@@ -13,6 +13,8 @@ public class Projectile {
 	private Vector2 rapidite = new Vector2();
 	private Vector2 posInitial = new Vector2();
 	
+	private boolean obsolete;// = false;
+	
 	
 	// normalement d'apres le cours on initialise dans le constructeur mais ici �a revient pareil
 	Rectangle cadre = new Rectangle();
@@ -26,6 +28,7 @@ public class Projectile {
 		this.rapidite = direction;
 		this.cadre.height = TAILLE;
 		this.cadre.width = TAILLE;
+		this.obsolete = false;
 	}
 	
 	
@@ -42,6 +45,13 @@ public class Projectile {
 		return cadre;
 	}
 
+	public boolean estObsolete(){
+		return this.obsolete;
+	}
+	
+	public void devientObsolete( ){
+		this.obsolete = true;
+	}
 	
 	public Vector2 getRapidite(){
 		return this.rapidite;

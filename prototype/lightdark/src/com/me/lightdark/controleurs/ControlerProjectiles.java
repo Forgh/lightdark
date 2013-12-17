@@ -41,9 +41,11 @@ public class ControlerProjectiles {
 		
 		
 		for (int i =0 ; i< this.projectiles.size;i++){
-			//gererCollision(this.projectiles.get(i), delta);
+			gererCollision(this.projectiles.get(i), delta);
 			this.projectiles.get(i).update(delta);
 		}
+		
+		gererObsoletes();
 	}
 	
 	public void gererCollision(Projectile p, float delta){
@@ -65,6 +67,7 @@ public class ControlerProjectiles {
 			if (collision.get(i) != null && persoRect.overlaps(collision.get(i))){
 				p.getRapidite().x = 0;
 				p.getRapidite().y = 0;
+				p.devientObsolete();
 				ok = false;
 			}
 			i++;
@@ -74,6 +77,14 @@ public class ControlerProjectiles {
 
 		p.getRapidite().mul(1/delta); // on restore la vitesse
 		
+	}
+	
+	public void gererObsoletes(){
+		for (int i =0 ; i< this.projectiles.size;i++){
+			if (this.projectiles.get(i).estObsolete()){
+				this.projectiles.removeIndex(i); // on attends que le garbage collector s'en occupe
+			}
+		}
 	}
 	
 	public ControlerProjectiles(Monde monde) {
