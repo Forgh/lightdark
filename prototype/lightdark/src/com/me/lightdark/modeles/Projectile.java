@@ -7,7 +7,9 @@ import com.badlogic.gdx.math.Vector2;
 public class Projectile {
 
 	public static final float VITESSE = 0.5f;	// vitesse par unite de temps sur une unite d'espace
-	public static final float TAILLE = 0.2f; // une demi unite
+	public static final float TAILLE = 0.2f; // 2/10 unite
+	
+	public static final float DISTANCE_MAX = 1f; // distance max de la portee du projectile
 	
 	private Vector2 position = new Vector2();
 	private Vector2 rapidite = new Vector2();
@@ -71,6 +73,7 @@ public class Projectile {
 		position.add(rapidite.cpy().scl(delta)); //?
 		cadre.setPosition(position);
 		//System.out.println("ok");
+		
 	}
 		
 }

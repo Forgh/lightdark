@@ -1,6 +1,7 @@
 package com.me.lightdark.controleurs;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.me.lightdark.modeles.Monde;
@@ -40,8 +41,10 @@ public class ControlerProjectiles {
 		
 		
 		
+		
 		for (int i =0 ; i< this.projectiles.size;i++){
 			gererCollision(this.projectiles.get(i), delta);
+			gererDistance(this.projectiles.get(i));
 			this.projectiles.get(i).update(delta);
 		}
 		
@@ -49,7 +52,7 @@ public class ControlerProjectiles {
 	}
 	
 	public void gererCollision(Projectile p, float delta){
-		p.getRapidite().mul(delta); // on travail au ralenti
+		p.getRapidite().scl(delta); // on travail au ralenti
 		
 		p.getCadre().x += p.getRapidite().x;
 		p.getCadre().y += p.getRapidite().y;
@@ -75,7 +78,7 @@ public class ControlerProjectiles {
 		
 		// ici pour les mobs
 
-		p.getRapidite().mul(1/delta); // on restore la vitesse
+		p.getRapidite().scl(1/delta); // on restore la vitesse
 		
 	}
 	
@@ -84,6 +87,23 @@ public class ControlerProjectiles {
 			if (this.projectiles.get(i).estObsolete()){
 				this.projectiles.removeIndex(i); // on attends que le garbage collector s'en occupe
 			}
+		}
+	}
+	
+	
+	/*
+	 * Cette methode rend obsolete un projectile qui depasse sa portee
+	 */
+	public void gererDistance(Projectile p){
+		// notre projectile est-il trop loin ?
+		Vector2 vtemp = new Vector2();
+		Vector2 position = p.getPosition();
+		Vector2 posInitial = p.getInitial();
+		
+		vtemp.x = Math.abs(position.x) - Math.abs(posInitial.x);
+		vtemp.y = Math.abs(position.y) - Math.abs(posInitial.y);
+		if (Math.abs(vtemp.x)>=p.DISTANCE_MAX || Math.abs(vtemp.y)>=p.DISTANCE_MAX){
+			p.devientObsolete(); //ben, au moins il ne doit plus aller vers l'infini...
 		}
 	}
 	
