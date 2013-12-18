@@ -26,7 +26,7 @@ public class Projectile {
 	
 	public Projectile(Vector2 position, Vector2 direction) {
 		this.position = position;
-		this.posInitial = position;
+		this.posInitial = new Vector2(position);
 		this.rapidite = direction;
 		this.cadre.height = TAILLE;
 		this.cadre.width = TAILLE;
