@@ -100,8 +100,9 @@ public class ControlerProjectiles {
 		Vector2 position = p.getPosition();
 		Vector2 posInitial = p.getInitial();
 		
-		vtemp.x = Math.abs(position.x) - Math.abs(posInitial.x);
-		vtemp.y = Math.abs(position.y) - Math.abs(posInitial.y);
+		vtemp.x = (Math.abs(position.x) - Math.abs(posInitial.x));
+		vtemp.y = (Math.abs(position.y) - Math.abs(posInitial.y));
+		System.out.println("proj : " + vtemp.x + ";"+ p.DISTANCE_MAX);
 		if (Math.abs(vtemp.x)>=p.DISTANCE_MAX || Math.abs(vtemp.y)>=p.DISTANCE_MAX){
 			p.devientObsolete(); //ben, au moins il ne doit plus aller vers l'infini...
 		}
