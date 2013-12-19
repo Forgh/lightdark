@@ -9,6 +9,8 @@ public class Case {
 	Vector2 position = new Vector2();
 	Rectangle cadre = new Rectangle();
 	
+
+	
 	interface type_case{} 
 	
 	enum type_case_generique implements type_case {
@@ -18,6 +20,7 @@ public class Case {
 
 	boolean bloquante;
 	boolean ombre;
+	float coef_friction;
 	
 	public Case(Vector2 position) {
 		this.position = position;
@@ -28,6 +31,7 @@ public class Case {
 		
 		this.bloquante = false;
 		this.ombre = false;
+		this.coef_friction = 1f;
 	}
 	
 	// **** GETTERS ****
@@ -44,6 +48,14 @@ public class Case {
 	 */
 	public void setBloquant(boolean b){
 		this.bloquante = b;
+	}
+	
+	public void setFriction(float f){
+		this.coef_friction = f;
+	}
+	
+	public float getFriction(){
+		return this.coef_friction;
 	}
 	
 	public boolean getBloquant(){

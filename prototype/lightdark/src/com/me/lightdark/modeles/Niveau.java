@@ -59,6 +59,8 @@ public class Niveau {
 		
 		cases[1][1] = new Case(new Vector2(1,1));
 		cases[2][1] = new Case(new Vector2(2,1));
+		(cases[2][1]).setFriction(0.1f);
+		
 		cases[9][9] = new Case(new Vector2(9,9));
 		cases[5][5] = new Case(new Vector2(5,5));
 		
