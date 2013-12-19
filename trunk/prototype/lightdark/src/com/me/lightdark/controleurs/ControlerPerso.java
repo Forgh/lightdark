@@ -102,9 +102,6 @@ public class ControlerPerso {
 		
 		
 		v.sub(this.perso.getPosition());
-
-		float negX = (v.x<0f ? -1f : 1f);
-		float negY = (v.y<0f ? -1f : 1f);
 		
 		float angle = (float) Math.atan2(v.y, v.x);
 		
