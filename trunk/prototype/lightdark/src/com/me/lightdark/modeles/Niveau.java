@@ -14,7 +14,7 @@ public class Niveau {
 		// TODO Auto-generated constructor stub
 		cases = new Case[11][11];
 		bloquantes = new Rectangle[11][11];
-		demo2();
+		demo();
 	}
 	
 	public int getLargeur(){
@@ -58,6 +58,7 @@ public class Niveau {
 		//cases[10][0] = new Case(new Vector2(10,0));
 		
 		cases[1][1] = new Case(new Vector2(1,1));
+		cases[2][1] = new Case(new Vector2(2,1));
 		cases[9][9] = new Case(new Vector2(9,9));
 		cases[5][5] = new Case(new Vector2(5,5));
 		
