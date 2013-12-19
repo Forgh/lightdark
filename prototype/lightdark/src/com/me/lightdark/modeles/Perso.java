@@ -8,8 +8,13 @@ public class Perso {
 	public interface Etat{} // ici polymorphisme pour light/shadow
 	
 	public enum Etat_light implements Etat {
-		INACTIF, MARCHANT, TIRANT, MOURRANT
+		INACTIF, MARCHANT, TIRANT, MOURRANT, 
 	}
+	
+	public enum ShadowForm implements Etat {
+		IDLE, SHADOWWALKING, GRABBING, DYING, TAMING 
+	} //Différenciation entre MARCHANt et SHADOWWALKING : la ShadowForm ne peut marche QUE sur des ombres!
+	
 	
 	public static final float VITESSE = 4f;	// vitesse par unite de temps sur une unite d'espace
 	public static final float TAILLE = 0.5f; // une demi unite

@@ -14,7 +14,7 @@ public class Niveau {
 		// TODO Auto-generated constructor stub
 		cases = new Case[11][11];
 		bloquantes = new Rectangle[11][11];
-		demo();
+		demo2();
 	}
 	
 	public int getLargeur(){
@@ -43,6 +43,13 @@ public class Niveau {
 		}
 	}
 	
+	public void createCaseWithShadow (int i, int j) {
+		cases[i][j] = new Case(new Vector2(i,j));
+		bloquantes[i][j] = cases[i][j].getCadre();
+
+	}
+	
+	
 	private void demo(){
 		largeur = 11;
 		hauteur = 11;
@@ -64,6 +71,49 @@ public class Niveau {
 
 		cases.add(new Case(new Vector2(0,0)));
 		*/
+	}
+	
+	private void demo2(){
+		largeur = 11;
+		hauteur = 11;
+		
+
+		
+		for(int i=7;i<hauteur;i++){
+			createCaseWithShadow(0,i);
+		}
+		
+		for(int i=0;i<3;i++){
+			createCaseWithShadow(i,2);
+		}
+
+		for(int i=0;i<3;i++){
+			createCaseWithShadow(4,i);
+		}
+		
+		for(int i=3;i<8;i++){
+			createCaseWithShadow(i,5);
+		}
+		
+		for(int i=3;i<6;i++){
+			createCaseWithShadow(10,i);
+		}
+		
+		for(int i=7;i<10;i++){
+			createCaseWithShadow(i,7);
+		}
+		
+		createCaseWithShadow(4,8);
+
+		
+		for(int i=3;i<7;i++){
+			createCaseWithShadow(i,10);
+		}
+		
+		createCaseWithShadow(9,9);
+		
+
+		
 	}
 	
 }
