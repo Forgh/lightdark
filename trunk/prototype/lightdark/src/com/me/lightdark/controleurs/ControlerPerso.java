@@ -94,8 +94,8 @@ public class ControlerPerso {
 		
 		float fx = (11f/w)*x;
 		float fy = 11f - ((11f/h)*y);
-		System.out.println("x: " + fx + "; x1: " + perso.getPosition().x);
-		System.out.println("y: " + fy + "; y1: " + perso.getPosition().y);
+		//System.out.println("x: " + fx + "; x1: " + perso.getPosition().x);
+		//System.out.println("y: " + fy + "; y1: " + perso.getPosition().y);
 		//directionTir.x = (fx-perso.getPosition().x) / Math.abs(fx-perso.getPosition().x);
 		directionTir.y = (perso.getPosition().y - fy) / Math.abs(perso.getPosition().y - fy);
 		if (fx> perso.getPosition().x){
