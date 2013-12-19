@@ -82,7 +82,7 @@ public class GameScreen  implements Screen, InputProcessor{
 		// TODO Auto-generated method stub
 		if (Input.Buttons.LEFT == button){
 			control.feuPresse(screenX, screenY, this.width, this.height);
-			System.out.println("pos :" + Gdx.graphics.getWidth());
+			//System.out.println("pos :" + Gdx.graphics.getWidth());
 		}
 		
 		return true;

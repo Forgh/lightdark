@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Projectile {
 
-	public static final float VITESSE = 5f;	// vitesse par unite de temps sur une unite d'espace
+	public static final float VITESSE = 10f;	// vitesse par unite de temps sur une unite d'espace
 	public static final float TAILLE = 0.2f; // 2/10 unite
 	
 	public static final float DISTANCE_MAX = 2.5f; // distance max de la portee du projectile
@@ -30,6 +30,7 @@ public class Projectile {
 		this.rapidite = direction;
 		this.cadre.height = TAILLE;
 		this.cadre.width = TAILLE;
+		cadre.setPosition(position);
 		this.obsolete = false;
 	}
 	

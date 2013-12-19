@@ -128,7 +128,7 @@ public class ControlerPerso {
 		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zéro (bloquant)
 		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
 
-		System.out.println("pos: " + v.x + ", " + v.y);
+		//System.out.println("pos: " + v.x + ", " + v.y);
 		
 	}
 	
