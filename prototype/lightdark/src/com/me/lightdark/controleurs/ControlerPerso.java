@@ -103,10 +103,14 @@ public class ControlerPerso {
 		
 		v.sub(this.perso.getPosition());
 
-		float angle = (float) Math.atan2(posX, posY);
+		float negX = (v.x<0f ? -1f : 1f);
+		float negY = (v.y<0f ? -1f : 1f);
 		
-		v.x = (float)Math.cos(angle);
-		v.y = (float)Math.sin(angle);
+		float angle = (float) Math.atan2(v.y, v.x);
+		
+		v.x =(float)Math.cos(angle);
+		v.y =(float)Math.sin(angle);
+		
 		/*
 		 * à verif que la precision numerique des float ne tombe pas sur 0.0 
 		 */
