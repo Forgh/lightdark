@@ -16,8 +16,7 @@ public class Perso {
 	} //Différenciation entre MARCHANt et SHADOWWALKING : la ShadowForm ne peut marche QUE sur des ombres!
 	
 	
-	public static final float VITESSE_DEF = 4f;
-	public float VITESSE = 4f;				 // vitesse par unite de temps sur une unite d'espace
+	public static final float VITESSE = 4f;	// vitesse par unite de temps sur une unite d'espace
 	public static final float TAILLE = 0.5f; // une demi unite
 	
 	private Vector2 position = new Vector2();
@@ -58,6 +57,10 @@ public class Perso {
 	
 	public void setRapidite(Vector2 v){
 		this.rapidite = v;
+	}
+	
+	public void setPosition(Vector2 v){
+		this.position=v;
 	}
 	
 	public Etat getEtat(){

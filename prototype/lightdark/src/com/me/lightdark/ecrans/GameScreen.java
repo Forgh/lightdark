@@ -82,7 +82,6 @@ public class GameScreen  implements Screen, InputProcessor{
 		// TODO Auto-generated method stub
 		if (Input.Buttons.LEFT == button){
 			control.feuPresse(screenX, screenY, this.width, this.height);
-			//System.out.println("pos :" + Gdx.graphics.getWidth());
 		}
 		
 		return true;
@@ -140,7 +139,7 @@ public class GameScreen  implements Screen, InputProcessor{
 		monde = new Monde();
 		affMonde = new AfficherMonde(monde, true);
 		control = new ControlerPerso(monde);
-		tirs = new ControlerProjectiles(monde);
+		tirs = new ControlerProjectiles(monde, monde.getPerso());
 		Gdx.input.setInputProcessor(this);
 	}
 

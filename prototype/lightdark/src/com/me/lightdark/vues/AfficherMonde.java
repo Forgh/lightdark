@@ -21,7 +21,9 @@ public class AfficherMonde {
 	private Monde monde;
 	private OrthographicCamera cam;
 	
-	private TextureRegion imgCase;
+	private TextureRegion imgSol;
+	private TextureRegion imgObstacle;
+	private TextureRegion imgOmbre;
 	private TextureRegion imgPerso;
 	private TextureRegion imgProjectile;
 	
@@ -57,7 +59,9 @@ public class AfficherMonde {
 	private void chargerTextures() {
 		// TODO mettre a jour avec des atlas
 		this.imgPerso = new TextureRegion(new Texture(Gdx.files.internal("images/perso.png")));
-		this.imgCase = new TextureRegion(new Texture(Gdx.files.internal("images/herbe_seche.png")));
+		this.imgSol = new TextureRegion(new Texture(Gdx.files.internal("images/herbe_seche.png")));
+		this.imgObstacle = new TextureRegion(new Texture(Gdx.files.internal("images/roche.png")));
+		this.imgOmbre= new TextureRegion(new Texture(Gdx.files.internal("images/ombre.png")));
 		this.imgProjectile = new TextureRegion(new Texture(Gdx.files.internal("images/projectile.png")));
 		// TODO rajouter pour toutes les cases
 		 
@@ -81,7 +85,15 @@ public class AfficherMonde {
 		Array<Case> cases=  monde.getAffichable(this.width, this.height);
 		for(int i = 0; i<cases.size;i++){
 			 Case c = cases.get(i);
-			 spriteBatch.draw(this.imgCase, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+			 if(c.getTypeCase().equals("TERRE")){
+				 spriteBatch.draw(this.imgSol, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+			 }
+			 else if(c.getTypeCase().equals("MONTAGNE")){
+				 spriteBatch.draw(this.imgObstacle, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+			 }
+			 else if(c.getTypeCase().equals("OMBRE")){
+				 spriteBatch.draw(this.imgOmbre, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+			 }
 		}
 		/*for(int i = 0; i<monde.niveau.size;i++){
 			 Case c = monde.getCase().get(i);

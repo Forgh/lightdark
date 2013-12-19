@@ -1,20 +1,23 @@
 package com.me.lightdark.controleurs;
 
+import java.util.Vector;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.me.lightdark.modeles.Monde;
+import com.me.lightdark.modeles.Perso;
 import com.me.lightdark.modeles.Projectile;
 
 public class ControlerProjectiles {
 
 	private Monde monde;
 	
-	
-	
+	private Perso lanceur;
 	private Array<Projectile> projectiles;
 	private Array<Rectangle> collision;
+	private Array<Rectangle> shadowTouched;
 	//idem pour les mobs
 	
 	private Pool<Rectangle> rectPool = new Pool<Rectangle>() {
@@ -27,10 +30,14 @@ public class ControlerProjectiles {
 
 	private void chargerCollision(){
 		collision.clear();
+		shadowTouched.clear();
 		for(int x = 0;x<=monde.getNiveau().getLargeur();x++){
 			for(int y= 0;y<=monde.getNiveau().getHauteur();y++){
 				if (monde.getNiveau().getCollision(x, y) != null){ // (x>=dX) && (x<= fX) && (y>=dY) && (y<= fY)){
 					collision.add(monde.getNiveau().getCollision(x, y));
+				}
+				else if (monde.getNiveau().getCollisionWithShadow(x, y) != null){
+					shadowTouched.add(monde.getNiveau().getCollisionWithShadow(x, y));
 				}
 			}
 		}
@@ -67,11 +74,23 @@ public class ControlerProjectiles {
 		int i = 0;
 		boolean ok = true;
 		while (i< collision.size && ok){
-			if (collision.get(i) != null && persoRect.overlaps(collision.get(i))){
-				p.getRapidite().x = 0;
-				p.getRapidite().y = 0;
-				p.devientObsolete();
-				ok = false;
+			if (collision.get(i) != null) {
+				if(persoRect.overlaps(collision.get(i))){
+					p.getRapidite().x = 0;
+					p.getRapidite().y = 0;
+					p.devientObsolete();
+					ok = false;
+				}
+				
+				
+			}
+			i++;
+		}
+		i=0;
+		while(i< shadowTouched.size){
+			if(persoRect.overlaps(shadowTouched.get(i))) {
+				lanceur.setPosition(new Vector2(shadowTouched.get(i).x,shadowTouched.get(i).y));
+
 			}
 			i++;
 		}
@@ -108,11 +127,13 @@ public class ControlerProjectiles {
 		}
 	}
 	
-	public ControlerProjectiles(Monde monde) {
+	public ControlerProjectiles(Monde monde, Perso lanceur) {
 		// TODO Auto-generated constructor stub
 		this.monde = monde;
 		this.projectiles = new Array<Projectile>();
 		this.collision = new Array<Rectangle>();
+		this.shadowTouched= new Array<Rectangle>();
+		this.lanceur=lanceur;
 	}
 
 }

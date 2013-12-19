@@ -30,7 +30,7 @@ public class Monde {
 
 	public Monde() {
 		// TODO Charger une map.
-		this.perso = new Perso(new Vector2(7,2));
+		this.perso = new Perso(new Vector2(1,1));
 		
 		this.niveau = new Niveau();
 		
@@ -40,7 +40,7 @@ public class Monde {
 	}
 	
 	public void lancerProjectile(Vector2 vect){
-		projectiles.add( new Projectile(new Vector2(perso.getPosition()),vect));
+		projectiles.add( new Projectile(perso,new Vector2(perso.getPosition()),vect));
 	}
 	
 	public Array<Case> getAffichable(int espaceH, int espaceV){ // H et V pour eventuellement faire un defilement style java
