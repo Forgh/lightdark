@@ -94,13 +94,23 @@ public class ControlerPerso {
 		
 		float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
 		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
-		 
+		
+		
 		Vector2 v = new Vector2(posX, posY);
+
+		
+		
+		
 		v.sub(this.perso.getPosition());
+
+		float angle = (float) Math.atan2(posX, posY);
 		
-		
-		
-		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001);
+		v.x = (float)Math.cos(angle);
+		v.y = (float)Math.sin(angle);
+		/*
+		 * à verif que la precision numerique des float ne tombe pas sur 0.0 
+		 */
+		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zéro (bloquant)
 		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
 
 		System.out.println("pos: " + v.x + ", " + v.y);
