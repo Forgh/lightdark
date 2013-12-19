@@ -90,25 +90,20 @@ public class ControlerPerso {
 	
 	public void feuPresse(int x, int y, int w, int h) {
 		touches.get(touches.put(Touches.FEU, true));
-		//soluce temporaire à 1h15 du mat
 		
-		float fx = (11f/w)*x;
-		float fy = 11f - ((11f/h)*y);
-		//System.out.println("x: " + fx + "; x1: " + perso.getPosition().x);
-		//System.out.println("y: " + fy + "; y1: " + perso.getPosition().y);
-		//directionTir.x = (fx-perso.getPosition().x) / Math.abs(fx-perso.getPosition().x);
-		directionTir.y = (perso.getPosition().y - fy) / Math.abs(perso.getPosition().y - fy);
-		if (fx> perso.getPosition().x){
-			directionTir.x = 1;
-		}else{
-			directionTir.x = -1;
-		}
 		
-		if (fy> perso.getPosition().y){
-			directionTir.y = 1;
-		}else{
-			directionTir.y = -1;
-		}
+		float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
+		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
+		 
+		Vector2 v = new Vector2(posX, posY);
+		v.sub(this.perso.getPosition());
+		
+		
+		
+		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001);
+		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
+
+		System.out.println("pos: " + v.x + ", " + v.y);
 		
 	}
 	

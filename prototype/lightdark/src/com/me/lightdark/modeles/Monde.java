@@ -40,7 +40,7 @@ public class Monde {
 	}
 	
 	public void lancerProjectile(Vector2 vect){
-		projectiles.add( new Projectile(new Vector2(perso.getPosition()),vect));
+		projectiles.add( new Projectile(new Vector2(perso.getPosition()),vect.scl(1/Projectile.VITESSE )));
 	}
 	
 	public Array<Case> getAffichable(int espaceH, int espaceV){ // H et V pour eventuellement faire un defilement style java
