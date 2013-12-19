@@ -21,6 +21,7 @@ public class ControlerPerso {
 	private Monde monde;
 	private Perso perso;
 	private Array<Rectangle> collision;
+	private Array<Case> cases;
 	
 	Vector2 directionTir;
 	
@@ -47,6 +48,7 @@ public class ControlerPerso {
 		this.monde = monde;
 		this.perso = monde.getPerso();
 		this.collision = new Array<Rectangle>();
+		this.cases = new Array<Case>();
 		this.directionTir = new Vector2();
 		//ici on charge la map des collisions
 	}
@@ -59,12 +61,24 @@ public class ControlerPerso {
 };
 
 
-	private void chargerCollision(){
+	private void chargerCollision(){ // à optimiser par le systeme des régions
 		collision.clear();
 		for(int x = 0;x<=monde.getNiveau().getLargeur();x++){
 			for(int y= 0;y<=monde.getNiveau().getHauteur();y++){
 				if (monde.getNiveau().getCollision(x, y) != null){ // (x>=dX) && (x<= fX) && (y>=dY) && (y<= fY)){
 					collision.add(monde.getNiveau().getCollision(x, y));
+				}
+			}
+		}
+		
+	}
+	
+	private void chargerCases(){ // à optimiser par le systeme des régions
+		cases.clear();
+		for(int x = 0;x<=monde.getNiveau().getLargeur();x++){
+			for(int y= 0;y<=monde.getNiveau().getHauteur();y++){
+				if (monde.getNiveau().get(x, y) != null){ // (x>=dX) && (x<= fX) && (y>=dY) && (y<= fY)){
+					cases.add(monde.getNiveau().get(x, y));
 				}
 			}
 		}
@@ -148,7 +162,38 @@ public class ControlerPerso {
 		gererEntrees();
 		gererCollision(delta);
 
+		gererFriction(delta);
 		perso.update(delta);
+	}
+	
+	public void gererFriction(float delta){
+		perso.getRapidite().mul(delta); // on travail au ralenti
+		
+		perso.getCadre().x += perso.getRapidite().x;
+		perso.getCadre().y += perso.getRapidite().y;
+		
+		Rectangle persoRect = rectPool.obtain();
+		persoRect.set(perso.getCadre());
+		
+		this.chargerCases();
+		persoRect.x += perso.getRapidite().x;
+		persoRect.y += perso.getRapidite().y;
+		
+		int i = 0;
+		boolean ok = true;
+		while (i< cases.size && ok){
+			if (cases.get(i) != null && persoRect.overlaps(cases.get(i).getCadre() )){
+				perso.VITESSE = perso.VITESSE_DEF * cases.get(i).getFriction();
+				ok = false;
+			}
+			i++;
+		}
+
+		if (ok){
+			perso.VITESSE = perso.VITESSE_DEF * 1f; //cas de correction pour debug
+		}
+		perso.getRapidite().mul(1/delta); // on restore la vitesse
+		
 	}
 	
 	public void gererCollision(float delta){
@@ -183,28 +228,28 @@ public class ControlerPerso {
 		// ici on modifie l'ï¿½tat du perso
 		if (touches.get(Touches.GAUCHE)) {
 			if (!touches.get(Touches.DROITE)){
-				perso.getRapidite().x = -Perso.VITESSE;
+				perso.getRapidite().x = -perso.VITESSE;
 			}
 			//perso.getRapidite().y = 0;
 			
 		}
 		if (touches.get(Touches.DROITE)) {
 			if (!touches.get(Touches.GAUCHE)){
-				perso.getRapidite().x = Perso.VITESSE;
+				perso.getRapidite().x = perso.VITESSE;
 			}
 			//perso.getRapidite().y = 0;
 			
 		}
 		if (touches.get(Touches.HAUT)) {
 			if (!touches.get(Touches.BAS)){
-				perso.getRapidite().y = Perso.VITESSE;
+				perso.getRapidite().y = perso.VITESSE;
 			}
 			//perso.getRapidite().x = 0;
 			
 		}
 		if (touches.get(Touches.BAS)) {	
 			if (!touches.get(Touches.HAUT)){
-				perso.getRapidite().y = -Perso.VITESSE;
+				perso.getRapidite().y = -perso.VITESSE;
 			
 			}
 			//perso.getRapidite().x = 0;
