@@ -16,6 +16,7 @@ public class Niveau {
 		// TODO Auto-generated constructor stub
 		cases = new Case[11][11];
 		bloquantes = new Rectangle[11][11];
+		monstres = new Array<Monstre>();
 		demo();
 	}
 	
@@ -91,7 +92,9 @@ public class Niveau {
 				}
 			}
 		}
+		monstres.add(new Monstre(new Vector2(5,1)));
 		
+		/*
 		for (int i=0; i<11 ; i++){
 			if (i%2 == 0){
 				for(int j = 1; j <9 ; j++){
@@ -100,7 +103,7 @@ public class Niveau {
 				}
 			}
 		}
-		
+		*/
 	}
 	
 	private void demo2(){

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Monde;
+import com.me.lightdark.modeles.Monstre;
 import com.me.lightdark.modeles.Niveau;
 import com.me.lightdark.modeles.Perso;
 import com.me.lightdark.modeles.Projectile;
@@ -24,6 +25,7 @@ public class AfficherMonde {
 	private TextureRegion imgCase;
 	private TextureRegion imgPerso;
 	private TextureRegion imgProjectile;
+	private TextureRegion imgMonstre;
 	
 	private SpriteBatch spriteBatch;
 	
@@ -59,6 +61,7 @@ public class AfficherMonde {
 		this.imgPerso = new TextureRegion(new Texture(Gdx.files.internal("images/perso.png")));
 		this.imgCase = new TextureRegion(new Texture(Gdx.files.internal("images/herbe_seche.png")));
 		this.imgProjectile = new TextureRegion(new Texture(Gdx.files.internal("images/projectile.png")));
+		this.imgMonstre = new TextureRegion(new Texture(Gdx.files.internal("images/monstre.png")));
 		// TODO rajouter pour toutes les cases
 		 
 	}
@@ -69,8 +72,10 @@ public class AfficherMonde {
 		// dessiner strate 1
 		drawMap();
 		// dessiner strate 2
-		drawProjectile();
+		drawProjectiles();
 		// dessiner strate 3
+		drawMonstres();
+		
 		drawPerso();
 		
 		spriteBatch.end();
@@ -95,12 +100,18 @@ public class AfficherMonde {
 	}
 	
 	
-	private void drawProjectile(){
+	private void drawProjectiles(){
 		 Array<Projectile> project = monde.getProjectile();
 		 for(int i=0;i<project.size;i++){
 			 spriteBatch.draw(this.imgProjectile, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
 		 }
 	}
 	
+	private void drawMonstres(){
+		 Array<Monstre> project = monde.getNiveau().getMonstres();
+		 for(int i=0;i<project.size;i++){
+			 spriteBatch.draw(this.imgMonstre, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
+		 }
+	}
 
 }
