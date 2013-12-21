@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Projectile {
 
-	public static final float VITESSE = 5f;	// vitesse par unite de temps sur une unite d'espace
+	public static final float VITESSE = 10f;	// vitesse par unite de temps sur une unite d'espace
 	public static final float TAILLE = 0.2f; // 2/10 unite
 	
 	public static final float DISTANCE_MAX = 2.5f; // distance max de la portee du projectile
@@ -14,7 +14,7 @@ public class Projectile {
 	private Vector2 position = new Vector2();
 	private Vector2 rapidite = new Vector2();
 	private Vector2 posInitial = new Vector2();
-	private Dark lanceur;
+	
 	private boolean obsolete;// = false;
 	
 	
@@ -24,15 +24,13 @@ public class Projectile {
 	float tempsAnime = 0;
 	
 	
-	public Projectile(Dark lanceur, Vector2 position, Vector2 direction) {
-		this.lanceur=lanceur;
+	public Projectile(Vector2 position, Vector2 direction) {
 		this.position = position;
 		this.posInitial = new Vector2(position);
 		this.rapidite = direction;
 		this.cadre.height = TAILLE;
 		this.cadre.width = TAILLE;
-		cadre.setPosition(lanceur.getPosition());
-
+		cadre.setPosition(position);
 		this.obsolete = false;
 	}
 	
@@ -44,10 +42,6 @@ public class Projectile {
 	
 	public Vector2 getInitial() {
 		return posInitial;
-	}
-	
-	public Dark getLanceur(){
-		return lanceur;
 	}
 
 	public Rectangle getCadre() {

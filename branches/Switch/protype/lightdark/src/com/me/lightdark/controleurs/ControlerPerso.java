@@ -6,7 +6,6 @@ import java.util.Map;
 
 
 
-
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -15,11 +14,13 @@ import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Perso;
 
+
 public class ControlerPerso {
 
 	private Monde monde;
 	private Perso perso;
 	private Array<Rectangle> collision;
+	private Array<Case> cases;
 	
 	Vector2 directionTir;
 	
@@ -46,6 +47,7 @@ public class ControlerPerso {
 		this.monde = monde;
 		this.perso = monde.getPerso();
 		this.collision = new Array<Rectangle>();
+		this.cases = new Array<Case>();
 		this.directionTir = new Vector2();
 		//ici on charge la map des collisions
 	}
@@ -58,15 +60,24 @@ public class ControlerPerso {
 };
 
 
-	private void chargerCollision(){
+	private void chargerCollision(){ // à optimiser par le systeme des régions
 		collision.clear();
 		for(int x = 0;x<=monde.getNiveau().getLargeur();x++){
 			for(int y= 0;y<=monde.getNiveau().getHauteur();y++){
 				if (monde.getNiveau().getCollision(x, y) != null){ // (x>=dX) && (x<= fX) && (y>=dY) && (y<= fY)){
 					collision.add(monde.getNiveau().getCollision(x, y));
 				}
-				else if (monde.getNiveau().getCollisionWithLight(x, y) != null){ // (x>=dX) && (x<= fX) && (y>=dY) && (y<= fY)){
-					collision.add(monde.getNiveau().getCollisionWithLight(x, y));
+			}
+		}
+		
+	}
+	
+	private void chargerCases(){ // à optimiser par le systeme des régions
+		cases.clear();
+		for(int x = 0;x<=monde.getNiveau().getLargeur();x++){
+			for(int y= 0;y<=monde.getNiveau().getHauteur();y++){
+				if (monde.getNiveau().get(x, y) != null){ // (x>=dX) && (x<= fX) && (y>=dY) && (y<= fY)){
+					cases.add(monde.getNiveau().get(x, y));
 				}
 			}
 		}
@@ -104,9 +115,6 @@ public class ControlerPerso {
 		
 		
 		v.sub(this.perso.getPosition());
-
-		float negX = (v.x<0f ? -1f : 1f);
-		float negY = (v.y<0f ? -1f : 1f);
 		
 		float angle = (float) Math.atan2(v.y, v.x);
 		
@@ -119,7 +127,7 @@ public class ControlerPerso {
 		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zéro (bloquant)
 		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
 
-		System.out.println("pos: " + v.x + ", " + v.y);
+		//System.out.println("pos: " + v.x + ", " + v.y);
 		
 	}
 	
@@ -153,7 +161,38 @@ public class ControlerPerso {
 		gererEntrees();
 		gererCollision(delta);
 
+		gererFriction(delta);
 		perso.update(delta);
+	}
+	
+	public void gererFriction(float delta){
+		perso.getRapidite().mul(delta); // on travail au ralenti
+		
+		perso.getCadre().x += perso.getRapidite().x;
+		perso.getCadre().y += perso.getRapidite().y;
+		
+		Rectangle persoRect = rectPool.obtain();
+		persoRect.set(perso.getCadre());
+		
+		this.chargerCases();
+		persoRect.x += perso.getRapidite().x;
+		persoRect.y += perso.getRapidite().y;
+		
+		int i = 0;
+		boolean ok = true;
+		while (i< cases.size && ok){
+			if (cases.get(i) != null && persoRect.overlaps(cases.get(i).getCadre() )){
+				perso.VITESSE = perso.VITESSE_DEF * cases.get(i).getFriction();
+				ok = false;
+			}
+			i++;
+		}
+
+		if (ok){
+			perso.VITESSE = perso.VITESSE_DEF * 1f; //cas de correction pour debug
+		}
+		perso.getRapidite().mul(1/delta); // on restore la vitesse
+		
 	}
 	
 	public void gererCollision(float delta){
@@ -224,15 +263,15 @@ public class ControlerPerso {
 			perso.getRapidite().y = 0;
 		}
 		
-		/*if (perso.getRapidite().x != 0f && perso.getRapidite().y != 0f){
-			Etat etat = perso.getEtat();
+		if (perso.getRapidite().x != 0f && perso.getRapidite().y != 0f){
+			/*Etat etat = perso.getEtat();
 			if (etat.getClass().equals(Etat_light.class))
-				perso.changerEtat(Etat_light.MARCHANT);
+				perso.changerEtat(Etat_light.MARCHANT);*/
 		}else{
-			Etat etat = perso.getEtat();
+			/*Etat etat = perso.getEtat();
 			if (etat.getClass().equals(Etat_light.class))
-				perso.changerEtat(Etat_light.INACTIF);
-		}*/
+				perso.changerEtat(Etat_light.INACTIF);*/
+		}
 		
 		if (touches.get(Touches.FEU) && directionTir.x !=0 && directionTir.y !=0){
 			monde.lancerProjectile(new Vector2(directionTir));

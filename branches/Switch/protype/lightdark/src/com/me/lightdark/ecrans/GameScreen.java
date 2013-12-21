@@ -1,13 +1,20 @@
 package com.me.lightdark.ecrans;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.me.lightdark.controleurs.ControlerPerso;
-import com.me.lightdark.controleurs.Grappin;
+import com.me.lightdark.controleurs.ControlerProjectiles;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.vues.AfficherMonde;
 
@@ -17,7 +24,7 @@ public class GameScreen  implements Screen, InputProcessor{
 	private AfficherMonde affMonde;
 	
 	private ControlerPerso control;
-	private Grappin tirs;
+	private ControlerProjectiles tirs;
 	
 	private int width;
 	private int height;
@@ -75,6 +82,7 @@ public class GameScreen  implements Screen, InputProcessor{
 		// TODO Auto-generated method stub
 		if (Input.Buttons.LEFT == button){
 			control.feuPresse(screenX, screenY, this.width, this.height);
+			//System.out.println("pos :" + Gdx.graphics.getWidth());
 		}
 		
 		return true;
@@ -132,7 +140,7 @@ public class GameScreen  implements Screen, InputProcessor{
 		monde = new Monde();
 		affMonde = new AfficherMonde(monde, true);
 		control = new ControlerPerso(monde);
-		tirs = new Grappin(monde, monde.getPerso());
+		tirs = new ControlerProjectiles(monde);
 		Gdx.input.setInputProcessor(this);
 	}
 

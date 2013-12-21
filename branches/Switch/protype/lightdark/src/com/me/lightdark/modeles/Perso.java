@@ -43,9 +43,6 @@ public abstract class Perso {
 		return cadre;
 	}
 	
-	public void setPosition(Vector2 v){
-		this.position=v;
-	}
 	
 	public Form getForm(){
 	    return Form.UNKNOWN;

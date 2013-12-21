@@ -1,6 +1,8 @@
 package com.me.lightdark.modeles;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
 //import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -10,7 +12,7 @@ public class Monde {
 
 	Niveau niveau;
 	
-	Dark perso;
+	Perso perso;
 	
 	Array<Projectile> projectiles = new Array<Projectile>();
 	
@@ -18,7 +20,7 @@ public class Monde {
 	public Array<Projectile> getProjectile() {
 		return projectiles;
 	}
-	public Dark getPerso() {
+	public Perso getPerso() {
 		return perso;
 	}
 	
@@ -28,7 +30,7 @@ public class Monde {
 
 	public Monde() {
 		// TODO Charger une map.
-		this.perso = new Dark(new Vector2(1,1));
+		this.perso = new Light(new Vector2(7,2));
 		
 		this.niveau = new Niveau();
 		
@@ -38,7 +40,7 @@ public class Monde {
 	}
 	
 	public void lancerProjectile(Vector2 vect){
-		projectiles.add( new Projectile(perso,new Vector2(perso.getPosition()),vect));
+		projectiles.add( new Projectile(new Vector2(perso.getPosition()),vect));
 	}
 	
 	public Array<Case> getAffichable(int espaceH, int espaceV){ // H et V pour eventuellement faire un defilement style java

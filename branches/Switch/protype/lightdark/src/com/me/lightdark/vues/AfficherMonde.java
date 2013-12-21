@@ -8,8 +8,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Monde;
+//import com.me.lightdark.modeles.Monstre;
 import com.me.lightdark.modeles.Niveau;
-import com.me.lightdark.modeles.Dark;
+import com.me.lightdark.modeles.Perso;
 import com.me.lightdark.modeles.Projectile;
 
 public class AfficherMonde {
@@ -21,11 +22,10 @@ public class AfficherMonde {
 	private Monde monde;
 	private OrthographicCamera cam;
 	
-	private TextureRegion imgSol;
-	private TextureRegion imgObstacle;
-	private TextureRegion imgOmbre;
+	private TextureRegion imgCase;
 	private TextureRegion imgPerso;
 	private TextureRegion imgProjectile;
+	private TextureRegion imgMonstre;
 	
 	private SpriteBatch spriteBatch;
 	
@@ -59,10 +59,9 @@ public class AfficherMonde {
 	private void chargerTextures() {
 		// TODO mettre a jour avec des atlas
 		this.imgPerso = new TextureRegion(new Texture(Gdx.files.internal("images/perso.png")));
-		this.imgSol = new TextureRegion(new Texture(Gdx.files.internal("images/herbe_seche.png")));
-		this.imgObstacle = new TextureRegion(new Texture(Gdx.files.internal("images/roche.png")));
-		this.imgOmbre= new TextureRegion(new Texture(Gdx.files.internal("images/ombre.png")));
+		this.imgCase = new TextureRegion(new Texture(Gdx.files.internal("images/herbe_seche.png")));
 		this.imgProjectile = new TextureRegion(new Texture(Gdx.files.internal("images/projectile.png")));
+		this.imgMonstre = new TextureRegion(new Texture(Gdx.files.internal("images/monstre.png")));
 		// TODO rajouter pour toutes les cases
 		 
 	}
@@ -73,8 +72,10 @@ public class AfficherMonde {
 		// dessiner strate 1
 		drawMap();
 		// dessiner strate 2
-		drawProjectile();
+		drawProjectiles();
 		// dessiner strate 3
+		//drawMonstres();
+		
 		drawPerso();
 		
 		spriteBatch.end();
@@ -85,15 +86,7 @@ public class AfficherMonde {
 		Array<Case> cases=  monde.getAffichable(this.width, this.height);
 		for(int i = 0; i<cases.size;i++){
 			 Case c = cases.get(i);
-			 if(c.getTypeCase().equals("TERRE")){
-				 spriteBatch.draw(this.imgSol, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-			 }
-			 else if(c.getTypeCase().equals("MONTAGNE")){
-				 spriteBatch.draw(this.imgObstacle, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-			 }
-			 else if(c.getTypeCase().equals("OMBRE")){
-				 spriteBatch.draw(this.imgOmbre, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-			 }
+			 spriteBatch.draw(this.imgCase, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 		}
 		/*for(int i = 0; i<monde.niveau.size;i++){
 			 Case c = monde.getCase().get(i);
@@ -102,17 +95,23 @@ public class AfficherMonde {
 	}
 	
 	private void drawPerso(){
-		Dark p = monde.getPerso();
+		Perso p = monde.getPerso();
 		spriteBatch.draw(this.imgPerso, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 	}
 	
 	
-	private void drawProjectile(){
+	private void drawProjectiles(){
 		 Array<Projectile> project = monde.getProjectile();
 		 for(int i=0;i<project.size;i++){
 			 spriteBatch.draw(this.imgProjectile, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
 		 }
 	}
 	
+	/*private void drawMonstres(){
+		 Array<Monstre> project = monde.getNiveau().getMonstres();
+		 for(int i=0;i<project.size;i++){
+			 spriteBatch.draw(this.imgMonstre, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
+		 }
+	}*/
 
 }
