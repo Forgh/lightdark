@@ -18,6 +18,7 @@ public class ControlerProjectiles {
 	private Array<Projectile> projectiles;
 	private Array<Rectangle> collision;
 	private Array<Rectangle> shadowTouched;
+	
 	//idem pour les mobs
 	
 	private Pool<Rectangle> rectPool = new Pool<Rectangle>() {
@@ -38,6 +39,7 @@ public class ControlerProjectiles {
 				}
 				else if (lanceur.getForm() == Form.SHADOWFORM && monde.getNiveau().getCollisionWithShadow(x, y) != null){
 					shadowTouched.add(monde.getNiveau().getCollisionWithShadow(x, y));
+					
 				}
 			}
 		}
@@ -45,6 +47,7 @@ public class ControlerProjectiles {
 	}
 	public void update(float delta) {
 		this.projectiles = monde.getProjectile();
+		
 		
 		
 		
