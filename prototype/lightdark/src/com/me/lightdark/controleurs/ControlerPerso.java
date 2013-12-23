@@ -46,6 +46,9 @@ public class ControlerPerso {
 		touches.put(Touches.FEU, false);
 	};
 	
+	static Touches toucheActuHoz; // ! rustine !
+	static Touches toucheActuVer; // ! rustine !
+	
 	public ControlerPerso(Monde monde) {
 		this.monde = monde;
 		this.perso = monde.getPerso();
@@ -79,18 +82,22 @@ public class ControlerPerso {
 
 	public void gauchePresse() {
 		touches.get(touches.put(Touches.GAUCHE, true));
+		toucheActuHoz = Touches.GAUCHE;
 	}
 	
 	public void droitPresse() {
 		touches.get(touches.put(Touches.DROITE, true));
+		toucheActuHoz = Touches.DROITE;
 	}
 	
 	public void hautPresse() {
 		touches.get(touches.put(Touches.HAUT, true));
+		toucheActuVer = Touches.HAUT;
 	}
 	
 	public void basPresse() {
 		touches.get(touches.put(Touches.BAS, true));
+		toucheActuVer = Touches.BAS;
 	}
 	
 	
@@ -190,32 +197,34 @@ public class ControlerPerso {
 	
 	private void gererEntrees() {
 		// ici on modifie l'�tat du perso
-		if (touches.get(Touches.GAUCHE)) {
-			if (!touches.get(Touches.DROITE)){
+		if (touches.get(Touches.GAUCHE) && toucheActuHoz == Touches.GAUCHE) {
+				
 				perso.getRapidite().x = -Perso.VITESSE;
-			}
+				
+	
 			//perso.getRapidite().y = 0;
 			
 		}
-		if (touches.get(Touches.DROITE)) {
-			if (!touches.get(Touches.GAUCHE)){
+		if (touches.get(Touches.DROITE) && toucheActuHoz == Touches.DROITE) {
+			
 				perso.getRapidite().x = Perso.VITESSE;
-			}
+			
+				
 			//perso.getRapidite().y = 0;
 			
 		}
-		if (touches.get(Touches.HAUT)) {
-			if (!touches.get(Touches.BAS)){
+		if (touches.get(Touches.HAUT)  && toucheActuVer == Touches.HAUT) {
+			
 				perso.getRapidite().y = Perso.VITESSE;
-			}
+			
 			//perso.getRapidite().x = 0;
 			
 		}
-		if (touches.get(Touches.BAS)) {	
-			if (!touches.get(Touches.HAUT)){
-				perso.getRapidite().y = -Perso.VITESSE;
+		if (touches.get(Touches.BAS)  && toucheActuVer == Touches.BAS) {	
 			
-			}
+				perso.getRapidite().y = -Perso.VITESSE;
+				
+			
 			//perso.getRapidite().x = 0;
 			
 		}
