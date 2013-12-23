@@ -15,11 +15,12 @@ public class Monde {
 	Perso perso;
 	
 	Array<Projectile> projectiles = new Array<Projectile>();
-	
+
 	// Getters -----------
 	public Array<Projectile> getProjectile() {
 		return projectiles;
 	}
+
 	public Perso getPerso() {
 		return perso;
 	}
@@ -31,7 +32,7 @@ public class Monde {
 	public Monde() {
 		// TODO Charger une map.
 		this.perso = new Perso(new Vector2(1,1));
-		perso.setForm(Form.LIGHTFORM);
+		perso.setForm(Form.SHADOWFORM);
 		this.niveau = new Niveau();
 		
 
@@ -40,7 +41,9 @@ public class Monde {
 	}
 	
 	public void lancerProjectile(Vector2 vect){
-		projectiles.add( new Projectile(perso,new Vector2(perso.getPosition()),vect));
+		if (projectiles.size<1){
+			projectiles.add( new Projectile(perso,new Vector2(perso.getPosition()),vect));
+		}
 	}
 	
 	public Array<Case> getAffichable(int espaceH, int espaceV){ // H et V pour eventuellement faire un defilement style java
