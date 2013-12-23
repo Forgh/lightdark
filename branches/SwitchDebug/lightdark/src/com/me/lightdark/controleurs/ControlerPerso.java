@@ -8,15 +8,20 @@ import java.util.Map;
 
 
 
+
+
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.me.lightdark.modeles.Case;
+import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Light;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Perso;
+import com.me.lightdark.modeles.Perso.Deplacement;
 import com.me.lightdark.modeles.Perso.Etat;
 
 public class ControlerPerso {
@@ -45,6 +50,9 @@ public class ControlerPerso {
 		touches.put(Touches.BAS, false);
 		touches.put(Touches.FEU, false);
 	};
+	
+	static Touches toucheActuHoz; // ! rustine !
+	static Touches toucheActuVer; // ! rustine !
 	
 	public ControlerPerso(Monde monde) {
 		this.monde = monde;
@@ -79,24 +87,28 @@ public class ControlerPerso {
 
 	public void gauchePresse() {
 		touches.get(touches.put(Touches.GAUCHE, true));
+		toucheActuHoz = Touches.GAUCHE;
 	}
 	
 	public void droitPresse() {
 		touches.get(touches.put(Touches.DROITE, true));
+		toucheActuHoz = Touches.DROITE;
 	}
 	
 	public void hautPresse() {
 		touches.get(touches.put(Touches.HAUT, true));
+		toucheActuVer = Touches.HAUT;
 	}
 	
 	public void basPresse() {
 		touches.get(touches.put(Touches.BAS, true));
+		toucheActuVer = Touches.BAS;
 	}
 	
 	
 	public void feuPresse(int x, int y, int w, int h) {
 		touches.get(touches.put(Touches.FEU, true));
-		
+
 		
 		float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
 		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
@@ -123,7 +135,7 @@ public class ControlerPerso {
 		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zéro (bloquant)
 		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
 
-		System.out.println("pos: " + v.x + ", " + v.y);
+		//System.out.println("pos: " + v.x + ", " + v.y);
 		
 	}
 	
@@ -177,8 +189,19 @@ public class ControlerPerso {
 		boolean ok = true;
 		while (i< collision.size && ok){
 			if (collision.get(i) != null && persoRect.overlaps(collision.get(i))){
-				perso.getRapidite().x = 0;
-				perso.getRapidite().y = 0;
+				/*Vector2 v = new Vector2(collision.get(i).getX(), collision.get(i).getY());
+				v.sub(perso.getPosition());
+				if (Math.abs(v.x) <Math.abs(v.y) ){
+					perso.getRapidite().x = 0;
+					
+				}else if (Math.abs(v.x) >Math.abs(v.y) ){
+					perso.getRapidite().y = 0;
+					
+				}
+				else{*/
+					perso.getRapidite().x = 0;
+					perso.getRapidite().y = 0;
+				//}
 				ok = false;
 			}
 			i++;
@@ -190,32 +213,34 @@ public class ControlerPerso {
 	
 	private void gererEntrees() {
 		// ici on modifie l'ï¿½tat du perso
-		if (touches.get(Touches.GAUCHE)) {
-			if (!touches.get(Touches.DROITE)){
+		if (touches.get(Touches.GAUCHE) && toucheActuHoz == Touches.GAUCHE) {
+			
 				perso.getRapidite().x = -Perso.VITESSE;
-			}
+				
+
 			//perso.getRapidite().y = 0;
 			
 		}
-		if (touches.get(Touches.DROITE)) {
-			if (!touches.get(Touches.GAUCHE)){
+		if (touches.get(Touches.DROITE) && toucheActuHoz == Touches.DROITE) {
+			
 				perso.getRapidite().x = Perso.VITESSE;
-			}
+			
+				
 			//perso.getRapidite().y = 0;
 			
 		}
-		if (touches.get(Touches.HAUT)) {
-			if (!touches.get(Touches.BAS)){
+		if (touches.get(Touches.HAUT)  && toucheActuVer == Touches.HAUT) {
+			
 				perso.getRapidite().y = Perso.VITESSE;
-			}
+			
 			//perso.getRapidite().x = 0;
 			
 		}
-		if (touches.get(Touches.BAS)) {	
-			if (!touches.get(Touches.HAUT)){
-				perso.getRapidite().y = -Perso.VITESSE;
+		if (touches.get(Touches.BAS)  && toucheActuVer == Touches.BAS) {	
 			
-			}
+				perso.getRapidite().y = -Perso.VITESSE;
+				
+			
 			//perso.getRapidite().x = 0;
 			
 		}
@@ -244,6 +269,7 @@ public class ControlerPerso {
 			directionTir.y = 0;
 			
 		}
+		
 		/*
 		if ( !touches.get(Touches.GAUCHE) && !touches.get(Touches.DROITE) && !touches.get(Touches.HAUT) && !touches.get(Touches.BAS)){
 			Etat etat = perso.getEtat();
@@ -267,4 +293,5 @@ public class ControlerPerso {
 					
 		}*/
 	}
+
 }
