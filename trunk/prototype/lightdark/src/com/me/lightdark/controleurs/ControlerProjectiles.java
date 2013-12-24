@@ -84,6 +84,7 @@ public class ControlerProjectiles {
 					p.getRapidite().y = 0;
 					p.devientObsolete();
 					lanceur.changerEtat(Dark.SHADOWWALKING);
+					//On remet en shadowwalking si jamais le grappin touche un obstacle
 					ok = false;
 				}
 				
@@ -97,6 +98,7 @@ public class ControlerProjectiles {
 				System.out.println(lanceur.getEtat());
 				lanceur.setPosition(new Vector2(shadowTouched.get(i).x,shadowTouched.get(i).y));
 				lanceur.changerEtat(Dark.SHADOWWALKING);
+				//on remet en shadowwalking si jamais on touche la case désirée (A FIX)
 			}
 			i++;
 		}
@@ -132,6 +134,7 @@ public class ControlerProjectiles {
 			p.devientObsolete(); //ben, au moins il ne doit plus aller vers l'infini...
 			if(lanceur.getForm()==Form.SHADOWFORM) {
 				lanceur.changerEtat(Dark.SHADOWWALKING);
+				//On remet en shadowwalking si on atteint le max de distance.
 			}
 		}
 	}
