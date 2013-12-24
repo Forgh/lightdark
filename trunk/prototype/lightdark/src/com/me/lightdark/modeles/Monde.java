@@ -41,9 +41,8 @@ public class Monde {
 	}
 	
 	public void lancerProjectile(Vector2 vect){
-		if (projectiles.size<1){
+		//if(perso.getEtat()!=Dark.GRABBING)
 			projectiles.add( new Projectile(perso,new Vector2(perso.getPosition()),vect));
-		}
 	}
 	
 	public Array<Case> getAffichable(int espaceH, int espaceV){ // H et V pour eventuellement faire un defilement style java

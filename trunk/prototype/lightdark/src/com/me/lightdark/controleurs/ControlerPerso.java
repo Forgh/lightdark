@@ -8,11 +8,13 @@ import java.util.Map;
 
 
 
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.me.lightdark.modeles.Case;
+import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Light;
 import com.me.lightdark.modeles.Monde;
@@ -125,9 +127,9 @@ public class ControlerPerso {
 		v.y =(float)Math.sin(angle);
 		
 		/*
-		 * à verif que la precision numerique des float ne tombe pas sur 0.0 
+		 * ï¿½ verif que la precision numerique des float ne tombe pas sur 0.0 
 		 */
-		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zéro (bloquant)
+		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zï¿½ro (bloquant)
 		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
 
 		System.out.println("pos: " + v.x + ", " + v.y);
@@ -247,7 +249,11 @@ public class ControlerPerso {
 				perso.changerEtat(Light.INACTIF);
 		}
 		
-		if (touches.get(Touches.FEU) && directionTir.x !=0 && directionTir.y !=0){
+		if (touches.get(Touches.FEU) && directionTir.x !=0 && directionTir.y !=0 && perso.getEtat()!=Dark.GRABBING){
+			if(perso.getForm()==Form.SHADOWFORM) {
+				perso.changerEtat(Dark.GRABBING);
+			}
+
 			monde.lancerProjectile(new Vector2(directionTir));
 			directionTir.x = 0;
 			directionTir.y = 0;

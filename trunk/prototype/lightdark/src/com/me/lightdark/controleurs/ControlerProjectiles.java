@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Perso;
@@ -82,6 +83,7 @@ public class ControlerProjectiles {
 					p.getRapidite().x = 0;
 					p.getRapidite().y = 0;
 					p.devientObsolete();
+					lanceur.changerEtat(Dark.SHADOWWALKING);
 					ok = false;
 				}
 				
@@ -92,8 +94,9 @@ public class ControlerProjectiles {
 		i=0;
 		while(i< shadowTouched.size){
 			if(persoRect.overlaps(shadowTouched.get(i))) {
+				System.out.println(lanceur.getEtat());
 				lanceur.setPosition(new Vector2(shadowTouched.get(i).x,shadowTouched.get(i).y));
-
+				lanceur.changerEtat(Dark.SHADOWWALKING);
 			}
 			i++;
 		}
@@ -127,6 +130,9 @@ public class ControlerProjectiles {
 
 		if (Math.abs(vtemp.x)>=p.DISTANCE_MAX || Math.abs(vtemp.y)>=p.DISTANCE_MAX){
 			p.devientObsolete(); //ben, au moins il ne doit plus aller vers l'infini...
+			if(lanceur.getForm()==Form.SHADOWFORM) {
+				lanceur.changerEtat(Dark.SHADOWWALKING);
+			}
 		}
 	}
 	
