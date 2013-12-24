@@ -18,6 +18,7 @@ public class Case {
 	type_case_generique typeCase;
 	boolean bloquante;
 	boolean ombre;
+	int hashCode;
 	
 	public Case(Vector2 position) {
 		this.position = position;
@@ -27,6 +28,7 @@ public class Case {
 		this.cadre.width = TAILLE;
 		this.bloquante = false;
 		this.ombre = false;
+		this.hashCode=this.hashCode();
 	}
 	
 	
@@ -40,6 +42,10 @@ public class Case {
 
 	public Rectangle getCadre() {
 		return cadre;
+	}
+	
+	public int getHashCode(){
+		return hashCode;
 	}
 	
 	/*
@@ -59,6 +65,13 @@ public class Case {
 	
 	public void setOmbre(boolean b){
 		this.ombre = b;
+	}
+	
+	public boolean equals(Case c){
+		if(this.hashCode == c.getHashCode()){
+			return true;
+		}
+		else return false;
 	}
 	
 	public boolean getOmbre(){
