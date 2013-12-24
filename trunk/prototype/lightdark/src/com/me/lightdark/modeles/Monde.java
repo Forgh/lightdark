@@ -40,9 +40,15 @@ public class Monde {
 
 	}
 	
-	public void lancerProjectile(Vector2 vect){
+	public void lancerProjectile(Vector2 vect, Vector2 cible){
 		//if(perso.getEtat()!=Dark.GRABBING)
-			projectiles.add( new Projectile(perso,new Vector2(perso.getPosition()),vect));
+			Projectile v = new Projectile(perso,new Vector2(perso.getPosition()),vect);
+			projectiles.add( v);
+			Case c = this.niveau.get((int) cible.x, (int) cible.y);
+			if (c != null){
+				v.setCaseCible(c); // on ajoute les coord. de la cible
+			}
+			
 	}
 	
 	public Array<Case> getAffichable(int espaceH, int espaceV){ // H et V pour eventuellement faire un defilement style java

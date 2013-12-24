@@ -28,6 +28,7 @@ public class ControlerPerso {
 	private Array<Rectangle> collision;
 	
 	Vector2 directionTir;
+	Vector2 cibleTir;
 	
 	enum direction  {
 		HAUT, HAUT_GAUCHE, HAUT_DROITE,
@@ -132,8 +133,8 @@ public class ControlerPerso {
 		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par z�ro (bloquant)
 		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
 
-		System.out.println("pos: " + v.x + ", " + v.y);
-		
+
+		cibleTir = new Vector2(posX, posY);
 	}
 	
 	
@@ -254,7 +255,7 @@ public class ControlerPerso {
 				perso.changerEtat(Dark.GRABBING);
 			}
 
-			monde.lancerProjectile(new Vector2(directionTir));
+			monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
 			directionTir.x = 0;
 			directionTir.y = 0;
 			
