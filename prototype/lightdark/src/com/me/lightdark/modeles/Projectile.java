@@ -15,6 +15,7 @@ public class Projectile {
 	private Vector2 rapidite = new Vector2();
 	private Vector2 posInitial = new Vector2();
 	private Perso lanceur;
+	private Case case_cible;
 	private boolean obsolete;// = false;
 	
 	
@@ -68,6 +69,14 @@ public class Projectile {
 	
 	public void setRapidite(Vector2 v){
 		this.rapidite = v;
+	}
+	
+	public void setCaseCible(Case c){
+		this.case_cible = c;
+	}
+	
+	public Case getCaseCible(){
+		return this.case_cible;
 	}
 	
 
