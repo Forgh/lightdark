@@ -9,7 +9,7 @@ public class Perso {
 
 	
 	public static final float VITESSE = 4f;	// vitesse par unite de temps sur une unite d'espace
-	public static final float TAILLE = 0.125f; // une demi unite
+	public static final float TAILLE = 0.5f; // une demi unite
 	
 	private Vector2 position = new Vector2();
 	private Vector2 rapidite = new Vector2();
@@ -70,9 +70,6 @@ public class Perso {
 		this.form=f;
 	}
 	
-	
-
-
 	public float temps(){
 		return tempsAnime;
 	}

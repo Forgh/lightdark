@@ -123,14 +123,18 @@ public class ControlerProjectiles {
 	 */
 	public void gererDistance(Projectile p){
 		// notre projectile est-il trop loin ?
-		Vector2 vtemp = new Vector2();
+		Vector2 vtemp = new Vector2(p.getInitial());
 		Vector2 position = p.getPosition();
 		Vector2 posInitial = p.getInitial();
 		
+	
 		vtemp.x = (Math.abs(position.x) - Math.abs(posInitial.x));
 		vtemp.y = (Math.abs(position.y) - Math.abs(posInitial.y));
 
-		if (Math.abs(vtemp.x)>=p.DISTANCE_MAX || Math.abs(vtemp.y)>=p.DISTANCE_MAX){
+		// calcul du rayon par le théorème de pythagore
+		float rayon = (float) Math.sqrt(Math.pow((double)vtemp.x, 2.0) + Math.pow((double)vtemp.y, 2.0));
+		
+		if (rayon > p.DISTANCE_MAX){
 			p.devientObsolete(); //ben, au moins il ne doit plus aller vers l'infini...
 			if(lanceur.getForm()==Form.SHADOWFORM) {
 				lanceur.changerEtat(Dark.SHADOWWALKING);
