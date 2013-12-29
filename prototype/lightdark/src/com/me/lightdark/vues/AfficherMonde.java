@@ -41,13 +41,13 @@ public class AfficherMonde {
 		this.width = w;
 		this.height = h;
 		ppuX = (float)width / CAM_LARG;
-		ppuY = (float)height / CAM_LARG;
+		ppuY = (float)height / CAM_HAUT;
 	}
 	
 	
 	public AfficherMonde( Monde monde, boolean debug) {
 		this.monde = monde;
-		this.cam =  new OrthographicCamera(CAM_HAUT / 2f,CAM_HAUT / 2f);
+		this.cam =  new OrthographicCamera(CAM_LARG / 2f,CAM_HAUT / 2f);
 		this.cam.position.set(CAM_LARG / 2f, CAM_HAUT / 2f, 0); // ici on place la camera au centre
 		this.deboguage = debug;
 		
