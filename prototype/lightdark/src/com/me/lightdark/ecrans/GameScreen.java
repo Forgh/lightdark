@@ -83,7 +83,10 @@ public class GameScreen  implements Screen, InputProcessor{
 			control.feuPresse(screenX, screenY, this.width, this.height);
 		}
 		if(monde.getOrbe().isPressed()){
+			System.out.println("THERE");
 			menu.orbPressed();
+			//TODO update les control pour le passage à l'autre forme
+			//control.update(delta);
 		}
 		
 		return true;
