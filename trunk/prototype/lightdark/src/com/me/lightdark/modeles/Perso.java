@@ -11,6 +11,8 @@ public class Perso {
 	public static final float VITESSE = 4f;	// vitesse par unite de temps sur une unite d'espace
 	public static final float TAILLE = 0.5f; // une demi unite
 	
+	private static int health;
+	
 	private Vector2 position = new Vector2();
 	private Vector2 rapidite = new Vector2();
 	
@@ -29,6 +31,7 @@ public class Perso {
 		this.cadre.setPosition(position);
 		this.cadre.height = TAILLE;
 		this.cadre.width = TAILLE;
+		this.health=3;
 	}
 	
 	
@@ -54,6 +57,11 @@ public class Perso {
 		this.etat = e;
 	}
 	
+	public int getHealth(){
+		return this.health;
+	}
+	
+	
 	public Vector2 getRapidite(){
 		return this.rapidite;
 	}
@@ -69,6 +77,15 @@ public class Perso {
 	public void setForm(Form f){
 		this.form=f;
 	}
+	
+	public void healthUp(){
+		health++;
+	}
+	
+	public void healthDown(){
+		health--;
+	}
+	
 	
 	public float temps(){
 		return tempsAnime;

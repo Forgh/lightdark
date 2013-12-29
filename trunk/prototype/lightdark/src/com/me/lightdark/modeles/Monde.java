@@ -37,14 +37,15 @@ public class Monde {
 		this.niveau = new Niveau();
 		
 		this.pause = new Button();
-		this.pause.setSize(50, 50);
-		this.pause.setX(650);
-		this.pause.setY(650);
+		this.pause.setSize(64, 32);
+		this.pause.setX(730);
+		this.pause.setY(750);
+		
 		
 		this.orbe = new Button();
 		this.orbe.setSize(50, 50);
 		this.orbe.setX(750);
-		this.orbe.setY(700);
+		this.orbe.setY(400);
 		
 		//cases.add(new Case(new Vector2(5,1), false));
 
