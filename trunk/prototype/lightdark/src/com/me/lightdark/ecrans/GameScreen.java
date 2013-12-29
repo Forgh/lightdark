@@ -7,18 +7,23 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.me.lightdark.controleurs.ControlerMenu;
 import com.me.lightdark.controleurs.ControlerPerso;
 import com.me.lightdark.controleurs.ControlerProjectiles;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.vues.AfficherMonde;
+import com.me.lightdark.vues.AfficherSideMenu;
 
 public class GameScreen  implements Screen, InputProcessor{
 
 	private Monde monde;
 	private AfficherMonde affMonde;
+	private AfficherSideMenu affSideMenu;
 	
 	private ControlerPerso control;
 	private ControlerProjectiles tirs;
+	private ControlerMenu menu;
 	
 	private int width;
 	private int height;
@@ -77,6 +82,9 @@ public class GameScreen  implements Screen, InputProcessor{
 		if (Input.Buttons.LEFT == button){
 			control.feuPresse(screenX, screenY, this.width, this.height);
 		}
+		if(monde.getOrbe().isPressed()){
+			menu.orbPressed();
+		}
 		
 		return true;
 	}
@@ -119,6 +127,7 @@ public class GameScreen  implements Screen, InputProcessor{
 		tirs.update(delta);
 		
 		affMonde.render();
+		affSideMenu.render();
 	}
 
 	@Override
@@ -132,8 +141,10 @@ public class GameScreen  implements Screen, InputProcessor{
 	public void show() {
 		monde = new Monde();
 		affMonde = new AfficherMonde(monde, true);
+		affSideMenu = new AfficherSideMenu(monde);
 		control = new ControlerPerso(monde);
 		tirs = new ControlerProjectiles(monde, monde.getPerso());
+		menu = new ControlerMenu(monde);
 		Gdx.input.setInputProcessor(this);
 	}
 

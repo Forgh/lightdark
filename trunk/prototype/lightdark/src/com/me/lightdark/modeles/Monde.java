@@ -1,10 +1,8 @@
 package com.me.lightdark.modeles;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 //import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.utils.Array;
 
@@ -16,6 +14,9 @@ public class Monde {
 	
 	Array<Projectile> projectiles = new Array<Projectile>();
 
+	private Button pause;
+	private Button orbe;
+	
 	// Getters -----------
 	public Array<Projectile> getProjectile() {
 		return projectiles;
@@ -35,7 +36,16 @@ public class Monde {
 		perso.setForm(Form.LIGHTFORM);
 		this.niveau = new Niveau();
 		
-
+		this.pause = new Button();
+		this.pause.setSize(50, 50);
+		this.pause.setX(650);
+		this.pause.setY(650);
+		
+		this.orbe = new Button();
+		this.orbe.setSize(50, 50);
+		this.orbe.setX(750);
+		this.orbe.setY(700);
+		
 		//cases.add(new Case(new Vector2(5,1), false));
 
 	}
@@ -83,6 +93,22 @@ public class Monde {
 		}
 		
 		return cases;
+	}
+
+	public Button getPause() {
+		return pause;
+	}
+
+	public void setPause(Button pause) {
+		this.pause = pause;
+	}
+
+	public Button getOrbe() {
+		return orbe;
+	}
+
+	public void setOrbe(Button orbe) {
+		this.orbe = orbe;
 	}
 	
 	
