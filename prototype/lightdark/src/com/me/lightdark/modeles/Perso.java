@@ -80,7 +80,15 @@ public class Perso {
 		cadre.setPosition(position);
 	}
 
-
+	public void switchForm (){
+		if(this.getForm()==Form.LIGHTFORM){
+			this.setForm(Form.SHADOWFORM);
+		}
+		else{
+			this.setForm(Form.LIGHTFORM);
+		}
+		System.out.println(this.getForm());
+	}
 	
 		
 
