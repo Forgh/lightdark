@@ -8,24 +8,22 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-//import com.me.lightdark.controleurs.ControlerMenu;
-import com.me.lightdark.controleurs.ControlerEpee;
+import com.me.lightdark.controleurs.ControlerMenu;
 import com.me.lightdark.controleurs.ControlerPerso;
 import com.me.lightdark.controleurs.ControlerProjectiles;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.vues.AfficherMonde;
-//import com.me.lightdark.vues.AfficherSideMenu;
+import com.me.lightdark.vues.AfficherSideMenu;
 
 public class GameScreen  implements Screen, InputProcessor{
 
 	private Monde monde;
 	private AfficherMonde affMonde;
-	//private AfficherSideMenu affSideMenu;
+	private AfficherSideMenu affSideMenu;
 	
 	private ControlerPerso control;
 	private ControlerProjectiles tirs;
-	private ControlerEpee epee;
-	//private ControlerMenu menu;
+	private ControlerMenu menu;
 	
 	private int width;
 	private int height;
@@ -84,12 +82,9 @@ public class GameScreen  implements Screen, InputProcessor{
 		if (Input.Buttons.LEFT == button){
 			control.feuPresse(screenX, screenY, this.width, this.height);
 		}
-		if (Input.Buttons.RIGHT == button){
-			control.sourisDroitPresse(screenX, screenY, this.width, this.height);
+		if(monde.getOrbe().isPressed()){
+			menu.orbPressed();
 		}
-	//	if(monde.getOrbe().isPressed()){
-		//	menu.orbPressed();
-	//	}
 		
 		return true;
 	}
@@ -99,9 +94,6 @@ public class GameScreen  implements Screen, InputProcessor{
 		// TODO Auto-generated method stub
 		if (Input.Buttons.LEFT == button){
 			control.feuRelache(screenX, screenY);
-		}
-		if (Input.Buttons.RIGHT == button){
-			control.sourisDroitRelache(screenX, screenY);
 		}
 		return true;
 	}
@@ -135,7 +127,7 @@ public class GameScreen  implements Screen, InputProcessor{
 		tirs.update(delta);
 		
 		affMonde.render();
-	//	affSideMenu.render();
+		affSideMenu.render();
 	}
 
 	@Override
@@ -149,10 +141,10 @@ public class GameScreen  implements Screen, InputProcessor{
 	public void show() {
 		monde = new Monde();
 		affMonde = new AfficherMonde(monde, true);
-		//affSideMenu = new AfficherSideMenu(monde);
+		affSideMenu = new AfficherSideMenu(monde);
 		control = new ControlerPerso(monde);
 		tirs = new ControlerProjectiles(monde, monde.getPerso());
-	//	menu = new ControlerMenu(monde);
+		menu = new ControlerMenu(monde);
 		Gdx.input.setInputProcessor(this);
 	}
 

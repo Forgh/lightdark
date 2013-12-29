@@ -13,7 +13,6 @@ public class Monde {
 	Perso perso;
 	
 	Array<Projectile> projectiles = new Array<Projectile>();
-	Array<Epee> sword = new Array<Epee>();
 
 	private Button pause;
 	private Button orbe;
@@ -21,9 +20,6 @@ public class Monde {
 	// Getters -----------
 	public Array<Projectile> getProjectile() {
 		return projectiles;
-	}
-	public Array<Epee> getEpee() {
-		return sword;
 	}
 
 	public Perso getPerso() {
@@ -62,20 +58,7 @@ public class Monde {
 			if (c != null){
 				v.setCaseCible(c); // on ajoute les coord. de la cible
 			}
-	}
-
-			public void frapperEpee(Vector2 vect, Vector2 cible){
-
-				if(perso.getForm() != Form.SHADOWFORM){
-					Epee s = new Epee(perso,new Vector2(perso.getPosition()),vect);
-					sword.add(s);
-					Case c = this.niveau.get((int) cible.x, (int) cible.y);
-					if (c != null){
-
-						s.setCaseCible(c); 
-					}
-				}
-					
+			
 	}
 	
 	public Array<Case> getAffichable(int espaceH, int espaceV){ // H et V pour eventuellement faire un defilement style java
