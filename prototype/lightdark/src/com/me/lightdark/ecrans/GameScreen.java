@@ -82,8 +82,8 @@ public class GameScreen  implements Screen, InputProcessor{
 		if (Input.Buttons.LEFT == button){
 			control.feuPresse(screenX, screenY, this.width, this.height);
 		}
-		if(monde.getOrbe().isPressed()){
-			System.out.println("THERE");
+		if(menu.getOrbe().getClickListener().isPressed()){
+			System.out.println("GameScreen");
 			menu.orbPressed();
 			//TODO update les control pour le passage à l'autre forme
 			//control.update(delta);

@@ -59,7 +59,7 @@ public class AfficherSideMenu {
 	
 	private void drawHealth(){
 		for(int i=0; i<monde.getPerso().getHealth();i++){
-			spriteBatch.draw(this.imgHealth, 700+i*32, 600, 32, 32);
+			spriteBatch.draw(this.imgHealth, 700+i*32, 100, 32, 32);
 		}
 	}
 	private void drawOrbe(){
