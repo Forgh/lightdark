@@ -2,7 +2,9 @@ package com.me.lightdark.modeles;
 
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 //import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.utils.Array;
 
@@ -39,14 +41,14 @@ public class Monde {
 		this.pause = new Button();
 		this.pause.setSize(64, 32);
 		this.pause.setX(730);
-		this.pause.setY(750);
-		
+		this.pause.setY(200);
 		
 		this.orbe = new Button();
 		this.orbe.setSize(50, 50);
 		this.orbe.setX(750);
 		this.orbe.setY(400);
 		
+
 		//cases.add(new Case(new Vector2(5,1), false));
 
 	}
