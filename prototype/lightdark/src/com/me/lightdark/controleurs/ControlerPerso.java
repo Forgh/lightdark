@@ -111,6 +111,7 @@ public class ControlerPerso {
 		float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
 		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
 		
+
 		
 		Vector2 v = new Vector2(posX, posY);
 

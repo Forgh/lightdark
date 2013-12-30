@@ -15,10 +15,13 @@ public class Niveau {
 
 	public Niveau() {
 		// TODO Auto-generated constructor stub
-		cases = new Case[11][11];
-		bloquantes = new Rectangle[11][11];
-		ombres = new Rectangle[11][11];
-		light = new Rectangle[11][11];
+		this.largeur = 20; this.hauteur = 13;
+		
+		cases = new Case[largeur][hauteur];
+		bloquantes = new Rectangle[largeur][hauteur];
+		ombres = new Rectangle[largeur][hauteur];
+		light = new Rectangle[largeur][hauteur];
+		
 		demo2();
 	}
 	
@@ -93,21 +96,21 @@ public class Niveau {
 	
 	public void createGroundAndBorder(){
 		
-		for(int i=0;i<hauteur;i++){
-			for(int j=0;j<largeur;j++){
+		for(int i=0;i<largeur;i++){
+			for(int j=0;j<hauteur;j++){
 				cases[i][j] = new Case(new Vector2(i,j));
 				cases[i][j].setTypeCase(type_case_generique.TERRE);
 			}
 		}
 		
-		for(int i=0;i<hauteur;i++){
+		for(int i=0;i<largeur;i++){
 			bloquantes[i][0] = cases[i][0].getCadre();
 			cases[i][0].setTypeCase(type_case_generique.MONTAGNE);
 			bloquantes[i][hauteur-1] = cases[i][hauteur-1].getCadre();
 			cases[i][hauteur-1].setTypeCase(type_case_generique.MONTAGNE);
 		}
 		
-		for(int i=0;i<largeur;i++){
+		for(int i=0;i<hauteur;i++){
 			bloquantes[0][i] = cases[0][i].getCadre();
 			cases[0][i].setTypeCase(type_case_generique.MONTAGNE);
 			bloquantes[largeur-1][i] = cases[largeur-1][i].getCadre();
@@ -139,8 +142,7 @@ public class Niveau {
 	}
 	
 	private void demo2(){
-		largeur = 11;
-		hauteur = 11;
+
 		
 		/*for(int i=0;i<hauteur;i++){
 			for(int j=0;j<largeur;j++){
@@ -184,8 +186,8 @@ public class Niveau {
 		
 		createCaseWithShadow(9,9);
 		
-		for(int i=0;i<hauteur;i++){
-			for(int j=0;j<largeur;j++){
+		for(int i=0;i<largeur;i++){
+			for(int j=0;j<hauteur;j++){
 				if(cases[i][j].typeCase== type_case_generique.TERRE)
 				light[i][j] = cases[i][j].getCadre();
 			}
