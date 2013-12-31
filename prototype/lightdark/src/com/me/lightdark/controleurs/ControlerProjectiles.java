@@ -99,7 +99,7 @@ public class ControlerProjectiles {
 				System.out.println(lanceur.getEtat());
 				lanceur.setPosition(new Vector2(shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f),shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f)));
 				lanceur.changerEtat(Dark.SHADOWWALKING);
-				//on remet en shadowwalking si jamais on touche la case dÃ©sirÃ©e (A FIX)
+				//on remet en shadowwalking si jamais on touche la case dÃ©sirÃ©e 
 			}
 			i++;
 		}
@@ -132,22 +132,22 @@ public class ControlerProjectiles {
 		vtemp.x = (Math.abs(position.x) - Math.abs(posInitial.x));
 		vtemp.y = (Math.abs(position.y) - Math.abs(posInitial.y));
 
-		// calcul du rayon par le théorème de pythagore
+		// calcul du rayon par le thï¿½orï¿½me de pythagore
 		float rayon = (float) Math.sqrt(Math.pow((double)vtemp.x, 2.0) + Math.pow((double)vtemp.y, 2.0));
 		
 		if (rayon > p.DISTANCE_MAX){
 			//System.out.println("[DEBUG] Distance max atteinte");
 			p.devientObsolete();
 			if(lanceur.getForm()==Form.SHADOWFORM) {
-				lanceur.changerEtat(Dark.SHADOWWALKING);
 				//On remet en shadowwalking si on atteint le max de distance.
-				//Le grappin revient en "boomerang" s'il est allé trop loin
+				//Le grappin revient en "boomerang" s'il est allï¿½ trop loin
 				Projectile boomerang = monde.lancerBoomerang(p);
 				
 				
-				//Si le retour est quasi arrivé, il devient obsolète
+				//Si le retour est quasi arrivï¿½, il devient obsolï¿½te
 				if(boomerang.getPosition().dst2(boomerang.getCaseCible().getPosition())<1f){
 					boomerang.devientObsolete();
+					lanceur.changerEtat(Dark.SHADOWWALKING);
 				}
 				
 			}
