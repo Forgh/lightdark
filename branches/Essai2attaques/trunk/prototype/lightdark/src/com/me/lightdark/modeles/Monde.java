@@ -64,17 +64,16 @@ public class Monde {
 			}
 	}
 
-			public void frapperEpee(Vector2 vect, Vector2 cible){
+	public void frapperEpee(Vector2 vect, Vector2 cible){
 
-				if(perso.getForm() != Form.SHADOWFORM){
-					Epee s = new Epee(perso,new Vector2(perso.getPosition()),vect);
-					sword.add(s);
-					Case c = this.niveau.get((int) cible.x, (int) cible.y);
-					if (c != null){
-
-						s.setCaseCible(c); 
-					}
-				}
+		if(perso.getForm() != Form.SHADOWFORM){
+			Epee s = new Epee(perso,new Vector2(perso.getPosition()),vect);
+			sword.add(s);
+			Case c = this.niveau.get((int) cible.x, (int) cible.y);
+			/*if (c != null){
+				s.setCaseCible(c); 
+			}*/
+		}
 					
 	}
 	

@@ -81,7 +81,7 @@ public class ControlerEpee {
 					p.getRapidite().x = 0;
 					p.getRapidite().y = 0;
 					p.devientObsolete();
-					epeiste.changerEtat(Dark.SHADOWWALKING);
+					//epeiste.changerEtat(Dark.SHADOWWALKING);
 					//On remet en shadowwalking si jamais le grappin touche un obstacle
 					ok = false;
 				}
@@ -90,7 +90,7 @@ public class ControlerEpee {
 			}
 			i++;
 		}
-		i=0;
+		/*i=0;
 		/////////////////////////////////////?????????????????????/////////////////////////
 		while(i< shadowTouched.size){
 			if(persoRect.overlaps(shadowTouched.get(i)) && shadowTouched.get(i).equals(p.getCaseCible().getCadre())) {
@@ -100,7 +100,7 @@ public class ControlerEpee {
 				//on remet en shadowwalking si jamais on touche la case désirée (A FIX)
 			}
 			i++;
-		}
+		}*/
 		
 		// ici pour les mobs
 
@@ -133,13 +133,13 @@ public class ControlerEpee {
 		// calcul du rayon par le th�or�me de pythagore
 		float rayon = (float) Math.sqrt(Math.pow((double)vtemp.x, 2.0) + Math.pow((double)vtemp.y, 2.0));
 		
-		if (rayon > p.DISTANCE_MAX){
+		if (rayon > p.getDistanceMax()){
 //////////////////////////////////????????????????????????//////////////////////
 			p.devientObsolete(); //ben, au moins il ne doit plus aller vers l'infini...
-			if(epeiste.getForm()==Form.SHADOWFORM) {
+			/*if(epeiste.getForm()==Form.SHADOWFORM) {
 				epeiste.changerEtat(Dark.SHADOWWALKING);
 				//On remet en shadowwalking si on atteint le max de distance.
-			}
+			}*/
 		}
 	}
 	
