@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Monde;
@@ -135,13 +136,26 @@ public class ControlerProjectiles {
 		float rayon = (float) Math.sqrt(Math.pow((double)vtemp.x, 2.0) + Math.pow((double)vtemp.y, 2.0));
 		
 		if (rayon > p.DISTANCE_MAX){
-			p.devientObsolete(); //ben, au moins il ne doit plus aller vers l'infini...
+			//System.out.println("[DEBUG] Distance max atteinte");
+			p.devientObsolete();
 			if(lanceur.getForm()==Form.SHADOWFORM) {
 				lanceur.changerEtat(Dark.SHADOWWALKING);
 				//On remet en shadowwalking si on atteint le max de distance.
+				//Le grappin revient en "boomerang" s'il est allé trop loin
+				Projectile boomerang = monde.lancerBoomerang(p);
+				
+				
+				//Si le retour est quasi arrivé, il devient obsolète
+				if(boomerang.getPosition().dst2(boomerang.getCaseCible().getPosition())<1f){
+					boomerang.devientObsolete();
+				}
+				
 			}
 		}
+			
 	}
+	
+	
 	
 	public ControlerProjectiles(Monde monde, Perso lanceur) {
 		// TODO Auto-generated constructor stub

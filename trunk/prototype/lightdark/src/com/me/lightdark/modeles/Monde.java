@@ -35,7 +35,7 @@ public class Monde {
 	public Monde() {
 		// TODO Charger une map.
 		this.perso = new Perso(new Vector2(1,1));
-		perso.setForm(Form.LIGHTFORM);
+		perso.setForm(Form.SHADOWFORM);
 		this.niveau = new Niveau();
 		
 		this.pause = new Button();
@@ -63,6 +63,19 @@ public class Monde {
 			}
 			
 	}
+	
+	/*
+	 * Se charge de lancer dans la map un grappin-retour venant du grappin source
+	 * @return Projectile boomerang le projectile de retour, pour pouvoir le suivre puis l'éliminer
+	 */
+	public Projectile lancerBoomerang(Projectile source){
+		Projectile boomerang = new Projectile(source);
+		projectiles.add(boomerang);
+		boomerang.setCaseCible(new Case (perso.getPosition()));
+		return boomerang;
+	}
+	
+	
 	
 	public Array<Case> getAffichable(int espaceH, int espaceV){ // H et V pour eventuellement faire un defilement style java
 		int x = (int)perso.getPosition().x - espaceH;
