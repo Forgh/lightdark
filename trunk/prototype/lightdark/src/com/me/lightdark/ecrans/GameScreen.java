@@ -9,6 +9,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.me.lightdark.controleurs.ControlerEpee;
 import com.me.lightdark.controleurs.ControlerMenu;
 import com.me.lightdark.controleurs.ControlerPerso;
 import com.me.lightdark.controleurs.ControlerProjectiles;
@@ -24,6 +25,8 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	
 	private ControlerPerso control;
 	private ControlerProjectiles tirs;
+	private ControlerEpee epee;
+
 	private ControlerMenu menu;
 	
 	private int width;
@@ -83,6 +86,9 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		if (Input.Buttons.LEFT == button){
 			control.feuPresse(screenX, screenY, this.width, this.height);
 		}
+		if (Input.Buttons.RIGHT == button){
+			control.sourisDroitPresse(screenX, screenY, this.width, this.height);
+		}
 		if(menu.getOrbe().getClickListener().isPressed()){
 			System.out.println("GameScreen");
 			menu.orbPressed();
@@ -98,6 +104,9 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		// TODO Auto-generated method stub
 		if (Input.Buttons.LEFT == button){
 			control.feuRelache(screenX, screenY);
+		}
+		if (Input.Buttons.RIGHT == button){
+			control.sourisDroitRelache(screenX, screenY);
 		}
 		return true;
 	}
@@ -129,7 +138,8 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		control.update(delta);
 		
 		tirs.update(delta);
-		
+		epee.update(delta);
+
 		affMonde.render();
 		affSideMenu.render();
 	}
@@ -148,6 +158,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		affSideMenu = new AfficherSideMenu(monde);
 		control = new ControlerPerso(monde);
 		tirs = new ControlerProjectiles(monde, monde.getPerso());
+		epee = new ControlerEpee(monde, monde.getPerso());
 		menu = new ControlerMenu(monde);
 		Gdx.input.setInputProcessor(this);
 	}

@@ -37,7 +37,7 @@ public class ControlerPerso {
 	}
 	
 	enum Touches {
-		GAUCHE, DROITE, HAUT, BAS, FEU,
+		GAUCHE, DROITE, HAUT, BAS, FEU, EPEE
 	}
 	
 	static Map<Touches, Boolean> touches = new HashMap<Touches, Boolean>();
@@ -47,6 +47,7 @@ public class ControlerPerso {
 		touches.put(Touches.DROITE, false);
 		touches.put(Touches.BAS, false);
 		touches.put(Touches.FEU, false);
+		touches.put(Touches.EPEE, false);
 	};
 	
 	static Touches toucheActuHoz; // ! rustine !
@@ -138,7 +139,38 @@ public class ControlerPerso {
 		cibleTir = new Vector2(posX, posY);
 	}
 	
-	
+	public void sourisDroitPresse(int x, int y, int w, int h) {
+		touches.get(touches.put(Touches.EPEE, true));
+		
+		
+		float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
+		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
+		
+		
+		Vector2 v = new Vector2(posX, posY);
+
+		
+		
+		
+		v.sub(this.perso.getPosition());
+
+		float negX = (v.x<0f ? -1f : 1f);
+		float negY = (v.y<0f ? -1f : 1f);
+		
+		float angle = (float) Math.atan2(v.y, v.x);
+		
+		v.x =(float)Math.cos(angle);
+		v.y =(float)Math.sin(angle);
+		
+		/*
+		 * � verif que la precision numerique des float ne tombe pas sur 0.0 
+		 */
+		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par z�ro (bloquant)
+		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
+
+
+		cibleTir = new Vector2(posX, posY);
+	}
 	
 	public void gaucheRelache() {
 		touches.get(touches.put(Touches.GAUCHE, false));
@@ -163,6 +195,14 @@ public class ControlerPerso {
 		directionTir.y = 0;
 	}
 	
+	
+	
+	public void sourisDroitRelache (int x, int y){
+		touches.get(touches.put(Touches.EPEE, false));
+		directionTir.x = 0;
+		directionTir.y = 0;
+	
+	}
 	
 	public void update(float delta) {
 		gererEntrees();
@@ -246,7 +286,6 @@ public class ControlerPerso {
 				perso.changerEtat(Light.MARCHANT);
 		}
 		else{
-		
 			if (perso.getForm() == Form.LIGHTFORM)
 				perso.changerEtat(Light.INACTIF);
 		}
@@ -258,6 +297,15 @@ public class ControlerPerso {
 
 			monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
 			directionTir.x = 0;
+			directionTir.y = 0;
+			
+		}
+		
+		if (touches.get(Touches.EPEE) && directionTir.x !=0 && directionTir.y !=0){
+
+			monde.frapperEpee(new Vector2(directionTir), new Vector2(cibleTir));
+			directionTir.x = 0;
+			System.out.println("J'ai frappé");
 			directionTir.y = 0;
 			
 		}
