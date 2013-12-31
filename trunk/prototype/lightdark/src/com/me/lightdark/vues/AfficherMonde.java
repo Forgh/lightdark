@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Case;
+import com.me.lightdark.modeles.Epee;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Niveau;
 import com.me.lightdark.modeles.Perso;
@@ -74,8 +75,10 @@ public class AfficherMonde {
 		drawMap();
 		// dessiner strate 2
 		drawProjectile();
+		drawSword();
 		// dessiner strate 3
 		drawPerso();
+		
 		
 		spriteBatch.end();
 	}
@@ -114,5 +117,10 @@ public class AfficherMonde {
 		 }
 	}
 	
-
+	private void drawSword(){
+		 Array<Epee> sword = monde.getEpee();
+		 for(int i=0;i<sword.size;i++){
+			 spriteBatch.draw(this.imgProjectile, sword.get(i).getPosition().x * ppuX, sword.get(i).getPosition().y * ppuY, sword.get(i).TAILLE * ppuX, sword.get(i).TAILLE * ppuY);
+		 }
+	}
 }

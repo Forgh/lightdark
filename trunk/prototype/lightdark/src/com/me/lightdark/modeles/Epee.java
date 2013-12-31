@@ -6,16 +6,16 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Epee {
 
-	public static final float VITESSE = 5f;	// vitesse par unite de temps sur une unite d'espace
+	private final float VITESSE =8f;	// vitesse par unite de temps sur une unite d'espace
 	public static final float TAILLE = 0.2f; // 2/10 unite
 	
-	public static final float DISTANCE_MAX = 0.8f; // portee de l'épée
+	private final float DISTANCE_MAX = 0.6f; // portee de l'épée
 	
 	private Vector2 position = new Vector2();
 	private Vector2 rapidite = new Vector2();
 	private Vector2 posInitial = new Vector2();
 	private Perso lanceur;
-	private Case case_cible;
+	//private Case case_cible;
 	private boolean obsolete;// = false;
 	
 	
@@ -71,15 +71,17 @@ public class Epee {
 		this.rapidite = v;
 	}
 	
-	public void setCaseCible(Case c){
+	/*public void setCaseCible(Case c){
 		this.case_cible = c;
 	}
 	
 	public Case getCaseCible(){
 		return this.case_cible;
-	}
+	}*/
 	
-
+	public float getDistanceMax(){
+		return this.DISTANCE_MAX;
+	}
 	public float temps(){
 		return tempsAnime;
 	}

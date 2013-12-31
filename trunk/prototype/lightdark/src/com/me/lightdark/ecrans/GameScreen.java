@@ -133,7 +133,7 @@ public class GameScreen  implements Screen, InputProcessor{
 		control.update(delta);
 		
 		tirs.update(delta);
-		
+		epee.update(delta);
 		affMonde.render();
 	//	affSideMenu.render();
 	}
@@ -152,6 +152,7 @@ public class GameScreen  implements Screen, InputProcessor{
 		//affSideMenu = new AfficherSideMenu(monde);
 		control = new ControlerPerso(monde);
 		tirs = new ControlerProjectiles(monde, monde.getPerso());
+		epee = new ControlerEpee(monde, monde.getPerso());
 	//	menu = new ControlerMenu(monde);
 		Gdx.input.setInputProcessor(this);
 	}
