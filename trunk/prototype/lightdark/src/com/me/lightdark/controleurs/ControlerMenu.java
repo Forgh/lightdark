@@ -17,6 +17,8 @@ public class ControlerMenu {
 		this.perso = monde.getPerso();
 		
 		this.orbe = monde.getOrbe();
+		this.orbe.setWidth(50);
+		this.orbe.setHeight(50);
 		this.orbe.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y){
@@ -26,6 +28,7 @@ public class ControlerMenu {
 		});
 		
 		this.pause = monde.getPause();
+		this.pause.setSize(64, 32);
 		this.pause.addListener(new ClickListener());
 	}
 	
