@@ -11,7 +11,7 @@ public class Main {
 
 		cfg.useGL20 = false;
 		cfg.width = 800;
-		cfg.height = 500;
+		cfg.height = 800;
 		new LwjglApplication(new LightDark(), cfg);
 	}
 }
