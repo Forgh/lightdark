@@ -38,6 +38,40 @@ public class Projectile {
 	}
 	
 	
+	
+	/* Renvoie le boomerang du projectile source
+	 * Pour éviter le blocage, apparait un peu plus près du lanceur (0,01f)
+	 */
+	public Projectile (Projectile p){
+		
+		
+		Vector2 DiffLanceurBoomerang = new Vector2(p.getPosition());
+		DiffLanceurBoomerang.sub(p.getLanceur().getPosition());
+		DiffLanceurBoomerang.sub(0.01f, 0.01f);
+		//Vecteur de la différence entre le lanceur et le projectile, un peu réduit VS bugs
+		
+		
+		Vector2 posBoomerang = new Vector2(p.getLanceur().getPosition());//Position effective du boomerang
+		posBoomerang.add(DiffLanceurBoomerang);
+		
+		Vector2 direction = new Vector2(p.getLanceur().getPosition());
+		direction.sub(posBoomerang);
+		
+		this.lanceur=p.getLanceur();
+		
+		this.cadre.height = TAILLE;
+		this.cadre.width = TAILLE;
+		
+		this.obsolete = false;
+		this.position = posBoomerang;
+		this.posInitial = new Vector2(posBoomerang);
+		this.rapidite = direction;
+		cadre.setPosition(posBoomerang);
+		
+	}
+	
+	
+	
 	// **** GETTERS ****
 	public Vector2 getPosition() {
 		return position;
