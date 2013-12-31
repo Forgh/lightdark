@@ -94,12 +94,14 @@ public class ControlerProjectiles {
 			i++;
 		}
 		i=0;
-		while(i< shadowTouched.size){
+		while(i< shadowTouched.size && ok){
 			if(persoRect.overlaps(shadowTouched.get(i)) && shadowTouched.get(i).equals(p.getCaseCible().getCadre())) {
 				System.out.println(lanceur.getEtat());
+				p.devientObsolete();
 				lanceur.setPosition(new Vector2(shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f),shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f)));
 				lanceur.changerEtat(Dark.SHADOWWALKING);
 				//on remet en shadowwalking si jamais on touche la case désirée 
+				ok=false;
 			}
 			i++;
 		}
@@ -139,7 +141,6 @@ public class ControlerProjectiles {
 			//System.out.println("[DEBUG] Distance max atteinte");
 			p.devientObsolete();
 			if(lanceur.getForm()==Form.SHADOWFORM) {
-				//On remet en shadowwalking si on atteint le max de distance.
 				//Le grappin revient en "boomerang" s'il est all� trop loin
 				Projectile boomerang = monde.lancerBoomerang(p);
 				
@@ -148,6 +149,7 @@ public class ControlerProjectiles {
 				if(boomerang.getPosition().dst2(boomerang.getCaseCible().getPosition())<1f){
 					boomerang.devientObsolete();
 					lanceur.changerEtat(Dark.SHADOWWALKING);
+					//On remet en shadowwalking si le grappin revient
 				}
 				
 			}

@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.me.lightdark.controleurs.ControlerMenu;
 import com.me.lightdark.controleurs.ControlerPerso;
@@ -15,7 +16,7 @@ import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.vues.AfficherMonde;
 import com.me.lightdark.vues.AfficherSideMenu;
 
-public class GameScreen  implements Screen, InputProcessor{
+public class GameScreen extends Stage implements Screen, InputProcessor{
 
 	private Monde monde;
 	private AfficherMonde affMonde;

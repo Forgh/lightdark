@@ -1,6 +1,7 @@
 package com.me.lightdark.modeles;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -39,12 +40,12 @@ public class Monde {
 		this.niveau = new Niveau();
 		
 		this.pause = new Button();
-		this.pause.setSize(64, 32);
+		
 		this.pause.setX(730);
 		this.pause.setY(200);
 		
 		this.orbe = new Button();
-		this.orbe.setSize(50, 50);
+		
 		this.orbe.setX(750);
 		this.orbe.setY(400);
 		
