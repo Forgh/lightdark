@@ -16,6 +16,7 @@ public class Monde {
 	Perso perso;
 	
 	Array<Projectile> projectiles = new Array<Projectile>();
+	Array<Epee> sword = new Array<Epee>();
 
 	private Button pause;
 	private Button orbe;
@@ -24,6 +25,11 @@ public class Monde {
 	public Array<Projectile> getProjectile() {
 		return projectiles;
 	}
+	
+	public Array<Epee> getEpee() {
+		return sword;
+	}
+
 
 	public Perso getPerso() {
 		return perso;
@@ -36,7 +42,7 @@ public class Monde {
 	public Monde() {
 		// TODO Charger une map.
 		this.perso = new Perso(new Vector2(1,1));
-		perso.setForm(Form.SHADOWFORM);
+		perso.setForm(Form.LIGHTFORM);
 		this.niveau = new Niveau();
 		
 		this.pause = new Button();
@@ -63,6 +69,15 @@ public class Monde {
 				v.setCaseCible(c); // on ajoute les coord. de la cible
 			}
 			
+	}
+	
+	public void frapperEpee(Vector2 vect, Vector2 cible){
+
+		if(perso.getForm() != Form.SHADOWFORM){
+			Epee s = new Epee(perso,new Vector2(perso.getPosition()),vect);
+			sword.add(s);
+		}
+					
 	}
 	
 	/*

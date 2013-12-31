@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Case;
+import com.me.lightdark.modeles.Epee;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Niveau;
 import com.me.lightdark.modeles.Perso;
@@ -26,6 +27,7 @@ public class AfficherMonde {
 	private TextureRegion imgOmbre;
 	private TextureRegion imgPerso;
 	private TextureRegion imgProjectile;
+	private TextureRegion imgSword;
 	
 	private SpriteBatch spriteBatch;
 	
@@ -66,6 +68,8 @@ public class AfficherMonde {
 		this.imgObstacle = new TextureRegion(new Texture(Gdx.files.internal("images/roche.png")));
 		this.imgOmbre= new TextureRegion(new Texture(Gdx.files.internal("images/ombre.png")));
 		this.imgProjectile = new TextureRegion(new Texture(Gdx.files.internal("images/projectile.png")));
+		this.imgSword = new TextureRegion(new Texture(Gdx.files.internal("images/sword.png")));
+
 		// TODO rajouter pour toutes les cases
 		 
 	}
@@ -77,6 +81,7 @@ public class AfficherMonde {
 		drawMap();
 		// dessiner strate 2
 		drawProjectile();
+		drawSword();
 		// dessiner strate 3
 		drawPerso();
 		
@@ -117,5 +122,11 @@ public class AfficherMonde {
 		 }
 	}
 	
+	private void drawSword(){
+		 Array<Epee> sword = monde.getEpee();
+		 for(int i=0;i<sword.size;i++){
+			 spriteBatch.draw(this.imgSword, sword.get(i).getPosition().x * ppuX, sword.get(i).getPosition().y * ppuY, sword.get(i).TAILLE * ppuX, sword.get(i).TAILLE * ppuY);
+		 }
+	}
 
 }
