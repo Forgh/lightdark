@@ -84,7 +84,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
 		if (Input.Buttons.LEFT == button){
-			control.feuPresse(screenX, screenY, this.width, this.height);
+			control.feuPresse(screenX, screenY, 866, this.height);
 		}
 		if (Input.Buttons.RIGHT == button){
 			control.sourisDroitPresse(screenX, screenY, this.width, this.height);
