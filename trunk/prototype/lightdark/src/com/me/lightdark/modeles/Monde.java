@@ -47,13 +47,13 @@ public class Monde {
 		
 		this.pause = new Button();
 		
-		this.pause.setX(730);
-		this.pause.setY(200);
+		this.pause.setX(930);
+		this.pause.setY(700);
 		
 		this.orbe = new Button();
 		
-		this.orbe.setX(750);
-		this.orbe.setY(400);
+		this.orbe.setX(950);
+		this.orbe.setY(500);
 		
 
 		//cases.add(new Case(new Vector2(5,1), false));

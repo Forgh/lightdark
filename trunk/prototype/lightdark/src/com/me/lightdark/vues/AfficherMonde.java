@@ -15,8 +15,8 @@ import com.me.lightdark.modeles.Projectile;
 
 public class AfficherMonde {
 
-	private float CAM_LARG = 11f;
-	private float CAM_HAUT = 11f;
+	private float CAM_LARG = 15f;
+	private float CAM_HAUT = 13f;
 	private static final float DUREE_IMAGES = 0.06f;
 	
 	private Monde monde;
@@ -50,8 +50,8 @@ public class AfficherMonde {
 	
 	public AfficherMonde( Monde monde, boolean debug) {
 		this.monde = monde;
-		this.CAM_HAUT = (float) this.monde.getNiveau().getHauteur();
-		this.CAM_LARG = (float) this.monde.getNiveau().getLargeur();
+		//this.CAM_HAUT = (float) this.monde.getNiveau().getHauteur();
+		//this.CAM_LARG = (float) this.monde.getNiveau().getLargeur();
 		this.cam =  new OrthographicCamera(CAM_LARG / 2f,CAM_HAUT / 2f);
 		this.cam.position.set(CAM_LARG / 2f, CAM_HAUT / 2f, 0); // ici on place la camera au centre
 		this.deboguage = debug;

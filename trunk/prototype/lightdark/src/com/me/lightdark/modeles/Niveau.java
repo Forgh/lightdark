@@ -15,7 +15,7 @@ public class Niveau {
 
 	public Niveau() {
 		// TODO Auto-generated constructor stub
-		this.largeur = 20; this.hauteur = 13;
+		this.largeur = 13; this.hauteur = 13;
 		
 		cases = new Case[largeur][hauteur];
 		bloquantes = new Rectangle[largeur][hauteur];
