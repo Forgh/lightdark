@@ -10,7 +10,7 @@ public class Main {
 		cfg.title = "lightdark - alpha";
 
 		cfg.useGL20 = false;
-		cfg.width = 800;
+		cfg.width = 1000;
 		cfg.height = 800;
 		new LwjglApplication(new LightDark(), cfg);
 	}
