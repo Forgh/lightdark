@@ -88,7 +88,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 				control.feuPresse(screenX, screenY, 866, this.height);
 			}
 			if (Input.Buttons.RIGHT == button){
-				control.sourisDroitPresse(screenX, screenY, this.width, this.height);
+				control.sourisDroitPresse(screenX, screenY, 866, this.height);
 			}
 		}else if(menu.getOrbe().getClickListener().isPressed()){
 			System.out.println("GameScreen");

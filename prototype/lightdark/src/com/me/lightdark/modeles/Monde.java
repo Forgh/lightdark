@@ -41,7 +41,7 @@ public class Monde {
 	public Monde() {
 		// TODO Charger une map.
 		this.perso = new Perso(new Vector2(1,1));
-		perso.setForm(Form.SHADOWFORM);
+		perso.setForm(Form.LIGHTFORM);
 		this.niveau = new Niveau();
 		
 		this.pause = new Button();
