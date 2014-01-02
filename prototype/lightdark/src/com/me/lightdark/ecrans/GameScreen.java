@@ -82,20 +82,21 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		if (Input.Buttons.LEFT == button){
-			control.feuPresse(screenX, screenY, 866, this.height);
-		}
-		if (Input.Buttons.RIGHT == button){
-			control.sourisDroitPresse(screenX, screenY, this.width, this.height);
-		}
-		if(menu.getOrbe().getClickListener().isPressed()){
+		if(screenX<=800){
+				// TODO Auto-generated method stub
+			if (Input.Buttons.LEFT == button){
+				control.feuPresse(screenX, screenY, 866, this.height);
+			}
+			if (Input.Buttons.RIGHT == button){
+				control.sourisDroitPresse(screenX, screenY, this.width, this.height);
+			}
+		}else if(menu.getOrbe().getClickListener().isPressed()){
 			System.out.println("GameScreen");
 			menu.orbPressed();
 			//TODO update les control pour le passage à l'autre forme
 			//control.update(delta);
-		}
 		
+		}
 		return true;
 	}
 
