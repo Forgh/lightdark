@@ -8,7 +8,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.me.lightdark.controleurs.ControlerEpee;
 import com.me.lightdark.controleurs.ControlerMenu;
 import com.me.lightdark.controleurs.ControlerPerso;
@@ -87,6 +86,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		
 		if(screenX<=800){
 				// TODO Auto-generated method stub
+			//TODO : projectile en clic gauche chargé
 			if (Input.Buttons.LEFT == button){
 				control.feuPresse(screenX, screenY, 866, this.height);
 			}
@@ -94,15 +94,12 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 				control.sourisDroitPresse(screenX, screenY, 866, this.height);
 			}
 		}else if(Input.Buttons.LEFT == button && menu.isPausePressed(screenX, screenY)){
-			if(!affSideMenu.isPaused()){
+			if(!affSideMenu.isPaused())
 				affSideMenu.showPauseFrame();
-				
-			}
-			else {
+			else
 				affSideMenu.hidePauseFrame();
-			}
 		}
-		else if(Input.Buttons.LEFT == button && menu.isOrbPressed(screenX, screenY)){
+		else if(Input.Buttons.LEFT == button && menu.isOrbPressed(screenX, screenY) && !affSideMenu.isPaused()){
 			menu.orbPressed();
 		}
 		

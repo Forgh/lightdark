@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Epee;
+import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Niveau;
 import com.me.lightdark.modeles.Perso;
@@ -27,7 +28,8 @@ public class AfficherMonde {
 	private TextureRegion imgSol;
 	private TextureRegion imgObstacle;
 	private TextureRegion imgOmbre;
-	private TextureRegion imgPerso;
+	private TextureRegion imgLightForm;
+	private TextureRegion imgDarkForm;
 	private TextureRegion imgProjectile;
 	private TextureRegion imgSword;
 	
@@ -67,7 +69,8 @@ public class AfficherMonde {
 
 	private void chargerTextures() {
 		// TODO mettre a jour avec des atlas
-		this.imgPerso = new TextureRegion(new Texture(Gdx.files.internal("images/perso.png")));
+		this.imgLightForm = new TextureRegion(new Texture(Gdx.files.internal("images/light.png")));
+		this.imgDarkForm = new TextureRegion(new Texture(Gdx.files.internal("images/dark.png")));
 		this.imgSol = new TextureRegion(new Texture(Gdx.files.internal("images/herbe_seche.png")));
 		this.imgObstacle = new TextureRegion(new Texture(Gdx.files.internal("images/roche.png")));
 		this.imgOmbre= new TextureRegion(new Texture(Gdx.files.internal("images/ombre.png")));
@@ -115,7 +118,10 @@ public class AfficherMonde {
 	
 	private void drawPerso(){
 		Perso p = monde.getPerso();
-		spriteBatch.draw(this.imgPerso, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+		if(p.getForm()==Form.LIGHTFORM)
+			spriteBatch.draw(this.imgLightForm, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+		else
+			spriteBatch.draw(this.imgDarkForm, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);	
 	}
 	
 	
