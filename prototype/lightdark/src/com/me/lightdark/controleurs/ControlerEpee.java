@@ -73,7 +73,6 @@ public class ControlerEpee {
 		persoRect.y += p.getRapidite().y;
 		
 		int i = 0;
-	////////////////////////////////////??????????????????///////////////////////////
 		boolean ok = true;
 		while (i< collision.size && ok){
 			if (collision.get(i) != null) {
@@ -81,7 +80,6 @@ public class ControlerEpee {
 					p.getRapidite().x = 0;
 					p.getRapidite().y = 0;
 					p.devientObsolete();
-					//epeiste.changerEtat(Dark.SHADOWWALKING);
 					//On remet en shadowwalking si jamais le grappin touche un obstacle
 					ok = false;
 				}
@@ -90,19 +88,6 @@ public class ControlerEpee {
 			}
 			i++;
 		}
-		/*i=0;
-		/////////////////////////////////////?????????????????????/////////////////////////
-		while(i< shadowTouched.size){
-			if(persoRect.overlaps(shadowTouched.get(i)) && shadowTouched.get(i).equals(p.getCaseCible().getCadre())) {
-				System.out.println(epeiste.getEtat());
-				epeiste.setPosition(new Vector2(shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (epeiste.TAILLE / 2f),shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (epeiste.TAILLE / 2f)));
-				epeiste.changerEtat(Dark.SHADOWWALKING);
-				//on remet en shadowwalking si jamais on touche la case désirée (A FIX)
-			}
-			i++;
-		}*/
-		
-		// ici pour les mobs
 
 		p.getRapidite().scl(1/delta); // on restaure la vitesse
 		
@@ -134,12 +119,8 @@ public class ControlerEpee {
 		float rayon = (float) Math.sqrt(Math.pow((double)vtemp.x, 2.0) + Math.pow((double)vtemp.y, 2.0));
 		
 		if (rayon > p.getDistanceMax()){
-//////////////////////////////////????????????????????????//////////////////////
 			p.devientObsolete(); //ben, au moins il ne doit plus aller vers l'infini...
-			/*if(epeiste.getForm()==Form.SHADOWFORM) {
-				epeiste.changerEtat(Dark.SHADOWWALKING);
-				//On remet en shadowwalking si on atteint le max de distance.
-			}*/
+			
 		}
 	}
 	

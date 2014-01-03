@@ -18,9 +18,9 @@ public class ControlerMenu {
 	private Button pause;
 	private Monde monde;
 	
-	private float transformTime = 10f;		//durée de la transformation (en secondes)
-	private float cooldownTime = 40f;		//temps de recharge du click à la prochaine utilisation
-	private boolean orbEnabled = true;		//par défaut l'orbe est utilisable
+	private float transformTime = 10;		//durï¿½e de la transformation (en secondes)
+	private float cooldownTime = 40;		//temps de recharge du click ï¿½ la prochaine utilisation
+	private boolean orbEnabled = true;		//par dï¿½faut l'orbe est utilisable
 	
 	public ControlerMenu(Monde monde) {
 		this.perso = monde.getPerso();
@@ -39,19 +39,19 @@ public class ControlerMenu {
 		int posX =(int)perso.getPosition().x;//La position de la case sur laquelle est le joueur
 		int posY = (int)perso.getPosition().y;
 		
-		//S'il est sur une ombre et que l'orbe est activé
+		//S'il est sur une ombre et que l'orbe est activï¿½
 		if (monde.getNiveau().get(posX, posY).getTypeCase()=="OMBRE" && orbEnabled){
 			final Vector2 savePos = new Vector2(perso.getPosition());//Sauver sa position
 			perso.switchForm();
 			
-			orbEnabled = false; //désactive l'Orbe
+			orbEnabled = false; //dï¿½sactive l'Orbe
 			//-------------------------
 			
 			Timer.Task transform = new Timer.Task()
 			{
 			    @Override
 			    public void run() {
-			    	System.out.println("[DEBUG] Transformation terminée");
+			    	System.out.println("[DEBUG] Transformation terminï¿½e");
 			    	Vector2 back = new Vector2(savePos);
 			    	perso.setPosition(savePos);
 					perso.switchForm();
@@ -63,19 +63,19 @@ public class ControlerMenu {
 			{
 			    @Override
 			    public void run() {
-			    	System.out.println("[DEBUG] Orbe réactivé");
-			    	orbEnabled = true; //réactive l'orbe après le cooldown
+			    	System.out.println("[DEBUG] Orbe rï¿½activï¿½");
+			    	orbEnabled = true; //rï¿½active l'orbe aprï¿½s le cooldown
 			    	
 			    }
 			};
 			
-			System.out.println("[DEBUG] Orbe utilisé");
+			System.out.println("[DEBUG] Orbe utilisï¿½");
 			Timer.schedule(transform, transformTime);
 			Timer.schedule(cooldown, cooldownTime);
 			
 		}
 		/*Si la transformation est impossible, dire pourquoi
-		 * Plus tard, on pourra Implémenter un FeedBack*/
+		 * Plus tard, on pourra Implï¿½menter un FeedBack*/
 		else if(!orbEnabled)
 			System.out.println("[DEBUG] L'orbe doit se recharger !");
 		else System.out.println("[DEBUG] Tu n'es pas sur une ombre !");
@@ -94,9 +94,24 @@ public class ControlerMenu {
 	}
 	
 	public boolean isPausePressed(int screenX, int screenY){
-		if(screenX >= pause.getOriginX() && screenX <= (pause.getOriginX() + pause.getWidth())
-				&& screenY >= pause.getOriginY() && screenY <= (pause.getOriginY()+ pause.getHeight())){
+		
+		screenY = 800-screenY;
+	
+		if((float)screenX >= pause.getX() && (float)screenX <= (pause.getX() + pause.getWidth())
+				&& (float)screenY >= pause.getY() && (float)screenY <= (pause.getY()+ pause.getHeight())){
 			return true;
+			
+		}else return false;
+	}
+	
+	public boolean isOrbPressed(int screenX, int screenY){
+		
+		screenY = 800-screenY;
+	
+		if((float)screenX >= orbe.getX() && (float)screenX <= (orbe.getX() + orbe.getWidth())
+				&& (float)screenY >= orbe.getY() && (float)screenY <= (orbe.getY()+ orbe.getHeight())){
+			return true;
+			
 		}else return false;
 	}
 }
