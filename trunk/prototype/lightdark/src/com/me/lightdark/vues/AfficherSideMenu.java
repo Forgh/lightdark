@@ -1,9 +1,14 @@
 package com.me.lightdark.vues;
 
+
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.me.lightdark.modeles.Monde;
 
@@ -15,6 +20,8 @@ public class AfficherSideMenu {
 	private TextureRegion imgPause;
 	private TextureRegion imgHealth;
 	
+	private boolean frameUpState;
+	private TextureRegion frameUp;
 	private SpriteBatch spriteBatch;
 	
 	
@@ -26,6 +33,8 @@ public class AfficherSideMenu {
 	public AfficherSideMenu(Monde monde) {
 		this.monde = monde;
 		
+		this.frameUpState  = false;
+		
 		spriteBatch = new SpriteBatch();
 		chargerTextures();
 	}
@@ -35,6 +44,25 @@ public class AfficherSideMenu {
 		this.imgOrbe = new TextureRegion(new Texture("images/orbe.png"));
 		this.imgPause = new TextureRegion(new Texture("images/start.png"));
 		this.imgHealth = new TextureRegion(new Texture("images/hp.png"));
+		this.frameUp  = new TextureRegion(new Texture("images/frameUp.png"));
+	}
+	
+	public void showPauseFrame(){
+		this.frameUpState = true;
+	}
+	
+	public void hidePauseFrame(){
+		this.frameUpState = false;
+	}
+	
+	
+	private void drawFrameUpPause(){
+		Color c1 = spriteBatch.getColor();
+		spriteBatch.setColor(c1.r, c1.g, c1.b, 0.9f);
+		spriteBatch.draw(this.frameUp, 25,100, 800, 600);
+		// + toutes les options
+		spriteBatch.setColor(c1);
+		
 	}
 	
 	public void render() {
@@ -42,6 +70,7 @@ public class AfficherSideMenu {
 		drawOrbe();
 		drawPause();
 		drawHealth();
+		if (this.frameUpState ) drawFrameUpPause();
 		spriteBatch.end();
 	}
 
