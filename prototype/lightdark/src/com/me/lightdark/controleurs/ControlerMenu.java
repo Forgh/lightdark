@@ -26,15 +26,8 @@ public class ControlerMenu {
 		this.perso = monde.getPerso();
 		this.monde = monde;
 		this.orbe = monde.getOrbe();
-		this.orbe.setWidth(50);
-		this.orbe.setHeight(50);
-		this.orbe.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y){
-				System.out.println("CLICK");
-				orbPressed();
-			}
-		});
+		this.orbe.setSize(50,50);
+		this.orbe.addListener(new ClickListener());
 		
 		this.pause = monde.getPause();
 		this.pause.setSize(64, 32);
@@ -100,4 +93,10 @@ public class ControlerMenu {
 		return this.pause;
 	}
 	
+	public boolean isPausePressed(int screenX, int screenY){
+		if(screenX >= pause.getOriginX() && screenX <= (pause.getOriginX() + pause.getWidth())
+				&& screenY >= pause.getOriginY() && screenY <= (pause.getOriginY()+ pause.getHeight())){
+			return true;
+		}else return false;
+	}
 }
