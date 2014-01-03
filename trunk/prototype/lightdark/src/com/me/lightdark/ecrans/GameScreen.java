@@ -29,6 +29,8 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 
 	private ControlerMenu menu;
 	
+	//private boolean gamePaused = false; // en pause ou pas
+	
 	private int width;
 	private int height;
 	
@@ -94,6 +96,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		}else if(Input.Buttons.LEFT == button && menu.isPausePressed(screenX, screenY)){
 			if(!affSideMenu.isPaused()){
 				affSideMenu.showPauseFrame();
+				
 			}
 			else {
 				affSideMenu.hidePauseFrame();
@@ -145,11 +148,12 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-		control.update(delta);
-		
-		tirs.update(delta);
-		epee.update(delta);
-
+		if(!affSideMenu.isPaused()){
+			control.update(delta);
+			
+			tirs.update(delta);
+			epee.update(delta);
+		}
 		affMonde.render();
 		affSideMenu.render();
 	}
