@@ -19,8 +19,10 @@ public class AfficherMonde {
 	private float CAM_HAUT = 13f;
 	private static final float DUREE_IMAGES = 0.06f;
 	
+	private AfficherSideMenu menu;
 	private Monde monde;
 	private OrthographicCamera cam;
+	
 	
 	private TextureRegion imgSol;
 	private TextureRegion imgObstacle;
@@ -47,7 +49,9 @@ public class AfficherMonde {
 		ppuY = (float)height / CAM_HAUT;
 	}
 	
-	
+	public int getWidth(){
+		return this.width;
+	}
 	public AfficherMonde( Monde monde, boolean debug) {
 		this.monde = monde;
 		//this.CAM_HAUT = (float) this.monde.getNiveau().getHauteur();

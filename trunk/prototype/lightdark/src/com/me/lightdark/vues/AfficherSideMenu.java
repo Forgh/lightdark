@@ -39,7 +39,10 @@ public class AfficherSideMenu {
 		chargerTextures();
 	}
 
-
+	public boolean isPaused(){
+		return this.frameUpState;
+	}
+	
 	private void chargerTextures() {
 		this.imgOrbe = new TextureRegion(new Texture("images/orbe.png"));
 		this.imgPause = new TextureRegion(new Texture("images/start.png"));

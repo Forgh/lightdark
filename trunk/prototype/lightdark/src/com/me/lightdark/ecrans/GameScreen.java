@@ -82,6 +82,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		
 		if(screenX<=800){
 				// TODO Auto-generated method stub
 			if (Input.Buttons.LEFT == button){
@@ -91,8 +92,15 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 				control.sourisDroitPresse(screenX, screenY, 866, this.height);
 			}
 		}else if(Input.Buttons.LEFT == button && menu.isPausePressed(screenX, screenY)){
-					//Debug
-					System.out.println("CLick Start");
+			if(!affSideMenu.isPaused()){
+				affSideMenu.showPauseFrame();
+			}
+			else {
+				affSideMenu.hidePauseFrame();
+			}
+		}
+		else if(Input.Buttons.LEFT == button && menu.isOrbPressed(screenX, screenY)){
+			menu.orbPressed();
 		}
 		
 		
