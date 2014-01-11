@@ -17,12 +17,17 @@ public class Monde {
 	Array<Projectile> projectiles = new Array<Projectile>();
 	Array<Epee> sword = new Array<Epee>();
 
+
 	private Button pause;
 	private Button orbe;
 	
 	// Getters -----------
 	public Array<Projectile> getProjectile() {
 		return projectiles;
+	}
+	
+	public Array<Animal> getAnimals() {
+		return this.niveau.getAnimals();
 	}
 	
 	public Array<Epee> getEpee() {

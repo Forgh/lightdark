@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Epee;
 import com.me.lightdark.modeles.Form;
@@ -32,6 +33,7 @@ public class AfficherMonde {
 	private TextureRegion imgDarkForm;
 	private TextureRegion imgProjectile;
 	private TextureRegion imgSword;
+	private TextureRegion imgAnimal;
 	
 	private SpriteBatch spriteBatch;
 	
@@ -76,6 +78,7 @@ public class AfficherMonde {
 		this.imgOmbre= new TextureRegion(new Texture(Gdx.files.internal("images/ombre.png")));
 		this.imgProjectile = new TextureRegion(new Texture(Gdx.files.internal("images/projectile.png")));
 		this.imgSword = new TextureRegion(new Texture(Gdx.files.internal("images/sword.png")));
+		this.imgAnimal = new TextureRegion(new Texture(Gdx.files.internal("images/cat_laptop.png")));
 
 		// TODO rajouter pour toutes les cases
 		 
@@ -90,6 +93,7 @@ public class AfficherMonde {
 		drawProjectile();
 		drawSword();
 		// dessiner strate 3
+		drawAnimals();
 		drawPerso();
 		
 		spriteBatch.end();
@@ -122,6 +126,13 @@ public class AfficherMonde {
 			spriteBatch.draw(this.imgLightForm, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 		else
 			spriteBatch.draw(this.imgDarkForm, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);	
+	}
+	
+	private void drawAnimals(){
+		Array<Animal> project = monde.getAnimals();
+		 for(int i=0;i<project.size;i++){
+			 spriteBatch.draw(this.imgAnimal, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
+		 }
 	}
 	
 	
