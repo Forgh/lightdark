@@ -9,7 +9,6 @@ public class Animal {
 	public static final float TAILLE = 1f; // une demi unite
 	
 	private Vector2 position = new Vector2();
-	private Vector2 last_position = new Vector2();
 	private Vector2 rapidite = new Vector2();
 	
 	private Rectangle cadre = new Rectangle();
@@ -23,7 +22,6 @@ public class Animal {
 		// TODO Auto-generated constructor stub
 		
 		this.position = position;
-		this.last_position = new Vector2(0f,0f);
 		this.cadre.setPosition(position);
 		this.cadre.height = TAILLE;
 		this.cadre.width = TAILLE;
@@ -36,10 +34,7 @@ public class Animal {
 			return position;
 		}
 		
-		public Vector2 getLastPosition() {
-			return last_position;
-		}
-
+		
 		public Array<Vector2>  getPath() {
 			return this.path;
 		}
@@ -73,9 +68,6 @@ public class Animal {
 			this.position=v;
 		}
 		
-		public void setLastPosition(Vector2 v){
-			this.last_position=v;
-		}
 
 
 
