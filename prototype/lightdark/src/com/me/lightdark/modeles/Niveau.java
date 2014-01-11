@@ -1,7 +1,10 @@
 package com.me.lightdark.modeles;
 
+
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Case.type_case_generique;
 
 public class Niveau {
@@ -12,6 +15,8 @@ public class Niveau {
 	private Rectangle[][] bloquantes;
 	private Rectangle[][] ombres;
 	private Rectangle[][] light;
+	
+	private Array<Animal> animals = new Array<Animal>();
 
 	public Niveau() {
 		// TODO Auto-generated constructor stub
@@ -67,6 +72,9 @@ public class Niveau {
 		}
 	}
 	
+	public Array<Animal> getAnimals(){
+		return this.animals;
+	}
 	public void createCaseWithShadow (int i, int j) {
 		/*if(j-1<=hauteur && j-1>=0 && cases[i][j-1]==null){
 			cases[i][j-1]= new Case(new Vector2(i,j-1));
@@ -193,6 +201,13 @@ public class Niveau {
 			}
 		}
 		
+		this.animals.add(new Animal(new Vector2(3f,3f)));
+		this.animals.get(0).getPath().add(new Vector2(1f,3f));
+		this.animals.get(0).getPath().add(new Vector2(5f,3f));
+		this.animals.get(0).getPath().add(new Vector2(6f,9f));
+		this.animals.get(0).getPath().add(new Vector2(5f,3f));
 	}
+	
+	
 	
 }

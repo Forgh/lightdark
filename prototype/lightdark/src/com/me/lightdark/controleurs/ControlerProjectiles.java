@@ -63,6 +63,18 @@ public class ControlerProjectiles {
 		gererObsoletes();
 	}
 	
+	private boolean gererCollisionAnimaux(Rectangle p){
+		boolean pasTouche = true;
+		int i = 0;
+		while (i<this.monde.getAnimals().size && pasTouche){
+			if (this.monde.getAnimals().get(i).getCadre().overlaps(p)){
+				pasTouche = false;
+			}
+			i++;
+		}
+		return pasTouche;
+		
+	}
 	public void gererCollision(Projectile p, float delta){
 		p.getRapidite().scl(delta); // on travail au ralenti
 		
@@ -80,7 +92,7 @@ public class ControlerProjectiles {
 		boolean ok = true;
 		while (i< collision.size && ok){
 			if (collision.get(i) != null) {
-				if(persoRect.overlaps(collision.get(i))){
+				if(persoRect.overlaps(collision.get(i)) || !gererCollisionAnimaux(p.getCadre())){
 					p.getRapidite().x = 0;
 					p.getRapidite().y = 0;
 					p.devientObsolete();
@@ -106,7 +118,7 @@ public class ControlerProjectiles {
 			i++;
 		}
 		
-		// ici pour les mobs
+	
 
 		p.getRapidite().scl(1/delta); // on restore la vitesse
 		

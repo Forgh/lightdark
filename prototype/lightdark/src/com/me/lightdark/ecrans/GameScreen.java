@@ -8,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.me.lightdark.controleurs.ControlerAnimaux;
 import com.me.lightdark.controleurs.ControlerEpee;
 import com.me.lightdark.controleurs.ControlerMenu;
 import com.me.lightdark.controleurs.ControlerPerso;
@@ -26,6 +27,8 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	private ControlerProjectiles tirs;
 	private ControlerEpee epee;
 
+	private ControlerAnimaux animaux;
+	
 	private ControlerMenu menu;
 	
 	//private boolean gamePaused = false; // en pause ou pas
@@ -150,6 +153,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 			
 			tirs.update(delta);
 			epee.update(delta);
+			animaux.update(delta);
 		}
 		affMonde.render();
 		affSideMenu.render();
@@ -170,6 +174,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		control = new ControlerPerso(monde);
 		tirs = new ControlerProjectiles(monde, monde.getPerso());
 		epee = new ControlerEpee(monde, monde.getPerso());
+		animaux = new ControlerAnimaux(monde);
 		menu = new ControlerMenu(monde);
 		Gdx.input.setInputProcessor(this);
 	}
