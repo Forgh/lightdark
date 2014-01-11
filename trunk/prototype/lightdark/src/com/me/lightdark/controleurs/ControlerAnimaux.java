@@ -22,7 +22,7 @@ public class ControlerAnimaux {
 		this.animaux = this.monde.getAnimals();
 		this.collision = new Array<Rectangle>();
 		chargerCollision();
-		demarrerParcoursAnimaux();
+		//demarrerParcoursAnimaux();
 	}
 	
 	private void demarrerParcoursAnimaux(){
@@ -57,7 +57,8 @@ public class ControlerAnimaux {
 		a.getCadre().y += a.getRapidite().y;
 		
 		Rectangle animaRect = rectPool.obtain();
-		animaRect.set(a.getCadre());
+		Rectangle r = a.getCadre();
+		animaRect.set(r.x + 0.1f,r.y + 0.1f,r.width - 0.1f,r.height - 0.1f);
 		
 		this.chargerCollision();
 		animaRect.x += a.getRapidite().x;
@@ -84,38 +85,19 @@ public class ControlerAnimaux {
 	}
 	
 	public void corrigeDirection(Animal a){
-		if (a.getPath().size>0){
-			if (a.getPosition().x>a.getPath().get(a.getPathStep()).x){
-				a.getRapidite().x = -Animal.VITESSE;
-			}else if (a.getPosition().x<a.getPath().get(a.getPathStep()).x){
-				a.getRapidite().x = Animal.VITESSE;
-			}else{
-				a.getRapidite().x = 0f;
-			}
-			
-			if (a.getPosition().y>a.getPath().get(a.getPathStep()).y){
-				a.getRapidite().y = -a.VITESSE;
-			}else if (a.getPosition().y<a.getPath().get(a.getPathStep()).y){
-				a.getRapidite().y = a.VITESSE;
-			}else{
-				a.getRapidite().y = 0f;
-			}
-		}else{
-			a.getRapidite().x = 0f;
-			a.getRapidite().y = 0f;
-		}
+		
+		Vector2 v = new Vector2();
+		v.x = -(a.getPosition().x - a.getPath().get(a.getPathStep()).x);
+		v.y = -(a.getPosition().y - a.getPath().get(a.getPathStep()).y);
+		float angle = (float) Math.atan2(v.y, v.x);
+		
+		v.x =(float)Math.cos(angle);
+		v.y =(float)Math.sin(angle);
+		
+		a.getRapidite().x = v.x * Animal.VITESSE;
+		a.getRapidite().y = v.y * Animal.VITESSE;
 	}
 	
-	public void verifDirection(Animal a){
-		Vector2 v = a.getLastPosition();
-		Vector2 p = a.getPosition();
-		
-		if ((int)p.x != (int)v.x || (int)p.y != (int)v.y){
-			System.out.println(p.x + " :" + v.x + ";" + p.y + " :" + v.y) ;
-			corrigeDirection(a);
-			a.setLastPosition(new Vector2(a.getPosition()));
-		}
-	}
 	
 	public void nextStep(Animal a){
 		if (a.getPath().size>0 && a.getPathStep() >= a.getPath().size -1){
@@ -123,6 +105,8 @@ public class ControlerAnimaux {
 		}else if (a.getPath().size>0 && a.getPathStep() < a.getPath().size - 1){
 			a.setPathStep(a.getPathStep()+1);
 		}
+		
+		
 	}
 	
 	public void gererParcours(Animal a){
@@ -130,9 +114,10 @@ public class ControlerAnimaux {
 		Vector2 p = a.getPosition();
 		//Rectangle r = new Rectangle();
 		//r.set(v.x, v.y, 1f, 1f);
+		corrigeDirection(a);
+		float aprox = 0.1f;
+		if ( Math.abs(p.x - v.x )<aprox && Math.abs(p.y - v.y )<aprox){
 		
-		if ( Math.abs(p.x - v.x )<0.1f && Math.abs(p.y - v.y )<0.1f){
-			
 			this.nextStep(a);
 		}
 		
@@ -140,7 +125,7 @@ public class ControlerAnimaux {
 	public void update(float delta){
 		
 		for(int i = 0; i<this.animaux.size;i++){
-			verifDirection(this.animaux.get(i));
+			gererCollision(this.animaux.get(i),delta);
 			this.animaux.get(i).update(delta);
 			gererParcours(this.animaux.get(i));
 		}
