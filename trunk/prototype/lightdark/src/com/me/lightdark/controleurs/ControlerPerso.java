@@ -157,7 +157,7 @@ public class ControlerPerso {
 		float negX = (v.x<0f ? -1f : 1f);
 		float negY = (v.y<0f ? -1f : 1f);
 		
-		float angle = (float) Math.atan2(v.y, v.x);
+		float angle = (float) v.angle(); //Math.atan2(v.y, v.x);
 		
 		v.x =(float)Math.cos(angle);
 		v.y =(float)Math.sin(angle);
@@ -212,10 +212,10 @@ public class ControlerPerso {
 	}
 	
 	public void gererCollision(float delta){
-		perso.getRapidite().mul(delta); // on travail au ralenti
+		perso.getRapidite().scl(delta); // on travail au ralenti
 		
-		perso.getCadre().x += perso.getRapidite().x;
-		perso.getCadre().y += perso.getRapidite().y;
+		//perso.getCadre().x += perso.getRapidite().x;
+		//perso.getCadre().y += perso.getRapidite().y;
 		
 		Rectangle persoRect = rectPool.obtain();
 		persoRect.set(perso.getCadre());
@@ -235,7 +235,7 @@ public class ControlerPerso {
 			i++;
 		}
 
-		perso.getRapidite().mul(1/delta); // on restore la vitesse
+		perso.getRapidite().scl(1/delta); // on restore la vitesse
 		
 	}
 	
