@@ -27,7 +27,7 @@ public class Niveau {
 		ombres = new Rectangle[largeur][hauteur];
 		light = new Rectangle[largeur][hauteur];
 		
-		demo2();
+		demo4();
 	}
 	
 	public int getLargeur(){
@@ -149,7 +149,7 @@ public class Niveau {
 		*/
 	}
 	
-	private void demo2(){
+private void demo2(){
 
 		
 		/*for(int i=0;i<hauteur;i++){
@@ -210,6 +210,99 @@ public class Niveau {
 		this.animals.get(0).getPath().add(new Vector2(1f,11f));
 		//this.animals.get(0).getPath().add(new Vector2(1f,3f));
 	}
+
+private void demo4(){
+
+	createGroundAndBorder();
+	
+	//Entrée et sortie :
+	cases[0][hauteur-3].setTypeCase(type_case_generique.OMBRE);
+	cases[largeur-1][hauteur-3].setTypeCase(type_case_generique.OMBRE);
+	
+	//Blocs de décor :
+	cases[1][hauteur-5].setTypeCase(type_case_generique.MONTAGNE);
+	cases[1][hauteur-6].setTypeCase(type_case_generique.MONTAGNE);
+	
+	for(int i=1; i<6; i++)
+		cases[1][i].setTypeCase(type_case_generique.MONTAGNE);
+	for(int i=1; i<6; i++)
+		cases[2][i].setTypeCase(type_case_generique.MONTAGNE);
+	
+	cases[4][1].setTypeCase(type_case_generique.MONTAGNE);
+	cases[4][2].setTypeCase(type_case_generique.MONTAGNE);
+	cases[5][1].setTypeCase(type_case_generique.MONTAGNE);
+	cases[5][2].setTypeCase(type_case_generique.MONTAGNE);
+	
+	cases[5][6].setTypeCase(type_case_generique.MONTAGNE);
+	cases[5][7].setTypeCase(type_case_generique.MONTAGNE);
+	
+	for(int i=3; i<6; i++)
+		cases[i][hauteur-2].setTypeCase(type_case_generique.MONTAGNE);
+	for(int i=3; i<6; i++)
+		cases[i][hauteur-3].setTypeCase(type_case_generique.MONTAGNE);
+	
+	for(int i=3; i<hauteur-1; i++)
+		cases[7][i].setTypeCase(type_case_generique.MONTAGNE);
+	for(int i=5; i<hauteur-3; i++)
+		cases[9][i].setTypeCase(type_case_generique.MONTAGNE);
+	
+	cases[9][hauteur-2].setTypeCase(type_case_generique.MONTAGNE);
+	cases[10][5].setTypeCase(type_case_generique.MONTAGNE);
+	cases[11][5].setTypeCase(type_case_generique.MONTAGNE);
+	cases[8][3].setTypeCase(type_case_generique.MONTAGNE);
+	cases[9][3].setTypeCase(type_case_generique.MONTAGNE);
+	cases[10][3].setTypeCase(type_case_generique.MONTAGNE);
+	cases[10][1].setTypeCase(type_case_generique.MONTAGNE);
+	//Coffre épée
+	cases[11][1].setTypeCase(type_case_generique.OMBRE);
+	
+	for(int i=0;i<largeur;i++){
+		for(int j=0;j<hauteur;j++){
+			if(cases[i][j].typeCase== type_case_generique.TERRE)
+			light[i][j] = cases[i][j].getCadre();
+			else if(cases[i][j].typeCase== type_case_generique.MONTAGNE)
+				bloquantes[i][j]=cases[i][j].getCadre();
+		}
+	}
+	
+	this.animals.add(new Animal(new Vector2(11f,2f)));
+	this.animals.get(0).getPath().add(new Vector2(11f,2f));//départ
+	this.animals.get(0).getPath().add(new Vector2(11f,4f));
+	this.animals.get(0).getPath().add(new Vector2(8f,4f));
+	this.animals.get(0).getPath().add(new Vector2(8f,hauteur-2f));//arrivée, puis retour
+	this.animals.get(0).getPath().add(new Vector2(8f,4f));
+	this.animals.get(0).getPath().add(new Vector2(11f,4f));
+}
+
+private void demo5(){
+
+	createGroundAndBorder();
+	
+		
+	for(int i=0;i<largeur;i++){
+		for(int j=0;j<hauteur;j++){
+			if(cases[i][j].typeCase== type_case_generique.TERRE)
+			light[i][j] = cases[i][j].getCadre();
+		}
+	}
+	
+	//Insérer ici les mobs
+	this.animals.add(new Animal(new Vector2(4f,6f)));
+	this.animals.add(new Animal(new Vector2(6f,6f)));
+	this.animals.add(new Animal(new Vector2(8f,6f)));
+	
+	//Insérer ici le coffre de l'orbe
+	cases[6][8].setTypeCase(type_case_generique.OMBRE);
+	
+	//L'entrée et la sortie :
+	cases[6][0].setTypeCase(type_case_generique.OMBRE);
+	cases[6][hauteur-1].setTypeCase(type_case_generique.OMBRE);
+	bloquantes[6][0] = null;
+	bloquantes[6][hauteur-1] = null;
+	
+}
+	
+	
 	
 	
 	
