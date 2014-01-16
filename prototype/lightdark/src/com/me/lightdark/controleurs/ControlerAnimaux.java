@@ -113,15 +113,15 @@ public class ControlerAnimaux {
 	}
 	
 	public void gererParcours(Animal a){
+		if(!(a.getPath().size==0)){//n'opère que si l'animal a un parcour
 		Vector2 v = a.getPath().get(a.getPathStep());
 		Vector2 p = a.getPosition();
-		//Rectangle r = new Rectangle();
-		//r.set(v.x, v.y, 1f, 1f);
 		corrigeDirection(a);
-		float aprox = 0.1f;
-		if ( Math.abs(p.x - v.x )<aprox && Math.abs(p.y - v.y )<aprox){
+		float approx = 0.1f;
+		if ( Math.abs(p.x - v.x )<approx && Math.abs(p.y - v.y )<approx){
 		
 			this.nextStep(a);
+		}
 		}
 		
 	}
