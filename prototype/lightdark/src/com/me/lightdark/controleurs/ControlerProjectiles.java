@@ -143,8 +143,8 @@ public class ControlerProjectiles {
 		Vector2 posInitial = p.getInitial();
 		
 	
-		vtemp.x = (Math.abs(position.x) - Math.abs(posInitial.x));
-		vtemp.y = (Math.abs(position.y) - Math.abs(posInitial.y));
+		vtemp.x = (Math.abs(position.x - posInitial.x));
+		vtemp.y = (Math.abs(position.y - posInitial.y));
 
 		// calcul du rayon par le th�or�me de pythagore
 		float rayon = (float) Math.sqrt(Math.pow((double)vtemp.x, 2.0) + Math.pow((double)vtemp.y, 2.0));

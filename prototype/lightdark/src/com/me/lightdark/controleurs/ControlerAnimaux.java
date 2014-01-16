@@ -68,7 +68,10 @@ public class ControlerAnimaux {
 		boolean ok = true;
 		while (i< collision.size && ok){
 			if (collision.get(i) != null) {
-				if(animaRect.overlaps(collision.get(i))){
+				Rectangle v = collision.get(i);
+				Rectangle p = a.getCadre();
+				float aprox = 0.1f;
+				if ( Math.abs(p.x - v.x )<aprox && Math.abs(p.y - v.y )<aprox && Math.abs(p.x - v.x )<aprox && Math.abs(p.y - v.y )<aprox){
 					a.getRapidite().x = 0;
 					a.getRapidite().y = 0;
 					
