@@ -27,7 +27,7 @@ public class Niveau {
 		ombres = new Rectangle[largeur][hauteur];
 		light = new Rectangle[largeur][hauteur];
 		
-		demo4();
+		demo5();
 	}
 	
 	public int getLargeur(){
@@ -149,7 +149,7 @@ public class Niveau {
 		*/
 	}
 	
-private void demo2(){
+private void demo1(){
 
 		
 		/*for(int i=0;i<hauteur;i++){
@@ -210,6 +210,113 @@ private void demo2(){
 		this.animals.get(0).getPath().add(new Vector2(1f,11f));
 		//this.animals.get(0).getPath().add(new Vector2(1f,3f));
 	}
+
+private void demo2(){
+
+createGroundAndBorder(); 
+
+for (int i =3; i<6 ; i++){
+createCaseWithShadow(i,11);
+}
+createCaseWithShadow(3,10);
+createCaseWithShadow(5,10);
+
+for (int i=4; i<7; i++){
+createCaseWithShadow(i,7);
+createCaseWithShadow(i,6);
+
+}
+
+for (int i=6; i>0; i-- ){
+createCaseWithShadow(1,i);
+
+}
+
+for (int i =1; i<5; i++){
+createCaseWithShadow(i,1);
+
+}
+
+createCaseWithShadow(7,1);
+
+for (int i=2; i<5;i++){ 
+createCaseWithShadow(11,i);
+
+}
+
+for (int i= 7; i<1; i++){
+createCaseWithShadow(11, i);
+}
+createCaseWithShadow(10,7);
+createCaseWithShadow(10,9);
+
+for(int i=0;i<largeur;i++){
+for(int j=0;j<hauteur;j++){
+	if(cases[i][j].typeCase== type_case_generique.TERRE)
+        light[i][j] = cases[i][j].getCadre();
+    }
+}
+//entrée et sortie
+cases[0][hauteur-2].setTypeCase(type_case_generique.OMBRE);
+bloquantes[0][hauteur-2]=null;
+cases[8][hauteur-1].setTypeCase(type_case_generique.OMBRE);
+bloquantes[largeur-5][hauteur-1]=null;
+
+cases[4][hauteur-2].setTypeCase(type_case_generique.OMBRE);
+bloquantes[4][hauteur-2]=null;
+createCaseWithShadow(11, hauteur-4);
+createCaseWithShadow(11, hauteur-6);
+
+this.animals.add(new Animal(new Vector2(4f,hauteur-2f)));//mob en haut
+this.animals.add(new Animal(new Vector2(11f,hauteur-5f)));//mob à droite
+this.animals.add(new Animal(new Vector2(8f,hauteur-2f)));//souris
+this.animals.get(2).getPath().add(new Vector2(8f,hauteur-2f));
+this.animals.get(2).getPath().add(new Vector2(8f,hauteur-8f));
+}
+
+
+private void demo3(){
+
+createGroundAndBorder();    
+
+for (int i = 4; i<6; i++){
+    for (int j= hauteur-1; j>5; j--)
+        createCaseWithShadow(i,j);
+}
+createCaseWithShadow(2,5);
+createCaseWithShadow(3,3);
+
+for (int i=6; i<11; i++)
+    createCaseWithShadow(7,i);
+
+
+for (int i = hauteur-1; i>3; i--)
+    createCaseWithShadow(largeur-2,i);
+
+createCaseWithShadow(6,hauteur-1);
+createCaseWithShadow(7,hauteur-1);
+createCaseWithShadow(9,hauteur-1);
+    
+for(int i=0;i<largeur;i++){
+    for(int j=0;j<hauteur;j++){
+        if(cases[i][j].typeCase== type_case_generique.TERRE)
+        light[i][j] = cases[i][j].getCadre();
+    }
+}
+
+//entrée et sortie
+cases[0][hauteur-2].setTypeCase(type_case_generique.OMBRE);
+cases[8][hauteur-1].setTypeCase(type_case_generique.OMBRE);
+bloquantes[0][hauteur-2]=null;
+bloquantes[8][hauteur-1]=null;
+
+
+
+this.animals.add(new Animal(new Vector2(8f,2f)));
+this.animals.get(0).getPath().add(new Vector2(8f,2f));
+this.animals.get(0).getPath().add(new Vector2(4f,2f));
+}
+
 
 private void demo4(){
 
