@@ -16,12 +16,14 @@ public class Niveau {
 	private Rectangle[][] ombres;
 	private Rectangle[][] light;
 	
+	private Vector2 posStart;
+	
 	private Array<Animal> animals = new Array<Animal>();
 
 	public Niveau() {
 		// TODO Auto-generated constructor stub
 		this.largeur = 13; this.hauteur = 13;
-		
+		posStart = new Vector2(0f,0f);
 		cases = new Case[largeur][hauteur];
 		bloquantes = new Rectangle[largeur][hauteur];
 		ombres = new Rectangle[largeur][hauteur];
@@ -407,6 +409,11 @@ private void demo5(){
 	bloquantes[6][0] = null;
 	bloquantes[6][hauteur-1] = null;
 	
+}
+
+public Vector2 getPosStart() {
+	// TODO Auto-generated method stub
+	return this.posStart;
 }
 	
 	
