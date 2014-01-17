@@ -147,7 +147,7 @@ public class ControlerProjectiles {
 		vtemp.y = (Math.abs(position.y - posInitial.y));
 
 		// calcul du rayon par le th�or�me de pythagore
-		float rayon = (float) Math.sqrt(Math.pow((double)vtemp.x, 2.0) + Math.pow((double)vtemp.y, 2.0));
+		float rayon = p.getPosition().dst(p.getInitial());//(float) Math.sqrt(Math.pow((double)vtemp.x, 2.0) + Math.pow((double)vtemp.y, 2.0));
 		
 		if (rayon > p.DISTANCE_MAX){
 			//System.out.println("[DEBUG] Distance max atteinte");
