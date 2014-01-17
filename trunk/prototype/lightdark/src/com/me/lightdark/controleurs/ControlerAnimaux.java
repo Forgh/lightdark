@@ -50,6 +50,10 @@ public class ControlerAnimaux {
 		
 	}
 	
+	public void estPlusProche(Rectangle a, Rectangle b){
+		
+	}
+	
 	public void gererCollision(Animal a, float delta){
 		a.getRapidite().scl(delta); // on travail au ralenti
 		
@@ -71,11 +75,9 @@ public class ControlerAnimaux {
 				Rectangle v = collision.get(i);
 				Rectangle p = a.getCadre();
 				float aprox = 0.1f;
-				if ( Math.abs(p.x - v.x )<aprox && Math.abs(p.y - v.y )<aprox && Math.abs(p.x - v.x )<aprox && Math.abs(p.y - v.y )<aprox){
+				if (v.overlaps(animaRect)){
 					a.getRapidite().x = 0;
 					a.getRapidite().y = 0;
-					
-					
 					ok = false;
 				}
 				
