@@ -29,7 +29,7 @@ public class Niveau {
 		ombres = new Rectangle[largeur][hauteur];
 		light = new Rectangle[largeur][hauteur];
 		
-		demo5();
+		demo6();
 	}
 	
 	public int getLargeur(){
@@ -211,6 +211,8 @@ private void demo1(){
 		this.animals.get(0).getPath().add(new Vector2(11f,11f));
 		this.animals.get(0).getPath().add(new Vector2(1f,11f));
 		//this.animals.get(0).getPath().add(new Vector2(1f,3f));
+		
+		this.posStart = new Vector2(1f,1f);
 	}
 
 private void demo2(){
@@ -274,6 +276,8 @@ this.animals.add(new Animal(new Vector2(11f,hauteur-5f)));//mob à droite
 this.animals.add(new Animal(new Vector2(8f,hauteur-2f)));//souris
 this.animals.get(2).getPath().add(new Vector2(8f,hauteur-2f));
 this.animals.get(2).getPath().add(new Vector2(8f,hauteur-8f));
+
+
 }
 
 
@@ -409,6 +413,51 @@ private void demo5(){
 	bloquantes[6][0] = null;
 	bloquantes[6][hauteur-1] = null;
 	
+}
+
+public void refresh(){
+	for(int i=0;i<largeur;i++){
+	    for(int j=0;j<hauteur;j++){
+	        if(cases[i][j].typeCase== type_case_generique.TERRE)
+	        light[i][j] = cases[i][j].getCadre();
+	        if(cases[i][j].typeCase== type_case_generique.MONTAGNE)
+	        	bloquantes[i][j] = cases[i][j].getCadre();
+	    }
+	}
+}
+public void demo6(){
+	createGroundAndBorder();
+	this.posStart = new Vector2(1f,1f);
+	
+	for(int i = 1;i<4;i++){
+		for(int j= 0; j<11;j++){
+			cases[i][j+1].setTypeCase(type_case_generique.OMBRE);
+			cases[12-i][j+1].setTypeCase(type_case_generique.OMBRE);
+		}
+	}
+	
+	for(int i=1;i<12;i++){
+		cases[i][6].setTypeCase(type_case_generique.MONTAGNE);
+	}
+	
+	cases[6][6].setTypeCase(type_case_generique.TERRE);
+	
+	//ici les mobs...
+	this.animals.add(new Animal(new Vector2(4f,5f)));
+	this.animals.get(0).getPath().add(new Vector2(4f,5f));//départ
+	this.animals.get(0).getPath().add(new Vector2(8f,5f));//arrivée
+	
+	this.animals.add(new Animal(new Vector2(4f,4f)));
+	this.animals.get(1).getPath().add(new Vector2(8f,2f));//départ
+	this.animals.get(1).getPath().add(new Vector2(4f,4f));//arrivée
+	
+	//ici la salamandre...
+	this.animals.add(new Animal(new Vector2(4f,9f)));
+	this.animals.get(2).getPath().add(new Vector2(4f,9f));
+	this.animals.get(2).getPath().add(new Vector2(6f,8f));
+	this.animals.get(2).getPath().add(new Vector2(8f,9f));
+	this.animals.get(2).getPath().add(new Vector2(6f,11f));
+	refresh();
 }
 
 public Vector2 getPosStart() {
