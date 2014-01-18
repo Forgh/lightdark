@@ -430,47 +430,58 @@ private void demo5(){
 }
 
 public void refresh(){
+	//Met à jour les cases bloquantes, ombres et light
+	//Ne retire pas (encore) les valeurs anciennement présentes
 	for(int i=0;i<largeur;i++){
 	    for(int j=0;j<hauteur;j++){
 	        if(cases[i][j].typeCase== type_case_generique.TERRE)
-	        light[i][j] = cases[i][j].getCadre();
+	        	light[i][j] = cases[i][j].getCadre();
 	        if(cases[i][j].typeCase== type_case_generique.MONTAGNE)
 	        	bloquantes[i][j] = cases[i][j].getCadre();
+	        if(cases[i][j].typeCase==type_case_generique.OMBRE)
+	        	ombres[i][j]=cases[i][j].getCadre();
 	    }
 	}
 }
 public void demo6(){
 	createGroundAndBorder();
-	this.posStart = new Vector2(1f,1f);
+	this.posStart = new Vector2(largeur-1f,2f);
 	
-	for(int i = 1;i<4;i++){
-		for(int j= 0; j<11;j++){
-			cases[i][j+1].setTypeCase(type_case_generique.OMBRE);
-			cases[12-i][j+1].setTypeCase(type_case_generique.OMBRE);
-		}
-	}
 	
-	for(int i=1;i<12;i++){
-		cases[i][6].setTypeCase(type_case_generique.MONTAGNE);
-	}
+	for(int i=5; i<largeur-1; i++)
+		for(int j=4; j<hauteur-5; j++)
+			createCaseWithShadow(i, j);
 	
-	cases[6][6].setTypeCase(type_case_generique.TERRE);
+	cases[largeur-1][2].setTypeCase(type_case_generique.OMBRE);
+	cases[0][2].setTypeCase(type_case_generique.OMBRE);
+	bloquantes[largeur-1][2]=null;
+	bloquantes[0][2]=null;
+	
+	
+	for(int i=1; i<largeur-1; i++)
+		cases[i][hauteur-2].setTypeCase(type_case_generique.OMBRE);
+	
+	createCaseWithShadow(3,hauteur-3);
+	createCaseWithShadow(3,hauteur-4);
+	
 	
 	//ici les mobs...
-	this.animals.add(new Animal(new Vector2(4f,5f)));
-	this.animals.get(0).getPath().add(new Vector2(4f,5f));//départ
-	this.animals.get(0).getPath().add(new Vector2(8f,5f));//arrivée
+	this.animals.add(new Animal(new Vector2(10f,10f)));
+	this.animals.get(0).getPath().add(new Vector2(10f,10f));
+	this.animals.get(0).getPath().add(new Vector2(10f,8f));
+	this.animals.get(0).getPath().add(new Vector2(6f,8f));
+	this.animals.get(0).getPath().add(new Vector2(6f,10f));
 	
-	this.animals.add(new Animal(new Vector2(4f,4f)));
-	this.animals.get(1).getPath().add(new Vector2(8f,2f));//départ
-	this.animals.get(1).getPath().add(new Vector2(4f,4f));//arrivée
 	
+	this.animals.add(new Animal(new Vector2(6f,8f)));
+	this.animals.get(1).getPath().add(new Vector2(6f,8f));
+	this.animals.get(1).getPath().add(new Vector2(6f,10f));
+	this.animals.get(1).getPath().add(new Vector2(10f,10f));
+	this.animals.get(1).getPath().add(new Vector2(10f,8f));
 	//ici la salamandre...
-	this.animals.add(new Animal(new Vector2(4f,9f)));
-	this.animals.get(2).getPath().add(new Vector2(4f,9f));
-	this.animals.get(2).getPath().add(new Vector2(6f,8f));
-	this.animals.get(2).getPath().add(new Vector2(8f,9f));
-	this.animals.get(2).getPath().add(new Vector2(6f,11f));
+	this.animals.add(new Animal(new Vector2(8f,9f)));
+	
+	
 	refresh();
 }
 
