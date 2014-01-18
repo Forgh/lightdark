@@ -41,7 +41,7 @@ public class ControlerMenu {
 		
 		//S'il est sur une ombre et que l'orbe est activ�
 		if (monde.getNiveau().get(posX, posY).getTypeCase()=="OMBRE" && orbEnabled){
-			final Vector2 savePos = new Vector2(perso.getPosition());//Sauver sa position
+			//final Vector2 savePos = new Vector2(perso.getPosition());//Sauver sa position
 			perso.switchForm();
 			
 			orbEnabled = false; //d�sactive l'Orbe
@@ -52,9 +52,10 @@ public class ControlerMenu {
 			    @Override
 			    public void run() {
 			    	System.out.println("[DEBUG] Transformation termin�e");
-			    	Vector2 back = new Vector2(savePos);
-			    	perso.setPosition(savePos);
+			    	//Vector2 back = new Vector2(savePos);
+			    	perso.setPosition(monde.getNiveau().getCloseShadow(perso.getPosition() ));
 					perso.switchForm();
+					System.out.println("[DEBUG] Orbe r�activ�" + perso.getPosition().x + " => " + + perso.getPosition().y);
 					
 			    }
 			};
@@ -84,6 +85,7 @@ public class ControlerMenu {
 		
 		
 	}
+
 	
 	public Button getOrbe(){
 		return this.orbe;

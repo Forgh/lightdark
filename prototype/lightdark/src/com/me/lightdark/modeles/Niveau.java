@@ -74,6 +74,20 @@ public class Niveau {
 		}
 	}
 	
+	public Vector2 getCloseShadow( Vector2 v){
+		float x =0;
+		float y =0;
+		for(int i=0;i<largeur;i++){
+			for(int j=0;j<hauteur;j++){
+				if (Math.abs(i-v.x)<Math.abs(x-v.x) && Math.abs(j-v.y)<Math.abs(y-v.y) && light[i][j] == null){
+					x = i;y=j;
+				}
+			}
+		}
+		
+		return new Vector2(x,y);
+	}
+	
 	public Array<Animal> getAnimals(){
 		return this.animals;
 	}
