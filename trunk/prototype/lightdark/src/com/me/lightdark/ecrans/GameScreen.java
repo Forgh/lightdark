@@ -129,12 +129,12 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		if(screenX<=800){
 			if (Input.Buttons.LEFT == button){
 				System.out.println("Appui chargé : "+wasCharged);
-				control.feuRelache(screenX, screenY);
+				control.feuRelache(screenX, screenY, wasCharged);
 				charged = false;//
 			}
-			if (Input.Buttons.RIGHT == button){
+			/*if (Input.Buttons.RIGHT == button){
 				control.sourisDroitRelache(screenX, screenY);
-			}
+			}*/
 		}
 		return true;
 	}

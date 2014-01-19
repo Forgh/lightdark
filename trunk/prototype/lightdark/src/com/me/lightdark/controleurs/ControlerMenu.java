@@ -39,23 +39,22 @@ public class ControlerMenu {
 		int posX =(int)perso.getPosition().x;//La position de la case sur laquelle est le joueur
 		int posY = (int)perso.getPosition().y;
 		
-		//S'il est sur une ombre et que l'orbe est activï¿½
+		//S'il est sur une ombre et que l'orbe est activé
 		if (monde.getNiveau().get(posX, posY).getTypeCase()=="OMBRE" && orbEnabled){
-			//final Vector2 savePos = new Vector2(perso.getPosition());//Sauver sa position
 			perso.switchForm();
 			
-			orbEnabled = false; //dï¿½sactive l'Orbe
+			orbEnabled = false; //désactive l'Orbe
 			//-------------------------
 			
 			Timer.Task transform = new Timer.Task()
 			{
 			    @Override
 			    public void run() {
-			    	System.out.println("[DEBUG] Transformation terminï¿½e");
+			    	System.out.println("[DEBUG] Transformation terminée");
 			    	//Vector2 back = new Vector2(savePos);
 			    	perso.setPosition(monde.getNiveau().getCloseShadow(perso.getPosition() ));
 					perso.switchForm();
-					System.out.println("[DEBUG] Orbe rï¿½activï¿½" + perso.getPosition().x + " => " + + perso.getPosition().y);
+					System.out.println("[DEBUG] Orbe réactivé" + perso.getPosition().x + " => " + + perso.getPosition().y);
 					
 			    }
 			};
@@ -70,7 +69,7 @@ public class ControlerMenu {
 			    }
 			};
 			
-			System.out.println("[DEBUG] Orbe utilisï¿½");
+			System.out.println("[DEBUG] Orbe utilisé");
 			Timer.schedule(transform, transformTime);
 			Timer.schedule(cooldown, cooldownTime);
 			

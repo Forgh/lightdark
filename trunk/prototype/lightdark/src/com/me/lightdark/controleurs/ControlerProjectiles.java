@@ -190,7 +190,6 @@ public class ControlerProjectiles {
 	
 	
 	public ControlerProjectiles(Monde monde, Perso lanceur) {
-		// TODO Auto-generated constructor stub
 		this.monde = monde;
 		this.projectiles = new Array<Projectile>();
 		this.collision = new Array<Rectangle>();
