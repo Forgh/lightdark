@@ -15,6 +15,7 @@ public class ControlerAnimaux {
 	
 	private Array<Rectangle> collision;
 	
+	final Vector2 vecteurNul = new Vector2(0f,0f);
 	
 	public ControlerAnimaux(Monde monde) {
 		// TODO Auto-generated constructor stub
@@ -76,9 +77,41 @@ public class ControlerAnimaux {
 				Rectangle p = a.getCadre();
 				float aprox = 0.1f;
 				if (v.overlaps(animaRect)){
+					/*
+					if (Math.abs(animaRect.x - v.x)<=v.width/2 && Math.abs(animaRect.y - v.y)<=v.height ){
+						System.out.println("gauche");
+						a.getRapidite().x = 0;
+					}
+					else if ((Math.abs(animaRect.x - v.x)<=v.width && Math.abs(animaRect.y - v.y)<=v.height  )){
+						System.out.println("droite");
+						a.getRapidite().x = 0;
+					}
+					
+					if ((Math.abs(animaRect.y - v.y)<=v.height/2 && Math.abs(animaRect.x - v.x)<=v.width )){
+						System.out.println("bas");
+						a.getRapidite().y = 0;
+						
+					}else if ((Math.abs(animaRect.y - v.y)<=v.height && Math.abs(animaRect.x - v.x)<=v.width )){
+						System.out.println("haut");
+						a.getRapidite().y = 0;
+					}
+					
+				*/
 					a.getRapidite().x = 0;
 					a.getRapidite().y = 0;
-					ok = false;
+					
+					 
+					 ok = false;
+					 /*if ((v.x + .5 * v.width > animaRect.x + .5 * animaRect.width)
+			                    && (v.y + .5 * v.height > animaRect.y + .5 * animaRect.height)
+			                    || (animaRect.x + .5 * animaRect.width > v.x + .5 * v.width)
+			                    && (animaRect.y + .5 * animaRect.height > v.y + .5 * v.height) )
+			            {
+						 a.getRapidite().x = 0;
+						 a.getRapidite().y = 0;
+						 ok = false;
+			            }*/
+					
 				}
 				
 				
@@ -127,12 +160,28 @@ public class ControlerAnimaux {
 		}
 		
 	}
+	public void bruteForce(Animal a, float delta){
+		int i =0;
+		int d = 0;
+		gererCollision(a, delta);
+		while (a.getRapidite().equals(vecteurNul) && i < 360 ){
+			i = d * 90;
+			double e = StrictMath.toRadians(i);
+			a.getRapidite().x = (float) Math.cos(e);
+			a.getRapidite().y = (float) Math.sin(e);
+			gererCollision(a, delta);
+			d++;
+		}
+		
+	}
+	
 	public void update(float delta){
 		
 		for(int i = 0; i<this.animaux.size;i++){
-			gererCollision(this.animaux.get(i),delta);
+			bruteForce(this.animaux.get(i),delta);
 			this.animaux.get(i).update(delta);
 			gererParcours(this.animaux.get(i));
+			
 		}
 	}
 
