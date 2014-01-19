@@ -457,6 +457,18 @@ public void refresh(){
 	        	bloquantes[i][j] = cases[i][j].getCadre();
 	        if(cases[i][j].typeCase==type_case_generique.OMBRE)
 	        	ombres[i][j]=cases[i][j].getCadre();
+	        
+	    }
+	}
+	
+	for(int i=0;i<largeur;i++){
+	    for(int j=0;j<hauteur;j++){
+	    	if (ombres[i][j] != null && light[i][j] != null){
+	    		ombres[i][j] = null;
+	    	}else if (ombres[i][j] != null && bloquantes[i][j] != null){
+	    		ombres[i][j] = null;
+	    	}
+	        
 	    }
 	}
 }
