@@ -9,9 +9,11 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.me.lightdark.controleurs.ControlerPerso.Touches;
 import com.me.lightdark.modeles.Anime;
+import com.me.lightdark.modeles.Anime.AnimeType;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Monde;
+import com.me.lightdark.modeles.Monstre;
 
 public class ControlerAnimaux {
 	private Monde monde;
@@ -163,14 +165,26 @@ public class ControlerAnimaux {
 	}
 	 
 	public void arretSuivreJoueur(Anime a){
-		if (reperer.get(a) == null){
+		if (reperer.get(a) != null){
 			a.getPath().removeIndex(reperer.get(a));
 			reperer.put(a,  null);
 		}
 	}
 	
+	public void detecterJoueur(Monstre a){
+		Vector2 v = new Vector2(this.monde.getPerso().getPosition());
+		if (v.dst(a.getPosition()) < a.DISTANCE_VUE ){
+			this.suivreJoueur(a);
+		}else{
+			this.arretSuivreJoueur(a);
+		}
+	}
+	
 	public void gererParcours(Anime a){
-		if(!(a.getPath().size==0)){//n'opère que si l'Anime a un parcour
+		
+		if(!(a.getPath().size==0)){//n'opère que si l'Anime a un parcours
+			if (a.getPathStep() >= a.getPath().size)
+				a.setPathStep(a.getPath().size - 1);
 		Vector2 v = a.getPath().get(a.getPathStep());
 		Vector2 p = a.getPosition();
 		corrigeDirection(a);
@@ -200,10 +214,11 @@ public class ControlerAnimaux {
 	public void update(float delta){
 		
 		for(int i = 0; i<this.animaux.size;i++){
-			
 			bruteForce(this.animaux.get(i),delta);
 			this.animaux.get(i).update(delta);
-			suivreJoueur(this.animaux.get(i));
+			if ((this.animaux.get(i) instanceof Monstre) && this.animaux.get(i).getAnimeType() == AnimeType.MONSTRE){ //
+				detecterJoueur((Monstre) this.animaux.get(i));
+			}
 			gererParcours(this.animaux.get(i));
 			
 		}
