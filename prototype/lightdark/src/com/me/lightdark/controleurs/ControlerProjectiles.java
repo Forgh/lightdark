@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Anime;
+import com.me.lightdark.modeles.Anime.AnimeType;
 import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
@@ -79,7 +80,7 @@ public class ControlerProjectiles {
 	}
 	
 	private boolean estAnimal(Anime a) {
-		if(a.getAnimeType().equals("ANIMAL"))
+		if(a.getAnimeType() == AnimeType.ANIMAL)
 			return true;
 		else
 			return false;
@@ -127,17 +128,19 @@ public class ControlerProjectiles {
 				//on remet en shadowwalking si jamais on touche la case désirée 
 				ok=false;
 			}
-			/*else if(estAnimal(monde.getAnime().get(i)) && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
-				System.out.println(lanceur.getEtat());
+			i++;
+		}
+		i=0;
+		while(i< monde.getAnime().size && ok){
+			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
 				p.devientObsolete();
 				lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
 				lanceur.changerEtat(Dark.SHADOWWALKING);
 				//on remet en shadowwalking si jamais on touche la case désirée 
-				ok=false;
-			}*/
+				ok=false; 
+			}
 			i++;
 		}
-		
 	
 
 		p.getRapidite().scl(1/delta); // on restore la vitesse
