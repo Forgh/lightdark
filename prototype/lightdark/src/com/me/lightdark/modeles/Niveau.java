@@ -16,8 +16,9 @@ public class Niveau {
 	private Rectangle[][] bloquantes;
 	private Rectangle[][] ombres;
 	private Rectangle[][] light;
-	
+
 	private Vector2 posStart;
+	private Form formStart;
 	
 	private Array<Anime> animals = new Array<Anime>();
 
@@ -175,6 +176,7 @@ private void demo1(){
 				cases[i][j].setTypeCase(type_case_generique.TERRE);
 			}
 		}*/
+		this.formStart=Form.SHADOWFORM;
 		
 		createGroundAndBorder();
 		
@@ -236,6 +238,8 @@ private void demo1(){
 	}
 
 private void demo2(){
+
+	this.formStart=Form.SHADOWFORM;
 
 createGroundAndBorder(); 
 
@@ -302,6 +306,7 @@ this.animals.get(2).getPath().add(new Vector2(8f,hauteur-8f));
 
 
 private void demo3(){
+	this.formStart=Form.SHADOWFORM;
 
 createGroundAndBorder();    
 
@@ -345,6 +350,7 @@ this.animals.get(0).getPath().add(new Vector2(4f,2f));
 
 
 private void demo4(){
+	this.formStart=Form.LIGHTFORM;
 
 	createGroundAndBorder();
 	
@@ -408,6 +414,7 @@ private void demo4(){
 }
 
 private void demo5(){
+	this.formStart=Form.LIGHTFORM;
 
 	createGroundAndBorder();
 	
@@ -450,6 +457,7 @@ public void refresh(){
 	}
 }
 public void demo6(){
+	this.formStart=Form.SHADOWFORM;
 	createGroundAndBorder();
 	this.posStart = new Vector2(largeur-1f,2f);
 	
