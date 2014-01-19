@@ -81,7 +81,7 @@ public class Niveau {
 		float y =0;
 		for(int i=0;i<largeur;i++){
 			for(int j=0;j<hauteur;j++){
-				if (Math.abs(i-v.x)<Math.abs(x-v.x) && Math.abs(j-v.y)<Math.abs(y-v.y) && light[i][j] == null){
+				if (Math.abs(i-(int)v.x)<Math.abs(x-(int)v.x) && Math.abs(j-(int)v.y)<Math.abs(y-(int)v.y) && light[i][j] == null){
 					x = i;y=j;
 				}
 			}
