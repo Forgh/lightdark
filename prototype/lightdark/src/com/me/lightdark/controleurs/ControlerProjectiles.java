@@ -120,7 +120,9 @@ public class ControlerProjectiles {
 			if(persoRect.overlaps(shadowTouched.get(i)) && shadowTouched.get(i).equals(p.getCaseCible().getCadre())) {
 				System.out.println(lanceur.getEtat());
 				p.devientObsolete();
-				lanceur.setPosition(new Vector2(shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f),shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f)));
+				lanceur.getPosition().x = (shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f));
+				lanceur.getPosition().y = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
+				//lanceur.setPosition();
 				lanceur.changerEtat(Dark.SHADOWWALKING);
 				//on remet en shadowwalking si jamais on touche la case désirée 
 				ok=false;
