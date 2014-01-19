@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import com.me.lightdark.modeles.Animal;
+import com.me.lightdark.modeles.Anime;
 import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
@@ -67,7 +69,7 @@ public class ControlerProjectiles {
 		boolean pasTouche = true;
 		int i = 0;
 		while (i<this.monde.getAnime().size && pasTouche){
-			if (this.monde.getAnime().get(i).getCadre().overlaps(p)){
+			if (this.monde.getAnime().get(i).getCadre().overlaps(p)){ //on gere une collision (overlaps entre projectile et l'animal)
 				pasTouche = false;
 			}
 			i++;
@@ -75,6 +77,14 @@ public class ControlerProjectiles {
 		return pasTouche;
 		
 	}
+	
+	private boolean estAnimal(Anime a) {
+		if(a.getAnimeType().equals("ANIMAL"))
+			return true;
+		else
+			return false;
+	}
+	
 	public void gererCollision(Projectile p, float delta){
 		p.getRapidite().scl(delta); // on travail au ralenti
 		
@@ -111,6 +121,14 @@ public class ControlerProjectiles {
 				System.out.println(lanceur.getEtat());
 				p.devientObsolete();
 				lanceur.setPosition(new Vector2(shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f),shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f)));
+				lanceur.changerEtat(Dark.SHADOWWALKING);
+				//on remet en shadowwalking si jamais on touche la case désirée 
+				ok=false;
+			}
+			else if(estAnimal(monde.getAnime().get(i)) && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
+				System.out.println(lanceur.getEtat());
+				p.devientObsolete();
+				lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
 				lanceur.changerEtat(Dark.SHADOWWALKING);
 				//on remet en shadowwalking si jamais on touche la case désirée 
 				ok=false;
