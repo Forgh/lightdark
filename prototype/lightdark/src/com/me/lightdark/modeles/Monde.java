@@ -26,8 +26,8 @@ public class Monde {
 		return projectiles;
 	}
 	
-	public Array<Animal> getAnimals() {
-		return this.niveau.getAnimals();
+	public Array<Anime> getAnime() {
+		return this.niveau.getAnime();
 	}
 	
 	public Array<Epee> getEpee() {

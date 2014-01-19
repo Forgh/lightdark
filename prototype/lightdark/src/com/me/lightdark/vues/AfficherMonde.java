@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Animal;
+import com.me.lightdark.modeles.Anime;
 import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Epee;
 import com.me.lightdark.modeles.Form;
@@ -129,7 +130,7 @@ public class AfficherMonde {
 	}
 	
 	private void drawAnimals(){
-		Array<Animal> project = monde.getAnimals();
+		Array<Anime> project = monde.getAnime();
 		 for(int i=0;i<project.size;i++){
 			 spriteBatch.draw(this.imgAnimal, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
 		 }
