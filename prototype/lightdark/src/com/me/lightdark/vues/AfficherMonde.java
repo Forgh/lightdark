@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Anime;
+import com.me.lightdark.modeles.Anime.AnimeEspece;
 import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Epee;
 import com.me.lightdark.modeles.Form;
@@ -35,6 +36,7 @@ public class AfficherMonde {
 	private TextureRegion imgProjectile;
 	private TextureRegion imgSword;
 	private TextureRegion imgAnimal;
+	private TextureRegion imgMonstreCube;
 	
 	private SpriteBatch spriteBatch;
 	
@@ -80,7 +82,7 @@ public class AfficherMonde {
 		this.imgProjectile = new TextureRegion(new Texture(Gdx.files.internal("images/projectile.png")));
 		this.imgSword = new TextureRegion(new Texture(Gdx.files.internal("images/sword.png")));
 		this.imgAnimal = new TextureRegion(new Texture(Gdx.files.internal("images/cat_laptop.png")));
-
+		this.imgMonstreCube = new TextureRegion(new Texture(Gdx.files.internal("images/monstre_cube.png")));
 		// TODO rajouter pour toutes les cases
 		 
 	}
@@ -132,7 +134,12 @@ public class AfficherMonde {
 	private void drawAnimals(){
 		Array<Anime> project = monde.getAnime();
 		 for(int i=0;i<project.size;i++){
-			 spriteBatch.draw(this.imgAnimal, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
+			 if (project.get(i).getAnimeEspece() == AnimeEspece.MONSTRE_CUBE){
+				 spriteBatch.draw(this.imgMonstreCube, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
+			 }else{
+				 spriteBatch.draw(this.imgAnimal, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
+			 }
+			
 		 }
 	}
 	
