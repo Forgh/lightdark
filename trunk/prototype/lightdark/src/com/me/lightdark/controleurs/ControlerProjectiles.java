@@ -133,9 +133,10 @@ public class ControlerProjectiles {
 		i=0;
 		while(i< monde.getAnime().size && ok){
 			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
+				monde.getAnime().get(i).setTaming(true);
 				p.devientObsolete();
 				lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
-				lanceur.changerEtat(Dark.SHADOWWALKING);
+				lanceur.changerEtat(Dark.TAMING);
 				//on remet en shadowwalking si jamais on touche la case désirée 
 				ok=false; 
 			}

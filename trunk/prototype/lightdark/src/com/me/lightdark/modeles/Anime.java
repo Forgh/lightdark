@@ -100,5 +100,9 @@ public abstract class Anime {
 			return this.rapidite;
 		}
 		
+		public boolean isTamed(){
+			return false;
+		}
 		
+		public abstract void setTaming(boolean t);
 }
