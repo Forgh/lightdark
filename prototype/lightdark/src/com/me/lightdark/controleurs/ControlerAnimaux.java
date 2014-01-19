@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.me.lightdark.controleurs.ControlerPerso.Touches;
+import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Anime;
 import com.me.lightdark.modeles.Anime.AnimeType;
 import com.me.lightdark.modeles.Dark;
@@ -182,7 +183,7 @@ public class ControlerAnimaux {
 	
 	public void gererParcours(Anime a){
 		
-		if(!(a.getPath().size==0)){//n'opère que si l'Anime a un parcours
+		if(!(a.getPath().size==0)){//n'opï¿½re que si l'Anime a un parcours
 			if (a.getPathStep() >= a.getPath().size)
 				a.setPathStep(a.getPath().size - 1);
 		Vector2 v = a.getPath().get(a.getPathStep());
@@ -241,12 +242,14 @@ public class ControlerAnimaux {
 	public void update(float delta){
 		
 		for(int i = 0; i<this.animaux.size;i++){
-			bruteForce(this.animaux.get(i),delta);
+			//if(!(this.animaux.get(i) instanceof Animal) && !this.animaux.get(i).isTamed())
+				bruteForce(this.animaux.get(i),delta);
 			this.animaux.get(i).update(delta);
 			if ((this.animaux.get(i) instanceof Monstre) && this.animaux.get(i).getAnimeType() == AnimeType.MONSTRE){ //
 				detecterJoueur((Monstre) this.animaux.get(i));
 			}
-			gererParcours(this.animaux.get(i));
+			//if(!(this.animaux.get(i) instanceof Animal) && !this.animaux.get(i).isTamed())
+				gererParcours(this.animaux.get(i));
 			
 		}
 	}

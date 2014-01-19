@@ -17,4 +17,10 @@ public class Monstre extends Anime{
 		return AnimeType.MONSTRE;
 	}
 
+	@Override
+	public void setTaming(boolean t) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

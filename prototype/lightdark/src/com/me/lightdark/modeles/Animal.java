@@ -7,11 +7,11 @@ import com.me.lightdark.modeles.Anime.AnimeType;
 
 public class Animal extends Anime {
 
-	boolean controle;
+	boolean taming;
 	
 	public Animal(Vector2 position) {
 		super(position);
-		this.controle=false;
+		this.taming=false;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -19,4 +19,13 @@ public class Animal extends Anime {
 		return AnimeType.ANIMAL;
 	}
 
+	public boolean isTamed(){
+		return this.taming;
+	}
+
+	@Override
+	public void setTaming(boolean t) {
+		// TODO Auto-generated method stub
+		this.taming=t;
+	}
 }
