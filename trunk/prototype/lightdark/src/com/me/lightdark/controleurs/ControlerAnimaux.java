@@ -4,14 +4,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import com.me.lightdark.modeles.Animal;
+import com.me.lightdark.modeles.Anime;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Monde;
 
 public class ControlerAnimaux {
 	private Monde monde;
-	private Array<Animal> animaux;
+	private Array<Anime> animaux;
 	
 	private Array<Rectangle> collision;
 	
@@ -20,7 +20,7 @@ public class ControlerAnimaux {
 	public ControlerAnimaux(Monde monde) {
 		// TODO Auto-generated constructor stub
 		this.monde = monde;
-		this.animaux = this.monde.getAnimals();
+		this.animaux = this.monde.getAnime();
 		this.collision = new Array<Rectangle>();
 		chargerCollision();
 		//demarrerParcoursAnimaux();
@@ -55,7 +55,7 @@ public class ControlerAnimaux {
 		
 	}
 	
-	public void gererCollision(Animal a, float delta){
+	public void gererCollision(Anime a, float delta){
 		a.getRapidite().scl(delta); // on travail au ralenti
 		
 		a.getCadre().x += a.getRapidite().x;
@@ -122,7 +122,7 @@ public class ControlerAnimaux {
 		a.getRapidite().scl(1/delta); // on restore la vitesse
 	}
 	
-	public void corrigeDirection(Animal a){
+	public void corrigeDirection(Anime a){
 		
 		Vector2 v = new Vector2();
 		v.x = -(a.getPosition().x - a.getPath().get(a.getPathStep()).x);
@@ -132,12 +132,12 @@ public class ControlerAnimaux {
 		v.x =(float)Math.cos(angle);
 		v.y =(float)Math.sin(angle);
 		
-		a.getRapidite().x = v.x * Animal.VITESSE;
-		a.getRapidite().y = v.y * Animal.VITESSE;
+		a.getRapidite().x = v.x * Anime.VITESSE;
+		a.getRapidite().y = v.y * Anime.VITESSE;
 	}
 	
 	
-	public void nextStep(Animal a){
+	public void nextStep(Anime a){
 		if (a.getPath().size>0 && a.getPathStep() >= a.getPath().size -1){
 			a.setPathStep(0);
 		}else if (a.getPath().size>0 && a.getPathStep() < a.getPath().size - 1){
@@ -147,8 +147,8 @@ public class ControlerAnimaux {
 		
 	}
 	
-	public void gererParcours(Animal a){
-		if(!(a.getPath().size==0)){//n'opère que si l'animal a un parcour
+	public void gererParcours(Anime a){
+		if(!(a.getPath().size==0)){//n'opère que si l'Anime a un parcour
 		Vector2 v = a.getPath().get(a.getPathStep());
 		Vector2 p = a.getPosition();
 		corrigeDirection(a);
@@ -160,7 +160,7 @@ public class ControlerAnimaux {
 		}
 		
 	}
-	public void bruteForce(Animal a, float delta){
+	public void bruteForce(Anime a, float delta){
 		int i =0;
 		int d = 0;
 		gererCollision(a, delta);

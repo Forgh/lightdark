@@ -18,7 +18,7 @@ public class Niveau {
 	
 	private Vector2 posStart;
 	
-	private Array<Animal> animals = new Array<Animal>();
+	private Array<Anime> animals = new Array<Anime>();
 
 	public Niveau() {
 		// TODO Auto-generated constructor stub
@@ -88,7 +88,7 @@ public class Niveau {
 		return new Vector2(x,y);
 	}
 	
-	public Array<Animal> getAnimals(){
+	public Array<Anime> getAnime(){
 		return this.animals;
 	}
 	public void createCaseWithShadow (int i, int j) {

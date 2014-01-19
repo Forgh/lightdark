@@ -66,8 +66,8 @@ public class ControlerProjectiles {
 	private boolean gererCollisionAnimaux(Rectangle p){
 		boolean pasTouche = true;
 		int i = 0;
-		while (i<this.monde.getAnimals().size && pasTouche){
-			if (this.monde.getAnimals().get(i).getCadre().overlaps(p)){
+		while (i<this.monde.getAnime().size && pasTouche){
+			if (this.monde.getAnime().get(i).getCadre().overlaps(p)){
 				pasTouche = false;
 			}
 			i++;
