@@ -29,7 +29,17 @@ public class Animal {
 	
 	
 	
-	// **** GETTERS ****
+	public Animal(Animal b) {
+		// TODO Auto-generated constructor stub
+		this.position = b.position;
+		this.cadre.setPosition(b.position);
+		this.cadre.height = b.TAILLE;
+		this.cadre.width = b.TAILLE;
+	}
+
+
+
+		// **** GETTERS ****
 		public Vector2 getPosition() {
 			return position;
 		}

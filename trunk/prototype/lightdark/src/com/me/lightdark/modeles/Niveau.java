@@ -29,7 +29,7 @@ public class Niveau {
 		ombres = new Rectangle[largeur][hauteur];
 		light = new Rectangle[largeur][hauteur];
 		
-		demo6();
+		demo1();
 	}
 	
 	public int getLargeur(){
@@ -220,7 +220,7 @@ private void demo1(){
 		this.animals.add(new Animal(new Vector2(3f,3f)));
 		this.animals.get(0).getPath().add(new Vector2(1f,3f));
 		this.animals.get(0).getPath().add(new Vector2(5f,3f));
-		this.animals.get(0).getPath().add(new Vector2(3f,1f));
+		this.animals.get(0).getPath().add(new Vector2(5f,11f));
 		this.animals.get(0).getPath().add(new Vector2(11f,1f));
 		this.animals.get(0).getPath().add(new Vector2(11f,11f));
 		this.animals.get(0).getPath().add(new Vector2(1f,11f));
@@ -482,6 +482,41 @@ public void demo6(){
 	this.animals.add(new Animal(new Vector2(8f,9f)));
 	
 	
+	refresh();
+}
+
+public void demo6A(){
+	createGroundAndBorder();
+	this.posStart = new Vector2(1f,1f);
+	
+	for(int i = 1;i<4;i++){
+		for(int j= 0; j<11;j++){
+			cases[i][j+1].setTypeCase(type_case_generique.OMBRE);
+			cases[12-i][j+1].setTypeCase(type_case_generique.OMBRE);
+		}
+	}
+	
+	for(int i=1;i<12;i++){
+		cases[i][6].setTypeCase(type_case_generique.MONTAGNE);
+	}
+	
+	cases[6][6].setTypeCase(type_case_generique.TERRE);
+	
+	//ici les mobs...
+	this.animals.add(new Animal(new Vector2(4f,5f)));
+	this.animals.get(0).getPath().add(new Vector2(4f,5f));//départ
+	this.animals.get(0).getPath().add(new Vector2(8f,5f));//arrivée
+	
+	this.animals.add(new Animal(new Vector2(4f,4f)));
+	this.animals.get(1).getPath().add(new Vector2(8f,2f));//départ
+	this.animals.get(1).getPath().add(new Vector2(4f,4f));//arrivée
+	
+	//ici la salamandre...
+	this.animals.add(new Animal(new Vector2(4f,9f)));
+	this.animals.get(2).getPath().add(new Vector2(4f,9f));
+	this.animals.get(2).getPath().add(new Vector2(6f,8f));
+	this.animals.get(2).getPath().add(new Vector2(8f,9f));
+	this.animals.get(2).getPath().add(new Vector2(6f,11f));
 	refresh();
 }
 
