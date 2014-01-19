@@ -29,6 +29,7 @@ public class ControlerPerso {
 	
 	Vector2 directionTir;
 	Vector2 cibleTir;
+	boolean charged;
 	
 	enum direction  {
 		HAUT, HAUT_GAUCHE, HAUT_DROITE,
@@ -47,7 +48,6 @@ public class ControlerPerso {
 		touches.put(Touches.DROITE, false);
 		touches.put(Touches.BAS, false);
 		touches.put(Touches.FEU, false);
-		touches.put(Touches.EPEE, false);
 	};
 	
 	static Touches toucheActuHoz; // ! rustine !
@@ -111,14 +111,9 @@ public class ControlerPerso {
 		
 		float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
 		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
-		
-
-		
+				
 		Vector2 v = new Vector2(posX, posY);
 
-		
-		
-		
 		v.sub(this.perso.getPosition());
 
 		float negX = (v.x<0f ? -1f : 1f);
@@ -140,10 +135,11 @@ public class ControlerPerso {
 	}
 	
 	public void sourisDroitPresse(int x, int y, int w, int h) {
+		//NB : Fusionné avec FeuPresse
 		touches.get(touches.put(Touches.EPEE, true));
 		
 		
-		float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
+		/*float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
 		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
 		
 		
@@ -162,14 +158,15 @@ public class ControlerPerso {
 		v.x =(float)Math.cos(angle);
 		v.y =(float)Math.sin(angle);
 		
-		/*
-		 * ï¿½ verif que la precision numerique des float ne tombe pas sur 0.0 
-		 */
+		
+		 // ï¿½ verif que la precision numerique des float ne tombe pas sur 0.0 
+		 
 		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zï¿½ro (bloquant)
 		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
 
 
 		cibleTir = new Vector2(posX, posY);
+		*/
 	}
 	
 	public void gaucheRelache() {
@@ -188,19 +185,20 @@ public class ControlerPerso {
 		touches.get(touches.put(Touches.BAS, false));
 	}
 	
-	
-	public void feuRelache(int x, int y) {
+	/*@Param les coordonnées x et y et si le tir est chargé*/
+	public void feuRelache(int x, int y, boolean charged) {
 		touches.get(touches.put(Touches.FEU, false));
 		directionTir.x = 0;
 		directionTir.y = 0;
+		this.charged = charged;
 	}
 	
 	
 	
 	public void sourisDroitRelache (int x, int y){
 		touches.get(touches.put(Touches.EPEE, false));
-		directionTir.x = 0;
-		directionTir.y = 0;
+		/*directionTir.x = 0;
+		directionTir.y = 0;*/
 	
 	}
 	
@@ -294,14 +292,20 @@ public class ControlerPerso {
 			if(perso.getForm()==Form.SHADOWFORM) {
 				perso.changerEtat(Dark.GRABBING);
 			}
-
+			
+			if(perso.getForm()==Form.SHADOWFORM || charged)
 			monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
+			else monde.frapperEpee(new Vector2(directionTir), new Vector2(cibleTir));
+
+			
+			
+			
 			directionTir.x = 0;
 			directionTir.y = 0;
 			
 		}
-		
-		if (touches.get(Touches.EPEE) && directionTir.x !=0 && directionTir.y !=0){
+		/*
+		if (touches.get(Touches.FEU) && directionTir.x !=0 && directionTir.y !=0){
 
 			monde.frapperEpee(new Vector2(directionTir), new Vector2(cibleTir));
 			directionTir.x = 0;
@@ -309,6 +313,7 @@ public class ControlerPerso {
 			directionTir.y = 0;
 			
 		}
+		*/
 		/*
 		if ( !touches.get(Touches.GAUCHE) && !touches.get(Touches.DROITE) && !touches.get(Touches.HAUT) && !touches.get(Touches.BAS)){
 			Etat etat = perso.getEtat();
