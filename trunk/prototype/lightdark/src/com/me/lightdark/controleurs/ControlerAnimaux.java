@@ -1,9 +1,13 @@
 package com.me.lightdark.controleurs;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import com.me.lightdark.controleurs.ControlerPerso.Touches;
 import com.me.lightdark.modeles.Anime;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
@@ -14,6 +18,8 @@ public class ControlerAnimaux {
 	private Array<Anime> animaux;
 	
 	private Array<Rectangle> collision;
+	
+	private Map<Anime, Integer> reperer = new HashMap<Anime, Integer>();
 	
 	final Vector2 vecteurNul = new Vector2(0f,0f);
 	
@@ -147,6 +153,22 @@ public class ControlerAnimaux {
 		
 	}
 	
+	public void suivreJoueur(Anime a){
+		if (reperer.get(a) == null){
+			reperer.put(a,  new Integer(a.getPath().size));
+			a.setPathStep(reperer.get(a).intValue());
+			a.getPath().add(this.monde.getPerso().getPosition());
+			
+		}
+	}
+	 
+	public void arretSuivreJoueur(Anime a){
+		if (reperer.get(a) == null){
+			a.getPath().removeIndex(reperer.get(a));
+			reperer.put(a,  null);
+		}
+	}
+	
 	public void gererParcours(Anime a){
 		if(!(a.getPath().size==0)){//n'opère que si l'Anime a un parcour
 		Vector2 v = a.getPath().get(a.getPathStep());
@@ -178,8 +200,10 @@ public class ControlerAnimaux {
 	public void update(float delta){
 		
 		for(int i = 0; i<this.animaux.size;i++){
+			
 			bruteForce(this.animaux.get(i),delta);
 			this.animaux.get(i).update(delta);
+			suivreJoueur(this.animaux.get(i));
 			gererParcours(this.animaux.get(i));
 			
 		}
