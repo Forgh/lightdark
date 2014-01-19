@@ -77,17 +77,21 @@ public class Niveau {
 	}
 	
 	public Vector2 getCloseShadow( Vector2 v){
-		float x =0;
-		float y =0;
+		Vector2 max = new Vector2(0f, 0f);
+		Vector2 index = new Vector2(0f, 0f);
 		for(int i=0;i<largeur;i++){
 			for(int j=0;j<hauteur;j++){
-				if (Math.abs(i-(int)v.x)<Math.abs(x-(int)v.x) && Math.abs(j-(int)v.y)<Math.abs(y-(int)v.y) && light[i][j] == null){
-					x = i;y=j;
+				index.x = i;
+				index.y = j;
+				
+				if ((index.dst(v)<max.dst(v)) && ombres[i][j] != null){
+					max.x = i;
+					max.y = j;
 				}
 			}
 		}
 		
-		return new Vector2(x,y);
+		return max;
 	}
 	
 	public Array<Anime> getAnime(){
