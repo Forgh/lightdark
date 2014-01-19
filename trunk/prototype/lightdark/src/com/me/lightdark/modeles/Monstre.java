@@ -4,6 +4,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.lightdark.modeles.Anime.AnimeType;
 
 public class Monstre extends Anime{
+	
+	public final float DISTANCE_VUE = 4f;
+	
 
 	public Monstre(Vector2 position) {
 		super(position);
