@@ -7,8 +7,11 @@ import com.me.lightdark.modeles.Anime.AnimeType;
 
 public class Animal extends Anime {
 
+	boolean controle;
+	
 	public Animal(Vector2 position) {
 		super(position);
+		this.controle=false;
 		// TODO Auto-generated constructor stub
 	}
 	
