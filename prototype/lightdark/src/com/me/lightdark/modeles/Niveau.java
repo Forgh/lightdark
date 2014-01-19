@@ -288,7 +288,7 @@ for(int j=0;j<hauteur;j++){
         light[i][j] = cases[i][j].getCadre();
     }
 }
-//entrée et sortie
+//entrï¿½e et sortie
 cases[0][hauteur-2].setTypeCase(type_case_generique.OMBRE);
 bloquantes[0][hauteur-2]=null;
 cases[8][hauteur-1].setTypeCase(type_case_generique.OMBRE);
@@ -300,7 +300,7 @@ createCaseWithShadow(11, hauteur-4);
 createCaseWithShadow(11, hauteur-6);
 
 this.animals.add(new Animal(new Vector2(4f,hauteur-2f)));//mob en haut
-this.animals.add(new Animal(new Vector2(11f,hauteur-5f)));//mob à droite
+this.animals.add(new Animal(new Vector2(11f,hauteur-5f)));//mob ï¿½ droite
 this.animals.add(new Animal(new Vector2(8f,hauteur-2f)));//souris
 this.animals.get(2).getPath().add(new Vector2(8f,hauteur-2f));
 this.animals.get(2).getPath().add(new Vector2(8f,hauteur-8f));
@@ -339,7 +339,7 @@ for(int i=0;i<largeur;i++){
     }
 }
 
-//entrée et sortie
+//entrï¿½e et sortie
 cases[0][hauteur-2].setTypeCase(type_case_generique.OMBRE);
 cases[8][hauteur-1].setTypeCase(type_case_generique.OMBRE);
 bloquantes[0][hauteur-2]=null;
@@ -358,11 +358,11 @@ private void demo4(){
 
 	createGroundAndBorder();
 	
-	//Entrée et sortie :
+	//Entrï¿½e et sortie :
 	cases[0][hauteur-3].setTypeCase(type_case_generique.OMBRE);
 	cases[largeur-1][hauteur-3].setTypeCase(type_case_generique.OMBRE);
 	
-	//Blocs de décor :
+	//Blocs de dï¿½cor :
 	cases[1][hauteur-5].setTypeCase(type_case_generique.MONTAGNE);
 	cases[1][hauteur-6].setTypeCase(type_case_generique.MONTAGNE);
 	
@@ -396,7 +396,7 @@ private void demo4(){
 	cases[9][3].setTypeCase(type_case_generique.MONTAGNE);
 	cases[10][3].setTypeCase(type_case_generique.MONTAGNE);
 	cases[10][1].setTypeCase(type_case_generique.MONTAGNE);
-	//Coffre épée
+	//Coffre ï¿½pï¿½e
 	cases[11][1].setTypeCase(type_case_generique.OMBRE);
 	
 	for(int i=0;i<largeur;i++){
@@ -409,10 +409,10 @@ private void demo4(){
 	}
 	
 	this.animals.add(new Animal(new Vector2(11f,2f)));
-	this.animals.get(0).getPath().add(new Vector2(11f,2f));//départ
+	this.animals.get(0).getPath().add(new Vector2(11f,2f));//dï¿½part
 	this.animals.get(0).getPath().add(new Vector2(11f,4f));
 	this.animals.get(0).getPath().add(new Vector2(8f,4f));
-	this.animals.get(0).getPath().add(new Vector2(8f,hauteur-2f));//arrivée, puis retour
+	this.animals.get(0).getPath().add(new Vector2(8f,hauteur-2f));//arrivï¿½e, puis retour
 	this.animals.get(0).getPath().add(new Vector2(8f,4f));
 	this.animals.get(0).getPath().add(new Vector2(11f,4f));
 }
@@ -430,15 +430,15 @@ private void demo5(){
 		}
 	}
 	
-	//Insérer ici les mobs
+	//Insï¿½rer ici les mobs
 	this.animals.add(new Animal(new Vector2(4f,6f)));
 	this.animals.add(new Animal(new Vector2(6f,6f)));
 	this.animals.add(new Animal(new Vector2(8f,6f)));
 	
-	//Insérer ici le coffre de l'orbe
+	//Insï¿½rer ici le coffre de l'orbe
 	cases[6][8].setTypeCase(type_case_generique.OMBRE);
 	
-	//L'entrée et la sortie :
+	//L'entrï¿½e et la sortie :
 	cases[6][0].setTypeCase(type_case_generique.OMBRE);
 	cases[6][hauteur-1].setTypeCase(type_case_generique.OMBRE);
 	bloquantes[6][0] = null;

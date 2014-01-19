@@ -125,14 +125,14 @@ public class ControlerProjectiles {
 				//on remet en shadowwalking si jamais on touche la case désirée 
 				ok=false;
 			}
-			else if(estAnimal(monde.getAnime().get(i)) && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
+			/*else if(estAnimal(monde.getAnime().get(i)) && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
 				System.out.println(lanceur.getEtat());
 				p.devientObsolete();
 				lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
 				lanceur.changerEtat(Dark.SHADOWWALKING);
 				//on remet en shadowwalking si jamais on touche la case désirée 
 				ok=false;
-			}
+			}*/
 			i++;
 		}
 		
