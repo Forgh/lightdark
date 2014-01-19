@@ -51,9 +51,9 @@ public class ControlerAnimaux {
 		
 	}
 	
-	public void estPlusProche(Rectangle a, Rectangle b){
+	/*public void estPlusProche(Rectangle a, Rectangle b){
 		
-	}
+	}*/
 	
 	public void gererCollision(Anime a, float delta){
 		a.getRapidite().scl(delta); // on travail au ralenti

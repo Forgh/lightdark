@@ -12,7 +12,7 @@ public abstract class Anime {
 		INCONNU, MONSTRE, ANIMAL
 	}
 	
-	public enum AnimeEspece {
+	public enum AnimeEspece { // affichage
 		INCONNU, MONSTRE_CUBE, ANIMAL_CHAT
 	}
 	
@@ -87,7 +87,7 @@ public abstract class Anime {
 		}
 		
 		public AnimeEspece getAnimeEspece(){
-			return AnimeEspece.INCONNU;
+			return espece;
 		}
 		
 		public void setAnimeEspece(AnimeEspece ae){

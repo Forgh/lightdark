@@ -5,6 +5,7 @@ package com.me.lightdark.modeles;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.me.lightdark.modeles.Anime.AnimeEspece;
 import com.me.lightdark.modeles.Case.type_case_generique;
 
 public class Niveau {
@@ -217,7 +218,7 @@ private void demo1(){
 			}
 		}
 		
-		this.animals.add(new Animal(new Vector2(3f,3f)));
+		this.animals.add(new Animal(new Vector2(4f,3f)));
 		this.animals.get(0).getPath().add(new Vector2(1f,3f));
 		this.animals.get(0).getPath().add(new Vector2(5f,3f));
 		this.animals.get(0).getPath().add(new Vector2(5f,11f));
@@ -225,6 +226,11 @@ private void demo1(){
 		this.animals.get(0).getPath().add(new Vector2(11f,11f));
 		this.animals.get(0).getPath().add(new Vector2(1f,11f));
 		//this.animals.get(0).getPath().add(new Vector2(1f,3f));
+		
+		this.animals.add(new Monstre(new Vector2(3f,11f)));
+		this.animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
+		this.animals.get(1).getPath().add(new Vector2(3f,11f));
+		this.animals.get(1).getPath().add(new Vector2(5f,11f));
 		
 		this.posStart = new Vector2(1f,1f);
 	}
