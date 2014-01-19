@@ -196,13 +196,40 @@ public class ControlerAnimaux {
 		}
 		
 	}
+	
+	public double angleProche(Vector2 v, Vector2 a){
+		Vector2 w = new Vector2();
+		
+		w.x = Math.abs(v.x - a.x);
+		w.y = Math.abs(v.y - a.y);
+		
+		double angle = w.angle();
+		
+		double d = Math.toDegrees(angle);
+		if (Math.abs(d-45)<=45){ // proche de zero
+			return 0;
+		}else if (Math.abs(d-45)>45 && Math.abs(d-45)<=135){ // proche de 90
+			return 90;
+		}else if (Math.abs(d-45)>135 && Math.abs(d-45)<=225){ // proche de 180
+			return 180;
+		}else if (Math.abs(d-45)>225 && Math.abs(d-45)<=315){ // proche de 270
+			return 270;
+		}
+		return 0;
+	}
+	
 	public void bruteForce(Anime a, float delta){
 		int i =0;
 		int d = 0;
 		gererCollision(a, delta);
+		double e;
+		/*e = StrictMath.toRadians(angleProche(a.getPosition(), a.getPath().get(a.getPathStep())));
+		a.getRapidite().x = (float) Math.cos(e);
+		a.getRapidite().y = (float) Math.sin(e);
+		*/
 		while (a.getRapidite().equals(vecteurNul) && i < 360 ){
 			i = d * 90;
-			double e = StrictMath.toRadians(i);
+			e = StrictMath.toRadians(i);
 			a.getRapidite().x = (float) Math.cos(e);
 			a.getRapidite().y = (float) Math.sin(e);
 			gererCollision(a, delta);
