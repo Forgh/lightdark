@@ -29,7 +29,7 @@ public class ControlerPerso {
 	
 	Vector2 directionTir;
 	Vector2 cibleTir;
-	boolean charged;
+	boolean charged;//Si le tir est chargé ou non
 	
 	enum direction  {
 		HAUT, HAUT_GAUCHE, HAUT_DROITE,
@@ -142,11 +142,7 @@ public class ControlerPerso {
 		/*float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
 		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
 		
-		
 		Vector2 v = new Vector2(posX, posY);
-
-		
-		
 		
 		v.sub(this.perso.getPosition());
 
@@ -163,7 +159,6 @@ public class ControlerPerso {
 		 
 		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zï¿½ro (bloquant)
 		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
-
 
 		cibleTir = new Vector2(posX, posY);
 		*/
@@ -197,8 +192,6 @@ public class ControlerPerso {
 	
 	public void sourisDroitRelache (int x, int y){
 		touches.get(touches.put(Touches.EPEE, false));
-		/*directionTir.x = 0;
-		directionTir.y = 0;*/
 	
 	}
 	
@@ -210,10 +203,8 @@ public class ControlerPerso {
 	}
 	
 	public void gererCollision(float delta){
-		perso.getRapidite().scl(delta); // on travail au ralenti
+		perso.getRapidite().scl(delta); // on travaille au ralenti
 		
-		//perso.getCadre().x += perso.getRapidite().x;
-		//perso.getCadre().y += perso.getRapidite().y;
 		
 		Rectangle persoRect = rectPool.obtain();
 		persoRect.set(perso.getCadre());
@@ -242,32 +233,21 @@ public class ControlerPerso {
 		if (touches.get(Touches.GAUCHE) && toucheActuHoz == Touches.GAUCHE) {
 				
 				perso.getRapidite().x = -Perso.VITESSE;
-				
-	
-			//perso.getRapidite().y = 0;
 			
 		}
 		if (touches.get(Touches.DROITE) && toucheActuHoz == Touches.DROITE) {
 			
 				perso.getRapidite().x = Perso.VITESSE;
 			
-				
-			//perso.getRapidite().y = 0;
-			
 		}
 		if (touches.get(Touches.HAUT)  && toucheActuVer == Touches.HAUT) {
 			
 				perso.getRapidite().y = Perso.VITESSE;
 			
-			//perso.getRapidite().x = 0;
-			
 		}
 		if (touches.get(Touches.BAS)  && toucheActuVer == Touches.BAS) {	
 			
 				perso.getRapidite().y = -Perso.VITESSE;
-				
-			
-			//perso.getRapidite().x = 0;
 			
 		}
 		
@@ -289,6 +269,8 @@ public class ControlerPerso {
 		}
 		
 		if (touches.get(Touches.FEU) && directionTir.x !=0 && directionTir.y !=0 && perso.getEtat()!=Dark.GRABBING){
+			/*Gestion des attaques*/
+			
 			if(perso.getForm()==Form.SHADOWFORM) {
 				perso.changerEtat(Dark.GRABBING);
 			}
@@ -296,24 +278,12 @@ public class ControlerPerso {
 			if(perso.getForm()==Form.SHADOWFORM || charged)
 			monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
 			else monde.frapperEpee(new Vector2(directionTir), new Vector2(cibleTir));
-
-			
-			
 			
 			directionTir.x = 0;
 			directionTir.y = 0;
 			
 		}
-		/*
-		if (touches.get(Touches.FEU) && directionTir.x !=0 && directionTir.y !=0){
-
-			monde.frapperEpee(new Vector2(directionTir), new Vector2(cibleTir));
-			directionTir.x = 0;
-			System.out.println("J'ai frappÃ©");
-			directionTir.y = 0;
-			
-		}
-		*/
+		
 		/*
 		if ( !touches.get(Touches.GAUCHE) && !touches.get(Touches.DROITE) && !touches.get(Touches.HAUT) && !touches.get(Touches.BAS)){
 			Etat etat = perso.getEtat();

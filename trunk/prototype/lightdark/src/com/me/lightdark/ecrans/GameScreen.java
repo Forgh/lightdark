@@ -33,7 +33,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	
 	private ControlerMenu menu;
 	
-	private Timer.Task chargeTime = new Timer.Task()//action à la fin du timer de charge
+	private Timer.Task chargeTime = new Timer.Task()//action à la fin du timer de charge du clic
 	{
 	    @Override
 	    public void run() {
@@ -99,8 +99,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		
 		Timer.schedule(chargeTime, 1.5f);//lancer le timer
 		if(screenX<=800){
-				// TODO Auto-generated method stub
-			//TODO : projectile en clic gauche chargÃ©
+			
 			if (Input.Buttons.LEFT == button){
 				control.feuPresse(screenX, screenY, 866, this.height);
 			}
@@ -124,7 +123,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		boolean wasCharged = charged;//sauvegarde de l'état de charge
-		if(chargeTime.isScheduled()) chargeTime.cancel();//Si le timer était en cours, l'annuler
+		if(chargeTime.isScheduled()) chargeTime.cancel();//Si le timer était toujours en cours, l'annuler
 		
 		if(screenX<=800){
 			if (Input.Buttons.LEFT == button){
@@ -132,9 +131,6 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 				control.feuRelache(screenX, screenY, wasCharged);
 				charged = false;//
 			}
-			/*if (Input.Buttons.RIGHT == button){
-				control.sourisDroitRelache(screenX, screenY);
-			}*/
 		}
 		return true;
 	}
