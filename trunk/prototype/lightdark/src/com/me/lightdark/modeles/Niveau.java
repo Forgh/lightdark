@@ -233,10 +233,10 @@ private void demo1(){
 		this.animals.get(0).getPath().add(new Vector2(1f,11f));
 		//this.animals.get(0).getPath().add(new Vector2(1f,3f));
 		
-		this.animals.add(new Monstre(new Vector2(3f,11f)));
+		this.animals.add(new Monstre(new Vector2(3f,6f)));
 		this.animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
-		this.animals.get(1).getPath().add(new Vector2(3f,11f));
-		this.animals.get(1).getPath().add(new Vector2(5f,11f));
+		this.animals.get(1).getPath().add(new Vector2(3f,6f));
+		this.animals.get(1).getPath().add(new Vector2(5f,6f));
 		
 		this.posStart = new Vector2(1f,1f);
 	}

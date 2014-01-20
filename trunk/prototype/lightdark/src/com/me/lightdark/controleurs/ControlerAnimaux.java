@@ -174,7 +174,7 @@ public class ControlerAnimaux {
 	
 	public void detecterJoueur(Monstre a){
 		Vector2 v = new Vector2(this.monde.getPerso().getPosition());
-		if (v.dst(a.getPosition()) < a.DISTANCE_VUE ){
+		if (v.dst(a.getPosition()) < a.DISTANCE_VUE && this.monde.getPerso().getEtat() != null && this.monde.getPerso().getEtat().getClass().equals(Dark.class) && ((Dark) this.monde.getPerso().getEtat()) == Dark.GRABBING ){
 			this.suivreJoueur(a);
 		}else{
 			this.arretSuivreJoueur(a);
