@@ -13,6 +13,7 @@ import com.me.lightdark.modeles.Anime;
 import com.me.lightdark.modeles.Anime.AnimeType;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
+import com.me.lightdark.modeles.Light;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Monstre;
 
@@ -174,7 +175,7 @@ public class ControlerAnimaux {
 	
 	public void detecterJoueur(Monstre a){
 		Vector2 v = new Vector2(this.monde.getPerso().getPosition());
-		if (v.dst(a.getPosition()) < a.DISTANCE_VUE && this.monde.getPerso().getEtat() != null && this.monde.getPerso().getEtat().getClass().equals(Dark.class) && ((Dark) this.monde.getPerso().getEtat()) == Dark.GRABBING ){
+		if (v.dst(a.getPosition()) < a.DISTANCE_VUE && this.monde.getPerso().getEtat() != null && ((this.monde.getPerso().getEtat().getClass().equals(Dark.class) && ((Dark) this.monde.getPerso().getEtat()) == Dark.GRABBING) || (this.monde.getPerso().getEtat().getClass().equals(Light.class))) ){
 			this.suivreJoueur(a);
 		}else{
 			this.arretSuivreJoueur(a);
