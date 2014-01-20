@@ -31,7 +31,7 @@ public class Niveau {
 		ombres = new Rectangle[largeur][hauteur];
 		light = new Rectangle[largeur][hauteur];
 		
-		demo1();
+		demo6();
 	}
 	
 	public int getLargeur(){
@@ -305,7 +305,7 @@ this.animals.add(new Animal(new Vector2(8f,hauteur-2f)));//souris
 this.animals.get(2).getPath().add(new Vector2(8f,hauteur-2f));
 this.animals.get(2).getPath().add(new Vector2(8f,hauteur-8f));
 
-
+this.posStart = new Vector2(0f,11f);
 }
 
 
@@ -350,6 +350,8 @@ bloquantes[8][hauteur-1]=null;
 this.animals.add(new Animal(new Vector2(8f,2f)));
 this.animals.get(0).getPath().add(new Vector2(8f,2f));
 this.animals.get(0).getPath().add(new Vector2(4f,2f));
+
+this.posStart = new Vector2(0f,11f);
 }
 
 
@@ -415,6 +417,8 @@ private void demo4(){
 	this.animals.get(0).getPath().add(new Vector2(8f,hauteur-2f));//arriv�e, puis retour
 	this.animals.get(0).getPath().add(new Vector2(8f,4f));
 	this.animals.get(0).getPath().add(new Vector2(11f,4f));
+	
+	this.posStart = new Vector2(0f,10f);
 }
 
 private void demo5(){
@@ -443,6 +447,8 @@ private void demo5(){
 	cases[6][hauteur-1].setTypeCase(type_case_generique.OMBRE);
 	bloquantes[6][0] = null;
 	bloquantes[6][hauteur-1] = null;
+	
+	this.posStart = new Vector2(6f,0f);
 	
 }
 
@@ -511,6 +517,7 @@ public void demo6(){
 	//ici la salamandre...
 	this.animals.add(new Animal(new Vector2(8f,9f)));
 	
+	this.posStart = new Vector2(0f,2f);
 	
 	refresh();
 }
