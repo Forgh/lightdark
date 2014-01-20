@@ -227,12 +227,12 @@ private void demo1(){
 		this.animals.add(new Animal(new Vector2(4f,3f)));
 		this.animals.get(0).getPath().add(new Vector2(1f,3f));
 		this.animals.get(0).getPath().add(new Vector2(5f,3f));
-		this.animals.get(0).getPath().add(new Vector2(5f,11f));
+		this.animals.get(0).getPath().add(new Vector2(9f,11f));
 		this.animals.get(0).getPath().add(new Vector2(11f,1f));
 		this.animals.get(0).getPath().add(new Vector2(11f,11f));
 		this.animals.get(0).getPath().add(new Vector2(1f,11f));
 		//this.animals.get(0).getPath().add(new Vector2(1f,3f));
-		this.animals.get(0).VITESSE = 0.5f;
+		this.animals.get(0).VITESSE = 1f;
 		
 		this.animals.add(new Monstre(new Vector2(3f,6f)));
 		this.animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
