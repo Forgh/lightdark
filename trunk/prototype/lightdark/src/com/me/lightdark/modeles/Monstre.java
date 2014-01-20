@@ -5,9 +5,12 @@ import com.me.lightdark.modeles.Anime.AnimeType;
 
 public class Monstre extends Anime{
 	
+	public final int VIE_MAX = 50;
 	public final float DISTANCE_VUE = 4f;
 	
-
+	private int puissance_tir = 20;
+	private int vie;
+	
 	public Monstre(Vector2 position) {
 		super(position);
 		// TODO Auto-generated constructor stub
@@ -15,6 +18,11 @@ public class Monstre extends Anime{
 
 	public AnimeType getAnimeType(){
 		return AnimeType.MONSTRE;
+	}
+	
+	public void recevoirCoup(int puissance){
+		this.vie -= puissance;
+		
 	}
 
 	@Override

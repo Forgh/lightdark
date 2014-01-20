@@ -10,8 +10,8 @@ public class Perso {
 	
 	public static final float VITESSE = 4f;	// vitesse par unite de temps sur une unite d'espace
 	public static final float TAILLE = 0.5f; // une demi unite
-	
-	private static int health;
+	public static final int max_health = 75;
+	private int health;
 	
 	private Vector2 position = new Vector2();
 	private Vector2 rapidite = new Vector2();
@@ -78,12 +78,12 @@ public class Perso {
 		this.form=f;
 	}
 	
-	public void healthUp(){
-		health++;
+	public void healthUp(int puissance){
+		health += puissance;
 	}
 	
-	public void healthDown(){
-		health--;
+	public void healthDown(int puissance){
+		health -= puissance;
 	}
 	
 	
