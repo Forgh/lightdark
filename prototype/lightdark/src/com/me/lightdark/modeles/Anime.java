@@ -5,8 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 public abstract class Anime {
-	public static final float VITESSE = 2f;	// vitesse par unite de temps sur une unite d'espace
-	public static final float TAILLE = 1f; // une demi unite
+	public float VITESSE = 2f;	// vitesse par unite de temps sur une unite d'espace
+	public float TAILLE = 1f; // une demi unite
 	
 	public enum AnimeType {
 		INCONNU, MONSTRE, ANIMAL
