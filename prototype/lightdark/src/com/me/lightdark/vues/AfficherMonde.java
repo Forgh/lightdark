@@ -10,6 +10,7 @@ import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Anime;
 import com.me.lightdark.modeles.Anime.AnimeEspece;
 import com.me.lightdark.modeles.Case;
+import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Epee;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Monde;
@@ -33,6 +34,7 @@ public class AfficherMonde {
 	private TextureRegion imgOmbre;
 	private TextureRegion imgLightForm;
 	private TextureRegion imgDarkForm;
+	private TextureRegion imgDarkFormTaming;
 	private TextureRegion imgProjectile;
 	private TextureRegion imgSword;
 	private TextureRegion imgAnimal;
@@ -76,6 +78,7 @@ public class AfficherMonde {
 		// TODO mettre a jour avec des atlas
 		this.imgLightForm = new TextureRegion(new Texture(Gdx.files.internal("images/light.png")));
 		this.imgDarkForm = new TextureRegion(new Texture(Gdx.files.internal("images/dark.png")));
+		this.imgDarkFormTaming = new TextureRegion(new Texture(Gdx.files.internal("images/taming.png")));
 		this.imgSol = new TextureRegion(new Texture(Gdx.files.internal("images/herbe_seche.png")));
 		this.imgObstacle = new TextureRegion(new Texture(Gdx.files.internal("images/roche.png")));
 		this.imgOmbre= new TextureRegion(new Texture(Gdx.files.internal("images/ombre.png")));
@@ -127,8 +130,12 @@ public class AfficherMonde {
 		Perso p = monde.getPerso();
 		if(p.getForm()==Form.LIGHTFORM)
 			spriteBatch.draw(this.imgLightForm, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-		else
-			spriteBatch.draw(this.imgDarkForm, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);	
+		else if(p.getForm()==Form.SHADOWFORM){
+			if(!(p.getEtat()==Dark.TAMING))//ShadowForm classique
+				spriteBatch.draw(this.imgDarkForm, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+			else //ShadowForm Taming
+				spriteBatch.draw(this.imgDarkFormTaming, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX/2, p.TAILLE * ppuY/2);
+		}
 	}
 	
 	private void drawAnimals(){
