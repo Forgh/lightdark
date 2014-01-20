@@ -31,7 +31,7 @@ public class Niveau {
 		ombres = new Rectangle[largeur][hauteur];
 		light = new Rectangle[largeur][hauteur];
 		
-		demo6();
+		demo1();
 	}
 	
 	public int getLargeur(){
@@ -232,6 +232,7 @@ private void demo1(){
 		this.animals.get(0).getPath().add(new Vector2(11f,11f));
 		this.animals.get(0).getPath().add(new Vector2(1f,11f));
 		//this.animals.get(0).getPath().add(new Vector2(1f,3f));
+		this.animals.get(0).VITESSE = 0.5f;
 		
 		this.animals.add(new Monstre(new Vector2(3f,6f)));
 		this.animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);

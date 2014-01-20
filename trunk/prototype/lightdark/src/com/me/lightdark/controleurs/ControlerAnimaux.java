@@ -141,8 +141,8 @@ public class ControlerAnimaux {
 		v.x =(float)Math.cos(angle);
 		v.y =(float)Math.sin(angle);
 		
-		a.getRapidite().x = v.x * Anime.VITESSE;
-		a.getRapidite().y = v.y * Anime.VITESSE;
+		a.getRapidite().x = v.x * a.VITESSE;
+		a.getRapidite().y = v.y * a.VITESSE;
 	}
 	
 	
@@ -243,7 +243,7 @@ public class ControlerAnimaux {
 		
 		for(int i = 0; i<this.animaux.size;i++){
 			//if(!(this.animaux.get(i) instanceof Animal) && !this.animaux.get(i).isTamed())
-				bruteForce(this.animaux.get(i),delta);
+				//bruteForce(this.animaux.get(i),delta);
 			this.animaux.get(i).update(delta);
 			if ((this.animaux.get(i) instanceof Monstre) && this.animaux.get(i).getAnimeType() == AnimeType.MONSTRE){ //
 				detecterJoueur((Monstre) this.animaux.get(i));
