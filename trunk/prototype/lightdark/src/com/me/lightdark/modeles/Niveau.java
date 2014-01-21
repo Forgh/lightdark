@@ -16,6 +16,8 @@ public class Niveau {
 	private Rectangle[][] bloquantes;
 	private Rectangle[][] ombres;
 	private Rectangle[][] light;
+	
+	
 
 	private Vector2 posStart;
 	private Form formStart;
@@ -92,6 +94,10 @@ public class Niveau {
 		}
 		
 		return max;
+	}
+	
+	public Form getFormStart(){
+		return this.formStart;
 	}
 	
 	public Array<Anime> getAnime(){
@@ -240,7 +246,8 @@ private void demo1(){
 		this.animals.get(1).getPath().add(new Vector2(5f,6f));
 		this.animals.get(1).VITESSE = 0.5f;
 		this.posStart = new Vector2(1f,1f);
-	}
+		this.formStart = Form.SHADOWFORM;
+}
 
 private void demo2(){
 
@@ -307,6 +314,7 @@ this.animals.get(2).getPath().add(new Vector2(8f,hauteur-2f));
 this.animals.get(2).getPath().add(new Vector2(8f,hauteur-8f));
 
 this.posStart = new Vector2(0f,11f);
+
 }
 
 
