@@ -98,7 +98,7 @@ public class Monde {
 	
 	/*
 	 * Se charge de lancer dans la map un grappin-retour venant du grappin source
-	 * @return Projectile boomerang le projectile de retour, pour pouvoir le suivre puis l'ï¿½liminer
+	 * @return Projectile boomerang le projectile de retour, pour pouvoir le suivre puis l'éliminer
 	 */
 	public Projectile lancerBoomerang(Projectile source){
 		Projectile boomerang = new Projectile(source);
