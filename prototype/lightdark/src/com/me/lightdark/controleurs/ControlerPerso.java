@@ -2,18 +2,11 @@ package com.me.lightdark.controleurs;
 
 import java.util.HashMap;
 import java.util.Map;
-
-
-
-
-
-
-
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import com.me.lightdark.modeles.Case;
+//import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Light;
@@ -116,8 +109,8 @@ public class ControlerPerso {
 
 		v.sub(this.perso.getPosition());
 
-		float negX = (v.x<0f ? -1f : 1f);
-		float negY = (v.y<0f ? -1f : 1f);
+		//float negX = (v.x<0f ? -1f : 1f);
+		//float negY = (v.y<0f ? -1f : 1f);
 		
 		float angle = (float) Math.atan2(v.y, v.x);
 		
@@ -136,7 +129,7 @@ public class ControlerPerso {
 	
 	public void sourisDroitPresse(int x, int y, int w, int h) {
 		//NB : Fusionné avec FeuPresse
-		touches.get(touches.put(Touches.EPEE, true));
+		//touches.get(touches.put(Touches.EPEE, true));
 		
 		
 		/*float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
@@ -224,12 +217,12 @@ public class ControlerPerso {
 			i++;
 		}
 
-		perso.getRapidite().scl(1/delta); // on restore la vitesse
+		perso.getRapidite().scl(1/delta); // on restaure la vitesse
 		
 	}
 	
 	private void gererEntrees() {
-		// ici on modifie l'ï¿½tat du perso
+		// ici on modifie l'état du perso
 		if (touches.get(Touches.GAUCHE) && toucheActuHoz == Touches.GAUCHE) {
 				
 				perso.getRapidite().x = -Perso.VITESSE;
