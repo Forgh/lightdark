@@ -59,6 +59,7 @@ public abstract class Anime {
 		public void setPathStep(int e){
 			this.pathStep = e;
 		}
+
 		
 		
 		public Rectangle getCadre() {

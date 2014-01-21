@@ -7,6 +7,7 @@ public class Monstre extends Anime{
 	
 	public final int VIE_MAX = 50;
 	public final float DISTANCE_VUE = 4f;
+	public final float DISTANCE_TIR = 2f;
 	
 	private int puissance_tir = 20;
 	private int vie;
