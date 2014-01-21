@@ -6,8 +6,8 @@ import com.me.lightdark.modeles.Anime.AnimeType;
 public class Monstre extends Anime{
 	
 	public final int VIE_MAX = 50;
-	public final float DISTANCE_VUE = 4f;
-	public final float DISTANCE_TIR = 2f;
+	public final float DISTANCE_VUE = 20f;
+	public final float DISTANCE_TIR = 20f;
 	
 	private int puissance_tir = 20;
 	private int vie;

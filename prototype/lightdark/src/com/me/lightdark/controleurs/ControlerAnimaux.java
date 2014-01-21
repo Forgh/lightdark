@@ -188,12 +188,17 @@ public class ControlerAnimaux {
 				{
 				    @Override
 				    public void run() {
-				    	
-						
+				    							
 				    }
 				};
 				tirer.put(a,transform );
-				Timer.schedule(transform, 2);
+				Vector2 d = new Vector2(this.monde.getPerso().getPosition());
+				d.sub(a.getPosition());
+				float x = v.angle();
+				d.x = (float) Math.cos(x);
+				d.y = (float) Math.sin(x);
+				//monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
+				Timer.schedule(transform, 0.5f);
 				
 			}else if (tirer.get(a) != null && !tirer.get(a).isScheduled()){
 				tirer.put(a,  null);
