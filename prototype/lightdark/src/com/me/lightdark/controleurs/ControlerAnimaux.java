@@ -165,7 +165,6 @@ public class ControlerAnimaux {
 			reperer.put(a,  new Integer(a.getPath().size));
 			a.setPathStep(reperer.get(a).intValue());
 			a.getPath().add(this.monde.getPerso().getPosition());
-			
 		}
 	}
 	 
@@ -178,27 +177,29 @@ public class ControlerAnimaux {
 	
 	public void detecterJoueur(Monstre a){
 		Vector2 v = new Vector2(this.monde.getPerso().getPosition());
-		if (v.dst(a.getPosition()) < a.DISTANCE_VUE && this.monde.getPerso().getEtat() != null && 
-				((this.monde.getPerso().getEtat().getClass().equals(Dark.class) && ((Dark) this.monde.getPerso().getEtat()) == Dark.GRABBING) 
-						|| (this.monde.getPerso().getEtat().getClass().equals(Light.class)))){
-			this.suivreJoueur(a);
-			if (v.dst(a.getPosition()) < a.DISTANCE_TIR && tirer.get(a) == null){
-				System.out.println(">>> tir");
-				Timer.Task transform = new Timer.Task()
-				{
-				    @Override
-				    public void run() {
-				    							
-				    }
-				};
-				tirer.put(a,transform );
-				Vector2 d = new Vector2(this.monde.getPerso().getPosition());
-				d.sub(a.getPosition());
-				float x = v.angle();
-				d.x = (float) Math.cos(x);
-				d.y = (float) Math.sin(x);
-				monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
-				Timer.schedule(transform, 0.5f);
+		if (v.dst(a.getPosition()) < a.DISTANCE_VUE){
+				if (this.monde.getPerso().getEtat() != null && 
+							((this.monde.getPerso().getEtat().getClass().equals(Dark.class) && ((Dark) this.monde.getPerso().getEtat()) == Dark.GRABBING) 
+										|| (this.monde.getPerso().getEtat().getClass().equals(Light.class)))){
+					this.suivreJoueur(a);
+					if (v.dst(a.getPosition()) < a.DISTANCE_TIR && tirer.get(a) == null){
+						System.out.println(">>> tir");
+						Timer.Task transform = new Timer.Task()
+						{
+						    @Override
+						    public void run() {
+						    							
+						    }
+						};
+						tirer.put(a,transform );
+						Vector2 d = new Vector2(this.monde.getPerso().getPosition());
+						d.sub(a.getPosition());
+						float x = v.angle();
+						d.x = (float) Math.cos(x);
+						d.y = (float) Math.sin(x);
+						monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
+						Timer.schedule(transform, 0.5f);
+					}		
 				
 			}else if (tirer.get(a) != null && !tirer.get(a).isScheduled()){
 				tirer.put(a,  null);
@@ -214,12 +215,12 @@ public class ControlerAnimaux {
 		if(!(a.getPath().size==0)){//n'op�re que si l'Anime a un parcours
 			if (a.getPathStep() >= a.getPath().size)
 				a.setPathStep(a.getPath().size - 1);
+			if (a instanceof Monstre) System.out.println("PathStep: " + a.getPathStep());
 		Vector2 v = a.getPath().get(a.getPathStep());
 		Vector2 p = a.getPosition();
 		corrigeDirection(a);
 		float approx = 0.1f;
 		if ( Math.abs(p.x - v.x )<approx && Math.abs(p.y - v.y )<approx){
-		
 			this.nextStep(a);
 		}
 		}
