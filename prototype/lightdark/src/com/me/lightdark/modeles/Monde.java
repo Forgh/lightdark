@@ -49,7 +49,7 @@ public class Monde {
 		this.niveau = new Niveau();
 		
 		this.perso = new Perso(niveau.getPosStart());
-		perso.setForm(Form.SHADOWFORM);
+		perso.setForm(niveau.getFormStart());
 		this.pause = new Button();
 		
 		this.pause.setX(930);
