@@ -18,7 +18,7 @@ public class ControlerMenu {
 	private Button pause;
 	private Monde monde;
 	
-	private float transformTime = 10;		//dur�e de la transformation (en secondes)
+	private float transformTime = 30;		//dur�e de la transformation (en secondes)
 	private float cooldownTime = 40;		//temps de recharge du click � la prochaine utilisation
 	private boolean orbEnabled = true;		//par d�faut l'orbe est utilisable
 	

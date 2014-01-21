@@ -12,6 +12,7 @@ import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Monde;
+import com.me.lightdark.modeles.Monstre;
 import com.me.lightdark.modeles.Perso;
 import com.me.lightdark.modeles.Projectile;
 
@@ -137,6 +138,12 @@ public class ControlerProjectiles {
 				p.devientObsolete();
 				lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
 				lanceur.changerEtat(Dark.TAMING);
+				//on remet en shadowwalking si jamais on touche la case désirée 
+				ok=false; 
+			}else if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
+				((Monstre) monde.getAnime().get(i)).recevoirCoup(lanceur.puissance());
+				System.out.println(">>>>>>>>>>>> ok");
+				p.devientObsolete();
 				//on remet en shadowwalking si jamais on touche la case désirée 
 				ok=false; 
 			}

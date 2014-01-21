@@ -197,7 +197,7 @@ public class ControlerAnimaux {
 				float x = v.angle();
 				d.x = (float) Math.cos(x);
 				d.y = (float) Math.sin(x);
-				//monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
+				monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
 				Timer.schedule(transform, 0.5f);
 				
 			}else if (tirer.get(a) != null && !tirer.get(a).isScheduled()){
@@ -278,6 +278,10 @@ public class ControlerAnimaux {
 			}
 			//if(!(this.animaux.get(i) instanceof Animal) && !this.animaux.get(i).isTamed())
 				gererParcours(this.animaux.get(i));
+				
+				if ( (this.animaux.get(i) instanceof Monstre) && ((Monstre) this.animaux.get(i)).isDead() ){
+					this.animaux.removeIndex(i);
+				}
 			
 		}
 	}

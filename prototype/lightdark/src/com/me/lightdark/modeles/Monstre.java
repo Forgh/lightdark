@@ -9,11 +9,13 @@ public class Monstre extends Anime{
 	public final float DISTANCE_VUE = 20f;
 	public final float DISTANCE_TIR = 20f;
 	
+	
 	private int puissance_tir = 20;
 	private int vie;
 	
 	public Monstre(Vector2 position) {
 		super(position);
+		this.vie = this.VIE_MAX;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -24,6 +26,10 @@ public class Monstre extends Anime{
 	public void recevoirCoup(int puissance){
 		this.vie -= puissance;
 		
+	}
+	
+	public boolean isDead(){
+		return this.vie<=0;
 	}
 
 	@Override
