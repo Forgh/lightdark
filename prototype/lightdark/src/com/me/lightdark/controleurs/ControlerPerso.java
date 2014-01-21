@@ -72,7 +72,7 @@ public class ControlerPerso {
 				
 				else if (perso.getForm() == Form.SHADOWFORM){
 					
-					if(monde.getNiveau().getCollisionWithLight(x, y) != null && !(perso.getEtat()==Dark.TAMING)){ //Si collision joueur-lumière
+					if(monde.getNiveau().getCollisionWithLight(x, y) != null && !(perso.getEtat()==Dark.TAMING)){ //Si collision joueur-lumière (hors taming)
 					collision.add(monde.getNiveau().getCollisionWithLight(x, y));
 				}
 			}
