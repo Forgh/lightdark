@@ -76,6 +76,17 @@ public class Monde {
 			
 	}
 	
+	
+	public void lancerProjectileParMonstre(Vector2 monstre, Vector2 vect, Vector2 cible){
+		//if(perso.getEtat()!=Dark.GRABBING)
+			Projectile v = new Projectile((new Vector2(monstre)),vect);
+			projectiles.add( v);
+			Case c = this.niveau.get((int) cible.x, (int) cible.y);
+			if (c != null){
+				v.setCaseCible(c); // on ajoute les coord. de la cible
+			}
+			
+	}
 	public void frapperEpee(Vector2 vect, Vector2 cible){
 
 		if(perso.getForm() != Form.SHADOWFORM){

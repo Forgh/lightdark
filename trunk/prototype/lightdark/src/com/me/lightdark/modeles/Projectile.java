@@ -39,6 +39,20 @@ public class Projectile {
 		this.position.add((lanceur.TAILLE / 2) - (this.TAILLE/2), (lanceur.TAILLE / 2) - (this.TAILLE/2));
 	}
 	
+	public Projectile( Vector2 position, Vector2 direction) {
+		this.lanceur=null;
+		this.position = position;
+		this.posInitial = new Vector2(position);
+		this.rapidite = direction;
+		this.cadre.height = TAILLE;
+		this.cadre.width = TAILLE;
+		cadre.setPosition(this.position);
+
+		this.obsolete = false;
+		
+		this.position.add((lanceur.TAILLE / 2) - (this.TAILLE/2), (lanceur.TAILLE / 2) - (this.TAILLE/2));
+	}
+	
 	
 	
 	/* Renvoie le boomerang du projectile source
