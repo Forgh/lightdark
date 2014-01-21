@@ -122,9 +122,11 @@ public class ControlerProjectiles {
 				lanceur.getPosition().y = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
 				//lanceur.setPosition();
 				lanceur.changerEtat(Dark.SHADOWWALKING);
-				System.out.println("[DEBUG] Ombre touchée");
-				if(lanceur.getEtat()==Dark.TAMING && lanceur.getAnimal()!=null)//Désactiver le shadow taming si de retour sur une ombre
+				if(lanceur.getEtat()==Dark.TAMING && lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
 					lanceur.getAnimal().setTaming(false);
+					lanceur.setPosition(monde.getNiveau().getCloseShadow(lanceur.getPosition()));
+					System.out.println("[DEBUG] Position joueur : "+lanceur.getPosition().toString()+"\n        Position ombre : "+monde.getNiveau().getCloseShadow(lanceur.getPosition()));
+				}
 				//on remet en shadowwalking si jamais on touche la case désirée 
 				ok=false;
 			}
