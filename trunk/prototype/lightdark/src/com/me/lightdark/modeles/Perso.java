@@ -24,6 +24,8 @@ public class Perso {
 	
 	private Enum<?> etat;
 	
+	private Animal animal = null;
+	
 	// normalement d'apres le cours on initialise dans le constructeur mais ici �a revient pareil
 	private Rectangle cadre = new Rectangle();
 	
@@ -70,6 +72,10 @@ public class Perso {
 	
 	public int getHealth(){
 		return this.health;
+	}
+	
+	public Animal getAnimal(){
+		return animal;
 	}
 	
 	
