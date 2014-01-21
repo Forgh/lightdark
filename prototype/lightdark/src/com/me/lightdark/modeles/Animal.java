@@ -7,8 +7,9 @@ import com.me.lightdark.modeles.Anime.AnimeType;
 
 public class Animal extends Anime {
 
-	boolean taming;
-	Perso tamer;//le controleur (=null)
+	private boolean taming;
+	
+	private Perso tamer;//le controleur (=null)
 	
 	public Animal(Vector2 position) {
 		super(position);

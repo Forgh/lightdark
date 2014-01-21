@@ -175,12 +175,20 @@ public class ControlerAnimaux {
 		}
 	}
 	
+	public boolean isShadowDetectable(){
+		if ((this.monde.getPerso().getEtat().getClass().equals(Dark.class))){	
+				Dark f = ((Dark) this.monde.getPerso().getEtat());
+				return f == Dark.GRABBING || (f == Dark.TAMING && this.monde.getPerso().isTamingDetectable());
+		}else{
+			return false;
+		}
+	}
 	public void detecterJoueur(Monstre a){
 		Vector2 v = new Vector2(this.monde.getPerso().getPosition());
 		if (v.dst(a.getPosition()) < a.DISTANCE_VUE){
 				if (this.monde.getPerso().getEtat() != null && 
-							((this.monde.getPerso().getEtat().getClass().equals(Dark.class) && ((Dark) this.monde.getPerso().getEtat()) == Dark.GRABBING) 
-										|| (this.monde.getPerso().getEtat().getClass().equals(Light.class)))){
+							
+										(isShadowDetectable() || (this.monde.getPerso().getEtat().getClass().equals(Light.class)))){
 					this.suivreJoueur(a);
 					if (v.dst(a.getPosition()) < a.DISTANCE_TIR && tirer.get(a) == null){
 						System.out.println(">>> tir");
