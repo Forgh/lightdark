@@ -67,7 +67,7 @@ public class ControlerProjectiles {
 		boolean pasTouche = true;
 		int i = 0;
 		while (i<this.monde.getAnime().size && pasTouche){
-			if (this.monde.getAnime().get(i).getCadre().overlaps(p)){ //on gere une collision (overlaps entre projectile et l'animal)
+			if (this.monde.getAnime().get(i).getCadre().overlaps(p) && this.monde.getAnime().get(i).isTamed()){ //on gere une collision (overlaps entre projectile et l'animal)
 				pasTouche = false;
 			}
 			i++;
