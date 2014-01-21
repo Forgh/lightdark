@@ -54,7 +54,7 @@ public class ControlerMenu {
 			    	//Vector2 back = new Vector2(savePos);
 			    	perso.setPosition(monde.getNiveau().getCloseShadow(perso.getPosition() ));
 					perso.switchForm();
-					System.out.println("[DEBUG] Orbe réactivé" + perso.getPosition().x + " => " + + perso.getPosition().y);
+					System.out.println("[DEBUG] Orbe réactivé");
 					
 			    }
 			};

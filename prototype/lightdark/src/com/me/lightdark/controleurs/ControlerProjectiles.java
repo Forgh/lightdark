@@ -54,10 +54,6 @@ public class ControlerProjectiles {
 	public void update(float delta) {
 		this.projectiles = monde.getProjectile();
 		
-		
-		
-		
-		
 		for (int i =0 ; i< this.projectiles.size;i++){
 			gererCollision(this.projectiles.get(i), delta);
 			gererDistance(this.projectiles.get(i));
@@ -126,7 +122,10 @@ public class ControlerProjectiles {
 				lanceur.getPosition().y = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
 				//lanceur.setPosition();
 				lanceur.changerEtat(Dark.SHADOWWALKING);
-				//on remet en shadowwalking si jamais on touche la case dÃ©sirÃ©e 
+				System.out.println("[DEBUG] Ombre touchée");
+				if(lanceur.getEtat()==Dark.TAMING && lanceur.getAnimal()!=null)//Désactiver le shadow taming si de retour sur une ombre
+					lanceur.getAnimal().setTaming(false);
+				//on remet en shadowwalking si jamais on touche la case désirée 
 				ok=false;
 			}
 			i++;

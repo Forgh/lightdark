@@ -41,7 +41,11 @@ public class Animal extends Anime {
 		
 		if(!taming)
 			super.setPosition(super.getPosition().add(super.getRapidite().cpy().scl(delta)));
-		else super.setPosition(tamer.getPosition());
+		else {
+			super.setPosition(tamer.getPosition());
+			if(tamer.getEtat()!=Dark.TAMING)
+				taming = false;
+		}
 		
 		super.getCadre().setPosition(super.getPosition());
 	}
