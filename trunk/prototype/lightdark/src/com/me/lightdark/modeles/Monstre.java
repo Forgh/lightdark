@@ -34,8 +34,10 @@ public class Monstre extends Anime{
 
 	@Override
 	public void setTaming(boolean t) {
-		// TODO Auto-generated method stub
-		
+	}
+	
+	@Override
+	public void setTamer(Perso p){
 	}
 
 }
