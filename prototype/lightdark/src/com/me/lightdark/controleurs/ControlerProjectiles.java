@@ -144,7 +144,7 @@ public class ControlerProjectiles {
 				ok=false; 
 			}else if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
 				((Monstre) monde.getAnime().get(i)).recevoirCoup(lanceur.puissance());
-				System.out.println(">>>>>>>>>>>> ok");
+				//System.out.println(">>>>>>>>>>>> ok");
 				p.devientObsolete();
 				//on remet en shadowwalking si jamais on touche la case désirée 
 				ok=false; 
