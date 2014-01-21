@@ -1,6 +1,10 @@
 package com.me.lightdark.modeles;
 
-public enum CompetanceAnimaux {
-	CHANTER, BRULER, VOLER, NAGER,
+public enum CompetenceAnimaux {
+	CHANTER,
+	BRULER,
+	VOLER,
+	NAGER,
+	AUCUNE;
 
 }
