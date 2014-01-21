@@ -11,6 +11,9 @@ public class Perso {
 	public static final float VITESSE = 4f;	// vitesse par unite de temps sur une unite d'espace
 	public static final float TAILLE = 0.5f; // une demi unite
 	public static final int max_health = 75;
+	
+	public final int puissance = 30;
+	
 	private int health;
 	
 	private Vector2 position = new Vector2();
@@ -36,6 +39,10 @@ public class Perso {
 	
 	
 	// **** GETTERS ****
+	
+	public int puissance(){
+		return this.puissance;
+	}
 	public Vector2 getPosition() {
 		return position;
 	}
@@ -108,5 +115,6 @@ public class Perso {
 	}
 	
 		
+	
 
 }
