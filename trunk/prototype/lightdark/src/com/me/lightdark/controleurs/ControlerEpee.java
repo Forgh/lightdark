@@ -5,17 +5,19 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Epee;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Monde;
+import com.me.lightdark.modeles.Monstre;
 import com.me.lightdark.modeles.Perso;
 
 public class ControlerEpee {
 
 	private Monde monde;
 	
-	private Perso epeiste;
+	private Perso lanceur;
 	private Array<Epee> sword;
 	private Array<Rectangle> collision;
 	private Array<Rectangle> shadowTouched;
@@ -89,6 +91,17 @@ public class ControlerEpee {
 			i++;
 		}
 
+		i=0;
+		while(i< monde.getAnime().size && ok){
+			if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
+				((Monstre) monde.getAnime().get(i)).recevoirCoup(lanceur.puissanceMini());
+				//System.out.println(">>>>>>>>>>>> ok");
+				p.devientObsolete();
+				//on remet en shadowwalking si jamais on touche la case désirée 
+				ok=false; 
+			}
+			i++;
+		}
 		p.getRapidite().scl(1/delta); // on restaure la vitesse
 		
 	}
@@ -130,7 +143,7 @@ public class ControlerEpee {
 		this.sword = new Array<Epee>();
 		this.collision = new Array<Rectangle>();
 		this.shadowTouched= new Array<Rectangle>();
-		this.epeiste=epeiste;
+		this.lanceur=epeiste;
 	}
 
 }

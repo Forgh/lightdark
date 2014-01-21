@@ -13,6 +13,7 @@ public class Perso {
 	public static final int max_health = 75;
 	
 	public final int puissance = 30;
+	public final int puissanceMini = 20;
 	
 	private int health;
 	
@@ -42,6 +43,9 @@ public class Perso {
 	
 	public int puissance(){
 		return this.puissance;
+	}
+	public int puissanceMini(){
+		return puissanceMini;
 	}
 	public Vector2 getPosition() {
 		return position;
