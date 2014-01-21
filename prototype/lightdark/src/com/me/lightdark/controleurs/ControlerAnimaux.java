@@ -178,7 +178,8 @@ public class ControlerAnimaux {
 	public boolean isShadowDetectable(){
 		if ((this.monde.getPerso().getEtat().getClass().equals(Dark.class))){	
 				Dark f = ((Dark) this.monde.getPerso().getEtat());
-				return f == Dark.GRABBING || (f == Dark.TAMING && this.monde.getPerso().isTamingDetectable());
+				
+				return (f == Dark.GRABBING);// || (f == Dark.TAMING && this.monde.getPerso().isTamingDetectable());
 		}else{
 			return false;
 		}
@@ -187,8 +188,8 @@ public class ControlerAnimaux {
 		Vector2 v = new Vector2(this.monde.getPerso().getPosition());
 		if (v.dst(a.getPosition()) < a.DISTANCE_VUE){
 				if (this.monde.getPerso().getEtat() != null && 
-							
-										(isShadowDetectable() || (this.monde.getPerso().getEtat().getClass().equals(Light.class)))){
+						(isShadowDetectable() || this.monde.getPerso().getEtat().getClass().equals(Light.class))){
+					
 					this.suivreJoueur(a);
 					if (v.dst(a.getPosition()) < a.DISTANCE_TIR && tirer.get(a) == null){
 						System.out.println(">>> tir");
@@ -206,9 +207,10 @@ public class ControlerAnimaux {
 						d.x = (float) Math.cos(x);
 						d.y = (float) Math.sin(x);
 						monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
-						Timer.schedule(transform, 0.5f);
-					}		
-				
+						Timer.schedule(transform, 0.5f);		
+				}else{
+					this.arretSuivreJoueur(a);
+				}
 			}else if (tirer.get(a) != null && !tirer.get(a).isScheduled()){
 				tirer.put(a,  null);
 			}
