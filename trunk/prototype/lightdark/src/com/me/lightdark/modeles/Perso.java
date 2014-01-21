@@ -15,6 +15,8 @@ public class Perso {
 	public final int puissance = 30;
 	public final int puissanceMini = 20;
 	
+	private boolean taming_detectable;
+	
 	private int health;
 	
 	private Vector2 position = new Vector2();
@@ -38,6 +40,7 @@ public class Perso {
 		this.cadre.height = TAILLE;
 		this.cadre.width = TAILLE;
 		this.health=3;
+		taming_detectable = false;
 	}
 	
 	
@@ -91,6 +94,13 @@ public class Perso {
 		this.position=v;
 	}
 	
+	public boolean isTamingDetectable(){
+		return this.taming_detectable;
+	}
+	
+	public void setTamingDetectable(boolean value){
+		this.taming_detectable = value;
+	}
 	public void setForm(Form f){
 		this.form=f;
 	}
