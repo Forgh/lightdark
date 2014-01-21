@@ -134,7 +134,7 @@ public class AfficherMonde {
 			if(!(p.getEtat()==Dark.TAMING))//ShadowForm classique
 				spriteBatch.draw(this.imgDarkForm, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 			else //ShadowForm Taming
-				spriteBatch.draw(this.imgDarkFormTaming, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX/2, p.TAILLE * ppuY/2);
+				spriteBatch.draw(this.imgDarkFormTaming, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 		}
 	}
 	
