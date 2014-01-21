@@ -48,6 +48,7 @@ public abstract class Anime {
 		}
 		
 		
+		
 		public Array<Vector2>  getPath() {
 			return this.path;
 		}
@@ -70,10 +71,15 @@ public abstract class Anime {
 		public float temps(){
 			return tempsAnime;
 		}
+		
+		public void setTemps(float f){
+		 tempsAnime = f;
+		}
 
 		public void update(float delta) {
 			tempsAnime += delta;
-			position.add(rapidite.cpy().scl(delta)); //?
+			
+			position.add(rapidite.cpy().scl(delta));
 			
 			cadre.setPosition(position);
 		}
@@ -97,7 +103,6 @@ public abstract class Anime {
 		
 
 		public Vector2 getRapidite() {
-			// TODO Auto-generated method stub
 			return this.rapidite;
 		}
 		
@@ -106,4 +111,7 @@ public abstract class Anime {
 		}
 		
 		public abstract void setTaming(boolean t);
+
+
+		public abstract void setTamer(Perso p);
 }

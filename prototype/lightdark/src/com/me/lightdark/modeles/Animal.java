@@ -8,11 +8,12 @@ import com.me.lightdark.modeles.Anime.AnimeType;
 public class Animal extends Anime {
 
 	boolean taming;
+	Perso tamer;//le controleur (=null)
 	
 	public Animal(Vector2 position) {
 		super(position);
 		this.taming=false;
-		// TODO Auto-generated constructor stub
+		tamer=null;
 	}
 	
 	public AnimeType getAnimeType(){
@@ -27,5 +28,21 @@ public class Animal extends Anime {
 	public void setTaming(boolean t) {
 		// TODO Auto-generated method stub
 		this.taming=t;
+	}
+	
+	@Override
+	public void setTamer(Perso p){
+		tamer = p;
+	}
+	
+	@Override
+	public void update(float delta) {
+		super.setTemps(super.temps()+delta);
+		
+		if(!taming)
+			super.setPosition(super.getPosition().add(super.getRapidite().cpy().scl(delta)));
+		else super.setPosition(tamer.getPosition());
+		
+		super.getCadre().setPosition(super.getPosition());
 	}
 }

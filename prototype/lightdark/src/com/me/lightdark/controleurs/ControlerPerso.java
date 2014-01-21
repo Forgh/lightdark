@@ -69,11 +69,15 @@ public class ControlerPerso {
 				if (monde.getNiveau().getCollision(x, y) != null){ // (x>=dX) && (x<= fX) && (y>=dY) && (y<= fY)){
 					collision.add(monde.getNiveau().getCollision(x, y));
 				}
-				else if (perso.getForm() == Form.SHADOWFORM && monde.getNiveau().getCollisionWithLight(x, y) != null){ // (x>=dX) && (x<= fX) && (y>=dY) && (y<= fY)){
+				
+				else if (perso.getForm() == Form.SHADOWFORM){
+					
+					if(monde.getNiveau().getCollisionWithLight(x, y) != null && !(perso.getEtat()==Dark.TAMING)){ //Si collision joueur-lumière
 					collision.add(monde.getNiveau().getCollisionWithLight(x, y));
 				}
 			}
 		}
+	}
 		
 	}
 
