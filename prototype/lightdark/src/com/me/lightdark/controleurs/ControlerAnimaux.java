@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.Timer;
 import com.me.lightdark.controleurs.ControlerPerso.Touches;
 import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Anime;
@@ -24,6 +25,8 @@ public class ControlerAnimaux {
 	private Array<Rectangle> collision;
 	
 	private Map<Anime, Integer> reperer = new HashMap<Anime, Integer>();
+	
+	private Map<Anime, Timer.Task> tirer = new HashMap<Anime, Timer.Task>();
 	
 	final Vector2 vecteurNul = new Vector2(0f,0f);
 	
@@ -175,8 +178,27 @@ public class ControlerAnimaux {
 	
 	public void detecterJoueur(Monstre a){
 		Vector2 v = new Vector2(this.monde.getPerso().getPosition());
-		if (v.dst(a.getPosition()) < a.DISTANCE_VUE && this.monde.getPerso().getEtat() != null && ((this.monde.getPerso().getEtat().getClass().equals(Dark.class) && ((Dark) this.monde.getPerso().getEtat()) == Dark.GRABBING) || (this.monde.getPerso().getEtat().getClass().equals(Light.class))) ){
+		if (v.dst(a.getPosition()) < a.DISTANCE_VUE && this.monde.getPerso().getEtat() != null && 
+				((this.monde.getPerso().getEtat().getClass().equals(Dark.class) && ((Dark) this.monde.getPerso().getEtat()) == Dark.GRABBING) 
+						|| (this.monde.getPerso().getEtat().getClass().equals(Light.class)))){
 			this.suivreJoueur(a);
+			if (v.dst(a.getPosition()) < a.DISTANCE_TIR && tirer.get(a) == null){
+				System.out.println(">>> tir");
+				Timer.Task transform = new Timer.Task()
+				{
+				    @Override
+				    public void run() {
+				    	
+						
+				    }
+				};
+				tirer.put(a,transform );
+				Timer.schedule(transform, 2);
+				
+			}else if (tirer.get(a) != null && !tirer.get(a).isScheduled()){
+				tirer.put(a,  null);
+			}
+			
 		}else{
 			this.arretSuivreJoueur(a);
 		}
