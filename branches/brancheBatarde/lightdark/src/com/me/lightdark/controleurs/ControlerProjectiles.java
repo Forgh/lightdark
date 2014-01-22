@@ -121,9 +121,9 @@ public class ControlerProjectiles {
 				System.out.println("[DEBUG] Degat proj");
 
 				((Monstre) monde.getAnime().get(i)).recevoirCoup(lanceur.puissance());
-				//System.out.println(">>>>>>>>>>>> ok");
-				//on remet en shadowwalking si jamais on touche la case désirée 
+			
 			}
+			
 			i++;
 		}
 		i=0;
