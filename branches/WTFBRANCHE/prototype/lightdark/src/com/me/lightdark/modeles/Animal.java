@@ -73,9 +73,9 @@ public class Animal extends Anime {
 		}
 	}
 
-	public void stoperCompetence(CompetenceAnimaux ca) {
+	public void stopperCompetence(CompetenceAnimaux ca) {
 		// TODO Auto-generated method stub
-		super.demarrerCompetence(ca);
+		super.stopperCompetence(ca);
 		
 		if (ca == CompetenceAnimaux.COURRIR){
 			tamer.resetVitesse();
