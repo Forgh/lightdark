@@ -67,7 +67,7 @@ public class ControlerProjectiles {
 		boolean pasTouche = true;
 		int i = 0;
 		while (i<this.monde.getAnime().size && pasTouche){
-			if (this.monde.getAnime().get(i).getCadre().overlaps(p) && this.monde.getAnime().get(i).isTamed()){ //on gere une collision (overlaps entre projectile et l'animal)
+			if (this.monde.getAnime().get(i).getCadre().overlaps(p) && !this.monde.getAnime().get(i).isTamed()){ //on gere une collision (overlaps entre projectile et l'animal)
 				pasTouche = false;
 			}
 			i++;
@@ -99,17 +99,25 @@ public class ControlerProjectiles {
 
 		int i = 0;
 		while(i< monde.getAnime().size && ok){
-			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.SHADOWFORM) {
-				monde.getAnime().get(i).setTamer(lanceur);
-				monde.getAnime().get(i).setTaming(true);//L'animal devient contrôlé
+			if (monde.getAnime().get(i) instanceof Animal && monde.getPerso().getAnimal() != null && !monde.getPerso().getAnimal().equals(monde.getAnime().get(i) )){
 				
-				p.devientObsolete();
-				lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
-				lanceur.changerEtat(Dark.TAMING);
-				System.out.println("[DEBUG] Shadow Taming");
-				ok=false; 
+			}
+			else if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.SHADOWFORM) {
+				
+					monde.getAnime().get(i).setTamer(lanceur);
+				
+					monde.getAnime().get(i).setTaming(true);//L'animal devient contrôlé
+					
+					p.devientObsolete();
+					//lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
+	                lanceur.getPosition().x = monde.getAnime().get(i).getCadre().x;
+	                lanceur.getPosition().y = monde.getAnime().get(i).getCadre().y;
+	                lanceur.changerEtat(Dark.TAMING);
+					System.out.println("[DEBUG] Shadow Taming");
+					ok=false;
+				
 			}else if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.LIGHTFORM && p.getLanceur()==monde.getPerso()) {
-				p.devientObsolete();
+				p.devientObsolete();System.out.println("[DEBUG0] Shadow Taming");
 				ok=false; 
 
 				System.out.println("[DEBUG] Degat proj");
@@ -126,7 +134,7 @@ public class ControlerProjectiles {
 				if(persoRect.overlaps(collision.get(i)) || !gererCollisionAnimaux(p.getCadre())){
 					p.getRapidite().x = 0;
 					p.getRapidite().y = 0;
-					p.devientObsolete();
+					p.devientObsolete();System.out.println("[DEBUG1] Shadow Taming");
 					lanceur.changerEtat(Dark.SHADOWWALKING);
 					//On remet en shadowwalking si jamais le grappin touche un obstacle
 					ok = false;
@@ -140,7 +148,7 @@ public class ControlerProjectiles {
 		while(i< shadowTouched.size && ok){
 			if(persoRect.overlaps(shadowTouched.get(i)) && shadowTouched.get(i).equals(p.getCaseCible().getCadre())) {
 				System.out.println(lanceur.getEtat());
-				p.devientObsolete();
+				p.devientObsolete();System.out.println("[DEBUG2] Shadow Taming");
 				lanceur.getPosition().x = (shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f));
 				lanceur.getPosition().y = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
 				//lanceur.setPosition();
