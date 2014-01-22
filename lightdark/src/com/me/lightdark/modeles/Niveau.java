@@ -229,22 +229,28 @@ private void demo1(){
 				light[i][j] = cases[i][j].getCadre();
 			}
 		}
+		Animal a = new Animal(new Vector2(4f,3f));
+		this.animals.add(a);
+		a.getPath().add(new Vector2(1f,3f));
+		a.getPath().add(new Vector2(5f,3f));
+		a.getPath().add(new Vector2(9f,11f));
+		a.getPath().add(new Vector2(11f,1f));
+		a.getPath().add(new Vector2(11f,11f));
+		a.getPath().add(new Vector2(1f,11f));
+		//a.getPath().add(new Vector2(1f,3f));
+		a.VITESSE = 1f;
 		
-		this.animals.add(new Animal(new Vector2(4f,3f)));
-		this.animals.get(0).getPath().add(new Vector2(1f,3f));
-		this.animals.get(0).getPath().add(new Vector2(5f,3f));
-		this.animals.get(0).getPath().add(new Vector2(9f,11f));
-		this.animals.get(0).getPath().add(new Vector2(11f,1f));
-		this.animals.get(0).getPath().add(new Vector2(11f,11f));
-		this.animals.get(0).getPath().add(new Vector2(1f,11f));
-		//this.animals.get(0).getPath().add(new Vector2(1f,3f));
-		this.animals.get(0).VITESSE = 1f;
+		a = new Animal(new Vector2(11f,3f));
+		this.animals.add(a);
+		a.getPath().add(new Vector2(11f,3f));
+		a.getPath().add(new Vector2(11f,11f));
 		
-		this.animals.add(new Monstre(new Vector2(3f,6f)));
-		this.animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
-		this.animals.get(1).getPath().add(new Vector2(3f,6f));
-		this.animals.get(1).getPath().add(new Vector2(5f,6f));
-		this.animals.get(1).VITESSE = 0.5f;
+		Monstre b = new Monstre(new Vector2(3f,6f));
+		this.animals.add(b);
+		b.setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
+		b.getPath().add(new Vector2(3f,6f));
+		b.getPath().add(new Vector2(5f,6f));
+		b.VITESSE = 0.5f;
 		this.posStart = new Vector2(1f,1f);
 		this.formStart = Form.LIGHTFORM;
 }
