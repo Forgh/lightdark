@@ -40,9 +40,21 @@ public class Animal extends Anime {
 	public void update(float delta) {
 		super.setTemps(super.temps()+delta);
 		
-		if(!taming)
-			super.setPosition(super.getPosition().add(super.getRapidite().cpy().scl(delta)));
-		else {
+		if(!taming){
+
+			if(super.getCadre()==null)
+			
+				super.setCadre(super.newCadre(getPosition()));
+				super.setPosition(super.getPosition().add(super.getRapidite().cpy().scl(delta)));
+			
+			}
+		else {//if taming
+		
+			if(super.getCadre()!=null){
+				
+				super.setCadre(null);
+			}
+			
 			super.setPosition(tamer.getPosition().cpy());
 			if(tamer.getEtat()!=Dark.TAMING)
 				taming = false;
