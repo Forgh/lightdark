@@ -23,6 +23,7 @@ public class ControlerProjectiles {
 	
 	private Perso lanceur;
 	private Array<Projectile> projectiles;
+	private Array<Projectile> fleches;
 	private Array<Rectangle> collision;
 	private Array<Rectangle> shadowTouched;
 	
@@ -54,13 +55,15 @@ public class ControlerProjectiles {
 	}
 	public void update(float delta) {
 		this.projectiles = monde.getProjectile();
-		
+		this.fleches = monde.getFleche();
 		for (int i =0 ; i< this.projectiles.size;i++){
 			gererCollision(this.projectiles.get(i), delta);
 			gererDistance(this.projectiles.get(i));
 			this.projectiles.get(i).update(delta);
 		}
-		
+		for (int i =0 ; i< this.fleches.size;i++){
+			this.fleches.get(i).update(delta);
+		}
 		gererObsoletes();
 	}
 	
@@ -225,6 +228,7 @@ public class ControlerProjectiles {
 	public ControlerProjectiles(Monde monde, Perso lanceur) {
 		this.monde = monde;
 		this.projectiles = new Array<Projectile>();
+		this.fleches = new Array<Projectile>();
 		this.collision = new Array<Rectangle>();
 		this.shadowTouched= new Array<Rectangle>();
 		this.lanceur=lanceur;
