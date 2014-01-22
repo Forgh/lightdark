@@ -198,10 +198,13 @@ public class ControlerAnimaux {
                 System.out.println(angle);
                 if (angle_J > min && angle_J <max){
                 	System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
+                	this.suivreJoueur(a);
                 }
-                
-                
+            }else{
+            	this.arretSuivreJoueur(a);
             }
+        }else{
+        	this.arretSuivreJoueur(a);
         }
     
     }
