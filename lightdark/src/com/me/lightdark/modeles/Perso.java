@@ -133,6 +133,12 @@ public class Perso {
 		}
 		System.out.println(this.getForm());
 	}
+
+
+	public void destroyTaming() {
+		// TODO Auto-generated method stub
+		this.animal = null;
+	}
 	
 		
 	

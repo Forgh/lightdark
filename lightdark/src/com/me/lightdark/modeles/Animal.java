@@ -36,6 +36,8 @@ public class Animal extends Anime {
 		tamer = p;
 	}
 	
+
+	
 	@Override
 	public void update(float delta) {
 		super.setTemps(super.temps()+delta);
