@@ -15,6 +15,8 @@ public class Monde {
 	Perso perso;
 	
 	Array<Projectile> projectiles = new Array<Projectile>();
+	Array<Projectile> fleches = new Array<Projectile>();
+
 	Array<Epee> sword = new Array<Epee>();
 
 
@@ -25,6 +27,10 @@ public class Monde {
 	public Array<Projectile> getProjectile() {
 		return projectiles;
 	}
+	
+	public Array<Projectile> getFleche() {
+		return fleches;
+	} 
 	
 	public Array<Anime> getAnime() {
 		return this.niveau.getAnime();
@@ -71,7 +77,7 @@ public class Monde {
 	public void lancerProjectile(Vector2 vect, Vector2 cible){
 		//if(perso.getEtat()!=Dark.GRABBING)
 			Projectile v = new Projectile(perso,(new Vector2(perso.getPosition() )),vect);
-			projectiles.add( v);
+			projectiles.add(v);
 			Case c = this.niveau.get((int) cible.x, (int) cible.y);
 			if (c != null){
 				v.setCaseCible(c); // on ajoute les coord. de la cible
@@ -83,7 +89,8 @@ public class Monde {
 	public void lancerProjectileParMonstre(Vector2 monstre, Vector2 vect, Vector2 cible){
 		//if(perso.getEtat()!=Dark.GRABBING)
 			Projectile v = new Projectile((new Vector2(monstre)),vect);
-			projectiles.add( v);
+			fleches.add(v);
+			System.out.println("[DEBUG] ajout d'une flèche");
 			Case c = this.niveau.get((int) cible.x, (int) cible.y);
 			if (c != null){
 				v.setCaseCible(c); // on ajoute les coord. de la cible
