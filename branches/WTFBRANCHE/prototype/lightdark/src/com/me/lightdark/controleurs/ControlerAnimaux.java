@@ -191,13 +191,20 @@ public class ControlerAnimaux {
         
         if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING){
             if (this.monde.getPerso().getPosition().dst(a.getPosition()) < a.DISTANCE_VUE){
-                float angle = (float) Math.toDegrees(a.getRapidite().angle());
-                float angle_J = (float) Math.toDegrees(this.monde.getPerso().getRapidite().angle()) % 360;
+                Vector2 d = new Vector2();
+                
+                d.x = Math.abs(a.getPosition().x - this.monde.getPerso().getPosition().x);
+                d.y = Math.abs(a.getPosition().y - this.monde.getPerso().getPosition().y);
+                
+            	
+            	float angle =(float) Math.toDegrees(a.getPosition().cpy().sub(this.monde.getPerso().getPosition()).angle());
+                float angle_J = (float) Math.toDegrees(d.angle()) % 360;
                 float min = (angle - 45) % 360;
-                float max =( angle + 45) %360;
-                System.out.println(angle_J +" : " + angle);
+                float max =( angle + 45) % 360;
+                System.out.println(( (angle_J>min && angle_J<max) ? " vu " : " pas vu ") + angle_J +" : " + angle % 360 + "; "+ min + "; " + max );
+                
                 if( angle_J>min && angle_J<max && (a.champDegage(this.monde.getPerso().getPosition()))){
-                	System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
+                	//System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
                 	
                 	/*Vector2 v = new Vector2(this.monde.getPerso().getPosition());
                 	if (v.dst(a.getPosition()) < a.DISTANCE_TIR && tirer.get(a) == null){
@@ -218,7 +225,7 @@ public class ControlerAnimaux {
 						monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
 						Timer.schedule(transform, 0.5f);
                 	}*/
-                	this.suivreJoueur(a);
+                	//this.suivreJoueur(a);
                 }
             }else{
             	this.arretSuivreJoueur(a);
@@ -271,7 +278,7 @@ public class ControlerAnimaux {
 		if(!(a.getPath().size==0)){//n'op�re que si l'Anime a un parcours
 			if (a.getPathStep() >= a.getPath().size)
 				a.setPathStep(a.getPath().size - 1);
-			if (a instanceof Monstre) System.out.println("PathStep: " + a.getPathStep());
+			//if (a instanceof Monstre) System.out.println("PathStep: " + a.getPathStep());
 		Vector2 v = a.getPath().get(a.getPathStep());
 		Vector2 p = a.getPosition();
 		corrigeDirection(a);

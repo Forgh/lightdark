@@ -242,7 +242,7 @@ private void demo1(){
 		
 		this.animals.add(new Monstre(new Vector2(3f,6f), this));
 		this.animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
-		this.animals.get(1).getPath().add(new Vector2(3f,6f));
+		this.animals.get(1).getPath().add(new Vector2(1f,6f));
 		this.animals.get(1).getPath().add(new Vector2(5f,6f));
 		this.animals.get(1).VITESSE = 0.5f;
 		this.posStart = new Vector2(1f,1f);
