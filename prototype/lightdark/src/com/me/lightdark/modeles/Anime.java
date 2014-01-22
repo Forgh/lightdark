@@ -67,6 +67,16 @@ public abstract class Anime {
 			return cadre;
 		}
 		
+		/*@param la position de l'anime
+		 * @return un nouveau cadre de collision pour cet anime*/
+		public Rectangle newCadre(Vector2 v){
+			Rectangle rect = new Rectangle();
+			rect.setPosition(position);
+			rect.height = TAILLE;
+			rect.width = TAILLE;
+			return rect;
+		}
+		
 
 		public float temps(){
 			return tempsAnime;
@@ -74,6 +84,14 @@ public abstract class Anime {
 		
 		public void setTemps(float f){
 		 tempsAnime = f;
+		}
+		
+		public void setCadre(Rectangle r){
+			if(r==null){
+			cadre.height=0f;
+			cadre.width=0f;
+			}
+			else cadre = r;
 		}
 
 		public void update(float delta) {
