@@ -184,6 +184,27 @@ public class ControlerAnimaux {
 			return false;
 		}
 	}
+	
+	public void detecterJoueur2(Monstre a){
+        //Vector2 v = new Vector2(this.monde.getPerso().getPosition());
+        
+        
+        if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING){
+            if (this.monde.getPerso().getPosition().dst(a.getPosition()) < a.DISTANCE_VUE){
+                float angle = (float) Math.toDegrees(a.getRapidite().angle());
+                float angle_J = (float) Math.toDegrees(this.monde.getPerso().getRapidite().angle());
+                float min = angle - 45;
+                float max = angle + 45;
+                System.out.println(angle);
+                if (angle_J > min && angle_J <max){
+                	System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
+                }
+                
+                
+            }
+        }
+    
+    }
 	public void detecterJoueur(Monstre a){
 		Vector2 v = new Vector2(this.monde.getPerso().getPosition());
 		if (v.dst(a.getPosition()) < a.DISTANCE_VUE){
@@ -287,7 +308,7 @@ public class ControlerAnimaux {
 				//bruteForce(this.animaux.get(i),delta);
 			this.animaux.get(i).update(delta);
 			if ((this.animaux.get(i) instanceof Monstre) && this.animaux.get(i).getAnimeType() == AnimeType.MONSTRE){ //
-				detecterJoueur((Monstre) this.animaux.get(i));
+				detecterJoueur2((Monstre) this.animaux.get(i));
 			}
 			//if(!(this.animaux.get(i) instanceof Animal) && !this.animaux.get(i).isTamed())
 				gererParcours(this.animaux.get(i));
