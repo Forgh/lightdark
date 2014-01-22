@@ -218,6 +218,8 @@ public class ControlerAnimaux {
 		}else{
 			this.arretSuivreJoueur(a);
 		}
+		
+		a.champDegage(this.monde.getPerso().getPosition());//[DEBUG] : test de la traque mob-->joueur
 	}
 	
 	public void gererParcours(Anime a){
