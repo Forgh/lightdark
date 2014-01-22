@@ -19,6 +19,8 @@ public abstract class Anime {
 	private Vector2 position = new Vector2();
 	private Vector2 rapidite = new Vector2();
 	
+	private Niveau niveau;
+	
 	private Rectangle cadre = new Rectangle();
 	
 	private Array<Vector2> path = new Array<Vector2>();
@@ -38,6 +40,11 @@ public abstract class Anime {
 		this.setAnimeEspece(AnimeEspece.INCONNU);
 	}
 	
+	public Anime(Vector2 position, Niveau niv){
+		this(position);
+		niveau = niv;
+	}
+	
 	
 
 
@@ -45,6 +52,10 @@ public abstract class Anime {
 		// **** GETTERS ****
 		public Vector2 getPosition() {
 			return position;
+		}
+		
+		public Niveau getNiveau(){
+			return niveau;
 		}
 		
 		

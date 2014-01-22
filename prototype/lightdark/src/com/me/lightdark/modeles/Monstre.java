@@ -13,8 +13,8 @@ public class Monstre extends Anime{
 	private int puissance_tir = 20;
 	private int vie;
 	
-	public Monstre(Vector2 position) {
-		super(position);
+	public Monstre(Vector2 position, Niveau niveau) {
+		super(position, niveau);
 		this.vie = this.VIE_MAX;
 		// TODO Auto-generated constructor stub
 	}
@@ -31,6 +31,27 @@ public class Monstre extends Anime{
 	public boolean isDead(){
 		return this.vie<=0;
 	}
+	
+	/*@return true si rien ne bloque le champ de vision entre le monstre et la position donnée, false sinon
+	 * @param Vector2 cible, la position de la cible a regarder
+	 * Need : avoir vérifié avant que le joueur n'étais pas à portée (plus économe)
+	 * HowTo : On regarde tous les xiemes de vecteur mob-cible si la case en question est bloquante*/
+	public boolean champDegage(Vector2 cible){
+		
+		float precision = 50f;//précision avec laquelle on vérifie le vecteur mob-player
+		Vector2 trace = new Vector2((cible.cpy().sub(super.getPosition())).div(precision));//Le vecteur mob-->cible au centième
+		Vector2 verif = super.getPosition().cpy();
+		System.out.println("Vecteur trace/50 : "+verif.toString());
+		
+		for(int i=0; i<100; i++){//tous les xièmes
+			verif.add(trace);//on progresse de 1/x vers le joueur	
+			if(super.getNiveau().getCollision((int)verif.x, (int)verif.y)!=null)//si verif est sur une bloquante
+				return false;//alors le mob ne peut pas nous voir
+		}
+		
+		return true;//si on arrive là, c'est que le joueur est visible pour le mob
+	}
+	
 
 	@Override
 	public void setTaming(boolean t) {
