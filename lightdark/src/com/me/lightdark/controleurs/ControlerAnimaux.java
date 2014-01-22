@@ -225,7 +225,7 @@ public class ControlerAnimaux {
 		if(!(a.getPath().size==0)){//n'op�re que si l'Anime a un parcours
 			if (a.getPathStep() >= a.getPath().size)
 				a.setPathStep(a.getPath().size - 1);
-			if (a instanceof Monstre) System.out.println("PathStep: " + a.getPathStep());
+			//if (a instanceof Monstre) System.out.println("PathStep: " + a.getPathStep());
 		Vector2 v = a.getPath().get(a.getPathStep());
 		Vector2 p = a.getPosition();
 		corrigeDirection(a);
