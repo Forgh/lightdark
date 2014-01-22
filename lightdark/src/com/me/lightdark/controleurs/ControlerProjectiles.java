@@ -95,9 +95,29 @@ public class ControlerProjectiles {
 		this.chargerCollision();
 		persoRect.x += p.getRapidite().x;
 		persoRect.y += p.getRapidite().y;
-		
-		int i = 0;
 		boolean ok = true;
+
+		int i = 0;
+		while(i< monde.getAnime().size && ok){
+			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.SHADOWFORM) {
+				monde.getAnime().get(i).setTamer(lanceur);
+				monde.getAnime().get(i).setTaming(true);//L'animal devient contrÙlÈ
+				
+				p.devientObsolete();
+				lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
+				lanceur.changerEtat(Dark.TAMING);
+				System.out.println("[DEBUG] Shadow Taming");
+				ok=false; 
+			}else if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.LIGHTFORM) {
+				((Monstre) monde.getAnime().get(i)).recevoirCoup(lanceur.puissance());
+				//System.out.println(">>>>>>>>>>>> ok");
+				p.devientObsolete();
+				//on remet en shadowwalking si jamais on touche la case d√©sir√©e 
+				ok=false; 
+			}
+			i++;
+		}
+		i=0;
 		while (i< collision.size && ok){
 			if (collision.get(i) != null) {
 				if(persoRect.overlaps(collision.get(i)) || !gererCollisionAnimaux(p.getCadre())){
@@ -132,26 +152,7 @@ public class ControlerProjectiles {
 			}
 			i++;
 		}
-		i=0;
-		while(i< monde.getAnime().size && ok){
-			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
-				monde.getAnime().get(i).setTamer(lanceur);
-				monde.getAnime().get(i).setTaming(true);//L'animal devient contrÙlÈ
-				
-				p.devientObsolete();
-				lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
-				lanceur.changerEtat(Dark.TAMING);
-				System.out.println("[DEBUG] Shadow Taming");
-				ok=false; 
-			}else if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
-				((Monstre) monde.getAnime().get(i)).recevoirCoup(lanceur.puissance());
-				//System.out.println(">>>>>>>>>>>> ok");
-				p.devientObsolete();
-				//on remet en shadowwalking si jamais on touche la case d√©sir√©e 
-				ok=false; 
-			}
-			i++;
-		}
+		
 	
 
 		p.getRapidite().scl(1/delta); // on restore la vitesse
