@@ -100,8 +100,8 @@ public class ControlerProjectiles {
 		int i = 0;
 		while(i< monde.getAnime().size && ok){
 
-			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.SHADOWFORM &&  !(monde.getPerso().getAnimal() != null && monde.getPerso().getAnimal().equals(monde.getAnime().get(i)) )) {
-				
+			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.SHADOWFORM) {
+				if (monde.getPerso().getAnimal() == null || (monde.getPerso().getAnimal() != null && monde.getPerso().getAnimal().equals(monde.getAnime().get(i)) )){
 					monde.getAnime().get(i).setTamer(lanceur);
 				
 					monde.getAnime().get(i).setTaming(true);//L'animal devient contrôlé
@@ -113,7 +113,7 @@ public class ControlerProjectiles {
 	                lanceur.changerEtat(Dark.TAMING);
 					System.out.println("[DEBUG] Shadow Taming");
 					ok=false;
-				
+				}
 			}else if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.LIGHTFORM && p.getLanceur()==monde.getPerso()) {
 				p.devientObsolete();System.out.println("[DEBUG0] Shadow Taming");
 				ok=false; 
