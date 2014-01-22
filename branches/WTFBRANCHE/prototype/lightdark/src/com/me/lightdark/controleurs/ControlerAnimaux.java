@@ -185,25 +185,26 @@ public class ControlerAnimaux {
 		}
 	}
 	
+	public float angleSurRefV1(Vector2 v1, Vector2 v2){ // calcul d'un angle sur le référenciel de v1
+		Vector2 zero = new Vector2(0f,0f);
+		float a = v1.dst(v2);
+		float b = v1.dst(zero);
+		
+		float tan_x = a / b;
+		return (float) Math.atan(tan_x);
+	}
+	
 	public void detecterJoueur2(Monstre a){
         
         
         
         if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING){
             if (this.monde.getPerso().getPosition().dst(a.getPosition()) < a.DISTANCE_VUE){
-                Vector2 d = new Vector2();
+               
+                float angle_J = (float) (Math.toDegrees(angleSurRefV1(a.getPosition(), this.monde.getPerso().getPosition())));
                 
-                d.x = Math.abs(a.getPosition().x - this.monde.getPerso().getPosition().x);
-                d.y = Math.abs(a.getPosition().y - this.monde.getPerso().getPosition().y);
-                
-            	
-            	float angle =(float) Math.toDegrees(a.getPosition().cpy().sub(this.monde.getPerso().getPosition()).angle());
-                float angle_J = (float) Math.toDegrees(d.angle()) % 360;
-                float min = (angle - 45) % 360;
-                float max =( angle + 45) % 360;
-                System.out.println(( (angle_J>min && angle_J<max) ? " vu " : " pas vu ") + angle_J +" : " + angle % 360 + "; "+ min + "; " + max );
-                
-                if( angle_J>min && angle_J<max && (a.champDegage(this.monde.getPerso().getPosition()))){
+                System.out.println(((angle_J>-45 && angle_J<45) ? "VU " : "PAS VU ") + " => " + angle_J);
+                if( angle_J>-45 && angle_J<45 && (a.champDegage(this.monde.getPerso().getPosition()))){
                 	//System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
                 	
                 	/*Vector2 v = new Vector2(this.monde.getPerso().getPosition());
