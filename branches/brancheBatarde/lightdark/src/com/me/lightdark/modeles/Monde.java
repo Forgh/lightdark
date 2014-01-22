@@ -77,6 +77,7 @@ public class Monde {
 				v.setCaseCible(c); // on ajoute les coord. de la cible
 			}
 			
+			
 	}
 	
 	

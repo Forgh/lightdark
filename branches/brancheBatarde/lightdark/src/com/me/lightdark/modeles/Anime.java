@@ -114,4 +114,18 @@ public abstract class Anime {
 
 
 		public abstract void setTamer(Perso p);
+		
+		public boolean equals(Object oo){
+			if (this == oo){
+				return true;
+			}
+			else{
+				if (oo instanceof Anime){
+					Anime e = ((Anime) oo);
+					return this.position.equals(e.position) && this.rapidite.equals(e.rapidite) && this.path.equals(e.path); // on vérifie qu'il sont 
+				}else{
+					return false;
+				}
+			}
+		}
 }
