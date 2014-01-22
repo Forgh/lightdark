@@ -192,10 +192,10 @@ public class ControlerAnimaux {
         if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING){
             if (this.monde.getPerso().getPosition().dst(a.getPosition()) < a.DISTANCE_VUE){
                 float angle = (float) Math.toDegrees(a.getRapidite().angle());
-                float angle_J = (float) Math.toDegrees(this.monde.getPerso().getRapidite().angle());
-                float min = angle - 45;
-                float max = angle + 45;
-                System.out.println(angle);
+                float angle_J = (float) Math.toDegrees(this.monde.getPerso().getRapidite().angle()) % 360;
+                float min = (angle - 45) % 360;
+                float max =( angle + 45) %360;
+                System.out.println(angle_J +" : " + angle);
                 if( angle_J>min && angle_J<max && (a.champDegage(this.monde.getPerso().getPosition()))){
                 	System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
                 	
