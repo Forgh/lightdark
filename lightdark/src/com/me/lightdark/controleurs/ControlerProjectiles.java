@@ -190,7 +190,7 @@ public class ControlerProjectiles {
 		if (rayon > p.DISTANCE_MAX){
 			//System.out.println("[DEBUG] Distance max atteinte");
 			p.devientObsolete();
-			if(lanceur.getForm()==Form.SHADOWFORM) {
+			if(p.getLanceur()!=null && lanceur.getForm()==Form.SHADOWFORM) {
 				//Le grappin revient en "boomerang" s'il est all� trop loin
 				Projectile boomerang = monde.lancerBoomerang(p);
 				
