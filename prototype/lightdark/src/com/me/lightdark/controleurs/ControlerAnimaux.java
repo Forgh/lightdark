@@ -186,7 +186,7 @@ public class ControlerAnimaux {
 	}
 	
 	public void detecterJoueur2(Monstre a){
-        //Vector2 v = new Vector2(this.monde.getPerso().getPosition());
+        
         
         
         if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING){
@@ -198,6 +198,26 @@ public class ControlerAnimaux {
                 System.out.println(angle);
                 if( angle_J>min && angle_J<max && (a.champDegage(this.monde.getPerso().getPosition()))){
                 	System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
+                	
+                	/*Vector2 v = new Vector2(this.monde.getPerso().getPosition());
+                	if (v.dst(a.getPosition()) < a.DISTANCE_TIR && tirer.get(a) == null){
+						System.out.println(">>> tir");
+						Timer.Task transform = new Timer.Task()
+						{
+						    @Override
+						    public void run() {
+						    							
+						    }
+						};
+						tirer.put(a,transform );
+						Vector2 d = new Vector2(this.monde.getPerso().getPosition());
+						d.sub(a.getPosition());
+						float x = v.angle();
+						d.x = (float) Math.cos(x);
+						d.y = (float) Math.sin(x);
+						monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
+						Timer.schedule(transform, 0.5f);
+                	}*/
                 	this.suivreJoueur(a);
                 }
             }else{
