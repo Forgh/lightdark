@@ -5,6 +5,7 @@ public enum CompetenceAnimaux {
 	BRULER,
 	VOLER,
 	NAGER,
+	COURRIR,
 	AUCUNE;
 
 }

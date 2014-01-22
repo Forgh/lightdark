@@ -62,4 +62,23 @@ public class Animal extends Anime {
 		
 		super.getCadre().setPosition(super.getPosition());
 	}
+
+	@Override
+	public void demarrerCompetence(CompetenceAnimaux ca) {
+		// TODO Auto-generated method stub
+		super.demarrerCompetence(ca);
+		
+		if (ca == CompetenceAnimaux.COURRIR){
+			tamer.setVitesse(tamer.VITESSE * 2);
+		}
+	}
+
+	public void stoperCompetence(CompetenceAnimaux ca) {
+		// TODO Auto-generated method stub
+		super.demarrerCompetence(ca);
+		
+		if (ca == CompetenceAnimaux.COURRIR){
+			tamer.resetVitesse();
+		}
+	}
 }

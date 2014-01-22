@@ -61,4 +61,5 @@ public class Monstre extends Anime{
 	public void setTamer(Perso p){
 	}
 
+
 }
