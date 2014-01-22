@@ -96,7 +96,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if(chargeTime.isScheduled()) chargeTime.cancel();
+		
 		Timer.schedule(chargeTime, 1.5f);//lancer le timer
 		if(screenX<=800){
 			

@@ -50,9 +50,6 @@ public class Monde {
 		
 		this.perso = new Perso(niveau.getPosStart());
 		perso.setForm(niveau.getFormStart());
-		
-		this.perso.setTamingDetectable(false);
-		
 		this.pause = new Button();
 		
 		this.pause.setX(930);

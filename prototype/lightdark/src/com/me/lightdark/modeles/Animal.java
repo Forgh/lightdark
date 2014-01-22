@@ -7,9 +7,8 @@ import com.me.lightdark.modeles.Anime.AnimeType;
 
 public class Animal extends Anime {
 
-	private boolean taming;
-	
-	private Perso tamer;//le controleur (=null)
+	boolean taming;
+	Perso tamer;//le controleur (=null)
 	
 	public Animal(Vector2 position) {
 		super(position);
@@ -42,11 +41,7 @@ public class Animal extends Anime {
 		
 		if(!taming)
 			super.setPosition(super.getPosition().add(super.getRapidite().cpy().scl(delta)));
-		else {
-			super.setPosition(tamer.getPosition().cpy());
-			if(tamer.getEtat()!=Dark.TAMING)
-				taming = false;
-		}
+		else super.setPosition(tamer.getPosition());
 		
 		super.getCadre().setPosition(super.getPosition());
 	}
