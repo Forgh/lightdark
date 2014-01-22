@@ -246,7 +246,7 @@ private void demo1(){
 		this.animals.get(1).getPath().add(new Vector2(5f,6f));
 		this.animals.get(1).VITESSE = 0.5f;
 		this.posStart = new Vector2(1f,1f);
-		this.formStart = Form.LIGHTFORM;
+		//this.formStart = Form.LIGHTFORM;
 }
 
 private void demo2(){
