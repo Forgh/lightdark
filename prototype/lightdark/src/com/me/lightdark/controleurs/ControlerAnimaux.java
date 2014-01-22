@@ -219,7 +219,7 @@ public class ControlerAnimaux {
 			this.arretSuivreJoueur(a);
 		}
 		
-		a.champDegage(this.monde.getPerso().getPosition());//[DEBUG] : test de la traque mob-->joueur
+		System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));//[DEBUG] : test de la traque mob-->joueur
 	}
 	
 	public void gererParcours(Anime a){

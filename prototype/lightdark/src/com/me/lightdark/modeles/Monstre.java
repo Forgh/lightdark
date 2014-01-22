@@ -41,7 +41,7 @@ public class Monstre extends Anime{
 		float precision = 50f;//précision avec laquelle on vérifie le vecteur mob-player
 		Vector2 trace = new Vector2((cible.cpy().sub(super.getPosition())).div(precision));//Le vecteur mob-->cible au centième
 		Vector2 verif = super.getPosition().cpy();
-		System.out.println("Vecteur trace/50 : "+verif.toString());
+		
 		
 		for(int i=0; i<100; i++){//tous les xièmes
 			verif.add(trace);//on progresse de 1/x vers le joueur	
