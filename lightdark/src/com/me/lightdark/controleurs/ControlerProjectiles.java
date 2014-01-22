@@ -99,10 +99,8 @@ public class ControlerProjectiles {
 
 		int i = 0;
 		while(i< monde.getAnime().size && ok){
-			if (monde.getAnime().get(i) instanceof Animal && monde.getPerso().getAnimal() != null && !monde.getPerso().getAnimal().equals(monde.getAnime().get(i) )){
-				
-			}
-			else if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.SHADOWFORM) {
+
+			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.SHADOWFORM &&  !(monde.getPerso().getAnimal() != null && monde.getPerso().getAnimal().equals(monde.getAnime().get(i)) )) {
 				
 					monde.getAnime().get(i).setTamer(lanceur);
 				
@@ -131,7 +129,7 @@ public class ControlerProjectiles {
 		i=0;
 		while (i< collision.size && ok){
 			if (collision.get(i) != null) {
-				if(persoRect.overlaps(collision.get(i)) || !gererCollisionAnimaux(p.getCadre())){
+				if(persoRect.overlaps(collision.get(i))){// !gererCollisionAnimaux(p.getCadre())){
 					p.getRapidite().x = 0;
 					p.getRapidite().y = 0;
 					p.devientObsolete();System.out.println("[DEBUG1] Shadow Taming");
