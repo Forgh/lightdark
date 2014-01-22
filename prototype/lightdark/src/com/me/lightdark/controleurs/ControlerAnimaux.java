@@ -196,7 +196,7 @@ public class ControlerAnimaux {
                 float min = angle - 45;
                 float max = angle + 45;
                 System.out.println(angle);
-                if (angle_J > min && angle_J <max){
+                if( angle_J>min && angle_J<max && (a.champDegage(this.monde.getPerso().getPosition()))){
                 	System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
                 	this.suivreJoueur(a);
                 }
