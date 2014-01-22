@@ -9,6 +9,7 @@ import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Anime;
 import com.me.lightdark.modeles.Anime.AnimeType;
 import com.me.lightdark.modeles.Case;
+import com.me.lightdark.modeles.CompetenceAnimaux;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Monde;
@@ -111,6 +112,8 @@ public class ControlerProjectiles {
 	                lanceur.getPosition().x = monde.getAnime().get(i).getCadre().x;
 	                lanceur.getPosition().y = monde.getAnime().get(i).getCadre().y;
 	                lanceur.changerEtat(Dark.TAMING);
+	                //ici test d'une compétence
+	                monde.getAnime().get(i).demarrerCompetence(CompetenceAnimaux.COURRIR);
 					System.out.println("[DEBUG] Shadow Taming");
 					ok=false;
 				}
@@ -153,6 +156,7 @@ public class ControlerProjectiles {
 				lanceur.changerEtat(Dark.SHADOWWALKING);
 				if(lanceur.getEtat()==Dark.TAMING && lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
 					lanceur.getAnimal().setTaming(false);
+					lanceur.getAnimal().stoperCompetence(CompetenceAnimaux.COURRIR);
 					lanceur.setPosition(monde.getNiveau().getCloseShadow(lanceur.getPosition()));
 					System.out.println("[DEBUG] Position joueur : "+lanceur.getPosition().toString()+"\n        Position ombre : "+monde.getNiveau().getCloseShadow(lanceur.getPosition()));
 				}

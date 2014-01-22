@@ -141,6 +141,9 @@ public abstract class Anime {
 		
 		public abstract void setTaming(boolean t);
 
+		public void demarrerCompetence(CompetenceAnimaux ca){
+			//ici rien
+		}
 
 		public abstract void setTamer(Perso p);
 }

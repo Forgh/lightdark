@@ -7,8 +7,8 @@ public class Perso {
 	
 	public interface Etat{} // ici polymorphisme pour light/shadow
 
-	
-	public static final float VITESSE = 4f;	// vitesse par unite de temps sur une unite d'espace
+	public static final float VITESSE_DEF = 4f;
+	public static float VITESSE = 4f;	// vitesse par unite de temps sur une unite d'espace
 	public static final float TAILLE = 0.5f; // une demi unite
 	public static final int max_health = 75;
 	
@@ -69,6 +69,13 @@ public class Perso {
 		return this.etat;
 	}
 	
+	public void setVitesse(float f){
+		this.VITESSE = f;
+	}
+	
+	public void resetVitesse(){
+		this.VITESSE = this.VITESSE_DEF;
+	}
 	public <E> void changerEtat(Enum<?> e){
 		this.etat = e;
 	}
