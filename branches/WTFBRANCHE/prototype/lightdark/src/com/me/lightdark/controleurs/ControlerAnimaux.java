@@ -185,13 +185,13 @@ public class ControlerAnimaux {
 		}
 	}
 	
-	public float angleSurRefV1(Vector2 v1, Vector2 v2){ // calcul d'un angle sur le référenciel de v1
+	public float angleSurRefV1(Vector2 a, Vector2 b){ // calcul d'un angle sur le référenciel de v1
 		Vector2 zero = new Vector2(0f,0f);
-		float a = v1.dst(v2);
-		float b = v1.dst(zero);
+		float ab_hori = a.x - b.x;
+		float bh_vert = b.y - a.y;
+		float ab_hyp = a.dst(b);
 		
-		float tan_x = a / b;
-		return (float) Math.atan(tan_x);
+		return (float) Math.asin(ab_hori / ab_hyp );
 	}
 	
 	public void detecterJoueur2(Monstre a){
@@ -201,10 +201,20 @@ public class ControlerAnimaux {
         if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING){
             if (this.monde.getPerso().getPosition().dst(a.getPosition()) < a.DISTANCE_VUE){
                
-                float angle_J = (float) (Math.toDegrees(angleSurRefV1(a.getPosition(), this.monde.getPerso().getPosition())));
+                float a1 = (float) Math.toDegrees(angleSurRefV1(a.getPosition(), this.monde.getPerso().getPosition()));
                 
-                System.out.println(((angle_J>-45 && angle_J<45) ? "VU " : "PAS VU ") + " => " + angle_J);
-                if( angle_J>-45 && angle_J<45 && (a.champDegage(this.monde.getPerso().getPosition()))){
+                float a2;
+                if (!a.getRapidite().equals(Vector2.Zero)){
+                	a2 = (float) Math.toDegrees(angleSurRefV1(a.getPosition(), a.getPosition().cpy().add(a.getRapidite())));
+                }else{
+                	a2 = (float) Math.toDegrees(angleSurRefV1(a.getPosition(), a.getPosition()));
+                }
+                
+                
+                float dec = Math.abs(a1 - a2);
+                System.out.println(((dec>-45 && dec<45) ? "VU " : "PAS VU ") + " => " + dec );
+                //System.out.println(dec + " => "+ a1 + " : " + a2 );
+                if( dec>-45 && dec<45 && (a.champDegage(this.monde.getPerso().getPosition()))){
                 	//System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
                 	
                 	/*Vector2 v = new Vector2(this.monde.getPerso().getPosition());
