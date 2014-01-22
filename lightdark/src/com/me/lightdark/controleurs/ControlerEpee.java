@@ -95,6 +95,8 @@ public class ControlerEpee {
 		while(i< monde.getAnime().size && ok){
 			if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
 				((Monstre) monde.getAnime().get(i)).recevoirCoup(lanceur.puissanceMini());
+				System.out.println("[DEBUG] Degat epee");
+
 				//System.out.println(">>>>>>>>>>>> ok");
 				p.devientObsolete();
 				//on remet en shadowwalking si jamais on touche la case désirée 
