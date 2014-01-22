@@ -39,11 +39,11 @@ public class Monstre extends Anime{
 	public boolean champDegage(Vector2 cible){
 		
 		float precision = 50f;//précision avec laquelle on vérifie le vecteur mob-player
-		Vector2 trace = new Vector2((cible.cpy().sub(super.getPosition())).div(precision));//Le vecteur mob-->cible au centième
+		Vector2 trace = new Vector2((cible.cpy().sub(super.getPosition())).div(precision));//Le vecteur mob-->cible divisé par la précision
 		Vector2 verif = super.getPosition().cpy();
 		
 		
-		for(int i=0; i<100; i++){//tous les xièmes
+		for(int i=0; i<(int)precision; i++){//tous les xièmes
 			verif.add(trace);//on progresse de 1/x vers le joueur	
 			if(super.getNiveau().getCollision((int)verif.x, (int)verif.y)!=null)//si verif est sur une bloquante
 				return false;//alors le mob ne peut pas nous voir
