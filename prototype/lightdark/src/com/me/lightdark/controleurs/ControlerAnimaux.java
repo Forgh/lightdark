@@ -212,9 +212,8 @@ public class ControlerAnimaux {
                 
                 
                 float dec = Math.abs(a1 - a2);
-                System.out.println(((dec>-45 && dec<45) ? "VU " : "PAS VU ") + " => " + dec );
                 //System.out.println(dec + " => "+ a1 + " : " + a2 );
-                if( dec>-45 && dec<45 && (a.champDegage(this.monde.getPerso().getPosition()))){
+                if( dec<60 && (a.champDegage(this.monde.getPerso().getPosition()))){
                 	//System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
                 	
                 	/*Vector2 v = new Vector2(this.monde.getPerso().getPosition());
@@ -236,7 +235,7 @@ public class ControlerAnimaux {
 						monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
 						Timer.schedule(transform, 0.5f);
                 	}*/
-                	//this.suivreJoueur(a);
+                	this.suivreJoueur(a);
                 }
             }else{
             	this.arretSuivreJoueur(a);
