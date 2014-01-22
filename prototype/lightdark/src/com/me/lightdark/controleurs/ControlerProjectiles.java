@@ -102,11 +102,11 @@ public class ControlerProjectiles {
 		while(i< monde.getAnime().size && ok){
 
 			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.SHADOWFORM) {
-				if (monde.getPerso().getAnimal() == null || (monde.getPerso().getAnimal() != null && monde.getPerso().getAnimal().equals(monde.getAnime().get(i)) )){
+				//if (monde.getPerso().getAnimal() == null || (monde.getPerso().getAnimal() != null && monde.getPerso().getAnimal().equals(monde.getAnime().get(i)) )){
 					monde.getAnime().get(i).setTamer(lanceur);
 				
 					monde.getAnime().get(i).setTaming(true);//L'animal devient contrôlé
-					
+					lanceur.setAnimal(monde.getAnime().get(i));
 					p.devientObsolete();
 					//lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
 	                lanceur.getPosition().x = monde.getAnime().get(i).getCadre().x;
@@ -116,7 +116,7 @@ public class ControlerProjectiles {
 	                monde.getAnime().get(i).demarrerCompetence(CompetenceAnimaux.COURRIR);
 					System.out.println("[DEBUG] Shadow Taming");
 					ok=false;
-				}
+				//}
 			}else if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.LIGHTFORM && p.getLanceur()==monde.getPerso()) {
 				p.devientObsolete();System.out.println("[DEBUG0] Shadow Taming");
 				ok=false; 
@@ -148,19 +148,22 @@ public class ControlerProjectiles {
 		i=0;
 		while(i< shadowTouched.size && ok){
 			if(persoRect.overlaps(shadowTouched.get(i)) && shadowTouched.get(i).equals(p.getCaseCible().getCadre())) {
+				
+				if(lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
+					//ici test d'une compétence
+					lanceur.getAnimal().stopperCompetence(CompetenceAnimaux.COURRIR);
+					lanceur.getAnimal().setTaming(false);
+					
+					lanceur.setPosition(monde.getNiveau().getCloseShadow(lanceur.getPosition()));
+					System.out.println("[DEBUG] Position joueur : "+lanceur.getPosition().toString()+"\n        Position ombre : "+monde.getNiveau().getCloseShadow(lanceur.getPosition()));
+				}
+				//on remet en shadowwalking si jamais on touche la case désirée 
 				System.out.println(lanceur.getEtat());
 				p.devientObsolete();System.out.println("[DEBUG2] Shadow Taming");
 				lanceur.getPosition().x = (shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f));
 				lanceur.getPosition().y = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
 				//lanceur.setPosition();
 				lanceur.changerEtat(Dark.SHADOWWALKING);
-				if(lanceur.getEtat()==Dark.TAMING && lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
-					lanceur.getAnimal().setTaming(false);
-					lanceur.getAnimal().stoperCompetence(CompetenceAnimaux.COURRIR);
-					lanceur.setPosition(monde.getNiveau().getCloseShadow(lanceur.getPosition()));
-					System.out.println("[DEBUG] Position joueur : "+lanceur.getPosition().toString()+"\n        Position ombre : "+monde.getNiveau().getCloseShadow(lanceur.getPosition()));
-				}
-				//on remet en shadowwalking si jamais on touche la case désirée 
 				ok=false;
 			}
 			i++;

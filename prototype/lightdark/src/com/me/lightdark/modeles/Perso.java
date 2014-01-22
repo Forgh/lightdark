@@ -8,7 +8,7 @@ public class Perso {
 	public interface Etat{} // ici polymorphisme pour light/shadow
 
 	public static final float VITESSE_DEF = 4f;
-	public static float VITESSE = 4f;	// vitesse par unite de temps sur une unite d'espace
+	public static float VITESSE;	// vitesse par unite de temps sur une unite d'espace
 	public static final float TAILLE = 0.5f; // une demi unite
 	public static final int max_health = 75;
 	
@@ -26,7 +26,7 @@ public class Perso {
 	
 	private Enum<?> etat;
 	
-	private Animal animal = null;
+	private Anime animal = null;
 	
 	// normalement d'apres le cours on initialise dans le constructeur mais ici �a revient pareil
 	private Rectangle cadre = new Rectangle();
@@ -40,6 +40,7 @@ public class Perso {
 		this.cadre.height = TAILLE;
 		this.cadre.width = TAILLE;
 		this.health=3;
+		this.VITESSE = this.VITESSE_DEF;
 		taming_detectable = false;
 	}
 	
@@ -84,8 +85,12 @@ public class Perso {
 		return this.health;
 	}
 	
-	public Animal getAnimal(){
+	public Anime getAnimal(){
 		return animal;
+	}
+	
+	public void setAnimal(Anime anime){
+		animal = anime;
 	}
 	
 	
