@@ -83,6 +83,16 @@ public class ControlerProjectiles {
 			return false;
 	}
 	
+	
+	private boolean isShadowAndRetamable(){ // vérifie si la forme du joueur est compatible pour réapprivoiser l'animal
+		if (monde.getPerso().getForm() != null && monde.getPerso().getForm() == Form.SHADOWFORM && this.monde.getPerso().getEtat() != null &&this.monde.getPerso().getEtat().getClass().equals(Dark.class) ){
+			Dark f = ((Dark) this.monde.getPerso().getEtat());
+			return f == Dark.TAMING;
+		}else{
+			return false;
+		}
+	}
+	
 	public void gererCollision(Projectile p, float delta){
 		p.getRapidite().scl(delta); // on travail au ralenti
 		
@@ -99,10 +109,17 @@ public class ControlerProjectiles {
 
 		int i = 0;
 		while(i< monde.getAnime().size && ok){
-			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.SHADOWFORM) {
-				monde.getAnime().get(i).setTamer(lanceur);
-				monde.getAnime().get(i).setTaming(true);//L'animal devient contrôlé
+			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && ((monde.getPerso().getForm()==Form.SHADOWFORM) || isShadowAndRetamable())) {
 				
+				if ((monde.getPerso().getAnimal() != null && monde.getPerso().getAnimal().equals(monde.getAnime().get(i)))){ // il existe déjà un animal
+					//monde.getAnime().get(i).setTaming(false);
+				}else{
+					monde.getAnime().get(i).setTamer(lanceur);
+					monde.getAnime().get(i).setTaming(true);//L'animal devient contrôlé
+					
+				}
+				lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
+
 				p.devientObsolete();
 				lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
 				lanceur.changerEtat(Dark.TAMING);
