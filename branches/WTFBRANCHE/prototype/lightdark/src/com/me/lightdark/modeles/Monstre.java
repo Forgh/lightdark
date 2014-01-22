@@ -9,6 +9,7 @@ public class Monstre extends Anime{
 	public final float DISTANCE_VUE = 5f;
 	public final float DISTANCE_TIR = 20f;
 	
+	private Vector2 direction_de_base;
 	
 	private int puissance_tir = 20;
 	private int vie;
@@ -16,6 +17,7 @@ public class Monstre extends Anime{
 	public Monstre(Vector2 position, Niveau niveau) {
 		super(position, niveau);
 		this.vie = this.VIE_MAX;
+		direction_de_base = new Vector2(0f,0f);// Vector2.Zero;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -32,6 +34,13 @@ public class Monstre extends Anime{
 		return this.vie<=0;
 	}
 	
+	public Vector2 getDirectionBase(){
+		return direction_de_base;
+	}
+	
+	public void setDirectionBase(Vector2 v){
+		direction_de_base = v;
+	}
 	/*@return true si rien ne bloque le champ de vision entre le monstre et la position donnée, false sinon
 	 * @param Vector2 cible, la position de la cible a regarder
 	 * Need : avoir vérifié avant que le joueur n'étais pas à portée (plus économe)

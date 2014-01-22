@@ -185,7 +185,7 @@ public class ControlerAnimaux {
 		}
 	}
 	
-	public float angleSurRefV1(Vector2 a, Vector2 b){ // calcul d'un angle sur le référenciel de v1
+	public float angleSurRefV1(Vector2 a, Vector2 b){ // calcul d'un angle sur le référenciel du vecteur a
 		Vector2 zero = new Vector2(0f,0f);
 		float ab_hori = a.x - b.x;
 		float bh_vert = b.y - a.y;
@@ -207,12 +207,12 @@ public class ControlerAnimaux {
                 if (!a.getRapidite().equals(Vector2.Zero)){
                 	a2 = (float) Math.toDegrees(angleSurRefV1(a.getPosition(), a.getPosition().cpy().add(a.getRapidite())));
                 }else{
-                	a2 = (float) Math.toDegrees(angleSurRefV1(a.getPosition(), a.getPosition()));
+                	a2 = (float) Math.toDegrees(angleSurRefV1(a.getPosition(), a.getDirectionBase()));
                 }
                 
                 
                 float dec = Math.abs(a1 - a2);
-                //System.out.println(dec + " => "+ a1 + " : " + a2 );
+                System.out.println((dec<60 ? " VU" : "PAS VU" )+ " => "+ a1 + " : " + a2 );
                 if( dec<60 && (a.champDegage(this.monde.getPerso().getPosition()))){
                 	//System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
                 	
@@ -235,7 +235,7 @@ public class ControlerAnimaux {
 						monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
 						Timer.schedule(transform, 0.5f);
                 	}*/
-                	this.suivreJoueur(a);
+                	//this.suivreJoueur(a);
                 }
             }else{
             	this.arretSuivreJoueur(a);
