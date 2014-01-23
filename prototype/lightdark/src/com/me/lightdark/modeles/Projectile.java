@@ -50,7 +50,7 @@ public class Projectile {
 
 		this.obsolete = false;
 		
-		this.position.add((lanceur.TAILLE / 2) - (this.TAILLE/2), (lanceur.TAILLE / 2) - (this.TAILLE/2));
+		//this.position.add((lanceur.TAILLE / 2) - (this.TAILLE/2), (lanceur.TAILLE / 2) - (this.TAILLE/2));//obsolète si lanceur==null
 	}
 	
 	

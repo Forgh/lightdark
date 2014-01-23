@@ -86,15 +86,16 @@ public class Monde {
 	}
 	
 	
-	public void lancerProjectileParMonstre(Vector2 monstre, Vector2 vect, Vector2 cible){
+	public void lancerProjectileParMonstre(Vector2 monstre, Vector2 cible){
 		//if(perso.getEtat()!=Dark.GRABBING)
-			Projectile v = new Projectile((new Vector2(monstre)),vect);
-			fleches.add(v);
-			System.out.println("[DEBUG] ajout d'une flèche");
-			Case c = this.niveau.get((int) cible.x, (int) cible.y);
-			if (c != null){
-				v.setCaseCible(c); // on ajoute les coord. de la cible
-			}
+		System.out.println("----------\nTIR :\nMonstre : "+monstre.toString()+"\nCible : "+cible.toString());
+		Projectile v = new Projectile((new Vector2(monstre)),cible.cpy().sub(monstre));//départ projectile puis direction
+		fleches.add(v);
+		System.out.println("[DEBUG] ajout d'une flèche");
+		Case c = this.niveau.get((int) cible.x, (int) cible.y);
+		if (c != null){
+			v.setCaseCible(c); // on ajoute les coord. de la cible
+		}
 			
 	}
 	public void frapperEpee(Vector2 vect, Vector2 cible){
