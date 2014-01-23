@@ -186,9 +186,7 @@ public class ControlerAnimaux {
 	}
 	
 	public float angleSurRefV1(Vector2 a, Vector2 b){ // calcul d'un angle sur le référenciel du vecteur a
-		Vector2 zero = new Vector2(0f,0f);
 		float ab_hori = a.x - b.x;
-		float bh_vert = b.y - a.y;
 		float ab_hyp = a.dst(b);
 		
 		return (float) Math.asin(ab_hori / ab_hyp );
@@ -216,7 +214,7 @@ public class ControlerAnimaux {
                 if( dec<60 && (a.champDegage(this.monde.getPerso().getPosition()))){
                 	//System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
                 	
-                	/*Vector2 v = new Vector2(this.monde.getPerso().getPosition());
+                	Vector2 v = new Vector2(this.monde.getPerso().getPosition());
                 	if (v.dst(a.getPosition()) < a.DISTANCE_TIR && tirer.get(a) == null){
 						System.out.println(">>> tir");
 						Timer.Task transform = new Timer.Task()
@@ -233,9 +231,10 @@ public class ControlerAnimaux {
 						d.x = (float) Math.cos(x);
 						d.y = (float) Math.sin(x);
 						monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
+						System.out.println("[DEBUG] Fleche lancee !!");
 						Timer.schedule(transform, 0.5f);
-                	}*/
-                	//this.suivreJoueur(a);
+                	}
+                	this.suivreJoueur(a);
                 }
             }else{
             	this.arretSuivreJoueur(a);

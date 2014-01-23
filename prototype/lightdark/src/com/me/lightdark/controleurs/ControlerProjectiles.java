@@ -63,6 +63,7 @@ public class ControlerProjectiles {
 		}
 		for (int i =0 ; i< this.fleches.size;i++){
 			this.fleches.get(i).update(delta);
+			System.out.println("[DEBUG] Fleche UPDATED !! " + i);
 		}
 		gererObsoletes();
 	}
