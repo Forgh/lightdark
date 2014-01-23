@@ -14,6 +14,7 @@ import com.me.lightdark.controleurs.ControlerEpee;
 import com.me.lightdark.controleurs.ControlerMenu;
 import com.me.lightdark.controleurs.ControlerPerso;
 import com.me.lightdark.controleurs.ControlerProjectiles;
+import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.vues.AfficherMonde;
 import com.me.lightdark.vues.AfficherSideMenu;
@@ -101,7 +102,12 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		if(screenX<=800){
 			
 			if (Input.Buttons.LEFT == button){
-				control.feuPresse(screenX, screenY, 866, this.height);
+				if (this.monde.getPerso().getEtat() == Dark.TAMING){
+					control.competencePresse(screenX, screenY, 866, this.height);
+				}else{
+					control.feuPresse(screenX, screenY, 866, this.height);
+				}
+				
 			}
 			if (Input.Buttons.RIGHT == button){
 				control.sourisDroitPresse(screenX, screenY, 866, this.height);
@@ -127,9 +133,16 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		
 		if(screenX<=800){
 			if (Input.Buttons.LEFT == button){
-				System.out.println("Appui chargé : "+wasCharged);
-				control.feuRelache(screenX, screenY, wasCharged);
-				charged = false;//
+				
+				
+				if (this.monde.getPerso().getEtat() == Dark.TAMING){
+					control.competenceRelache(screenX, screenY, wasCharged);
+					charged = false;//
+				}else{
+					System.out.println("Appui chargé : "+wasCharged);
+					control.feuRelache(screenX, screenY, wasCharged);
+					charged = false;//
+				}
 			}
 		}
 		return true;
