@@ -29,7 +29,7 @@ public class ControlerAnimaux {
 	//private Map<Anime, Timer.Task> tirer = new HashMap<Anime, Timer.Task>();
 	//private boolean charged = false; //tir chargé
 
-	Timer.Task transform = new Timer.Task()
+	Timer.Task monsterReload = new Timer.Task()
 	{
 	    @Override
 	    public void run() {
@@ -222,7 +222,7 @@ public class ControlerAnimaux {
                 if( dec<60 && (a.champDegage(this.monde.getPerso().getPosition()))){//si joueur dans l'angle de vision et le champ est libre
                 	
                 	Vector2 posJoueur = new Vector2(this.monde.getPerso().getPosition());
-                	if (posJoueur.dst(a.getPosition()) < a.DISTANCE_TIR && !transform.isScheduled()){
+                	if (posJoueur.dst(a.getPosition()) < a.DISTANCE_TIR && !monsterReload.isScheduled()){
 						System.out.println(">>> tir");
 						/*
 						tirer.put(a,transform );*/
@@ -233,7 +233,7 @@ public class ControlerAnimaux {
 						d.y = (float) Math.sin(x);*/
 						monde.lancerProjectileParMonstre(a.getPosition(), posJoueur);
 						System.out.println("[DEBUG] Fleche lancee !!");
-						Timer.schedule(transform, 0.5f);
+						Timer.schedule(monsterReload, 0.5f);
                 	}
                 	this.suivreJoueur(a);
                 }

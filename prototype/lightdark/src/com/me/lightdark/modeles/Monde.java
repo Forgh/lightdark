@@ -88,7 +88,7 @@ public class Monde {
 	
 	public void lancerProjectileParMonstre(Vector2 monstre, Vector2 cible){
 		//if(perso.getEtat()!=Dark.GRABBING)
-		System.out.println("----------\nTIR :\nMonstre : "+monstre.toString()+"\nCible : "+cible.toString());
+		
 		Projectile v = new Projectile((new Vector2(monstre)),cible.cpy().sub(monstre));//départ projectile puis direction
 		fleches.add(v);
 		System.out.println("[DEBUG] ajout d'une flèche");
