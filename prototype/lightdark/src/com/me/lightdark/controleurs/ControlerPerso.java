@@ -2,10 +2,12 @@ package com.me.lightdark.controleurs;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import com.me.lightdark.modeles.Case;
 //import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
@@ -19,6 +21,7 @@ public class ControlerPerso {
 	private Monde monde;
 	private Perso perso;
 	private Array<Rectangle> collision;
+	private Array<Case> arrives;
 	
 	Vector2 directionTir;
 	Vector2 cibleTir;
@@ -50,6 +53,7 @@ public class ControlerPerso {
 		this.monde = monde;
 		this.perso = monde.getPerso();
 		this.collision = new Array<Rectangle>();
+		this.arrives = new Array<Case>();
 		this.directionTir = new Vector2();
 		//ici on charge la map des collisions 
 	}
@@ -80,6 +84,19 @@ public class ControlerPerso {
 	}
 		
 	}
+	
+	private void chargerArrives(){
+		arrives.clear();
+		for(int x = 0;x<=monde.getNiveau().getLargeur();x++){
+			for(int y= 0;y<=monde.getNiveau().getHauteur();y++){
+				if (monde.getNiveau().get(x, y) != null){ // (x>=dX) && (x<= fX) && (y>=dY) && (y<= fY)){
+					arrives.add(monde.getNiveau().get(x, y));
+				}
+			}
+		}
+	}
+		
+
 
 	public void gauchePresse() {
 		touches.get(touches.put(Touches.GAUCHE, true));
@@ -193,8 +210,12 @@ public class ControlerPerso {
 	}
 	
 	public void update(float delta) {
+		this.perso = monde.getPerso();
 		gererEntrees();
+		gererArrives(delta);
 		gererCollision(delta);
+		
+		
 
 		perso.update(delta);
 	}
@@ -223,6 +244,31 @@ public class ControlerPerso {
 
 		perso.getRapidite().scl(1/delta); // on restaure la vitesse
 		
+	}
+	
+	public void gererArrives(float delta){
+		perso.getRapidite().scl(delta); // on travaille au ralenti
+		
+		
+		Rectangle persoRect = rectPool.obtain();
+		persoRect.set(perso.getCadre());
+		
+		this.chargerArrives();
+		persoRect.x += perso.getRapidite().x;
+		persoRect.y += perso.getRapidite().y;
+		
+		int i = 0;
+		boolean ok = true;
+		while (i< arrives.size && ok){
+			if (arrives.get(i) != null && persoRect.overlaps(arrives.get(i).getCadre())){
+				arrives.get(i).arrive(monde);
+				System.out.println("toto" +arrives.get(i).getPosition().x + " : "+  +arrives.get(i).getPosition().y );
+				ok = false;
+			}
+			i++;
+		}
+
+		perso.getRapidite().scl(1/delta); // on restaure la vitesse
 	}
 	
 	private void gererEntrees() {
