@@ -165,6 +165,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
 		if(!affSideMenu.isPaused()){
+			
 			control.update(delta);
 			
 			tirs.update(delta);
@@ -173,6 +174,12 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		}
 		affMonde.render();
 		affSideMenu.render();
+		
+		if (monde.getNiveau().isLevelChanged() != null){
+			System.out.println(monde.getNiveau().isLevelChanged());
+			String s = new String(monde.getNiveau().isLevelChanged());
+			reload(s);
+		}
 	}
 
 	@Override
@@ -182,9 +189,8 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		this.height = height;
 	}
 
-	@Override
-	public void show() {
-		monde = new Monde();
+	public void reload(String niv){
+		monde = new Monde(niv);
 		affMonde = new AfficherMonde(monde, true);
 		affSideMenu = new AfficherSideMenu(monde);
 		control = new ControlerPerso(monde);
@@ -192,6 +198,11 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		epee = new ControlerEpee(monde, monde.getPerso());
 		animaux = new ControlerAnimaux(monde);
 		menu = new ControlerMenu(monde);
+		affMonde.setSize(width, height);
+	}
+	@Override
+	public void show() {
+		reload("demo1");
 		Gdx.input.setInputProcessor(this);
 	}
 

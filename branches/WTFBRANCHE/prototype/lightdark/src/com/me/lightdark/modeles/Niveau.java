@@ -22,6 +22,8 @@ public class Niveau {
 	private Vector2 posStart;
 	private Form formStart;
 	
+	private String changeLevel;
+	
 	private Array<Anime> animals = new Array<Anime>();
 	
 	Array<Projectile> projectiles = new Array<Projectile>();
@@ -30,7 +32,7 @@ public class Niveau {
 
 	Array<Epee> sword = new Array<Epee>();
 
-	public Niveau() {
+	public Niveau(String niv) {
 		// TODO Auto-generated constructor stub
 		this.largeur = 13; this.hauteur = 13;
 		posStart = new Vector2(0f,0f);
@@ -39,9 +41,18 @@ public class Niveau {
 		ombres = new Rectangle[largeur][hauteur];
 		light = new Rectangle[largeur][hauteur];
 		
+		unloadNiveau();
+		
+		if (niv.equals("demo1")){
+			demo1();
+		}else if (niv.equals("demo2")){
+			demo2();
+		}else{
+			demo();
+		}
 	}
 	
-	public void loadStartLevel(String niv, Monde m){
+	/*public void loadStartLevel(String niv, Monde m){
 		Perso p;
 		if (niv.equals("demo1")){
 			demo1();
@@ -54,6 +65,10 @@ public class Niveau {
 		p = new Perso(this.getPosStart(), m);
 		p.setForm(this.getFormStart());
 		m.setPerso(p);
+	}*/
+	
+	public String isLevelChanged(){
+		return this.changeLevel;
 	}
 	
 	public Array<Projectile> getProjectile() {
@@ -301,8 +316,9 @@ private void demo1(){
 		
 		cases[11][1] =  new Case(new Vector2(11f,1f)){
 			public void arrive(Monde m){
-				m.getNiveau().unloadNiveau();
-				m.getNiveau().loadStartLevel("demo2", m);
+				unloadNiveau();
+				changeLevel = new String("demo2");
+				//m.getNiveau().loadStartLevel("demo2", m);
 			}
 		};
 		cases[11][1].setTypeCase(type_case_generique.TERRE);
