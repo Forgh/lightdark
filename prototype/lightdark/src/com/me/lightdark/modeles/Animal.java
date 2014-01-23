@@ -30,6 +30,14 @@ public class Animal extends Anime {
 	public boolean isTamed(){
 		return this.taming;
 	}
+	
+	private Timer.Task reinitFrame = new Timer.Task()
+	{
+	    @Override
+	    public void run() {
+	    	resetCadre();
+	    }
+	};
 
 	@Override
 	public void setTaming(boolean t) {
@@ -50,15 +58,18 @@ public class Animal extends Anime {
 		return comptanima;
 	}
 	
+	public void resetCadre(){
+		super.setCadre(super.newCadre(getPosition()));
+	}
+	
 	@Override
 	public void update(float delta) {
 		super.setTemps(super.temps()+delta);
 		
 		if(!taming){
-
-			if(super.getCadre()==null)
+			if(super.getCadre().height==0 && super.getCadre().width==0 && !reinitFrame.isScheduled())
+				Timer.schedule(reinitFrame, 0.5f);
 			
-				super.setCadre(super.newCadre(getPosition()));
 				super.setPosition(super.getPosition().add(super.getRapidite().cpy().scl(delta)));
 			
 			}
