@@ -102,11 +102,9 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		if(screenX<=800){
 			
 			if (Input.Buttons.LEFT == button){
-				if (this.monde.getPerso().getEtat() == Dark.TAMING){
-					control.competencePresse(screenX, screenY, 866, this.height);
-				}else{
-					control.feuPresse(screenX, screenY, 866, this.height);
-				}
+				
+				control.feuPresse(screenX, screenY, 866, this.height);
+			
 				
 			}
 			if (Input.Buttons.RIGHT == button){
@@ -122,7 +120,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 			menu.orbPressed();
 		}
 		
-		
+		 
 		return true;
 	}
 
@@ -133,16 +131,10 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		
 		if(screenX<=800){
 			if (Input.Buttons.LEFT == button){
+				System.out.println("Appui chargé : "+wasCharged);
+				control.feuRelache(screenX, screenY, wasCharged);
+				charged = false;//
 				
-				
-				if (this.monde.getPerso().getEtat() == Dark.TAMING){
-					control.competenceRelache(screenX, screenY, wasCharged);
-					charged = false;//
-				}else{
-					System.out.println("Appui chargé : "+wasCharged);
-					control.feuRelache(screenX, screenY, wasCharged);
-					charged = false;//
-				}
 			}
 		}
 		return true;

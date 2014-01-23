@@ -2,12 +2,10 @@ package com.me.lightdark.controleurs;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import com.me.lightdark.modeles.CompetenceAnimaux;
 //import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
@@ -33,7 +31,7 @@ public class ControlerPerso {
 	}
 	
 	enum Touches {
-		GAUCHE, DROITE, HAUT, BAS, FEU, EPEE, COMPETENCE
+		GAUCHE, DROITE, HAUT, BAS, FEU, EPEE
 	}
 	
 	static Map<Touches, Boolean> touches = new HashMap<Touches, Boolean>();
@@ -43,7 +41,6 @@ public class ControlerPerso {
 		touches.put(Touches.DROITE, false);
 		touches.put(Touches.BAS, false);
 		touches.put(Touches.FEU, false);
-		touches.put(Touches.COMPETENCE, false);
 	};
 	
 	static Touches toucheActuHoz; // ! rustine !
@@ -54,7 +51,7 @@ public class ControlerPerso {
 		this.perso = monde.getPerso();
 		this.collision = new Array<Rectangle>();
 		this.directionTir = new Vector2();
-		//ici on charge la map des collisions
+		//ici on charge la map des collisions 
 	}
 	
 	private Pool<Rectangle> rectPool = new Pool<Rectangle>() {
@@ -134,35 +131,6 @@ public class ControlerPerso {
 		cibleTir = new Vector2(posX, posY);
 	}
 	
-	public void competencePresse(int x, int y, int w, int h) {
-		touches.get(touches.put(Touches.COMPETENCE, true));
-		
-		
-		float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
-		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
-				
-		Vector2 v = new Vector2(posX, posY);
-
-		v.sub(this.perso.getPosition());
-
-		//float negX = (v.x<0f ? -1f : 1f);
-		//float negY = (v.y<0f ? -1f : 1f);
-		
-		float angle = (float) Math.atan2(v.y, v.x);
-		
-		v.x =(float)Math.cos(angle);
-		v.y =(float)Math.sin(angle);
-		
-		/*
-		 * ï¿½ verif que la precision numerique des float ne tombe pas sur 0.0 
-		 */
-		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zï¿½ro (bloquant)
-		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
-
-
-		cibleTir = new Vector2(posX, posY);
-	}
-	
 	public void sourisDroitPresse(int x, int y, int w, int h) {
 		//NB : Fusionné avec FeuPresse
 		//touches.get(touches.put(Touches.EPEE, true));
@@ -212,13 +180,6 @@ public class ControlerPerso {
 	/*@Param les coordonnées x et y et si le tir est chargé*/
 	public void feuRelache(int x, int y, boolean charged) {
 		touches.get(touches.put(Touches.FEU, false));
-		directionTir.x = 0;
-		directionTir.y = 0;
-		this.charged = charged;
-	}
-	
-	public void competenceRelache(int x, int y, boolean charged) {
-		touches.get(touches.put(Touches.COMPETENCE, false));
 		directionTir.x = 0;
 		directionTir.y = 0;
 		this.charged = charged;
@@ -318,16 +279,6 @@ public class ControlerPerso {
 			directionTir.x = 0;
 			directionTir.y = 0;
 			
-		}
-		
-		if (touches.get(Touches.COMPETENCE)){
-			if (perso.getEtat() == Dark.TAMING && perso.getAnimal() != null && charged){
-				perso.getAnimal().demarrerCompetence();
-			}else{
-				monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
-			}
-			directionTir.x = 0;
-			directionTir.y = 0;
 		}
 		
 		/*
