@@ -239,6 +239,7 @@ private void demo1(){
 		this.animals.get(0).getPath().add(new Vector2(1f,11f));
 		//this.animals.get(0).getPath().add(new Vector2(1f,3f));
 		this.animals.get(0).VITESSE = 1f;
+		((Animal) this.animals.get(0)).setCompetence(CompetenceAnimaux.CHANTER);
 		
 		this.animals.add(new Monstre(new Vector2(3f,6f), this));
 		this.animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);

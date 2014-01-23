@@ -81,9 +81,20 @@ public class Animal extends Anime {
 	public void demarrerCompetence(CompetenceAnimaux ca) {
 		// TODO Auto-generated method stub
 		super.demarrerCompetence(comptanima);
+		boolean actionTimed = false;
 		
 		if (comptanima == CompetenceAnimaux.COURRIR){
-			tamer.setVitesse(tamer.VITESSE * 2);
+			tamer.setVitesse(tamer.VITESSE * 4);
+			actionTimed = true;
+			
+			
+		}else if (comptanima == CompetenceAnimaux.CHANTER){
+			tamer.setTamingDetectable(true);
+			actionTimed = true;
+		}
+		
+		
+		if (actionTimed){
 			Timer.Task fin = new Timer.Task() {
 
 				@Override
@@ -108,6 +119,8 @@ public class Animal extends Anime {
 		
 		if (ca == CompetenceAnimaux.COURRIR){
 			tamer.resetVitesse();
+		}else if (comptanima == CompetenceAnimaux.CHANTER){
+			tamer.setTamingDetectable(false);
 		}
 	}
 }
