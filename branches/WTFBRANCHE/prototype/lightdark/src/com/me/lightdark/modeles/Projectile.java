@@ -48,7 +48,7 @@ public class Projectile {
 		this.cadre.width = TAILLE;
 		cadre.setPosition(this.position);
 
-		this.obsolete = false;
+		this.obsolete = false; 
 		
 		//this.position.add((lanceur.TAILLE / 2) - (this.TAILLE/2), (lanceur.TAILLE / 2) - (this.TAILLE/2));//obsolète si lanceur==null
 	}

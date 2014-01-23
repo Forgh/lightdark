@@ -29,7 +29,7 @@ public class ControlerAnimaux {
 	//private Map<Anime, Timer.Task> tirer = new HashMap<Anime, Timer.Task>();
 	//private boolean charged = false; //tir chargé
 
-	Timer.Task transform = new Timer.Task()
+	Timer.Task monsterReload = new Timer.Task()
 	{
 	    @Override
 	    public void run() {
@@ -204,7 +204,7 @@ public class ControlerAnimaux {
         
         
         
-        if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING || (this.monde.getPerso().isTamingDetectable() && this.monde.getPerso().getEtat()==Dark.TAMING)){
+        if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING){
             if (this.monde.getPerso().getPosition().dst(a.getPosition()) < a.DISTANCE_VUE){
                
                 float a1 = (float) Math.toDegrees(angleSurRefV1(a.getPosition(), this.monde.getPerso().getPosition()));
@@ -223,17 +223,17 @@ public class ControlerAnimaux {
                 	//System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
                 	
                 	Vector2 v = new Vector2(this.monde.getPerso().getPosition());
-                	if (v.dst(a.getPosition()) < a.DISTANCE_TIR && !transform.isScheduled()){
+                	if (v.dst(a.getPosition()) < a.DISTANCE_TIR && !monsterReload.isScheduled()){
 						System.out.println(">>> tir");
 						/*
 						tirer.put(a,transform );*/
 						Vector2 d = new Vector2();
 						float x = a.getPosition().angle() +angleSurRefV1(a.getPosition(), this.monde.getPerso().getPosition());
 						d.x = (float) Math.cos(x);
-						d.y = (float) Math.sin(x);
-						monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
+						d.y = (float) Math.sin(x); 
+						monde.lancerProjectileParMonstre(a.getPosition().cpy(),this.monde.getPerso().getPosition().cpy() );
 						System.out.println("[DEBUG] Fleche lancee !!");
-						Timer.schedule(transform, 0.5f);
+						Timer.schedule(monsterReload, 0.5f);
                 	}
                 	this.suivreJoueur(a);
                 }
