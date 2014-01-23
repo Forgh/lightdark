@@ -109,9 +109,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 			
 				
 			}
-			if (Input.Buttons.RIGHT == button){
-				control.sourisDroitPresse(screenX, screenY, 866, this.height);
-			}
+			
 		}else if(Input.Buttons.LEFT == button && menu.isPausePressed(screenX, screenY)){
 			if(!affSideMenu.isPaused())
 				affSideMenu.showPauseFrame();
