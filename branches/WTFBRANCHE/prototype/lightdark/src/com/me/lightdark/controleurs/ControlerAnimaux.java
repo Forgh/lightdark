@@ -205,7 +205,7 @@ public class ControlerAnimaux {
         
         
         if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING){
-            if (this.monde.getPerso().getPosition().dst(a.getPosition()) < a.DISTANCE_VUE){
+            if (this.monde.getPerso().getPosition().dst(a.getPosition()) < a.DISTANCE_VUE){//si joueur à portée de vue
                
                 float a1 = (float) Math.toDegrees(angleSurRefV1(a.getPosition(), this.monde.getPerso().getPosition()));
                 
@@ -218,21 +218,20 @@ public class ControlerAnimaux {
                 
                 
                 float dec = Math.abs(a1 - a2);
-                System.out.println((dec<60 ? " VU" : "PAS VU" )+ " => "+ a1 + " : " + a2 );
-                if( dec<60 && (a.champDegage(this.monde.getPerso().getPosition()))){
-                	//System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
+                //System.out.println((dec<60 ? " VU" : "PAS VU" )+ " => "+ a1 + " : " + a2 );
+                if( dec<60 && (a.champDegage(this.monde.getPerso().getPosition()))){//si joueur dans l'angle de vision et le champ est libre
                 	
-                	Vector2 v = new Vector2(this.monde.getPerso().getPosition());
-                	if (v.dst(a.getPosition()) < a.DISTANCE_TIR && !transform.isScheduled()){
+                	Vector2 posJoueur = new Vector2(this.monde.getPerso().getPosition());
+                	if (posJoueur.dst(a.getPosition()) < a.DISTANCE_TIR && !transform.isScheduled()){
 						System.out.println(">>> tir");
 						/*
 						tirer.put(a,transform );*/
-						Vector2 d = new Vector2(this.monde.getPerso().getPosition());
-						d.sub(a.getPosition());
-						float x = v.angle();
+						/*Vector2 d = new Vector2(this.monde.getPerso().getPosition());
+						d.sub(a.getPosition());//bug : donnera la direction, pas la position de la cible
+						float x = posJoueur.angle();
 						d.x = (float) Math.cos(x);
-						d.y = (float) Math.sin(x);
-						monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
+						d.y = (float) Math.sin(x);*/
+						monde.lancerProjectileParMonstre(a.getPosition(), posJoueur);
 						System.out.println("[DEBUG] Fleche lancee !!");
 						Timer.schedule(transform, 0.5f);
                 	}
