@@ -272,8 +272,10 @@ public class ControlerPerso {
 				perso.changerEtat(Dark.GRABBING);
 			}
 			
+			
 			if(perso.getForm()==Form.SHADOWFORM || charged)
 			monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
+			
 			else monde.frapperEpee(new Vector2(directionTir), new Vector2(cibleTir));
 			
 			directionTir.x = 0;
