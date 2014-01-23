@@ -77,6 +77,10 @@ public class Case {
 	public boolean getOmbre(){
 		return this.ombre;
 	}
+	
+	public void action(CompetenceAnimaux ca, Monde m){
+		// ici gerer la capacité
+	}
 	/*
 	public ? getType(){
 		return "";

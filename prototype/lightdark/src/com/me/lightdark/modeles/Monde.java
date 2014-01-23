@@ -16,6 +16,7 @@ public class Monde {
 	
 	Array<Projectile> projectiles = new Array<Projectile>();
 	Array<Projectile> fleches = new Array<Projectile>();
+	Array<Objet> objets = new Array<Objet>();
 
 	Array<Epee> sword = new Array<Epee>();
 
@@ -30,6 +31,10 @@ public class Monde {
 	
 	public Array<Projectile> getFleche() {
 		return fleches;
+	} 
+	
+	public Array<Objet> getObjet() {
+		return objets;
 	} 
 	
 	public Array<Anime> getAnime() {
@@ -54,7 +59,7 @@ public class Monde {
 		
 		this.niveau = new Niveau();
 		
-		this.perso = new Perso(niveau.getPosStart());
+		this.perso = new Perso(niveau.getPosStart(), this);
 		perso.setForm(niveau.getFormStart());
 		
 		this.perso.setTamingDetectable(false);
@@ -152,6 +157,10 @@ public class Monde {
 		}
 		
 		return cases;
+	}
+	
+	public void addObjet(Objet o){
+		this.objets.add(o);
 	}
 
 	public Button getPause() { 

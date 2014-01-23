@@ -102,7 +102,13 @@ public class Animal extends Anime {
 		}else if (comptanima == CompetenceAnimaux.CHANTER){
 			tamer.setTamingDetectable(true);
 			actionTimed = true;
+			
+		}else if (comptanima == CompetenceAnimaux.BRULER){
+			tamer.setTamingDetectable(true);
+			actionTimed = true;
 		}
+		
+		
 		
 		
 		if (actionTimed){
@@ -132,6 +138,9 @@ public class Animal extends Anime {
 			tamer.resetVitesse();
 		}else if (comptanima == CompetenceAnimaux.CHANTER){
 			tamer.setTamingDetectable(false);
+		}else if (comptanima == CompetenceAnimaux.BRULER){
+			Case c = tamer.getMonde().getNiveau().get((int)super.getPosition().x, (int)super.getPosition().y);
+			c.action(ca, tamer.getMonde());
 		}
 	}
 }
