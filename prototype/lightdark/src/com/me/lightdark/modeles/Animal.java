@@ -12,18 +12,15 @@ public class Animal extends Anime {
 	
 	private Perso tamer;//le controleur (=null)
 	
-	private Timer.Task redimensionner = new Timer.Task()//action à la fin du timer
-	{
-	    @Override
-	    public void run() {
-	    	reinitCadre();
-	    }
-	};
+	private CompetenceAnimaux comptanima;
+	
+	private Animal me;
 	
 	public Animal(Vector2 position) {
 		super(position);
 		this.taming=false;
 		tamer=null;
+		me = this;
 	}
 	
 	public AnimeType getAnimeType(){
@@ -45,9 +42,12 @@ public class Animal extends Anime {
 		tamer = p;
 	}
 	
-	public void reinitCadre(){
-		//interviens pour redonner le cadre originel après un taming
-		super.setCadre(super.newCadre(getPosition()));
+	public void setCompetence( CompetenceAnimaux ca){
+		comptanima = ca;
+	}
+	
+	public CompetenceAnimaux getCompetence(){
+		return comptanima;
 	}
 	
 	@Override
@@ -56,12 +56,9 @@ public class Animal extends Anime {
 		
 		if(!taming){
 
-			if(super.getCadre().height==0 && super.getCadre().width==0)//si cadre redimensionné
-				//TODO: attendre
-				if(!redimensionner.isScheduled())
-				Timer.schedule(redimensionner, 0.5f);
-				
+			if(super.getCadre()==null)
 			
+				super.setCadre(super.newCadre(getPosition()));
 				super.setPosition(super.getPosition().add(super.getRapidite().cpy().scl(delta)));
 			
 			}
@@ -69,7 +66,7 @@ public class Animal extends Anime {
 		
 			if(super.getCadre()!=null){
 				
-				super.setCadre(null);//taille de cadre=0
+				super.setCadre(null);
 			}
 			
 			super.setPosition(tamer.getPosition().cpy().sub(TAILLE/4, TAILLE/4));
@@ -83,11 +80,26 @@ public class Animal extends Anime {
 	@Override
 	public void demarrerCompetence(CompetenceAnimaux ca) {
 		// TODO Auto-generated method stub
-		super.demarrerCompetence(ca);
+		super.demarrerCompetence(comptanima);
 		
-		if (ca == CompetenceAnimaux.COURRIR){
+		if (comptanima == CompetenceAnimaux.COURRIR){
 			tamer.setVitesse(tamer.VITESSE * 2);
+			Timer.Task fin = new Timer.Task() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if (me != null) me.stopperCompetence(me.comptanima);
+				}
+			};
+			Timer.schedule(fin, 3f); // DUREE de l'effet
 		}
+	}
+	
+	public void demarrerCompetence() {
+		// TODO Auto-generated method stub
+		this.demarrerCompetence(this.comptanima);
+		
 	}
 
 	public void stopperCompetence(CompetenceAnimaux ca) {

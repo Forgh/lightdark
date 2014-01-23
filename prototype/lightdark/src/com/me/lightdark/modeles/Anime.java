@@ -145,6 +145,10 @@ public abstract class Anime {
 			//ici rien
 		}
 		
+		public void demarrerCompetence(){
+			//ici rien
+		}
+		
 		public void stopperCompetence(CompetenceAnimaux ca){
 			// ici rien
 		}
