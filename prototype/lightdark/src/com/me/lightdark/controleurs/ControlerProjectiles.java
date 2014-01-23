@@ -117,7 +117,7 @@ public class ControlerProjectiles {
 	                lanceur.getPosition().y = monde.getAnime().get(i).getCadre().y;
 	                lanceur.changerEtat(Dark.TAMING);
 	                //ici test d'une compétence
-	                monde.getAnime().get(i).demarrerCompetence(CompetenceAnimaux.COURRIR);
+	                monde.getAnime().get(i).demarrerCompetence();
 					System.out.println("[DEBUG] Shadow Taming");
 					ok=false;
 				//}
@@ -155,7 +155,7 @@ public class ControlerProjectiles {
 				
 				if(lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
 					//ici test d'une compétence
-					lanceur.getAnimal().stopperCompetence(CompetenceAnimaux.COURRIR);
+					//lanceur.getAnimal().stopperCompetence(CompetenceAnimaux.COURRIR);
 					lanceur.getAnimal().setTaming(false);
 					
 					lanceur.setPosition(monde.getNiveau().getCloseShadow(lanceur.getPosition()));

@@ -204,7 +204,7 @@ public class ControlerAnimaux {
         
         
         
-        if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING){
+        if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING || (this.monde.getPerso().isTamingDetectable() && this.monde.getPerso().getEtat()==Dark.TAMING)){
             if (this.monde.getPerso().getPosition().dst(a.getPosition()) < a.DISTANCE_VUE){
                
                 float a1 = (float) Math.toDegrees(angleSurRefV1(a.getPosition(), this.monde.getPerso().getPosition()));
