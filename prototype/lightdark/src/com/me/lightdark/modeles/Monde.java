@@ -58,17 +58,20 @@ public class Monde {
 		return niveau;
 	}
 
-	public Monde() {
+	public Monde(String niv) {
 		// TODO Charger une map.
 		
-		this.niveau = new Niveau();
+		this.niveau = new Niveau(niv);
 		
 		projectiles = this.niveau.getProjectile();
 		fleches = this.niveau.getFleche();
 		objets = this.niveau.getObjet();
 		sword = this.niveau.getEpee();
 		
-		niveau.loadStartLevel("demo1", this);
+		this.perso = new Perso(niveau.getPosStart(), this);
+		this.perso.setForm(niveau.getFormStart());
+		
+		//niveau.loadStartLevel("demo1", this);
 		
 		this.perso.setTamingDetectable(false);
 		
