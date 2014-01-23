@@ -98,6 +98,7 @@ public class AfficherMonde {
 		// dessiner strate 2
 		drawProjectile();
 		drawSword();
+		drawFleche();
 		// dessiner strate 3
 		drawAnimals();
 		drawPerso();
@@ -153,6 +154,13 @@ public class AfficherMonde {
 	
 	private void drawProjectile(){
 		 Array<Projectile> project = monde.getProjectile();
+		 for(int i=0;i<project.size;i++){
+			 spriteBatch.draw(this.imgProjectile, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
+		 }
+	}
+	
+	private void drawFleche(){
+		 Array<Projectile> project = monde.getFleche();
 		 for(int i=0;i<project.size;i++){
 			 spriteBatch.draw(this.imgProjectile, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
 		 }
