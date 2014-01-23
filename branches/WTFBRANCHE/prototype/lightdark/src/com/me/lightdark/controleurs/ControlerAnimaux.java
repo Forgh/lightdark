@@ -217,14 +217,14 @@ public class ControlerAnimaux {
                 	Vector2 v = new Vector2(this.monde.getPerso().getPosition());
                 	if (v.dst(a.getPosition()) < a.DISTANCE_TIR && tirer.get(a) == null){
 						System.out.println(">>> tir");
-						Timer.Task transform = new Timer.Task()
+						/*Timer.Task transform = new Timer.Task()
 						{
 						    @Override
 						    public void run() {
 						    							
 						    }
 						};
-						tirer.put(a,transform );
+						tirer.put(a,transform );*/
 						Vector2 d = new Vector2(this.monde.getPerso().getPosition());
 						d.sub(a.getPosition());
 						float x = v.angle();
@@ -232,7 +232,7 @@ public class ControlerAnimaux {
 						d.y = (float) Math.sin(x);
 						monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
 						System.out.println("[DEBUG] Fleche lancee !!");
-						Timer.schedule(transform, 0.5f);
+						//Timer.schedule(transform, 0.5f);
                 	}
                 	this.suivreJoueur(a);
                 }
