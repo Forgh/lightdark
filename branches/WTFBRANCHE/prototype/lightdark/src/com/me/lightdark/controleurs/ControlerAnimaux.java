@@ -26,8 +26,16 @@ public class ControlerAnimaux {
 	
 	private Map<Anime, Integer> reperer = new HashMap<Anime, Integer>();
 	
-	private Map<Anime, Timer.Task> tirer = new HashMap<Anime, Timer.Task>();
-	
+	//private Map<Anime, Timer.Task> tirer = new HashMap<Anime, Timer.Task>();
+	//private boolean charged = false; //tir chargé
+
+	Timer.Task transform = new Timer.Task()
+	{
+	    @Override
+	    public void run() {
+	    //	charged = true;	//Si le timer est passé, alors le clic est chargé
+	    }
+	};
 	final Vector2 vecteurNul = new Vector2(0f,0f);
 	
 	public ControlerAnimaux(Monde monde) {
@@ -215,15 +223,9 @@ public class ControlerAnimaux {
                 	//System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
                 	
                 	Vector2 v = new Vector2(this.monde.getPerso().getPosition());
-                	if (v.dst(a.getPosition()) < a.DISTANCE_TIR && tirer.get(a) == null){
+                	if (v.dst(a.getPosition()) < a.DISTANCE_TIR && !transform.isScheduled()){
 						System.out.println(">>> tir");
-						/*Timer.Task transform = new Timer.Task()
-						{
-						    @Override
-						    public void run() {
-						    							
-						    }
-						};
+						/*
 						tirer.put(a,transform );*/
 						Vector2 d = new Vector2(this.monde.getPerso().getPosition());
 						d.sub(a.getPosition());
@@ -232,7 +234,7 @@ public class ControlerAnimaux {
 						d.y = (float) Math.sin(x);
 						monde.lancerProjectileParMonstre(a.getPosition(), d, this.monde.getPerso().getPosition() );
 						System.out.println("[DEBUG] Fleche lancee !!");
-						//Timer.schedule(transform, 0.5f);
+						Timer.schedule(transform, 0.5f);
                 	}
                 	this.suivreJoueur(a);
                 }
@@ -244,7 +246,7 @@ public class ControlerAnimaux {
         }
     
     }
-	public void detecterJoueur(Monstre a){
+	/*public void detecterJoueur(Monstre a){
 		Vector2 v = new Vector2(this.monde.getPerso().getPosition());
 		if (v.dst(a.getPosition()) < a.DISTANCE_VUE){
 				if (this.monde.getPerso().getEtat() != null && 
@@ -280,7 +282,7 @@ public class ControlerAnimaux {
 		}
 		
 		System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));//[DEBUG] : test de la traque mob-->joueur
-	}
+	}*/
 	
 	public void gererParcours(Anime a){
 		
