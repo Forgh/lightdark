@@ -3,6 +3,7 @@ package com.me.lightdark.modeles;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 import com.me.lightdark.modeles.Anime.AnimeType;
 
 public class Animal extends Anime {
@@ -10,6 +11,14 @@ public class Animal extends Anime {
 	private boolean taming;
 	
 	private Perso tamer;//le controleur (=null)
+	
+	private Timer.Task redimensionner = new Timer.Task()//action à la fin du timer
+	{
+	    @Override
+	    public void run() {
+	    	reinitCadre();
+	    }
+	};
 	
 	public Animal(Vector2 position) {
 		super(position);
@@ -36,15 +45,23 @@ public class Animal extends Anime {
 		tamer = p;
 	}
 	
+	public void reinitCadre(){
+		//interviens pour redonner le cadre originel après un taming
+		super.setCadre(super.newCadre(getPosition()));
+	}
+	
 	@Override
 	public void update(float delta) {
 		super.setTemps(super.temps()+delta);
 		
 		if(!taming){
 
-			if(super.getCadre()==null)
+			if(super.getCadre().height==0 && super.getCadre().width==0)//si cadre redimensionné
+				//TODO: attendre
+				if(!redimensionner.isScheduled())
+				Timer.schedule(redimensionner, 0.5f);
+				
 			
-				super.setCadre(super.newCadre(getPosition()));
 				super.setPosition(super.getPosition().add(super.getRapidite().cpy().scl(delta)));
 			
 			}
@@ -52,7 +69,7 @@ public class Animal extends Anime {
 		
 			if(super.getCadre()!=null){
 				
-				super.setCadre(null);
+				super.setCadre(null);//taille de cadre=0
 			}
 			
 			super.setPosition(tamer.getPosition().cpy().sub(TAILLE/4, TAILLE/4));
