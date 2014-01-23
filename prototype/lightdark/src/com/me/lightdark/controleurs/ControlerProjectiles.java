@@ -62,8 +62,8 @@ public class ControlerProjectiles {
 			this.projectiles.get(i).update(delta);
 		}
 		for (int i =0 ; i< this.fleches.size;i++){
+			gererCollisionFleche(this.fleches.get(i), delta);
 			this.fleches.get(i).update(delta);
-			System.out.println("[DEBUG] Fleche UPDATED !! " + i);
 		}
 		gererObsoletes();
 	}
@@ -179,10 +179,48 @@ public class ControlerProjectiles {
 		
 	}
 	
+	public void gererCollisionFleche(Projectile p, float delta){
+		p.getRapidite().scl(delta); // on travail au ralenti
+		
+		p.getCadre().x += p.getRapidite().x;
+		p.getCadre().y += p.getRapidite().y;
+		
+		Rectangle persoRect = rectPool.obtain();
+		persoRect.set(p.getCadre());
+		
+		this.chargerCollision();
+		persoRect.x += p.getRapidite().x;
+		persoRect.y += p.getRapidite().y;
+		boolean ok = true;
+
+		int i = 0;
+		while (i< collision.size && ok){
+			if (collision.get(i) != null) {
+				if(persoRect.overlaps(collision.get(i))){
+					p.getRapidite().x = 0;
+					p.getRapidite().y = 0;
+					p.devientObsolete();
+					//On remet en shadowwalking si jamais le grappin touche un obstacle
+					ok = false;
+				}
+				
+				
+			}
+			i++;
+		}
+		p.getRapidite().scl(1/delta); // on restore la vitesse
+
+	}
+	
 	public void gererObsoletes(){
 		for (int i =0 ; i< this.projectiles.size;i++){
 			if (this.projectiles.get(i).estObsolete()){
 				this.projectiles.removeIndex(i); // on attends que le garbage collector s'en occupe
+			}
+		}
+		for (int i =0 ; i< this.fleches.size;i++){
+			if (this.fleches.get(i).estObsolete()){
+				this.fleches.removeIndex(i); // on attends que le garbage collector s'en occupe
 			}
 		}
 	}
