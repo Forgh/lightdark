@@ -154,7 +154,7 @@ public class Monde {
 		return cases;
 	}
 
-	public Button getPause() {
+	public Button getPause() { 
 		return pause;
 	}
 
