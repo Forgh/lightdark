@@ -1,6 +1,7 @@
 package com.me.lightdark.vues;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -91,6 +92,7 @@ public class AfficherMonde {
 		this.imgMonstreCube = new TextureRegion(new Texture(Gdx.files.internal("images/monstre_cube.png")));
 		
 		this.imgTorche  = new TextureRegion(new Texture(Gdx.files.internal("images/torche.png")));
+		
 		// TODO rajouter pour toutes les cases
 		 
 	}
@@ -188,5 +190,7 @@ public class AfficherMonde {
 			 spriteBatch.draw(this.imgSword, sword.get(i).getPosition().x * ppuX, sword.get(i).getPosition().y * ppuY, sword.get(i).TAILLE * ppuX, sword.get(i).TAILLE * ppuY);
 		 }
 	}
+	
+	
 
 }

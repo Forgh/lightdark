@@ -29,7 +29,9 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	private ControlerProjectiles tirs;
 	private boolean charged = false; //tir chargé
 	private ControlerEpee epee;
+	
 
+	private boolean finish;
 	private ControlerAnimaux animaux;
 	
 	private ControlerMenu menu;
@@ -164,7 +166,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-		if(!affSideMenu.isPaused()){
+		if(!affSideMenu.isPaused() && !this.finish){
 			
 			control.update(delta);
 			
@@ -176,9 +178,15 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		affSideMenu.render();
 		
 		if (monde.getNiveau().isLevelChanged() != null){
-			System.out.println(monde.getNiveau().isLevelChanged());
-			String s = new String(monde.getNiveau().isLevelChanged());
-			reload(s);
+			if (!monde.getNiveau().isLevelChanged().equals("END_GAME")){
+				System.out.println(monde.getNiveau().isLevelChanged());
+				String s = new String(monde.getNiveau().isLevelChanged());
+				reload(s);
+			}else{
+				affSideMenu.setEndMsgOn(true);
+				this.finish = true;
+				
+			}
 		}
 	}
 
@@ -202,7 +210,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	}
 	@Override
 	public void show() {
-		reload("demo1");
+		reload("demo6");
 		Gdx.input.setInputProcessor(this);
 	}
 

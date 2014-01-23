@@ -24,10 +24,14 @@ public class AfficherSideMenu {
 	private TextureRegion frameUp;
 	private SpriteBatch spriteBatch;
 	
+	private boolean end_msg_on = false;
+	private boolean win_this_game = false;
+	
 	
 	public void setSize (int w, int h) {
 		
 	}
+	
 	
 	
 	public AfficherSideMenu(Monde monde) {
@@ -48,6 +52,22 @@ public class AfficherSideMenu {
 		this.imgPause = new TextureRegion(new Texture("images/start.png"));
 		this.imgHealth = new TextureRegion(new Texture("images/hp.png"));
 		this.frameUp  = new TextureRegion(new Texture("images/frameUp.png"));
+	}
+	
+	public void setEndMsgOn(boolean win){
+		this.end_msg_on = true;
+		this.win_this_game = win;
+	}
+	
+	public void drawEndMsg(boolean win){
+		//spriteBatch.begin();
+		Color c1 = spriteBatch.getColor();
+		spriteBatch.setColor(c1.r, c1.g, c1.b, 0.9f);
+		spriteBatch.draw(this.frameUp, 25,100, 800, 600);
+		// texte de fin en fonction du score ok pas ok
+		
+		spriteBatch.setColor(c1);
+
 	}
 	
 	public void showPauseFrame(){
@@ -74,13 +94,14 @@ public class AfficherSideMenu {
 		drawPause();
 		drawHealth();
 		if (this.frameUpState ) drawFrameUpPause();
+		if (this.end_msg_on) drawEndMsg(this.win_this_game);
 		spriteBatch.end();
 	}
 
 	public void updateHealth(){
-		spriteBatch.begin();
+		//spriteBatch.begin();
 		drawHealth();
-		spriteBatch.end();
+		//spriteBatch.end();
 	}
 	
 	private void drawPause(){
