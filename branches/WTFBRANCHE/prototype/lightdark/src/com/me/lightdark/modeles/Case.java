@@ -60,7 +60,13 @@ public class Case {
 	}
 	
 	public String getTypeCase(){
-		return this.typeCase.toString();
+		String s;
+		try{
+			s = this.typeCase.toString();
+		}catch (NullPointerException npe){
+			s = new String();
+		}
+		return s;
 	}
 	
 	public void setOmbre(boolean b){
@@ -82,7 +88,7 @@ public class Case {
 		// ici gerer la capacité
 	}
 	
-	public void arrive(Monde m){
+	public void arrive(){
 
 	}
 	

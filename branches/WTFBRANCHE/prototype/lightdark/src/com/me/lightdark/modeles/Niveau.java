@@ -47,6 +47,14 @@ public class Niveau {
 			demo1();
 		}else if (niv.equals("demo2")){
 			demo2();
+		}else if (niv.equals("demo3")){
+			demo3();
+		}else if (niv.equals("demo4")){
+			demo4();
+		}else if (niv.equals("demo5")){
+			demo5();
+		}else if (niv.equals("demo6")){
+			demo6();
 		}else{
 			demo();
 		}
@@ -315,7 +323,7 @@ private void demo1(){
 		cases[11][11].setTypeCase(type_case_generique.TERRE);
 		
 		cases[11][1] =  new Case(new Vector2(11f,1f)){
-			public void arrive(Monde m){
+			public void arrive(){
 				unloadNiveau();
 				changeLevel = new String("demo2");
 				//m.getNiveau().loadStartLevel("demo2", m);
@@ -382,8 +390,19 @@ for(int j=0;j<hauteur;j++){
 //entr�e et sortie
 cases[0][hauteur-2].setTypeCase(type_case_generique.OMBRE);
 bloquantes[0][hauteur-2]=null;
+
+cases[8][hauteur-1] =  new Case(new Vector2(8f,hauteur-1)){
+	public void arrive(){
+		unloadNiveau();
+		changeLevel = new String("demo3");
+	}
+};
 cases[8][hauteur-1].setTypeCase(type_case_generique.OMBRE);
+bloquantes[8][hauteur-1]=null;
+
 bloquantes[largeur-5][hauteur-1]=null;
+
+
 
 cases[4][hauteur-2].setTypeCase(type_case_generique.OMBRE);
 bloquantes[4][hauteur-2]=null;
@@ -404,46 +423,53 @@ this.posStart = new Vector2(0f,11f);
 private void demo3(){
 	this.formStart=Form.SHADOWFORM;
 
-createGroundAndBorder();    
-
-for (int i = 4; i<6; i++){
-    for (int j= hauteur-1; j>5; j--)
-        createCaseWithShadow(i,j);
-}
-createCaseWithShadow(2,5);
-createCaseWithShadow(3,3);
-
-for (int i=6; i<11; i++)
-    createCaseWithShadow(7,i);
-
-
-for (int i = hauteur-1; i>3; i--)
-    createCaseWithShadow(largeur-2,i);
-
-createCaseWithShadow(6,hauteur-1);
-createCaseWithShadow(7,hauteur-1);
-createCaseWithShadow(9,hauteur-1);
-    
-for(int i=0;i<largeur;i++){
-    for(int j=0;j<hauteur;j++){
-        if(cases[i][j].typeCase== type_case_generique.TERRE)
-        light[i][j] = cases[i][j].getCadre();
-    }
-}
-
-//entr�e et sortie
-cases[0][hauteur-2].setTypeCase(type_case_generique.OMBRE);
-cases[8][hauteur-1].setTypeCase(type_case_generique.OMBRE);
-bloquantes[0][hauteur-2]=null;
-bloquantes[8][hauteur-1]=null;
-
-
-
-this.animals.add(new Animal(new Vector2(8f,2f)));
-this.animals.get(0).getPath().add(new Vector2(8f,2f));
-this.animals.get(0).getPath().add(new Vector2(4f,2f));
-
-this.posStart = new Vector2(0f,11f);
+	createGroundAndBorder();    
+	
+	for (int i = 4; i<6; i++){
+	    for (int j= hauteur-1; j>5; j--)
+	        createCaseWithShadow(i,j);
+	}
+	createCaseWithShadow(2,5);
+	createCaseWithShadow(3,3);
+	
+	for (int i=6; i<11; i++)
+	    createCaseWithShadow(7,i);
+	
+	
+	for (int i = hauteur-1; i>3; i--)
+	    createCaseWithShadow(largeur-2,i);
+	
+	createCaseWithShadow(6,hauteur-1);
+	createCaseWithShadow(7,hauteur-1);
+	createCaseWithShadow(9,hauteur-1);
+	    
+	for(int i=0;i<largeur;i++){
+	    for(int j=0;j<hauteur;j++){
+	        if(cases[i][j].typeCase== type_case_generique.TERRE)
+	        light[i][j] = cases[i][j].getCadre();
+	    }
+	}
+	
+	//entr�e et sortie
+	cases[0][hauteur-2].setTypeCase(type_case_generique.OMBRE);
+	cases[8][hauteur-1] =  new Case(new Vector2(8f,hauteur-1)){
+		public void arrive(){
+			unloadNiveau();
+			changeLevel = new String("demo4");
+		}
+	};
+	cases[8][hauteur-1].setTypeCase(type_case_generique.OMBRE);
+	
+	bloquantes[0][hauteur-2]=null;
+	bloquantes[8][hauteur-1]=null;
+	
+	
+	
+	this.animals.add(new Animal(new Vector2(8f,2f)));
+	this.animals.get(0).getPath().add(new Vector2(8f,2f));
+	this.animals.get(0).getPath().add(new Vector2(4f,2f));
+	
+	this.posStart = new Vector2(0f,11f);
 }
 
 
@@ -452,9 +478,7 @@ private void demo4(){
 
 	createGroundAndBorder();
 	
-	//Entr�e et sortie :
-	cases[0][hauteur-3].setTypeCase(type_case_generique.OMBRE);
-	cases[largeur-1][hauteur-3].setTypeCase(type_case_generique.OMBRE);
+	
 	
 	//Blocs de d�cor :
 	cases[1][hauteur-5].setTypeCase(type_case_generique.MONTAGNE);
@@ -511,6 +535,19 @@ private void demo4(){
 	this.animals.get(0).getPath().add(new Vector2(11f,4f));
 	
 	this.posStart = new Vector2(0f,10f);
+	
+	//Entr�e et sortie :
+		cases[0][hauteur-3].setTypeCase(type_case_generique.OMBRE);
+		bloquantes[0][hauteur-3] = null;
+		cases[largeur-1][hauteur-3] =  new Case(new Vector2(hauteur-1,hauteur-3)){
+			public void arrive(){
+				unloadNiveau();
+				changeLevel = new String("demo5");
+			}
+		};
+		cases[largeur-1][hauteur-3].setTypeCase(type_case_generique.OMBRE);
+		bloquantes[largeur-1][hauteur-3] = null;
+		
 }
 
 private void demo5(){
@@ -536,7 +573,15 @@ private void demo5(){
 	
 	//L'entr�e et la sortie :
 	cases[6][0].setTypeCase(type_case_generique.OMBRE);
+	
+	cases[6][hauteur-1] =  new Case(new Vector2(6f,hauteur-1)){
+		public void arrive(){
+			unloadNiveau();
+			changeLevel = new String("demo6");
+		}
+	};
 	cases[6][hauteur-1].setTypeCase(type_case_generique.OMBRE);
+	
 	bloquantes[6][0] = null;
 	bloquantes[6][hauteur-1] = null;
 	

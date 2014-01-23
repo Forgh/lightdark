@@ -118,14 +118,16 @@ public class AfficherMonde {
 		Array<Case> cases=  monde.getAffichable(this.width, this.height);
 		for(int i = 0; i<cases.size;i++){
 			 Case c = cases.get(i);
-			 if(c.getTypeCase().equals("TERRE")){
-				 spriteBatch.draw(this.imgSol, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-			 }
-			 else if(c.getTypeCase().equals("MONTAGNE")){
-				 spriteBatch.draw(this.imgObstacle, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-			 }
-			 else if(c.getTypeCase().equals("OMBRE")){
-				 spriteBatch.draw(this.imgOmbre, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+			 if (c.getTypeCase() != null){
+				 if(c.getTypeCase().equals("TERRE")){
+					 spriteBatch.draw(this.imgSol, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("MONTAGNE")){
+					 spriteBatch.draw(this.imgObstacle, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("OMBRE")){
+					 spriteBatch.draw(this.imgOmbre, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
 			 }
 		}
 		/*for(int i = 0; i<monde.niveau.size;i++){

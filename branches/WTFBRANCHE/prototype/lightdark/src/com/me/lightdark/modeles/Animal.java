@@ -134,13 +134,20 @@ public class Animal extends Anime {
 		// TODO Auto-generated method stub
 		super.stopperCompetence(ca);
 		
-		if (ca == CompetenceAnimaux.COURRIR){
-			tamer.resetVitesse();
-		}else if (comptanima == CompetenceAnimaux.CHANTER){
-			tamer.setTamingDetectable(false);
-		}else if (comptanima == CompetenceAnimaux.BRULER){
-			Case c = tamer.getMonde().getNiveau().get((int)super.getPosition().x, (int)super.getPosition().y);
-			c.action(ca, tamer.getMonde());
+		try{
+			if (ca == CompetenceAnimaux.COURRIR){
+				tamer.resetVitesse();
+			}else if (comptanima == CompetenceAnimaux.CHANTER){
+				tamer.setTamingDetectable(false);
+			}else if (comptanima == CompetenceAnimaux.BRULER){
+				Case c = tamer.getMonde().getNiveau().get((int)super.getPosition().x, (int)super.getPosition().y);
+				c.action(ca, tamer.getMonde());
+			}
+	}catch (NullPointerException npe){
+		
+	}finally{
+			
 		}
+		
 	}
 }

@@ -261,7 +261,7 @@ public class ControlerPerso {
 		boolean ok = true;
 		while (i< arrives.size && ok){
 			if (arrives.get(i) != null && persoRect.overlaps(arrives.get(i).getCadre())){
-				arrives.get(i).arrive(monde);
+				arrives.get(i).arrive();
 				System.out.println("toto" +arrives.get(i).getPosition().x + " : "+  +arrives.get(i).getPosition().y );
 				ok = false;
 			}
