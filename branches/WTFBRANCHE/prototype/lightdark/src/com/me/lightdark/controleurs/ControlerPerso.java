@@ -26,6 +26,7 @@ public class ControlerPerso {
 	Vector2 directionTir;
 	Vector2 cibleTir;
 	boolean charged;//Si le tir est chargé ou non
+	boolean attacking;//Si le Perso se prépare à attaquer ou non (charge un tir, arme son épée par ex.)
 	
 	enum direction  {
 		HAUT, HAUT_GAUCHE, HAUT_DROITE,
@@ -52,6 +53,7 @@ public class ControlerPerso {
 	public ControlerPerso(Monde monde) {
 		this.monde = monde;
 		this.perso = monde.getPerso();
+		this.attacking = false;
 		this.collision = new Array<Rectangle>();
 		this.arrives = new Array<Case>();
 		this.directionTir = new Vector2();
@@ -75,9 +77,8 @@ public class ControlerPerso {
 				}
 				
 				else if (perso.getForm() == Form.SHADOWFORM){
-					
 					if(monde.getNiveau().getCollisionWithLight(x, y) != null && !(perso.getEtat()==Dark.TAMING)){ //Si collision joueur-lumière (hors taming)
-					collision.add(monde.getNiveau().getCollisionWithLight(x, y));
+						collision.add(monde.getNiveau().getCollisionWithLight(x, y));
 				}
 			}
 		}
@@ -85,6 +86,7 @@ public class ControlerPerso {
 		
 	}
 	
+	/*Définis par défaut les cases qui permettent au personnage d'arriver sur un micro-monde et d'en sortir*/
 	private void chargerArrives(){
 		arrives.clear();
 		for(int x = 0;x<=monde.getNiveau().getLargeur();x++){
@@ -122,7 +124,6 @@ public class ControlerPerso {
 	public void feuPresse(int x, int y, int w, int h) {
 		touches.get(touches.put(Touches.FEU, true));
 		
-		
 		float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
 		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
 				
@@ -130,8 +131,6 @@ public class ControlerPerso {
 
 		v.sub(this.perso.getPosition());
 
-		//float negX = (v.x<0f ? -1f : 1f);
-		//float negY = (v.y<0f ? -1f : 1f);
 		
 		float angle = (float) Math.atan2(v.y, v.x);
 		
@@ -148,35 +147,7 @@ public class ControlerPerso {
 		cibleTir = new Vector2(posX, posY);
 	}
 	
-	public void sourisDroitPresse(int x, int y, int w, int h) {
-		//NB : Fusionné avec FeuPresse
-		//touches.get(touches.put(Touches.EPEE, true));
-		
-		
-		/*float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
-		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
-		
-		Vector2 v = new Vector2(posX, posY);
-		
-		v.sub(this.perso.getPosition());
-
-		float negX = (v.x<0f ? -1f : 1f);
-		float negY = (v.y<0f ? -1f : 1f);
-		
-		float angle = (float) v.angle(); //Math.atan2(v.y, v.x);
-		
-		v.x =(float)Math.cos(angle);
-		v.y =(float)Math.sin(angle);
-		
-		
-		 // ï¿½ verif que la precision numerique des float ne tombe pas sur 0.0 
-		 
-		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zï¿½ro (bloquant)
-		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
-
-		cibleTir = new Vector2(posX, posY);
-		*/
-	}
+	
 	
 	public void gaucheRelache() {
 		touches.get(touches.put(Touches.GAUCHE, false));
@@ -196,27 +167,18 @@ public class ControlerPerso {
 	
 	/*@Param les coordonnées x et y et si le tir est chargé*/
 	public void feuRelache(int x, int y, boolean charged) {
+		this.charged=charged;
 		touches.get(touches.put(Touches.FEU, false));
-		directionTir.x = 0;
-		directionTir.y = 0;
-		this.charged = charged;
+		
 	}
 	
 	
-	
-	public void sourisDroitRelache (int x, int y){
-		touches.get(touches.put(Touches.EPEE, false));
-	
-	}
 	
 	public void update(float delta) {
 		this.perso = monde.getPerso();
 		gererEntrees();
 		gererArrives(delta);
 		gererCollision(delta);
-		
-		
-
 		perso.update(delta);
 	}
 	
@@ -262,7 +224,7 @@ public class ControlerPerso {
 		while (i< arrives.size && ok){
 			if (arrives.get(i) != null && persoRect.overlaps(arrives.get(i).getCadre())){
 				arrives.get(i).arrive();
-				System.out.println("toto" +arrives.get(i).getPosition().x + " : "+  +arrives.get(i).getPosition().y );
+				//System.out.println("toto" +arrives.get(i).getPosition().x + " : "+  +arrives.get(i).getPosition().y );
 				ok = false;
 			}
 			i++;
@@ -312,44 +274,38 @@ public class ControlerPerso {
 		}
 		
 		if (touches.get(Touches.FEU) && directionTir.x !=0 && directionTir.y !=0 && perso.getEtat()!=Dark.GRABBING){
-			/*Gestion des attaques*/
+			//si on appuie sur la touche de feu, que la direction du tir est correcte et que le Shadow-player ne tire pas déjà
+			attacking = true;
+		}
+		
+		if(!touches.get(Touches.FEU) && attacking){
+			//Si la touche de feu est relâchée après un appui dans le but d'effectuer une attaque
+			attacking = false;//reset pour le prochain appui
 			
-			if(perso.getForm()==Form.SHADOWFORM) {
+			
+			if(perso.getForm()==Form.SHADOWFORM && !charged) {//Si en shadowForm en tir non chargé
 				perso.changerEtat(Dark.GRABBING);
+				monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
+				System.out.println("[DEBUG] La shadowForm lance un tir non chargé");
+			}
+			
+			if(perso.getForm()==Form.SHADOWFORM && charged) {//Si en shadowForm en tir chargé
+				System.out.println("[DEBUG] La shadowForm lance un tir chargé (ControlerPerso)");
 			}
 			
 			
-			if(perso.getForm()==Form.SHADOWFORM || charged)
-			monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
+			if(perso.getForm()==Form.LIGHTFORM && !charged)//Si en LightForm en tir non chargé
+				monde.frapperEpee(new Vector2(directionTir), new Vector2(cibleTir));
 			
-			else monde.frapperEpee(new Vector2(directionTir), new Vector2(cibleTir));
+			if(perso.getForm()==Form.LIGHTFORM && charged)//Si tir en LightForm et tir chargé
+				monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
 			
+			//Finallement, reset les coordonnées du tir pour un prochain appui, le tir est de toute façon déchargé
 			directionTir.x = 0;
 			directionTir.y = 0;
+			charged = false;
 			
 		}
 		
-		/*
-		if ( !touches.get(Touches.GAUCHE) && !touches.get(Touches.DROITE) && !touches.get(Touches.HAUT) && !touches.get(Touches.BAS)){
-			Etat etat = perso.getEtat();
-			if (etat.getClass().equals(Etat_light.class))
-				perso.changerEtat(Etat_light.INACTIF);
-			
-			perso.getRapidite().x = 0;
-			perso.getRapidite().y = 0;
-		}*/
-		
-		//ici cas ou il tire
-		/*if ((touches.get(Touches.GAUCHE) && touches.get(Touches.DROITE)) || (touches.get(Touches.HAUT) && touches.get(Touches.BAS)) ||
-				(!touches.get(Touches.GAUCHE) && !(touches.get(Touches.DROITE))) ||
-						(!touches.get(Touches.HAUT) && !(touches.get(Touches.BAS)))) {
-			Etat etat = perso.getEtat();
-			if (etat.getClass().equals(Etat_light.class))
-				perso.changerEtat(Etat_light.INACTIF);
-			
-			perso.getRapidite().x = 0;
-			perso.getRapidite().y = 0;
-					
-		}*/
 	}
 }
