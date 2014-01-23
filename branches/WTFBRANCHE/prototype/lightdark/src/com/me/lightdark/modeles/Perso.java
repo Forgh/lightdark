@@ -33,8 +33,10 @@ public class Perso {
 	
 	private float tempsAnime = 0;
 	
+	private Monde monde;
 	
-	public Perso(Vector2 position) {
+	
+	public Perso(Vector2 position, Monde m) {
 		this.position = position;
 		this.cadre.setPosition(position);
 		this.cadre.height = TAILLE;
@@ -42,10 +44,14 @@ public class Perso {
 		this.health=3;
 		this.VITESSE = this.VITESSE_DEF;
 		taming_detectable = false;
+		this.monde = m;
 	}
 	
 	
 	// **** GETTERS ****
+	public Monde getMonde(){
+		return monde;
+	}
 	
 	public int puissance(){
 		return this.puissance;

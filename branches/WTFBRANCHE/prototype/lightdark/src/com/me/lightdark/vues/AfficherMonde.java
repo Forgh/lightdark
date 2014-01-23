@@ -15,6 +15,7 @@ import com.me.lightdark.modeles.Epee;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Niveau;
+import com.me.lightdark.modeles.Objet;
 import com.me.lightdark.modeles.Perso;
 import com.me.lightdark.modeles.Projectile;
 
@@ -39,6 +40,8 @@ public class AfficherMonde {
 	private TextureRegion imgSword;
 	private TextureRegion imgAnimal;
 	private TextureRegion imgMonstreCube;
+	
+	private TextureRegion imgTorche;
 	
 	private SpriteBatch spriteBatch;
 	
@@ -86,6 +89,8 @@ public class AfficherMonde {
 		this.imgSword = new TextureRegion(new Texture(Gdx.files.internal("images/sword.png")));
 		this.imgAnimal = new TextureRegion(new Texture(Gdx.files.internal("images/cat_laptop.png")));
 		this.imgMonstreCube = new TextureRegion(new Texture(Gdx.files.internal("images/monstre_cube.png")));
+		
+		this.imgTorche  = new TextureRegion(new Texture(Gdx.files.internal("images/torche.png")));
 		// TODO rajouter pour toutes les cases
 		 
 	}
@@ -102,6 +107,8 @@ public class AfficherMonde {
 		// dessiner strate 3
 		drawAnimals();
 		drawPerso();
+		
+		drawObjet();
 		
 		spriteBatch.end();
 	}
@@ -163,6 +170,13 @@ public class AfficherMonde {
 		 Array<Projectile> project = monde.getFleche();
 		 for(int i=0;i<project.size;i++){
 			 spriteBatch.draw(this.imgProjectile, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
+		 }
+	}
+	
+	private void drawObjet(){
+		 Array<Objet> project = monde.getObjet();
+		 for(int i=0;i<project.size;i++){
+			 spriteBatch.draw(this.imgTorche, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
 		 }
 	}
 	
