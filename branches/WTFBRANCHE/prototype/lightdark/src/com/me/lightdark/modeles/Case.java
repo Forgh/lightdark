@@ -81,6 +81,11 @@ public class Case {
 	public void action(CompetenceAnimaux ca, Monde m){
 		// ici gerer la capacité
 	}
+	
+	public void arrive(Monde m){
+
+	}
+	
 	/*
 	public ? getType(){
 		return "";

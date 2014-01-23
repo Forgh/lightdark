@@ -23,6 +23,12 @@ public class Niveau {
 	private Form formStart;
 	
 	private Array<Anime> animals = new Array<Anime>();
+	
+	Array<Projectile> projectiles = new Array<Projectile>();
+	Array<Projectile> fleches = new Array<Projectile>();
+	Array<Objet> objets = new Array<Objet>();
+
+	Array<Epee> sword = new Array<Epee>();
 
 	public Niveau() {
 		// TODO Auto-generated constructor stub
@@ -33,7 +39,37 @@ public class Niveau {
 		ombres = new Rectangle[largeur][hauteur];
 		light = new Rectangle[largeur][hauteur];
 		
-		demo1();
+	}
+	
+	public void loadStartLevel(String niv, Monde m){
+		Perso p;
+		if (niv.equals("demo1")){
+			demo1();
+		}else if (niv.equals("demo2")){
+			demo2();
+		}else{
+			demo();
+		}
+		m.setPerso(null);
+		p = new Perso(this.getPosStart(), m);
+		p.setForm(this.getFormStart());
+		m.setPerso(p);
+	}
+	
+	public Array<Projectile> getProjectile() {
+		return projectiles;
+	}
+	
+	public Array<Projectile> getFleche() {
+		return fleches;
+	} 
+	
+	public Array<Objet> getObjet() {
+		return objets;
+	} 
+	
+	public Array<Epee> getEpee() {
+		return sword;
 	}
 	
 	public int getLargeur(){
@@ -128,6 +164,20 @@ public class Niveau {
 			ombres[i-1][j-1]=cases[i-1][j-1].getCadre();
 			cases[i-1][j-1].setTypeCase(type_case_generique.OMBRE);
 		}
+	}
+	
+	public void unloadNiveau(){
+		posStart = new Vector2(0f,0f);
+		cases = new Case[largeur][hauteur];
+		bloquantes = new Rectangle[largeur][hauteur];
+		ombres = new Rectangle[largeur][hauteur];
+		light = new Rectangle[largeur][hauteur];
+		
+		projectiles.clear();
+		fleches.clear();
+		objets.clear();
+		sword.clear();
+		animals.clear();
 	}
 	
 	public void createGroundAndBorder(){
@@ -248,6 +298,14 @@ private void demo1(){
 			}
 		};
 		cases[11][11].setTypeCase(type_case_generique.TERRE);
+		
+		cases[11][1] =  new Case(new Vector2(11f,1f)){
+			public void arrive(Monde m){
+				m.getNiveau().unloadNiveau();
+				m.getNiveau().loadStartLevel("demo2", m);
+			}
+		};
+		cases[11][1].setTypeCase(type_case_generique.TERRE);
 		
 		this.animals.add(new Monstre(new Vector2(3f,6f), this));
 		this.animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);

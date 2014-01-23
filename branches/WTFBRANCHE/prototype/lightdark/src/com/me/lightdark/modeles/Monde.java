@@ -12,13 +12,13 @@ public class Monde {
 
 	Niveau niveau;
 	
-	Perso perso;
+	private Perso perso;
 	
-	Array<Projectile> projectiles = new Array<Projectile>();
-	Array<Projectile> fleches = new Array<Projectile>();
-	Array<Objet> objets = new Array<Objet>();
+	Array<Projectile> projectiles;
+	Array<Projectile> fleches;
+	Array<Objet> objets;
 
-	Array<Epee> sword = new Array<Epee>();
+	Array<Epee> sword;
 
 
 	private Button pause;
@@ -50,6 +50,10 @@ public class Monde {
 		return perso;
 	}
 	
+	public void setPerso(Perso p) {
+		perso = p;
+	}
+	
 	public Niveau getNiveau(){
 		return niveau;
 	}
@@ -59,8 +63,12 @@ public class Monde {
 		
 		this.niveau = new Niveau();
 		
-		this.perso = new Perso(niveau.getPosStart(), this);
-		perso.setForm(niveau.getFormStart());
+		projectiles = this.niveau.getProjectile();
+		fleches = this.niveau.getFleche();
+		objets = this.niveau.getObjet();
+		sword = this.niveau.getEpee();
+		
+		niveau.loadStartLevel("demo1", this);
 		
 		this.perso.setTamingDetectable(false);
 		
