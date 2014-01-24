@@ -262,9 +262,9 @@ public class ControlerProjectiles {
 				
 				//Si le retour est quasi arriv�, il devient obsol�te
 				if(boomerang.getPosition().dst2(boomerang.getCaseCible().getPosition())<1f){
+					if(!boomerang.getFromTaming())
+						lanceur.changerEtat(Dark.SHADOWWALKING);
 					boomerang.devientObsolete();
-					lanceur.changerEtat(Dark.SHADOWWALKING);
-					//On remet en shadowwalking si le grappin revient
 				}
 				
 			}

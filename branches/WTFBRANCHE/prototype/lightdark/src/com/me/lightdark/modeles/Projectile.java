@@ -27,7 +27,7 @@ public class Projectile {
 	
 	
 	public Projectile(Perso lanceur, Vector2 position, Vector2 direction) {
-		
+		fromTaming=lanceur.getEtat()==Dark.TAMING;
 		this.lanceur=lanceur;
 		this.position = position;
 		this.posInitial = new Vector2(position);
@@ -64,11 +64,10 @@ public class Projectile {
 	 */
 	public Projectile (Projectile p){
 		
-		
 		Vector2 DiffLanceurBoomerang = new Vector2(p.getPosition());
 		DiffLanceurBoomerang.sub(p.getLanceur().getPosition());
 		DiffLanceurBoomerang.sub(0.01f, 0.01f);
-		//Vecteur de la différence entre le lanceur et le projectile, un peu réduit VS bugs
+		//Vecteur de la différence entre le lanceur et le projectile, un peu réduit pour éviter les bugs
 		
 		
 		Vector2 posBoomerang = new Vector2(p.getLanceur().getPosition());//Position effective du boomerang
@@ -82,6 +81,7 @@ public class Projectile {
 		this.cadre.height = TAILLE;
 		this.cadre.width = TAILLE;
 		
+		this.fromTaming = p.getFromTaming();
 		this.obsolete = false;
 		this.position = posBoomerang;
 		this.posInitial = new Vector2(posBoomerang);
@@ -107,6 +107,10 @@ public class Projectile {
 
 	public Rectangle getCadre() {
 		return cadre;
+	}
+	
+	public boolean getFromTaming(){
+		return fromTaming;
 	}
 
 	public boolean estObsolete(){
