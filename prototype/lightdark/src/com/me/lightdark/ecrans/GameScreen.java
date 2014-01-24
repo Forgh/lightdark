@@ -170,6 +170,11 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		affMonde.render();
 		affSideMenu.render();
 		
+		if(monde.getPerso().getHealth()==0){
+			monde.getPerso().refill();
+			reload(monde.getNiveau().getLevelName());
+		}
+		
 		if (monde.getNiveau().isLevelChanged() != null){
 			if (!monde.getNiveau().isLevelChanged().equals("END_GAME")){
 				System.out.println(monde.getNiveau().isLevelChanged());

@@ -11,12 +11,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.me.lightdark.modeles.Monde;
-
+import com.me.lightdark.controleurs.ControlerMenu;
 
 public class AfficherSideMenu {
 
 	private Monde monde;
 	private TextureRegion imgOrbe;
+	private TextureRegion imgOrbeOff;
 	private TextureRegion imgPause;
 	private TextureRegion imgHealth;
 	
@@ -48,7 +49,8 @@ public class AfficherSideMenu {
 	}
 	
 	private void chargerTextures() {
-		this.imgOrbe = new TextureRegion(new Texture("images/orbe.png"));
+		this.imgOrbe = new TextureRegion(new Texture("images/orb1_a.png"));
+		this.imgOrbeOff = new TextureRegion(new Texture("images/orb1_d.png"));
 		this.imgPause = new TextureRegion(new Texture("images/start.png"));
 		this.imgHealth = new TextureRegion(new Texture("images/hp.png"));
 		this.frameUp  = new TextureRegion(new Texture("images/frameUp.png"));
@@ -117,8 +119,12 @@ public class AfficherSideMenu {
 	}
 	private void drawOrbe(){
 		Button o = monde.getOrbe();
-		
-		spriteBatch.draw(this.imgOrbe, o.getX(), o.getY(), 50, 50);
+		if(monde.isOrbEnabled()){
+			spriteBatch.draw(this.imgOrbe, o.getX(), o.getY(), 128, 128);
+		}
+		else{
+			spriteBatch.draw(this.imgOrbeOff, o.getX(), o.getY(), 128, 128);
+		}
 	}
 	
 	

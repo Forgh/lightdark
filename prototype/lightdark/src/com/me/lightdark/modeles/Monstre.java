@@ -11,7 +11,7 @@ public class Monstre extends Anime{
 	
 	private Vector2 direction_de_base;
 	
-	private int puissance_tir = 20;
+	private int puissance_tir = 1;
 	private int vie;
 	
 	public Monstre(Vector2 position, Niveau niveau) {

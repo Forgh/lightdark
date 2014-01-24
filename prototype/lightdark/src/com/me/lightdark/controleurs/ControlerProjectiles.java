@@ -159,30 +159,32 @@ public class ControlerProjectiles {
 			}
 			i++;
 		}
-		i=0;
-		while(i< shadowTouched.size && ok){
-			if(persoRect.overlaps(shadowTouched.get(i)) && shadowTouched.get(i).equals(p.getCaseCible().getCadre())) {
+		if(monde.getPerso().getForm()==Form.SHADOWFORM){
+			i=0;
+			while(i< shadowTouched.size && ok){
+				if(persoRect.overlaps(shadowTouched.get(i)) && shadowTouched.get(i).equals(p.getCaseCible().getCadre())) {
+					System.out.println(lanceur.getEtat());
+					p.devientObsolete();System.out.println("[DEBUG2] Shadow Taming");
+					lanceur.getPosition().x = (shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f));
+					lanceur.getPosition().y = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
+					//lanceur.setPosition();
+					lanceur.changerEtat(Dark.SHADOWWALKING);
+					if(lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
+						//ici test d'une compétence
+						//lanceur.getAnimal().stopperCompetence(CompetenceAnimaux.COURRIR);
+						lanceur.getAnimal().setTaming(false);
+						
+						//lanceur.setPosition(monde.getNiveau().getCloseShadow(lanceur.getPosition()));
+						System.out.println("[DEBUG] Position joueur : "+lanceur.getPosition().toString()+"\n        Position ombre : "+monde.getNiveau().getCloseShadow(lanceur.getPosition()));
+					}
 				
-				if(lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
-					//ici test d'une compétence
-					//lanceur.getAnimal().stopperCompetence(CompetenceAnimaux.COURRIR);
-					lanceur.getAnimal().setTaming(false);
-					
-					lanceur.setPosition(monde.getNiveau().getCloseShadow(lanceur.getPosition()));
-					System.out.println("[DEBUG] Position joueur : "+lanceur.getPosition().toString()+"\n        Position ombre : "+monde.getNiveau().getCloseShadow(lanceur.getPosition()));
+					//on remet en shadowwalking si jamais on touche la case désirée 
+
+					ok=false;
 				}
-				//on remet en shadowwalking si jamais on touche la case désirée 
-				System.out.println(lanceur.getEtat());
-				p.devientObsolete();System.out.println("[DEBUG2] Shadow Taming");
-				lanceur.getPosition().x = (shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f));
-				lanceur.getPosition().y = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
-				//lanceur.setPosition();
-				lanceur.changerEtat(Dark.SHADOWWALKING);
-				ok=false;
+				i++;
 			}
-			i++;
 		}
-		
 	
 
 		p.getRapidite().scl(1/delta); // on restore la vitesse
@@ -204,6 +206,12 @@ public class ControlerProjectiles {
 		boolean ok = true;
 
 		int i = 0;
+		if(persoRect.overlaps(monde.getPerso().getCadre())){
+			monde.getPerso().healthDown();
+			p.getRapidite().x = 0;
+			p.getRapidite().y = 0;
+			p.devientObsolete();
+		}
 		while (i< collision.size && ok){
 			if (collision.get(i) != null) {
 				if(persoRect.overlaps(collision.get(i))){
