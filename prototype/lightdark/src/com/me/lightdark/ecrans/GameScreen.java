@@ -105,7 +105,6 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		if(screenX<=800){//Si clic dans la zone de jeu
 			if (Input.Buttons.LEFT == button)
 				control.feuPresse(screenX, screenY, 866, this.height);
-			System.out.println("this.width vaut "+this.width);
 		}
 		else if(Input.Buttons.LEFT == button && menu.isPausePressed(screenX, screenY)){
 			if(!affSideMenu.isPaused())
@@ -204,7 +203,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	}
 	@Override
 	public void show() {
-		reload("demo6");
+		reload("demo1");
 		Gdx.input.setInputProcessor(this);
 	}
 

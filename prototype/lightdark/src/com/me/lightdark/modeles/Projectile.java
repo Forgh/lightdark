@@ -17,6 +17,7 @@ public class Projectile {
 	private Perso lanceur;
 	private Case case_cible;
 	private boolean obsolete;// = false;
+	private boolean fromTaming;//flag marquant si le tir a été tiré depuis un animal
 	
 	
 	// normalement d'apres le cours on initialise dans le constructeur mais ici ï¿½a revient pareil
@@ -26,6 +27,7 @@ public class Projectile {
 	
 	
 	public Projectile(Perso lanceur, Vector2 position, Vector2 direction) {
+		
 		this.lanceur=lanceur;
 		this.position = position;
 		this.posInitial = new Vector2(position);
@@ -36,7 +38,9 @@ public class Projectile {
 
 		this.obsolete = false;
 		
+		//Lancer depuis le milieu du tireur
 		this.position.add((lanceur.TAILLE / 2) - (this.TAILLE/2), (lanceur.TAILLE / 2) - (this.TAILLE/2));
+		
 	}
 	
 	public Projectile( Vector2 position, Vector2 direction) {
