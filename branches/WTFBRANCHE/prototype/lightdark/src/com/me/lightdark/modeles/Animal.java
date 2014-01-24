@@ -68,7 +68,7 @@ public class Animal extends Anime {
 		
 		if(!taming){
 			if(super.getCadre().height==0 && super.getCadre().width==0 && !reinitFrame.isScheduled())
-				Timer.schedule(reinitFrame, 0.6f);
+				Timer.schedule(reinitFrame, 0.3f);
 			if(!reinitFrame.isScheduled())//ne doit bouger qu'après "s'être remis du taming"
 				super.setPosition(super.getPosition().add(super.getRapidite().cpy().scl(delta)));
 			

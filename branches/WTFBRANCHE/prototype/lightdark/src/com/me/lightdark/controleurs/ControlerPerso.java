@@ -308,14 +308,20 @@ public class ControlerPerso {
 			attacking = false;//reset pour le prochain appui
 			
 			
-			if(perso.getForm()==Form.SHADOWFORM && !charged) {//Si en shadowForm en tir non chargé
+			if(perso.getForm()==Form.SHADOWFORM && !charged && perso.getEtat()!=Dark.TAMING) {//Si en shadowForm en tir non chargé et hors taming
 				perso.changerEtat(Dark.GRABBING);
 				monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
-				
 			}
 			
-			if(perso.getForm()==Form.SHADOWFORM && charged) {//Si en shadowForm en tir chargé
-				System.out.println("[DEBUG] La shadowForm lance un tir chargé (ControlerPerso)");
+			if(perso.getForm()==Form.SHADOWFORM && !charged && perso.getEtat()==Dark.TAMING) {//Si en shadowForm en tir non chargé et en taming
+				//NB : ne pas sortir du Taming
+				monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
+			}
+			
+			
+			
+			if(perso.getForm()==Form.SHADOWFORM && charged && perso.getEtat()==Dark.TAMING) {//Si en shadowForm en tir chargé
+				System.out.println("[DEBUG] Lancement d'un tir chargé depuis l'animal : Compétence à activer");
 			}
 			
 			

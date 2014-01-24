@@ -106,23 +106,25 @@ public class ControlerProjectiles {
 		while(i< monde.getAnime().size && ok){
 
 			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.SHADOWFORM) {
-				//if (monde.getPerso().getAnimal() == null || (monde.getPerso().getAnimal() != null && monde.getPerso().getAnimal().equals(monde.getAnime().get(i)) )){
-					monde.getAnime().get(i).setTamer(lanceur);
+				//Si le projectile du perso en ShadowForm rencontre un Animal
 				
+					monde.getAnime().get(i).setTamer(lanceur);
 					monde.getAnime().get(i).setTaming(true);//L'animal devient contrôlé
 					lanceur.setAnimal(monde.getAnime().get(i));
 					p.devientObsolete();
-					//lanceur.setPosition(new Vector2(monde.getAnime().get(i).getCadre().x,monde.getAnime().get(i).getCadre().y));
-	                lanceur.getPosition().x = monde.getAnime().get(i).getCadre().x;
+
+					lanceur.getPosition().x = monde.getAnime().get(i).getCadre().x;//TODO : placer cash sur le CENTRE de l'animal (+=Animal.TAILLE/4)
 	                lanceur.getPosition().y = monde.getAnime().get(i).getCadre().y;
 	                lanceur.changerEtat(Dark.TAMING);
 	                //ici test d'une compétence
 	                monde.getAnime().get(i).demarrerCompetence();
 					System.out.println("[DEBUG] Shadow Taming");
 					ok=false;
-				//}
-			}else if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.LIGHTFORM && p.getLanceur()==monde.getPerso()) {
-				p.devientObsolete();System.out.println("[DEBUG0] Shadow Taming");
+			}
+			else if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.LIGHTFORM && p.getLanceur()==monde.getPerso()) {
+				//Si le perso en LightForm tire sur un monstre (no friendFire chez les mobs)
+				p.devientObsolete();
+				System.out.println("[DEBUG0] Shadow Taming");
 				ok=false; 
 
 				System.out.println("[DEBUG] Degat proj");
@@ -134,14 +136,22 @@ public class ControlerProjectiles {
 			i++;
 		}
 		i=0;
+		
 		while (i< collision.size && ok){
 			if (collision.get(i) != null) {
+				
 				if(persoRect.overlaps(collision.get(i))){// !gererCollisionAnimaux(p.getCadre())){
+					//Si le projectile rencontre une case bloquante
 					p.getRapidite().x = 0;
 					p.getRapidite().y = 0;
-					p.devientObsolete();System.out.println("[DEBUG1] Shadow Taming");
-					lanceur.changerEtat(Dark.SHADOWWALKING);
-					//On remet en shadowwalking si jamais le grappin touche un obstacle
+					p.devientObsolete();
+					
+					//System.out.println("Le tir entre en collision");
+					
+					if(!(lanceur.getEtat()==Dark.TAMING)){
+						lanceur.changerEtat(Dark.SHADOWWALKING);
+					}
+					//On remet en shadowwalking si jamais le grappin touche un obstacle ET qu'il n'était pas en taming
 					ok = false;
 				}
 				

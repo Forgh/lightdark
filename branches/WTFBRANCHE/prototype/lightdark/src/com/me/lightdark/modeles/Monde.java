@@ -91,7 +91,7 @@ public class Monde {
 	}
 	
 	public void lancerProjectile(Vector2 vect, Vector2 cible){
-		//if(perso.getEtat()!=Dark.GRABBING)
+		
 			Projectile v = new Projectile(perso,(new Vector2(perso.getPosition() )),vect);
 			projectiles.add(v);
 			Case c = this.niveau.get((int) cible.x, (int) cible.y);
