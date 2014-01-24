@@ -101,16 +101,13 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		if(chargeTime.isScheduled()) chargeTime.cancel();
 		Timer.schedule(chargeTime, 1.5f);//lancer le timer
-		if(screenX<=800){
-			
-			if (Input.Buttons.LEFT == button){
-				
+		
+		if(screenX<=800){//Si clic dans la zone de jeu
+			if (Input.Buttons.LEFT == button)
 				control.feuPresse(screenX, screenY, 866, this.height);
-			
-				
-			}
-			
-		}else if(Input.Buttons.LEFT == button && menu.isPausePressed(screenX, screenY)){
+			System.out.println("this.width vaut "+this.width);
+		}
+		else if(Input.Buttons.LEFT == button && menu.isPausePressed(screenX, screenY)){
 			if(!affSideMenu.isPaused())
 				affSideMenu.showPauseFrame();
 			else
@@ -119,8 +116,6 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		else if(Input.Buttons.LEFT == button && menu.isOrbPressed(screenX, screenY) && !affSideMenu.isPaused()){
 			menu.orbPressed();
 		}
-		
-		 
 		return true;
 	}
 
@@ -131,8 +126,9 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		
 		if(screenX<=800){
 			if (Input.Buttons.LEFT == button){
-				System.out.println("Appui chargé : "+wasCharged);
-				control.feuRelache(screenX, screenY, wasCharged);
+				//System.out.println("Appui chargé : "+wasCharged);
+				//control.feuRelache(screenX, screenY, wasCharged);
+				control.feuRelache(screenX, screenY, 866, this.height, wasCharged);
 				charged = false;//
 				
 			}

@@ -137,14 +137,15 @@ public class ControlerPerso {
 		v.x =(float)Math.cos(angle);
 		v.y =(float)Math.sin(angle);
 		
-		/*
-		 * ï¿½ verif que la precision numerique des float ne tombe pas sur 0.0 
-		 */
+		
+		 //ï¿½ verif que la precision numerique des float ne tombe pas sur 0.0 
+		 
 		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zï¿½ro (bloquant)
 		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
 
 
 		cibleTir = new Vector2(posX, posY);
+		
 	}
 	
 	
@@ -165,9 +166,33 @@ public class ControlerPerso {
 		touches.get(touches.put(Touches.BAS, false));
 	}
 	
-	/*@Param les coordonnées x et y et si le tir est chargé*/
-	public void feuRelache(int x, int y, boolean charged) {
+	/*@Param les coordonnées x et y, largeur et hauteur du niveau, et si le tir est chargé*/
+	public void feuRelache(int x, int y, int w,int h,  boolean charged) {
+		
 		this.charged=charged;
+		
+		float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
+		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
+				
+		Vector2 v = new Vector2(posX, posY);
+
+		v.sub(this.perso.getPosition());
+
+		
+		float angle = (float) Math.atan2(v.y, v.x);
+		
+		v.x =(float)Math.cos(angle);
+		v.y =(float)Math.sin(angle);
+		
+		/*
+		 * ï¿½ verif que la precision numerique des float ne tombe pas sur 0.0 
+		 */
+		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zï¿½ro (bloquant)
+		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
+
+
+		cibleTir = new Vector2(posX, posY);
+		
 		touches.get(touches.put(Touches.FEU, false));
 		
 	}
@@ -286,7 +311,7 @@ public class ControlerPerso {
 			if(perso.getForm()==Form.SHADOWFORM && !charged) {//Si en shadowForm en tir non chargé
 				perso.changerEtat(Dark.GRABBING);
 				monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
-				System.out.println("[DEBUG] La shadowForm lance un tir non chargé");
+				
 			}
 			
 			if(perso.getForm()==Form.SHADOWFORM && charged) {//Si en shadowForm en tir chargé
