@@ -23,6 +23,7 @@ public class Niveau {
 	private Form formStart;
 	
 	private String changeLevel;
+	private String levelName;
 	
 	private Array<Anime> animals = new Array<Anime>();
 	
@@ -40,20 +41,20 @@ public class Niveau {
 		bloquantes = new Rectangle[largeur][hauteur];
 		ombres = new Rectangle[largeur][hauteur];
 		light = new Rectangle[largeur][hauteur];
-		
+		levelName = niv;
 		unloadNiveau();
 		
-		if (niv.equals("demo1")){
+		if (levelName.equals("demo1")){
 			demo1();
-		}else if (niv.equals("demo2")){
+		}else if (levelName.equals("demo2")){
 			demo2();
-		}else if (niv.equals("demo3")){
+		}else if (levelName.equals("demo3")){
 			demo3();
-		}else if (niv.equals("demo4")){
+		}else if (levelName.equals("demo4")){
 			demo4();
-		}else if (niv.equals("demo5")){
+		}else if (levelName.equals("demo5")){
 			demo5();
-		}else if (niv.equals("demo6")){
+		}else if (levelName.equals("demo6")){
 			demo6();
 		}else{
 			demo();
@@ -103,6 +104,9 @@ public class Niveau {
 		return this.hauteur;
 	}
 	
+	public String getLevelName(){
+		return this.levelName;
+	}
 	// normalement peut etre ici des setters
 	
 	public Case get(int x, int y){

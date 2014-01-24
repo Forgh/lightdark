@@ -23,7 +23,8 @@ public class Monde {
 
 	private Button pause;
 	private Button orbe;
-	
+	private boolean orbEnabled = true;		//par d�faut l'orbe est utilisable
+
 	// Getters -----------
 	public Array<Projectile> getProjectile() {
 		return projectiles;
@@ -44,8 +45,15 @@ public class Monde {
 	public Array<Epee> getEpee() {
 		return sword;
 	}
+	
+	public boolean isOrbEnabled(){
+		return this.orbEnabled;
+	}
 
-
+	public void switchOrb(boolean t){
+		this.orbEnabled=t;
+	}
+	
 	public Perso getPerso() {
 		return perso;
 	}
@@ -82,8 +90,8 @@ public class Monde {
 		
 		this.orbe = new Button();
 		
-		this.orbe.setX(950);
-		this.orbe.setY(500);
+		this.orbe.setX(872);
+		this.orbe.setY(400);
 		
 
 		//cases.add(new Case(new Vector2(5,1), false));
@@ -190,6 +198,9 @@ public class Monde {
 		this.orbe = orbe;
 	}
 	
+	public void setLvl(String l) {
+		this.niveau= new Niveau(l);
+	}
 	
 
 }

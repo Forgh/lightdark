@@ -20,13 +20,12 @@ public class ControlerMenu {
 	
 	private float transformTime = 30;		//durï¿½e de la transformation (en secondes)
 	private float cooldownTime = 40;		//temps de recharge du click ï¿½ la prochaine utilisation
-	private boolean orbEnabled = true;		//par dï¿½faut l'orbe est utilisable
 	
 	public ControlerMenu(Monde monde) {
 		this.perso = monde.getPerso();
 		this.monde = monde;
 		this.orbe = monde.getOrbe();
-		this.orbe.setSize(50,50);
+		this.orbe.setSize(128,128);
 		this.orbe.addListener(new ClickListener());
 		
 		this.pause = monde.getPause();
@@ -40,10 +39,10 @@ public class ControlerMenu {
 		int posY = (int)perso.getPosition().y;
 		
 		//S'il est sur une ombre et que l'orbe est activé
-		if (monde.getNiveau().get(posX, posY).getTypeCase()=="OMBRE" && orbEnabled){
+		if (monde.getNiveau().get(posX, posY).getTypeCase()=="OMBRE" && monde.isOrbEnabled()){
 			perso.switchForm();
 			
-			orbEnabled = false; //désactive l'Orbe
+			monde.switchOrb(false); //désactive l'Orbe
 			//-------------------------
 			
 			Timer.Task transform = new Timer.Task()
@@ -64,7 +63,7 @@ public class ControlerMenu {
 			    @Override
 			    public void run() {
 			    	System.out.println("[DEBUG] Orbe rï¿½activï¿½");
-			    	orbEnabled = true; //rï¿½active l'orbe aprï¿½s le cooldown
+			    	monde.switchOrb(true);  //rï¿½active l'orbe aprï¿½s le cooldown
 			    	
 			    }
 			};
@@ -76,7 +75,7 @@ public class ControlerMenu {
 		}
 		/*Si la transformation est impossible, dire pourquoi
 		 * Plus tard, on pourra Implï¿½menter un FeedBack*/
-		else if(!orbEnabled)
+		else if(!monde.isOrbEnabled())
 			System.out.println("[DEBUG] L'orbe doit se recharger !");
 		else System.out.println("[DEBUG] Tu n'es pas sur une ombre !");
 	
@@ -93,6 +92,8 @@ public class ControlerMenu {
 	public Button getPause(){
 		return this.pause;
 	}
+	
+
 	
 	public boolean isPausePressed(int screenX, int screenY){
 		

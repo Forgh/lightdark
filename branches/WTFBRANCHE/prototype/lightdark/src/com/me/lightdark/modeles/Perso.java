@@ -10,14 +10,19 @@ public class Perso {
 	public static final float VITESSE_DEF = 4f;
 	public static float VITESSE;	// vitesse par unite de temps sur une unite d'espace
 	public static final float TAILLE = 0.5f; // une demi unite
-	public static final int max_health = 75;
+	//public static final int max_health = 75;
+	public static final int max_health_light= 3; //vie max light
+	public static final int max_health_shadow= 1; //vie max shadow
 	
 	public final int puissance = 30;
 	public final int puissanceMini = 20;
 	
 	private boolean taming_detectable;
 	
-	private int health;
+	private int health; //niveau de vie actuel
+	private int healthLight; //niveau de vie sauvegardé actuel en light
+	private int healthShadow; //niveau de vie sauvegardé en shadow
+
 	
 	private Vector2 position = new Vector2();
 	private Vector2 rapidite = new Vector2();
@@ -41,7 +46,8 @@ public class Perso {
 		this.cadre.setPosition(position);
 		this.cadre.height = TAILLE;
 		this.cadre.width = TAILLE;
-		this.health=3;
+		this.healthLight=max_health_light;
+		this.healthShadow=max_health_shadow;
 		this.VITESSE = this.VITESSE_DEF;
 		taming_detectable = false;
 		this.monde = m;
@@ -121,14 +127,24 @@ public class Perso {
 	}
 	public void setForm(Form f){
 		this.form=f;
+		if(this.form==Form.SHADOWFORM)
+			this.health=this.healthShadow;
+		else
+			this.health=this.healthLight;
 	}
 	
 	public void healthUp(int puissance){
-		health += puissance;
+		health++;
 	}
 	
-	public void healthDown(int puissance){
-		health -= puissance;
+	public void refill(){
+		this.healthLight=max_health_light;
+		this.healthShadow=max_health_shadow;
+	}
+	
+	public void healthDown(){
+		health--;
+		System.out.println("HEALTH DOWN");
 	}
 	
 	
@@ -144,10 +160,13 @@ public class Perso {
 
 	public void switchForm (){
 		if(this.getForm()==Form.LIGHTFORM){
+			this.healthLight=this.health; //on sauvegarde la santé avant le switch
 			this.setForm(Form.SHADOWFORM);
+			this.health=healthShadow;
 		}
 		else{
 			this.setForm(Form.LIGHTFORM);
+			this.health=healthLight;
 		}
 		System.out.println(this.getForm());
 	}
