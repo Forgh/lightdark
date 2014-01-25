@@ -286,9 +286,9 @@ public class ControlerPerso {
 			perso.getRapidite().y = 0;
 		}
 		
-		if (perso.getRapidite().x != 0f && perso.getRapidite().y != 0f){
+		if (perso.getRapidite().x != 0f || perso.getRapidite().y != 0f){
 			if (perso.getForm() == Form.LIGHTFORM)
-				perso.changerEtat(Light.MARCHANT);
+					perso.changerEtat(Light.MARCHANT);
 		}
 		else{
 			if (perso.getForm() == Form.LIGHTFORM)
