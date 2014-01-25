@@ -10,7 +10,7 @@ public class Perso {
 
 	public static final float VITESSE_DEF = 4f;
 	public static float VITESSE;	// vitesse par unite de temps sur une unite d'espace
-	public static final float TAILLE = 1f; // une demi unite
+	public static final float TAILLE = 0.9f; // une demi unite
 	//public static final int max_health = 75;
 	public static final int max_health_light= 3; //vie max light
 	public static final int max_health_shadow= 1; //vie max shadow
@@ -42,6 +42,9 @@ public class Perso {
 	private Monde monde;
 	
 	private direction direction;
+	private Vector2 cadre_pos;
+	private float correctY;
+	private float correctX;
 	
 	public enum direction  {
 		HAUT, HAUT_GAUCHE, HAUT_DROITE,
@@ -52,9 +55,11 @@ public class Perso {
 	
 	public Perso(Vector2 position, Monde m) {
 		this.position = position;
-		this.cadre.setPosition(position);
-		this.cadre.height = TAILLE/2;
-		this.cadre.width = TAILLE;
+		this.cadre_pos = new Vector2(position);
+		this.correctX = this.TAILLE / 2;
+		this.correctY = 0;
+		this.cadre.height = TAILLE;
+		this.cadre.width = 0.2f;
 		this.healthLight=max_health_light;
 		this.healthShadow=max_health_shadow;
 		this.VITESSE = this.VITESSE_DEF;
@@ -133,6 +138,7 @@ public class Perso {
 	}
 	
 	public void setPosition(Vector2 v){
+		
 		this.position=v;
 	}
 	
@@ -173,7 +179,7 @@ public class Perso {
 	public void update(float delta) {
 		tempsAnime += delta;
 		position.add(rapidite.cpy().scl(delta)); //?
-		cadre.setPosition(position);
+		cadre.setPosition(position.x + correctX, position.y + correctY);
 	}
 
 	public void switchForm (){
