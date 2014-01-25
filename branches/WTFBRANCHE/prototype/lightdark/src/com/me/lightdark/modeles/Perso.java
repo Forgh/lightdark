@@ -3,6 +3,7 @@ package com.me.lightdark.modeles;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+
 public class Perso {
 	
 	public interface Etat{} // ici polymorphisme pour light/shadow
@@ -40,6 +41,14 @@ public class Perso {
 	
 	private Monde monde;
 	
+	private direction direction;
+	
+	public enum direction  {
+		HAUT, HAUT_GAUCHE, HAUT_DROITE,
+		BAS, BAS_GAUCHE, BAS_DROITE,
+		GAUCHE, DROITE,
+	}
+	
 	
 	public Perso(Vector2 position, Monde m) {
 		this.position = position;
@@ -51,6 +60,7 @@ public class Perso {
 		this.VITESSE = this.VITESSE_DEF;
 		taming_detectable = false;
 		this.monde = m;
+		this.direction = direction.DROITE;
 	}
 	
 	
@@ -108,6 +118,14 @@ public class Perso {
 	
 	public Vector2 getRapidite(){
 		return this.rapidite;
+	}
+	
+	public direction getDirection(){
+		return this.direction;
+	}
+	
+	public void setDirection(direction d){
+		direction = d;
 	}
 	
 	public void setRapidite(Vector2 v){

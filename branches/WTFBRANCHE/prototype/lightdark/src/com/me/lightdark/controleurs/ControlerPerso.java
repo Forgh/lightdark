@@ -15,6 +15,7 @@ import com.me.lightdark.modeles.Light;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Perso;
 import com.me.lightdark.modeles.Perso.Etat;
+import com.me.lightdark.modeles.Perso.direction;
 
 public class ControlerPerso {
 
@@ -28,14 +29,9 @@ public class ControlerPerso {
 	boolean charged;//Si le tir est chargé ou non
 	boolean attacking;//Si le Perso se prépare à attaquer ou non (charge un tir, arme son épée par ex.)
 	
-	enum direction  {
-		HAUT, HAUT_GAUCHE, HAUT_DROITE,
-		BAS, BAS_GAUCHE, BAS_DROITE,
-		GAUCHE, DROITE,
-	}
 	
 	enum Touches {
-		GAUCHE, DROITE, HAUT, BAS, FEU, EPEE
+		GAUCHE, DROITE, HAUT, BAS, FEU//, EPEE
 	}
 	
 	static Map<Touches, Boolean> touches = new HashMap<Touches, Boolean>();
@@ -57,6 +53,7 @@ public class ControlerPerso {
 		this.collision = new Array<Rectangle>();
 		this.arrives = new Array<Case>();
 		this.directionTir = new Vector2();
+	
 		//ici on charge la map des collisions 
 	}
 	
@@ -261,22 +258,22 @@ public class ControlerPerso {
 	private void gererEntrees() {
 		// ici on modifie l'état du perso
 		if (touches.get(Touches.GAUCHE) && toucheActuHoz == Touches.GAUCHE) {
-				
+				perso.setDirection(direction.GAUCHE);
 				perso.getRapidite().x = -Perso.VITESSE;
 			
 		}
 		if (touches.get(Touches.DROITE) && toucheActuHoz == Touches.DROITE) {
-			
+				perso.setDirection(direction.DROITE);
 				perso.getRapidite().x = Perso.VITESSE;
 			
 		}
 		if (touches.get(Touches.HAUT)  && toucheActuVer == Touches.HAUT) {
-			
+				perso.setDirection(direction.HAUT);
 				perso.getRapidite().y = Perso.VITESSE;
 			
 		}
 		if (touches.get(Touches.BAS)  && toucheActuVer == Touches.BAS) {	
-			
+				perso.setDirection(direction.BAS);
 				perso.getRapidite().y = -Perso.VITESSE;
 			
 		}
@@ -331,7 +328,7 @@ public class ControlerPerso {
 			if(perso.getForm()==Form.LIGHTFORM && charged)//Si tir en LightForm et tir chargé
 				monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
 			
-			//Finallement, reset les coordonnées du tir pour un prochain appui, le tir est de toute façon déchargé
+			//Finalement, reset les coordonnées du tir pour un prochain appui, le tir est de toute façon déchargé
 			directionTir.x = 0;
 			directionTir.y = 0;
 			charged = false;
