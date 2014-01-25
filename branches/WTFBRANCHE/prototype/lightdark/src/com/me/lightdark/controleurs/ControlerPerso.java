@@ -207,7 +207,7 @@ public class ControlerPerso {
 	public void gererCollision(float delta){
 		perso.getRapidite().scl(delta); // on travaille au ralenti
 		
-		float approx = 0f;
+		float approx = 0.0f;
 		Rectangle persoRect = rectPool.obtain();
 		persoRect.set(perso.getCadre().x - approx, perso.getCadre().y - approx, perso.getCadre().height - approx, perso.getCadre().width - approx);
 		
