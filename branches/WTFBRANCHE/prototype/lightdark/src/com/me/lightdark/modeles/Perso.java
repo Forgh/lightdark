@@ -56,10 +56,10 @@ public class Perso {
 	public Perso(Vector2 position, Monde m) {
 		this.position = position;
 		this.cadre_pos = new Vector2(position);
-		this.correctX = this.TAILLE / 2;
-		this.correctY = 0;
-		this.cadre.height = TAILLE;
-		this.cadre.width = 0.2f;
+		this.correctX = (this.TAILLE / 2) - (this.TAILLE / 4);
+		this.correctY = (this.TAILLE / 8);
+		this.cadre.height = TAILLE/2;
+		this.cadre.width = (this.TAILLE/2) + (this.TAILLE / 4);
 		this.healthLight=max_health_light;
 		this.healthShadow=max_health_shadow;
 		this.VITESSE = this.VITESSE_DEF;

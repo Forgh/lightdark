@@ -150,14 +150,14 @@ public class AfficherMonde {
 		atlasPersoLight = new Texture(Gdx.files.internal("images/atlas/perso_light.png"));//32 colonnes, 34 lignes d'images (parfois vides)
 		atlasPersoDark = new Texture(Gdx.files.internal("images/atlas/perso_dark.png"));//idem
 		
-		TextureRegion[][] tempLight = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/32, atlasPersoLight.getHeight()/64);
+		TextureRegion[][] tempLight = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/4, atlasPersoLight.getHeight()/8);
 		TextureRegion[][] tempDark = TextureRegion.split(atlasPersoDark, atlasPersoDark.getWidth()/32, atlasPersoDark.getHeight()/64);
 		
 		//Inactif
 		lightIdle_left = tempLight[0][1];
-		lightIdle_right = tempLight[0][3];
+		lightIdle_right = tempLight[0][2];
 		lightIdle_up = tempLight[0][0];
-		lightIdle_down = tempLight[0][2];
+		lightIdle_down = tempLight[0][3];
 		
 		darkIdle_left = tempDark[0][1];
 		darkIdle_right = tempDark[0][3];
@@ -165,34 +165,34 @@ public class AfficherMonde {
 		darkIdle_down = tempDark[0][2];
 		
 		//Marchant
-		lightWalking_leftTbt = new TextureRegion[9];//9 images pour le déplacement
-		lightWalking_rightTbt = new TextureRegion[9];
-		lightWalking_upTbt = new TextureRegion[9];
-		lightWalking_downTbt = new TextureRegion[9];
+		lightWalking_leftTbt = new TextureRegion[4];//9 images pour le déplacement
+		lightWalking_rightTbt = new TextureRegion[4];
+		lightWalking_upTbt = new TextureRegion[4];
+		lightWalking_downTbt = new TextureRegion[4];
 		
-		darkWalking_leftTbt = new TextureRegion[9];
-		darkWalking_rightTbt = new TextureRegion[9];
-		darkWalking_upTbt = new TextureRegion[9];
-		darkWalking_downTbt = new TextureRegion[9];
+		darkWalking_leftTbt = new TextureRegion[4];
+		darkWalking_rightTbt = new TextureRegion[4];
+		darkWalking_upTbt = new TextureRegion[4];
+		darkWalking_downTbt = new TextureRegion[4];
 		
 		//Déplacements lightForm
-		for(int i=0; i<9; i++)
-			lightWalking_leftTbt[i]=tempLight[9][i];//8e ligne
-		for(int i=0; i<9; i++)
-			lightWalking_rightTbt[i]=tempLight[11][i];
-		for(int i=0; i<9; i++)
-			lightWalking_upTbt[i]=tempLight[8][i];
-		for(int i=0; i<9; i++)
-			lightWalking_downTbt[i]=tempLight[10][i];
+		for(int i=0; i<4; i++)
+			lightWalking_leftTbt[i]=tempLight[1][i];//8e ligne
+		for(int i=0; i<4; i++)
+			lightWalking_rightTbt[i]=tempLight[2][i];
+		for(int i=0; i<4; i++)
+			lightWalking_upTbt[i]=tempLight[0][i];
+		for(int i=0; i<4; i++)
+			lightWalking_downTbt[i]=tempLight[3][i];
 		
 		//Déplacements shdowForm
-		for(int i=0; i<9; i++)
-			darkWalking_leftTbt[i]=tempDark[9][i];
-		for(int i=0; i<9; i++)
+		for(int i=0; i<4; i++)
+			darkWalking_leftTbt[i]=tempDark[4][i];
+		for(int i=0; i<4; i++)
 			darkWalking_rightTbt[i]=tempDark[11][i];
-		for(int i=0; i<9; i++)
+		for(int i=0; i<4; i++)
 			darkWalking_upTbt[i]=tempDark[8][i];
-		for(int i=0; i<9; i++)
+		for(int i=0; i<4; i++)
 			darkWalking_downTbt[i]=tempDark[10][i];
 		
 		
