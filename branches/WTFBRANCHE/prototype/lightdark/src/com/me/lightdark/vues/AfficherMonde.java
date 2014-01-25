@@ -180,13 +180,13 @@ public class AfficherMonde {
 		
 		//Déplacements shdowForm
 		for(int i=0; i<9; i++)
-			darkWalking_leftTbt[i]=tempLight[9][i];
+			darkWalking_leftTbt[i]=tempDark[9][i];
 		for(int i=0; i<9; i++)
-			darkWalking_rightTbt[i]=tempLight[11][i];
+			darkWalking_rightTbt[i]=tempDark[11][i];
 		for(int i=0; i<9; i++)
-			darkWalking_upTbt[i]=tempLight[8][i];
+			darkWalking_upTbt[i]=tempDark[8][i];
 		for(int i=0; i<9; i++)
-			darkWalking_downTbt[i]=tempLight[10][i];
+			darkWalking_downTbt[i]=tempDark[10][i];
 		
 		
 		lightWalking_left = new Animation(1/9f, lightWalking_leftTbt);
