@@ -144,7 +144,7 @@ public class AfficherMonde {
 		atlasPersoDark = new Texture(Gdx.files.internal("images/atlas/perso_dark.png"));//idem
 		
 		TextureRegion[][] tempLight = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/32, atlasPersoLight.getHeight()/64);
-		TextureRegion[][] tempDark = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/32, atlasPersoLight.getHeight()/64);
+		TextureRegion[][] tempDark = TextureRegion.split(atlasPersoDark, atlasPersoDark.getWidth()/32, atlasPersoDark.getHeight()/64);
 		
 		//Inactif
 		lightIdle_left = tempLight[0][1];
@@ -170,23 +170,23 @@ public class AfficherMonde {
 		
 		//Déplacements lightForm
 		for(int i=0; i<9; i++)
-			lightWalking_leftTbt[i]=tempLight[i][8];//8e ligne
+			lightWalking_leftTbt[i]=tempLight[9][i];//8e ligne
 		for(int i=0; i<9; i++)
-			lightWalking_rightTbt[i]=tempLight[i][10];
+			lightWalking_rightTbt[i]=tempLight[11][i];
 		for(int i=0; i<9; i++)
-			lightWalking_upTbt[i]=tempLight[i][7];
+			lightWalking_upTbt[i]=tempLight[8][i];
 		for(int i=0; i<9; i++)
-			lightWalking_downTbt[i]=tempLight[i][9];
+			lightWalking_downTbt[i]=tempLight[10][i];
 		
 		//Déplacements shdowForm
 		for(int i=0; i<9; i++)
-			darkWalking_leftTbt[i]=tempLight[i][8];
+			darkWalking_leftTbt[i]=tempLight[9][i];
 		for(int i=0; i<9; i++)
-			darkWalking_rightTbt[i]=tempLight[i][10];
+			darkWalking_rightTbt[i]=tempLight[11][i];
 		for(int i=0; i<9; i++)
-			darkWalking_upTbt[i]=tempLight[i][7];
+			darkWalking_upTbt[i]=tempLight[8][i];
 		for(int i=0; i<9; i++)
-			darkWalking_downTbt[i]=tempLight[i][9];
+			darkWalking_downTbt[i]=tempLight[10][i];
 		
 		
 		lightWalking_left = new Animation(1/9f, lightWalking_leftTbt);
@@ -289,6 +289,7 @@ public class AfficherMonde {
 		if(p.getForm()==Form.LIGHTFORM){
 			
 			if(p.getEtat()!=null && p.getEtat()==Light.MARCHANT){//si marche
+		
 				
 				if(d==direction.BAS || d==direction.BAS_GAUCHE || d==direction.BAS_DROITE)
 					spriteBatch.draw(currentFrameLight_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
@@ -298,6 +299,7 @@ public class AfficherMonde {
 					spriteBatch.draw(currentFrameLight_left, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 				if(d==direction.DROITE)
 					spriteBatch.draw(currentFrameLight_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+					
 			}
 			else if(p.getEtat()==null || p.getEtat()==Light.INACTIF){//si inactif
 				
@@ -314,10 +316,10 @@ public class AfficherMonde {
 		
 		
 		else if(p.getForm()==Form.SHADOWFORM){
-			if(!(p.getEtat()==Dark.TAMING)){//ShadowForm classique
-				if(d==direction.BAS)
+			if(p.getEtat()!=Dark.TAMING){//ShadowForm classique
+				if(d==direction.BAS || d==direction.BAS_GAUCHE || d==direction.BAS_DROITE)
 					spriteBatch.draw(currentFrameDark_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-				if(d==direction.HAUT)
+				if(d==direction.HAUT || d==direction.HAUT_GAUCHE || d==direction.HAUT_DROITE)
 					spriteBatch.draw(currentFrameDark_up, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 				if(d==direction.GAUCHE)
 					spriteBatch.draw(currentFrameDark_left, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
