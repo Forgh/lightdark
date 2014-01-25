@@ -316,7 +316,7 @@ public class AfficherMonde {
 		
 		
 		else if(p.getForm()==Form.SHADOWFORM){
-			if(p.getEtat()!=Dark.TAMING){//ShadowForm classique
+			if(p.getEtat()==Dark.SHADOWWALKING){//ShadowForm classique
 				if(d==direction.BAS || d==direction.BAS_GAUCHE || d==direction.BAS_DROITE)
 					spriteBatch.draw(currentFrameDark_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 				if(d==direction.HAUT || d==direction.HAUT_GAUCHE || d==direction.HAUT_DROITE)
@@ -326,8 +326,21 @@ public class AfficherMonde {
 				if(d==direction.DROITE)
 					spriteBatch.draw(currentFrameDark_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 			}
-			else //ShadowForm Taming
+			if(p.getEtat()==Dark.TAMING) //ShadowForm Taming
 				spriteBatch.draw(this.imgDarkFormTaming, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+			
+			else if(p.getEtat()==null || p.getEtat()==Dark.IDLE){//si inactif
+				
+				if(d==direction.BAS)
+					spriteBatch.draw(darkIdle_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(d==direction.HAUT)
+					spriteBatch.draw(darkIdle_up, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(d==direction.GAUCHE)
+					spriteBatch.draw(darkIdle_left, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(d==direction.DROITE)
+					spriteBatch.draw(darkIdle_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+			}
+			
 		}
 	}
 	
