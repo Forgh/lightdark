@@ -1,5 +1,7 @@
 package com.me.lightdark.vues;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -23,6 +25,7 @@ import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Niveau;
 import com.me.lightdark.modeles.Objet;
 import com.me.lightdark.modeles.Perso;
+import com.me.lightdark.modeles.type_case_generique;
 import com.me.lightdark.modeles.Perso.direction;
 import com.me.lightdark.modeles.Projectile;
 
@@ -44,6 +47,8 @@ public class AfficherMonde {
 	private TextureRegion imgOmbre;
 	//private TextureRegion imgLightForm;
 	//private TextureRegion imgDarkForm;
+	
+	private HashMap<type_case_generique, TextureRegion >  terrain;
 	private TextureRegion currentFrameLight_left;
 	private TextureRegion currentFrameLight_right;
 	private TextureRegion currentFrameLight_up;
@@ -154,15 +159,15 @@ public class AfficherMonde {
 		TextureRegion[][] tempDark = TextureRegion.split(atlasPersoDark, atlasPersoDark.getWidth()/32, atlasPersoDark.getHeight()/64);
 		
 		//Inactif
-		lightIdle_left = tempLight[0][1];
-		lightIdle_right = tempLight[0][2];
-		lightIdle_up = tempLight[0][0];
-		lightIdle_down = tempLight[0][3];
+		lightIdle_left = tempLight[0][2];
+		lightIdle_right = tempLight[0][1];
+		lightIdle_up = tempLight[0][3];
+		lightIdle_down = tempLight[0][0];
 		
-		darkIdle_left = tempDark[0][1];
-		darkIdle_right = tempDark[0][3];
-		darkIdle_up = tempDark[0][0];
-		darkIdle_down = tempDark[0][2];
+		darkIdle_left = tempDark[0][2];
+		darkIdle_right = tempDark[0][1];
+		darkIdle_up = tempDark[0][3];
+		darkIdle_down = tempDark[0][0];
 		
 		//Marchant
 		lightWalking_leftTbt = new TextureRegion[4];//9 images pour le déplacement
@@ -177,13 +182,13 @@ public class AfficherMonde {
 		
 		//Déplacements lightForm
 		for(int i=0; i<4; i++)
-			lightWalking_leftTbt[i]=tempLight[1][i];//8e ligne
+			lightWalking_leftTbt[i]=tempLight[2][i];//8e ligne
 		for(int i=0; i<4; i++)
-			lightWalking_rightTbt[i]=tempLight[2][i];
+			lightWalking_rightTbt[i]=tempLight[1][i];
 		for(int i=0; i<4; i++)
-			lightWalking_upTbt[i]=tempLight[0][i];
+			lightWalking_upTbt[i]=tempLight[3][i];
 		for(int i=0; i<4; i++)
-			lightWalking_downTbt[i]=tempLight[3][i];
+			lightWalking_downTbt[i]=tempLight[0][i];
 		
 		//Déplacements shdowForm
 		for(int i=0; i<4; i++)
@@ -240,6 +245,7 @@ public class AfficherMonde {
 		this.imgTorche  = new TextureRegion(new Texture(Gdx.files.internal("images/torche.png")));
 		
 		// TODO rajouter pour toutes les cases
+		terrain.put(type_case_generique.ARBUSTE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain/arbuste_herbe.png"))));
 		 
 	}
 	

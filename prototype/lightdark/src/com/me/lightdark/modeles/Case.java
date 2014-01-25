@@ -9,11 +9,9 @@ public class Case {
 	Vector2 position = new Vector2();
 	Rectangle cadre = new Rectangle();
 	
-	interface type_case{} 
+	public interface type_case{} 
 	
-	enum type_case_generique implements type_case {
-		TERRE, EAU, VEGETATION, MONTAGNE, CAVERNE, OMBRE
-	}
+	
 	
 	type_case_generique typeCase;
 	boolean bloquante;
