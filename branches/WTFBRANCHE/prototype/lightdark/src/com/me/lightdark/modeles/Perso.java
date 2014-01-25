@@ -10,7 +10,7 @@ public class Perso {
 
 	public static final float VITESSE_DEF = 4f;
 	public static float VITESSE;	// vitesse par unite de temps sur une unite d'espace
-	public static final float TAILLE = 0.5f; // une demi unite
+	public static final float TAILLE = 1f; // une demi unite
 	//public static final int max_health = 75;
 	public static final int max_health_light= 3; //vie max light
 	public static final int max_health_shadow= 1; //vie max shadow
@@ -53,7 +53,7 @@ public class Perso {
 	public Perso(Vector2 position, Monde m) {
 		this.position = position;
 		this.cadre.setPosition(position);
-		this.cadre.height = TAILLE;
+		this.cadre.height = TAILLE/2;
 		this.cadre.width = TAILLE;
 		this.healthLight=max_health_light;
 		this.healthShadow=max_health_shadow;
@@ -201,7 +201,7 @@ public class Perso {
 		if(this.form==Form.LIGHTFORM)
 			this.etat=Light.INACTIF;
 		else if (this.getAnimal()==null) {
-			this.etat=Dark.SHADOWWALKING;
+			this.etat=Dark.IDLE;
 		}
 	}
 

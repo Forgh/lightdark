@@ -149,7 +149,7 @@ public class ControlerProjectiles {
 					//System.out.println("Le tir entre en collision");
 					
 					if(!(lanceur.getEtat()==Dark.TAMING)){
-						lanceur.changerEtat(Dark.SHADOWWALKING);
+						lanceur.changerEtat(Dark.IDLE);
 					}
 					//On remet en shadowwalking si jamais le grappin touche un obstacle ET qu'il n'était pas en taming
 					ok = false;
@@ -168,7 +168,7 @@ public class ControlerProjectiles {
 					lanceur.getPosition().x = (shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f));
 					lanceur.getPosition().y = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
 					//lanceur.setPosition();
-					lanceur.changerEtat(Dark.SHADOWWALKING);
+					lanceur.changerEtat(Dark.IDLE);
 					if(lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
 						//ici test d'une compétence
 						//lanceur.getAnimal().stopperCompetence(CompetenceAnimaux.COURRIR);
