@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Anime;
@@ -32,6 +35,8 @@ public class AfficherMonde {
 	private AfficherSideMenu menu;
 	private Monde monde;
 	private OrthographicCamera cam;
+	
+	ShapeRenderer debugRenderer = new ShapeRenderer();
 	
 	//Les textures fixes TODO : animer celles qui en ont besoin---------------------------------
 	private TextureRegion imgSol;
@@ -114,6 +119,8 @@ public class AfficherMonde {
 		
 		ppuX = (float)width / CAM_LARG;
 		ppuY = (float)height / CAM_HAUT;
+		
+		//System.out.println("ppuX, ppuY :"+ppuX+" "+ppuY);
 	}
 	
 	public int getWidth(){
@@ -238,6 +245,9 @@ public class AfficherMonde {
 	
 	public void render() {
 		
+		
+		 
+		
 		majPerso();
 		
 		spriteBatch.begin();
@@ -252,12 +262,20 @@ public class AfficherMonde {
 		drawAnimals();
 		drawPerso();
 		
+		
 		drawObjet();
 		
 		spriteBatch.end();
+		
+	debugRenderer.setProjectionMatrix(cam.combined);
+	  debugRenderer.begin(ShapeType.Line);
+	  Rectangle rect = monde.getPerso().getCadre();
+	debugRenderer.rect(monde.getPerso().getPosition().x/ppuX + rect.x, monde.getPerso().getPosition().y + rect.y/ppuY, rect.width, rect.height);
+		debugRenderer.setColor(new Color(1, 0, 0, 1));
+		debugRenderer.end();
+	
 	}
 	
-
 	private void drawMap(){
 		Niveau niveau = monde.getNiveau();
 		Array<Case> cases=  monde.getAffichable(this.width, this.height);
@@ -283,6 +301,7 @@ public class AfficherMonde {
 	
 	private void drawPerso(){
 		Perso p = monde.getPerso();
+		
 		direction d = p.getDirection();
 		System.out.println("Forme : "+p.getForm()+ " Etat : "+p.getEtat()+" Direction : "+p.getDirection());
 		
@@ -301,7 +320,7 @@ public class AfficherMonde {
 					spriteBatch.draw(currentFrameLight_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 					
 			}
-			else if(p.getEtat()==null || p.getEtat()==Light.INACTIF){//si inactif
+			else if(p.getEtat()==null || p.getEtat()==Light.INACTIF || p.getEtat()==Dark.GRABBING){//si inactif
 				
 				if(d==direction.BAS)
 					spriteBatch.draw(lightIdle_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
