@@ -53,18 +53,22 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	public boolean keyDown(int keycode) {
 		if (keycode == Keys.Q){
 			control.gauchePresse();
+			monde.getPerso().toWalking();
 		}
 			
 		if (keycode == Keys.D){
 			control.droitPresse();
+			monde.getPerso().toWalking();
 		}
 			
 		if (keycode == Keys.Z){
 			control.hautPresse();
+			monde.getPerso().toWalking();
 		}
 			
 		if (keycode == Keys.S){
 			control.basPresse();
+			monde.getPerso().toWalking();
 		}
 			
 		return true;
@@ -74,18 +78,25 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	public boolean keyUp(int keycode) {
 		if (keycode == Keys.Q){
 			control.gaucheRelache();
+			monde.getPerso().toIdle();
 		}
 			
 		if (keycode == Keys.D){
 			control.droitRelache();
+			monde.getPerso().toIdle();
+
 		}
 			
 		if (keycode == Keys.Z){
 			control.hautRelache();
+			monde.getPerso().toIdle();
+
 		}
 			
 		if (keycode == Keys.S){
 			control.basRelache();
+			monde.getPerso().toIdle();
+
 		}
 			
 		return true;

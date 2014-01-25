@@ -189,7 +189,16 @@ public class Perso {
 		System.out.println(this.getForm());
 	}
 	
-		
+	public void toWalking(){
+		if(this.form==Form.LIGHTFORM)
+			this.etat=Light.MARCHANT;
+		else this.etat=Dark.SHADOWWALKING;
+	}
 	
+	public void toIdle(){
+		if(this.form==Form.LIGHTFORM)
+			this.etat=Light.INACTIF;
+		else this.etat=Dark.IDLE;
+	}
 
 }
