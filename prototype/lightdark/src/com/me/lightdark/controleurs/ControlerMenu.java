@@ -18,8 +18,8 @@ public class ControlerMenu {
 	private Button pause;
 	private Monde monde;
 	
-	private float transformTime = 30;		//durï¿½e de la transformation (en secondes)
-	private float cooldownTime = 40;		//temps de recharge du click ï¿½ la prochaine utilisation
+	private float transformTime = 30;		//durée de la transformation (en secondes)
+	private float cooldownTime = 40;		//temps de recharge depuis le clic et jusqu'à la prochaine utilisation
 	
 	public ControlerMenu(Monde monde) {
 		this.perso = monde.getPerso();
@@ -33,6 +33,7 @@ public class ControlerMenu {
 		this.pause.addListener(new ClickListener());
 	}
 	
+	/*Action éxecutée quand on appuie sur l'orbe*/
 	public void orbPressed(){
 		
 		int posX =(int)perso.getPosition().x;//La position de la case sur laquelle est le joueur
@@ -68,7 +69,7 @@ public class ControlerMenu {
 			    }
 			};
 			
-			System.out.println("[DEBUG] Orbe utilisé");
+			//System.out.println("[DEBUG] Orbe utilisé");
 			Timer.schedule(transform, transformTime);
 			Timer.schedule(cooldown, cooldownTime);
 			
@@ -94,7 +95,7 @@ public class ControlerMenu {
 	}
 	
 
-	
+	/*En fonction des coordonnées touchées, retourne si le bouton pause a été pressé*/
 	public boolean isPausePressed(int screenX, int screenY){
 		
 		screenY = 800-screenY;
@@ -106,6 +107,7 @@ public class ControlerMenu {
 		}else return false;
 	}
 	
+	/*En fonction des coordonnées touchées, retourne si l'orbe a été pressé*/
 	public boolean isOrbPressed(int screenX, int screenY){
 		
 		screenY = 800-screenY;
