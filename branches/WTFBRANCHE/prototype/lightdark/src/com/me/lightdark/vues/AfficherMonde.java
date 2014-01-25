@@ -283,42 +283,45 @@ public class AfficherMonde {
 	
 	private void drawPerso(){
 		Perso p = monde.getPerso();
+		direction d = p.getDirection();
+		System.out.println("Forme : "+p.getForm()+ " Etat : "+p.getEtat()+" Direction : "+p.getDirection());
+		
 		if(p.getForm()==Form.LIGHTFORM){
+			
 			if(p.getEtat()!=null && p.getEtat()==Light.MARCHANT){//si marche
-				System.out.println("Marche détectée");
-				if(p.getDirection()==direction.BAS)
+				
+				if(d==direction.BAS || d==direction.BAS_GAUCHE || d==direction.BAS_DROITE)
 					spriteBatch.draw(currentFrameLight_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-				if(p.getDirection()==direction.HAUT)
+				if(d==direction.HAUT || d==direction.HAUT_GAUCHE || d==direction.HAUT_DROITE)
 					spriteBatch.draw(currentFrameLight_up, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-				if(p.getDirection()==direction.GAUCHE)
+				if(d==direction.GAUCHE)
 					spriteBatch.draw(currentFrameLight_left, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-				if(p.getDirection()==direction.DROITE)
+				if(d==direction.DROITE)
 					spriteBatch.draw(currentFrameLight_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 			}
-			else if(p.getEtat()!=null && p.getEtat()==Light.INACTIF){//si inactif
-				if(p.getDirection()==direction.BAS)
+			else if(p.getEtat()==null || p.getEtat()==Light.INACTIF){//si inactif
+				
+				if(d==direction.BAS)
 					spriteBatch.draw(lightIdle_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-				if(p.getDirection()==direction.HAUT)
+				if(d==direction.HAUT)
 					spriteBatch.draw(lightIdle_up, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-				if(p.getDirection()==direction.GAUCHE)
+				if(d==direction.GAUCHE)
 					spriteBatch.draw(lightIdle_left, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-				if(p.getDirection()==direction.DROITE)
+				if(d==direction.DROITE)
 					spriteBatch.draw(lightIdle_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 			}
-		
-			
 		}
 		
 		
 		else if(p.getForm()==Form.SHADOWFORM){
 			if(!(p.getEtat()==Dark.TAMING)){//ShadowForm classique
-				if(p.getDirection()==direction.BAS)
+				if(d==direction.BAS)
 					spriteBatch.draw(currentFrameDark_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-				if(p.getDirection()==direction.HAUT)
+				if(d==direction.HAUT)
 					spriteBatch.draw(currentFrameDark_up, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-				if(p.getDirection()==direction.GAUCHE)
+				if(d==direction.GAUCHE)
 					spriteBatch.draw(currentFrameDark_left, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-				if(p.getDirection()==direction.DROITE)
+				if(d==direction.DROITE)
 					spriteBatch.draw(currentFrameDark_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 			}
 			else //ShadowForm Taming
