@@ -207,21 +207,34 @@ public class ControlerPerso {
 	public void gererCollision(float delta){
 		perso.getRapidite().scl(delta); // on travaille au ralenti
 		
-		
+		float approx = 0f;
 		Rectangle persoRect = rectPool.obtain();
-		persoRect.set(perso.getCadre());
+		persoRect.set(perso.getCadre().x - approx, perso.getCadre().y - approx, perso.getCadre().height - approx, perso.getCadre().width - approx);
 		
 		this.chargerCollision();
 		persoRect.x += perso.getRapidite().x;
-		persoRect.y += perso.getRapidite().y;
+		//persoRect.y += perso.getRapidite().y;
 		
 		int i = 0;
 		boolean ok = true;
 		while (i< collision.size && ok){
 			if (collision.get(i) != null && persoRect.overlaps(collision.get(i))){
-				perso.getRapidite().x = 0;
-				perso.getRapidite().y = 0;
+				perso.getRapidite().x=0;
 				ok = false;
+			}
+			i++;
+		}
+
+		
+		persoRect.x = perso.getPosition().x;
+		persoRect.y += perso.getRapidite().y;
+		
+		i = 0;
+		boolean ok2 = true;
+		while (i< collision.size && ok2){
+			if (collision.get(i) != null && persoRect.overlaps(collision.get(i))){
+				perso.getRapidite().y=0;
+				ok2 = false;
 			}
 			i++;
 		}
