@@ -128,11 +128,11 @@ public class AfficherMonde {
 	
 	private void mapperPerso(){
 	
-		atlasPersoLight = new Texture(Gdx.files.internal("images/atlas/perso_light.png"));//13 colonnes, 21 lignes d'images
-		atlasPersoDark = new Texture(Gdx.files.internal("images/atlas/perso_dark.png"));//13 colonnes, 21 lignes d'images
+		atlasPersoLight = new Texture(Gdx.files.internal("images/atlas/perso_light.png"));//32 colonnes, 34 lignes d'images (parfois vides)
+		atlasPersoDark = new Texture(Gdx.files.internal("images/atlas/perso_dark.png"));//idem
 		
-		TextureRegion[][] tempLight = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/13, atlasPersoLight.getHeight()/21);
-		TextureRegion[][] tempDark = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/13, atlasPersoLight.getHeight()/21);
+		TextureRegion[][] tempLight = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/32, atlasPersoLight.getHeight()/64);
+		TextureRegion[][] tempDark = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/32, atlasPersoLight.getHeight()/64);
 		
 		
 		lightWalking_leftTbt = new TextureRegion[9];//9 images pour le déplacement
