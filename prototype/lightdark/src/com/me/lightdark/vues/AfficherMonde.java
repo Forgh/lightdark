@@ -15,6 +15,7 @@ import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Epee;
 import com.me.lightdark.modeles.Form;
+import com.me.lightdark.modeles.Light;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Niveau;
 import com.me.lightdark.modeles.Objet;
@@ -47,6 +48,17 @@ public class AfficherMonde {
 	private TextureRegion currentFrameDark_right;
 	private TextureRegion currentFrameDark_up;
 	private TextureRegion currentFrameDark_down;
+	
+	private TextureRegion lightIdle_left;
+	private TextureRegion lightIdle_right;
+	private TextureRegion lightIdle_up;
+	private TextureRegion lightIdle_down;
+	
+	private TextureRegion darkIdle_left;
+	private TextureRegion darkIdle_right;
+	private TextureRegion darkIdle_up;
+	private TextureRegion darkIdle_down;
+	
 	
 	private TextureRegion imgDarkFormTaming;
 	private TextureRegion imgProjectile;
@@ -134,7 +146,18 @@ public class AfficherMonde {
 		TextureRegion[][] tempLight = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/32, atlasPersoLight.getHeight()/64);
 		TextureRegion[][] tempDark = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/32, atlasPersoLight.getHeight()/64);
 		
+		//Inactif
+		lightIdle_left = tempLight[0][1];
+		lightIdle_right = tempLight[0][3];
+		lightIdle_up = tempLight[0][0];
+		lightIdle_down = tempLight[0][2];
 		
+		darkIdle_left = tempDark[0][1];
+		darkIdle_right = tempDark[0][3];
+		darkIdle_up = tempDark[0][0];
+		darkIdle_down = tempDark[0][2];
+		
+		//Marchant
 		lightWalking_leftTbt = new TextureRegion[9];//9 images pour le déplacement
 		lightWalking_rightTbt = new TextureRegion[9];
 		lightWalking_upTbt = new TextureRegion[9];
@@ -261,15 +284,29 @@ public class AfficherMonde {
 	private void drawPerso(){
 		Perso p = monde.getPerso();
 		if(p.getForm()==Form.LIGHTFORM){
-			if(p.getDirection()==direction.BAS)
-				spriteBatch.draw(currentFrameLight_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-			if(p.getDirection()==direction.HAUT)
-				spriteBatch.draw(currentFrameLight_up, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-			if(p.getDirection()==direction.GAUCHE)
-				spriteBatch.draw(currentFrameLight_left, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
-			if(p.getDirection()==direction.DROITE)
-				spriteBatch.draw(currentFrameLight_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+			if(p.getEtat()!=null && p.getEtat()==Light.MARCHANT){//si marche
+				System.out.println("Marche détectée");
+				if(p.getDirection()==direction.BAS)
+					spriteBatch.draw(currentFrameLight_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(p.getDirection()==direction.HAUT)
+					spriteBatch.draw(currentFrameLight_up, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(p.getDirection()==direction.GAUCHE)
+					spriteBatch.draw(currentFrameLight_left, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(p.getDirection()==direction.DROITE)
+					spriteBatch.draw(currentFrameLight_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+			}
+			else if(p.getEtat()!=null && p.getEtat()==Light.INACTIF){//si inactif
+				if(p.getDirection()==direction.BAS)
+					spriteBatch.draw(lightIdle_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(p.getDirection()==direction.HAUT)
+					spriteBatch.draw(lightIdle_up, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(p.getDirection()==direction.GAUCHE)
+					spriteBatch.draw(lightIdle_left, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(p.getDirection()==direction.DROITE)
+					spriteBatch.draw(lightIdle_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+			}
 		
+			
 		}
 		
 		
