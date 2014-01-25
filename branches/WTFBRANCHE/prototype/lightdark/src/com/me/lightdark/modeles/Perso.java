@@ -192,13 +192,17 @@ public class Perso {
 	public void toWalking(){
 		if(this.form==Form.LIGHTFORM)
 			this.etat=Light.MARCHANT;
-		else this.etat=Dark.SHADOWWALKING;
+		else if (this.getAnimal()==null) {
+			this.etat=Dark.SHADOWWALKING;
+		}
 	}
 	
 	public void toIdle(){
 		if(this.form==Form.LIGHTFORM)
 			this.etat=Light.INACTIF;
-		else this.etat=Dark.IDLE;
+		else if (this.getAnimal()==null) {
+			this.etat=Dark.SHADOWWALKING;
+		}
 	}
 
 }
