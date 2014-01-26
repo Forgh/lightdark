@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -30,7 +31,9 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	private ControlerProjectiles tirs;
 	private boolean charged = false; //tir chargé
 	private ControlerEpee epee;
-	
+	private Sound gameOver = Gdx.audio.newSound(Gdx.files.internal("sound/gameover.wav"));
+	private Sound darkness = Gdx.audio.newSound(Gdx.files.internal("sound/darkness.mp3"));
+
 
 	private boolean finish;
 	private ControlerAnimaux animaux;
@@ -170,7 +173,6 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		// TODO Auto-generated method stub
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-
 		if(!affSideMenu.isPaused() && !this.finish){
 			
 			control.update(delta);
@@ -183,8 +185,12 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		affSideMenu.render();
 		
 		if(monde.getPerso().getHealth()==0){
+			darkness.pause(5);
+			gameOver.play(0.3f);
 			monde.getPerso().refill();
 			reload(monde.getNiveau().getLevelName());
+			darkness.resume();
+			
 		}
 		
 		if (monde.getNiveau().isLevelChanged() != null){
@@ -222,6 +228,8 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	@Override
 	public void show() {
 		reload("demo1");
+		darkness.loop(0.1f);
+
 		Gdx.input.setInputProcessor(this);
 	}
 

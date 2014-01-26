@@ -3,6 +3,8 @@ package com.me.lightdark.controleurs;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -23,6 +25,11 @@ public class ControlerPerso {
 	private Perso perso;
 	private Array<Rectangle> collision;
 	private Array<Case> arrives;
+	
+	private Sound bruitEpee = Gdx.audio.newSound(Gdx.files.internal("sound/epees.wav"));
+	private Sound bruitOmbre = Gdx.audio.newSound(Gdx.files.internal("sound/ombre.wav"));
+	private Sound bruitProj = Gdx.audio.newSound(Gdx.files.internal("sound/projectile.wav"));
+
 	
 	Vector2 directionTir;
 	Vector2 cibleTir;
@@ -336,12 +343,14 @@ public class ControlerPerso {
 			if(perso.getForm()==Form.SHADOWFORM && !charged && perso.getEtat()!=Dark.TAMING) {//Si en shadowForm en tir non chargé et hors taming
 				perso.changerEtat(Dark.GRABBING);
 				monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
+				this.bruitOmbre.play();
 			}
 			
 			if(perso.getForm()==Form.SHADOWFORM && !charged && perso.getEtat()==Dark.TAMING) {//Si en shadowForm en tir non chargé et en taming
 				//NB : ne pas sortir du Taming
 				if(monde.getProjectile().size==0)
 					monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
+					
 			}
 			
 			
@@ -352,12 +361,15 @@ public class ControlerPerso {
 			}
 			
 			
-			if(perso.getForm()==Form.LIGHTFORM && !charged)//Si en LightForm en tir non chargé
+			if(perso.getForm()==Form.LIGHTFORM && !charged){//Si en LightForm en tir non chargé
+				
 				monde.frapperEpee(new Vector2(directionTir), new Vector2(cibleTir));
-			
-			if(perso.getForm()==Form.LIGHTFORM && charged)//Si tir en LightForm et tir chargé
+				this.bruitEpee.play();
+			}
+			if(perso.getForm()==Form.LIGHTFORM && charged){//Si tir en LightForm et tir chargé
 				monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
-			
+				this.bruitProj.play();
+			}
 			//Finalement, reset les coordonnées du tir pour un prochain appui, le tir est de toute façon déchargé
 			directionTir.x = 0;
 			directionTir.y = 0;

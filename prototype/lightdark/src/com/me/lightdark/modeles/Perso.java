@@ -181,8 +181,9 @@ public class Perso {
 		tempsAnime += delta;
 		if (transition==null)
 			position.add(rapidite.cpy().scl(delta)); //?
-		else//Si transistion en cours
+		else{//Si transistion en cours
 			transit();
+		}
 		cadre.setPosition(position.x + correctX, position.y + correctY);
 	}
 
