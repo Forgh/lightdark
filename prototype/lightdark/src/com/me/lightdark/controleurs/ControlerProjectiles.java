@@ -124,10 +124,10 @@ public class ControlerProjectiles {
 			else if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.LIGHTFORM && p.getLanceur()==monde.getPerso()) {
 				//Si le perso en LightForm tire sur un monstre (no friendFire chez les mobs)
 				p.devientObsolete();
-				System.out.println("[DEBUG0] Shadow Taming");
+				//System.out.println("[DEBUG0] Shadow Taming");
 				ok=false; 
 
-				System.out.println("[DEBUG] Degat proj");
+				//System.out.println("[DEBUG] Degat proj");
 
 				((Monstre) monde.getAnime().get(i)).recevoirCoup(lanceur.puissance());
 			
@@ -164,7 +164,8 @@ public class ControlerProjectiles {
 			while(i< shadowTouched.size && ok){
 				if(persoRect.overlaps(shadowTouched.get(i)) && shadowTouched.get(i).equals(p.getCaseCible().getCadre())) {
 					System.out.println(lanceur.getEtat());
-					p.devientObsolete();System.out.println("[DEBUG2] Shadow Taming");
+					p.devientObsolete();
+					System.out.println("[DEBUG2] Shadow Taming ...");
 					lanceur.getPosition().x = (shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f));
 					lanceur.getPosition().y = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
 					//lanceur.setPosition();
@@ -175,7 +176,7 @@ public class ControlerProjectiles {
 						lanceur.getAnimal().setTaming(false);
 						
 						//lanceur.setPosition(monde.getNiveau().getCloseShadow(lanceur.getPosition()));
-						System.out.println("[DEBUG] Position joueur : "+lanceur.getPosition().toString()+"\n        Position ombre : "+monde.getNiveau().getCloseShadow(lanceur.getPosition()));
+						//System.out.println("[DEBUG] Position joueur : "+lanceur.getPosition().toString()+"\n        Position ombre : "+monde.getNiveau().getCloseShadow(lanceur.getPosition()));
 					}
 				
 					//on remet en shadowwalking si jamais on touche la case désirée 
@@ -271,7 +272,7 @@ public class ControlerProjectiles {
 				//Si le retour est quasi arrivï¿½, il devient obsolï¿½te
 				if(boomerang.getPosition().dst2(boomerang.getCaseCible().getPosition())<1f){
 					if(!boomerang.getFromTaming())
-						lanceur.changerEtat(Dark.SHADOWWALKING);
+						lanceur.changerEtat(Dark.IDLE);
 					boomerang.devientObsolete();
 				}
 				
