@@ -33,6 +33,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	private ControlerEpee epee;
 	private Sound gameOver = Gdx.audio.newSound(Gdx.files.internal("sound/gameover.wav"));
 	private Sound darkness = Gdx.audio.newSound(Gdx.files.internal("sound/darkness.mp3"));
+	private Sound chargedSound = Gdx.audio.newSound(Gdx.files.internal("sound/charged.wav"));
 
 
 	private boolean finish;
@@ -45,6 +46,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	    @Override
 	    public void run() {
 	    	charged = true;	//Si le timer est passé, alors le clic est chargé
+	    	chargedSound.play();
 	    }
 	};
 	
