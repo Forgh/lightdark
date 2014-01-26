@@ -1,5 +1,7 @@
 package com.me.lightdark.modeles;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -13,7 +15,8 @@ public class Animal extends Anime {
 	private Perso tamer;//le controleur (=null)
 	
 	private CompetenceAnimaux comptanima;
-	
+	private Sound chat = Gdx.audio.newSound(Gdx.files.internal("sound/cat.wav"));
+
 	private Animal me;
 	
 	public Animal(Vector2 position) {
@@ -101,6 +104,7 @@ public class Animal extends Anime {
 			
 		}else if (comptanima == CompetenceAnimaux.CHANTER){
 			System.out.println("C0c0r1c0 !");
+			chat.play(0.1f);
 			tamer.setTamingDetectable(true);
 			actionTimed = true;
 			
