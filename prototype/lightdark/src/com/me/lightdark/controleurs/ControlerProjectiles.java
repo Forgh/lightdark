@@ -113,9 +113,13 @@ public class ControlerProjectiles {
 					lanceur.setAnimal(monde.getAnime().get(i));
 					p.devientObsolete();
 
-					lanceur.getPosition().x = monde.getAnime().get(i).getCadre().x;//TODO : placer cash sur le CENTRE de l'animal (+=Animal.TAILLE/4)
-	                lanceur.getPosition().y = monde.getAnime().get(i).getCadre().y;
+					//lanceur.getPosition().x = monde.getAnime().get(i).getCadre().x;//TODO : placer cash sur le CENTRE de l'animal (+=Animal.TAILLE/4)
+	                //lanceur.getPosition().y = monde.getAnime().get(i).getCadre().y;
+	                Vector2 destination = new Vector2(monde.getAnime().get(i).getCadre().x, monde.getAnime().get(i).getCadre().y);
+	                
 	                lanceur.changerEtat(Dark.TAMING);
+	                lanceur.transit(destination);
+	                
 	                //ici test d'une compétence
 	                monde.getAnime().get(i).demarrerCompetence();
 					System.out.println("[DEBUG] Shadow Taming");

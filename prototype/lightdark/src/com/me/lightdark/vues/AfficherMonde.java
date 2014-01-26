@@ -59,6 +59,16 @@ public class AfficherMonde {
 	private TextureRegion currentFrameDark_up;
 	private TextureRegion currentFrameDark_down;
 	
+	private TextureRegion currentFrameDarkSpelling_down;
+	private TextureRegion currentFrameDarkSpelling_up;
+	private TextureRegion currentFrameDarkSpelling_left;
+	private TextureRegion currentFrameDarkSpelling_right;
+	
+	private TextureRegion currentFrameLightSpelling_down;
+	private TextureRegion currentFrameLightSpelling_up;
+	private TextureRegion currentFrameLightSpelling_left;
+	private TextureRegion currentFrameLightSpelling_right;
+	
 	private TextureRegion lightIdle_left;
 	private TextureRegion lightIdle_right;
 	private TextureRegion lightIdle_up;
@@ -91,6 +101,16 @@ public class AfficherMonde {
 	private TextureRegion[] darkWalking_upTbt;
 	private TextureRegion[] darkWalking_downTbt;
 	
+	private TextureRegion[] darkSpelling_leftTbt;
+	private TextureRegion[] darkSpelling_rightTbt;
+	private TextureRegion[] darkSpelling_upTbt;
+	private TextureRegion[] darkSpelling_downTbt;
+	
+	private TextureRegion[] lightSpelling_leftTbt;
+	private TextureRegion[] lightSpelling_rightTbt;
+	private TextureRegion[] lightSpelling_upTbt;
+	private TextureRegion[] lightSpelling_downTbt;
+	
 	
 	
 	//Les Textures animées----------------------------------
@@ -103,6 +123,16 @@ public class AfficherMonde {
 	private Animation darkWalking_right;
 	private Animation darkWalking_up;
 	private Animation darkWalking_down;
+	
+	private Animation darkSpelling_left;
+	private Animation darkSpelling_right;
+	private Animation darkSpelling_up;
+	private Animation darkSpelling_down;
+	
+	private Animation lightSpelling_left;
+	private Animation lightSpelling_right;
+	private Animation lightSpelling_up;
+	private Animation lightSpelling_down;
 	
 	
 	
@@ -125,7 +155,6 @@ public class AfficherMonde {
 		ppuX = (float)width / CAM_LARG;
 		ppuY = (float)height / CAM_HAUT;
 		
-		//System.out.println("ppuX, ppuY :"+ppuX+" "+ppuY);
 	}
 	
 	public int getWidth(){
@@ -161,15 +190,15 @@ public class AfficherMonde {
 		TextureRegion[][] tempDark = TextureRegion.split(atlasPersoDark, atlasPersoDark.getWidth()/32, atlasPersoDark.getHeight()/64);
 		
 		//Inactif
-		lightIdle_left = tempLight[0][2];
-		lightIdle_right = tempLight[0][1];
-		lightIdle_up = tempLight[0][3];
+		lightIdle_left = tempLight[2][0];
+		lightIdle_right = tempLight[1][0];
+		lightIdle_up = tempLight[3][0];
 		lightIdle_down = tempLight[0][0];
 		
-		darkIdle_left = tempDark[0][2];
-		darkIdle_right = tempDark[0][1];
-		darkIdle_up = tempDark[0][3];
-		darkIdle_down = tempDark[0][0];
+		darkIdle_left = tempDark[1][0];
+		darkIdle_right = tempDark[3][0];
+		darkIdle_up = tempDark[0][0];
+		darkIdle_down = tempDark[2][0];
 		
 		//Marchant
 		lightWalking_leftTbt = new TextureRegion[4];//9 images pour le déplacement
@@ -182,9 +211,21 @@ public class AfficherMonde {
 		darkWalking_upTbt = new TextureRegion[4];
 		darkWalking_downTbt = new TextureRegion[4];
 		
+		//Tirant
+		 darkSpelling_leftTbt = new TextureRegion[7];
+		 darkSpelling_rightTbt = new TextureRegion[7];
+		 darkSpelling_upTbt = new TextureRegion[7];
+		 darkSpelling_downTbt = new TextureRegion[7];
+		
+		/* lightSpelling_leftTbt = new TextureRegion[7];
+		 lightSpelling_rightTbt = new TextureRegion[7];
+		 lightSpelling_upTbt = new TextureRegion[7];
+		 lightSpelling_downTbt = new TextureRegion[7];
+		 */
+		
 		//Déplacements lightForm
 		for(int i=0; i<4; i++)
-			lightWalking_leftTbt[i]=tempLight[2][i];//8e ligne
+			lightWalking_leftTbt[i]=tempLight[2][i];
 		for(int i=0; i<4; i++)
 			lightWalking_rightTbt[i]=tempLight[1][i];
 		for(int i=0; i<4; i++)
@@ -192,9 +233,9 @@ public class AfficherMonde {
 		for(int i=0; i<4; i++)
 			lightWalking_downTbt[i]=tempLight[0][i];
 		
-		//Déplacements shdowForm
+		//Déplacements shadowForm
 		for(int i=0; i<4; i++)
-			darkWalking_leftTbt[i]=tempDark[4][i];
+			darkWalking_leftTbt[i]=tempDark[9][i];
 		for(int i=0; i<4; i++)
 			darkWalking_rightTbt[i]=tempDark[11][i];
 		for(int i=0; i<4; i++)
@@ -202,6 +243,25 @@ public class AfficherMonde {
 		for(int i=0; i<4; i++)
 			darkWalking_downTbt[i]=tempDark[10][i];
 		
+		//Invocation
+		for(int i=0; i<7; i++)
+			 darkSpelling_upTbt[i]=tempDark[1][i];
+		for(int i=0; i<7; i++)
+			 darkSpelling_leftTbt[i]=tempDark[0][i];
+		for(int i=0; i<7; i++)
+			 darkSpelling_downTbt[i]=tempDark[2][i];
+		for(int i=0; i<7; i++)
+			 darkSpelling_rightTbt[i]=tempDark[3][i];
+		
+		/*for(int i=0; i<7; i++)
+			 lightSpelling_upTbt[i]=tempLight[1][i];
+		for(int i=0; i<7; i++)
+			 lightSpelling_leftTbt[i]=tempLight[1][i];
+		for(int i=0; i<7; i++)
+			 lightSpelling_downTbt[i]=tempLight[2][i];
+		for(int i=0; i<7; i++)
+			 lightSpelling_rightTbt[i]=tempLight[3][i];
+		*/
 		
 		lightWalking_left = new Animation(1/9f, lightWalking_leftTbt);
 		lightWalking_right = new Animation(1/9f, lightWalking_rightTbt);
@@ -212,6 +272,17 @@ public class AfficherMonde {
 		darkWalking_right = new Animation(1/9f, darkWalking_rightTbt);
 		darkWalking_up = new Animation(1/9f, darkWalking_upTbt);
 		darkWalking_down = new Animation(1/9f, darkWalking_downTbt);
+		
+		/*lightSpelling_up = new Animation(1/7f, lightSpelling_upTbt);
+		lightSpelling_left = new Animation(1/7f, lightSpelling_leftTbt);
+		lightSpelling_right = new Animation(1/7f, lightSpelling_rightTbt);
+		lightSpelling_down = new Animation(1/7f, lightSpelling_downTbt);*/
+		
+		darkSpelling_up = new Animation(1/7f, darkSpelling_leftTbt);
+		darkSpelling_left = new Animation(1/7f, darkSpelling_upTbt);
+		darkSpelling_right = new Animation(1/7f, darkSpelling_rightTbt);
+		darkSpelling_down = new Animation(1/7f, darkSpelling_downTbt);
+		
 		
 		persoTime = 0f;//reset du stateTime, augmente à chaque appel de render()
 	}
@@ -229,6 +300,18 @@ public class AfficherMonde {
 		currentFrameDark_right = darkWalking_right.getKeyFrame(persoTime, true);
 		currentFrameDark_up = darkWalking_up.getKeyFrame(persoTime, true);
 		currentFrameDark_down = darkWalking_down.getKeyFrame(persoTime, true);
+		
+		currentFrameDarkSpelling_up = darkSpelling_up.getKeyFrame(persoTime, true);
+		currentFrameDarkSpelling_down = darkSpelling_down.getKeyFrame(persoTime, true);
+		currentFrameDarkSpelling_left = darkSpelling_left.getKeyFrame(persoTime, true);
+		currentFrameDarkSpelling_right = darkSpelling_right.getKeyFrame(persoTime, true);
+		
+		/*currentFrameLightSpelling_up = lightSpelling_up.getKeyFrame(persoTime, true);
+		currentFrameLightSpelling_down = lightSpelling_down.getKeyFrame(persoTime, true);
+		currentFrameLightSpelling_left = lightSpelling_left.getKeyFrame(persoTime, true);
+		currentFrameLightSpelling_right = lightSpelling_right.getKeyFrame(persoTime, true);
+		*/
+		
 	}
 	
 	private void chargerTextures() {
@@ -389,7 +472,7 @@ public class AfficherMonde {
 		Perso p = monde.getPerso();
 		
 		direction d = p.getDirection();
-		System.out.println("Forme : "+p.getForm()+ " Etat : "+p.getEtat()+" Direction : "+p.getDirection());
+		//System.out.println("Forme : "+p.getForm()+ " Etat : "+p.getEtat()+" Direction : "+p.getDirection());
 		
 		if(p.getForm()==Form.LIGHTFORM){
 			
@@ -406,10 +489,12 @@ public class AfficherMonde {
 					spriteBatch.draw(currentFrameLight_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 					
 			}
-			else if(p.getEtat()==null || p.getEtat()==Light.INACTIF || p.getEtat()==Dark.GRABBING){//si inactif
+			else if(p.getEtat()==null || p.getEtat()==Light.INACTIF /*|| p.getEtat()==Dark.GRABBING*/){//si inactif
 				
-				if(d==direction.BAS)
+				if(d==direction.BAS){
+					
 					spriteBatch.draw(lightIdle_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				}
 				if(d==direction.HAUT)
 					spriteBatch.draw(lightIdle_up, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 				if(d==direction.GAUCHE)
@@ -421,7 +506,9 @@ public class AfficherMonde {
 		
 		
 		else if(p.getForm()==Form.SHADOWFORM){
+			
 			if(p.getEtat()==Dark.SHADOWWALKING){//ShadowForm classique
+				
 				if(d==direction.BAS || d==direction.BAS_GAUCHE || d==direction.BAS_DROITE)
 					spriteBatch.draw(currentFrameDark_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 				if(d==direction.HAUT || d==direction.HAUT_GAUCHE || d==direction.HAUT_DROITE)
@@ -444,6 +531,16 @@ public class AfficherMonde {
 					spriteBatch.draw(darkIdle_left, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 				if(d==direction.DROITE)
 					spriteBatch.draw(darkIdle_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+			}
+			else if(p.getEtat()==Dark.GRABBING){//Si en tir de grappin
+				if(d==direction.BAS)
+					spriteBatch.draw(currentFrameDarkSpelling_down, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(d==direction.HAUT)
+					spriteBatch.draw(currentFrameDarkSpelling_up, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(d==direction.GAUCHE)
+					spriteBatch.draw(currentFrameDarkSpelling_left, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
+				if(d==direction.DROITE)
+					spriteBatch.draw(currentFrameDarkSpelling_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 			}
 			
 		}

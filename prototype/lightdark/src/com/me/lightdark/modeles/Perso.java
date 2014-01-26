@@ -211,5 +211,18 @@ public class Perso {
 			this.etat=Dark.IDLE;
 		}
 	}
+	
+	/*@param la destination du joueur
+	 * déplace le joueur de façon fluide jusqu'à sa destination*/
+	public void transit(Vector2 destination){
+		
+		float precision = 50f;//précision avec laquelle on vérifie le vecteur mob-player
+		Vector2 trace = new Vector2((destination.cpy().sub(this.getPosition())).div(precision));//Le vecteur joueur-->destination divisé par la précision
+		//Vector2 verif = this.getPosition().cpy();
+		
+		
+		for(int i=0; i<(int)precision; i++)//tous les xièmes
+			this.getPosition().add(trace);//on progresse de 1/x vers la destination
+	}
 
 }
