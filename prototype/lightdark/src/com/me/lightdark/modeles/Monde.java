@@ -115,7 +115,7 @@ public class Monde {
 		
 		Projectile v = new Projectile((new Vector2(monstre)),cible.cpy().sub(monstre));//départ projectile puis direction
 		fleches.add(v);
-		System.out.println("[DEBUG] ajout d'une flèche");
+		//System.out.println("[DEBUG] ajout d'une flèche");
 		Case c = this.niveau.get((int) cible.x, (int) cible.y);
 		if (c != null){
 			v.setCaseCible(c); // on ajoute les coord. de la cible
@@ -200,6 +200,7 @@ public class Monde {
 	
 	public void setLvl(String l) {
 		this.niveau= new Niveau(l);
+		System.out.println("l");
 	}
 	
 

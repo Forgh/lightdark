@@ -125,7 +125,7 @@ public class Animal extends Anime {
 	}
 	
 	public void demarrerCompetence() {
-		// TODO Auto-generated method stub
+		
 		this.demarrerCompetence(this.comptanima);
 		
 	}
