@@ -18,6 +18,9 @@ public abstract class Anime {
 	
 	private Vector2 position = new Vector2();
 	private Vector2 rapidite = new Vector2();
+	private Vector2 positionInit;
+	
+	private boolean revient=false;//Indique si le mob revient à sa position initiale
 	
 	private Niveau niveau;
 	
@@ -32,7 +35,7 @@ public abstract class Anime {
 	
 	public Anime(Vector2 position) {
 		// TODO Auto-generated constructor stub
-		
+		positionInit = position.cpy();
 		this.position = position;
 		this.cadre.setPosition(position);
 		this.cadre.height = TAILLE;
@@ -71,6 +74,18 @@ public abstract class Anime {
 		public void setPathStep(int e){
 			this.pathStep = e;
 		}
+		
+		public void setRevient(boolean b){
+			revient = b;
+		}
+		
+		/*fait retourner un mob à son point de départ
+		 * NB : a n'utiliser que sur des mobs immobiles*/
+		public void goHome(){
+				path.add(positionInit.cpy());
+				revient = true;
+			
+		}
 
 		
 		
@@ -108,9 +123,19 @@ public abstract class Anime {
 		public void update(float delta) {
 			tempsAnime += delta;
 			
+			if(revient && Math.abs(position.x-positionInit.x)<0.1f && Math.abs(position.y-positionInit.y)<0.1f){//si quasi revenu
+				revient=false;
+				if(path.size<2){
+				path.clear();
+				rapidite = new Vector2(0f, 0f);
+				}
+			}
+				
 			position.add(rapidite.cpy().scl(delta));
 			
 			cadre.setPosition(position);
+			
+			
 		}
 
 		public void setPosition(Vector2 v){
