@@ -33,14 +33,14 @@ public abstract class Anime {
 	
 	private AnimeEspece espece;
 	
-	public enum direction  {
+	public enum directions  {
 		HAUT, BAS, GAUCHE, DROITE
 	}
 	
-	private direction direction;
+	private directions direction;
 	
 	public Anime(Vector2 position) {
-		this.direction = direction.BAS;
+		this.direction = directions.BAS;
 		positionInit = position.cpy();
 		this.position = position;
 		this.cadre.setPosition(position);
@@ -99,6 +99,10 @@ public abstract class Anime {
 			return cadre;
 		}
 		
+		public directions getDirections(){
+			return direction;
+		}
+		
 		/*@param la position de l'anime
 		 * @return un nouveau cadre de collision pour cet anime*/
 		public Rectangle newCadre(Vector2 v){
@@ -125,6 +129,22 @@ public abstract class Anime {
 			}
 			else cadre = r;
 		}
+		
+		/*definis l'orientation (Haut, Bas, Gauche, Droite) de l'Animé selon sa rapidite (son orientation)*/
+		public void setOrientation(){
+			
+			float angle = rapidite.angle();
+			
+			if(angle<=135 && angle>45)
+				direction=directions.HAUT;
+			else if(angle<=225 && angle>135)
+				direction=directions.GAUCHE;
+			else if(angle<=315 && angle>225)
+				direction=directions.BAS;
+			else direction=directions.DROITE;
+			
+			
+		}
 
 		public void update(float delta) {
 			tempsAnime += delta;
@@ -132,12 +152,16 @@ public abstract class Anime {
 			if(revient && Math.abs(position.x-positionInit.x)<0.1f && Math.abs(position.y-positionInit.y)<0.1f){//si quasi revenu
 				revient=false;
 				if(path.size<2){
-				path.clear();
+					path.clear();
 				rapidite = new Vector2(0f, 0f);
 				}
 			}
+			
+			
 				
 			position.add(rapidite.cpy().scl(delta));
+			
+			setOrientation();
 			
 			cadre.setPosition(position);
 			
