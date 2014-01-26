@@ -253,6 +253,9 @@ public class Niveau {
 				ombres[largeur-2][i] = cases[largeur-2][i].getCadre();
 			}
 		}
+		
+		cases[1][hauteur-2].setTypeCase(type_case_generique.OMBRE_HERBE_BAS);
+		setToFullShadow(11,11);
 	}
 	
 	
@@ -272,6 +275,10 @@ public class Niveau {
 	private void createHerbe(int i, int j){
 		cases[i][j] = new Case(new Vector2(i,j));
 		cases[i][j].setTypeCase(type_case_generique.HERBE);
+	}
+	
+	private void setToFullShadow(int i, int j){
+		cases[i][j].setTypeCase(type_case_generique.OMBRE);
 	}
 
 	private void demo(){
@@ -390,7 +397,13 @@ private void demo1(){
 		//cases[7][2].setTypeCase(type_case_generique.ARBUSTE_HERBE);
 		
 //		this.formStart = Form.LIGHTFORM;
+		
+		cases[3][1].setTypeCase(type_case_generique.OMBRE_HERBE_BAS);
+		cases[2][9].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+		cases[2][11].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
 
+		setToFullShadow(11,11);
+		setToFullShadow(2,11);
 		refresh();
 
 }
@@ -399,18 +412,21 @@ private void demo2(){
 
 	this.formStart=Form.SHADOWFORM;
 	this.posStart = new Vector2(0f,11f);
-	createGroundAndBorder(); 
+	createGroundAndBorder();
 	
-	createObstacle(4,11);
-	createObstacle(7,11);
 	createObstacle(4,10);
+	createObstacle(4,11);
 	createObstacle(7,10);
+	createObstacle(7,11);
+
+	
 	
 	for (int i=4; i<7; i++){
 		createObstacle(i,7);
 		createObstacle(i,6);
 	
 	}
+	cases[3][6].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
 	
 	for (int i=6; i>0; i-- ){
 		createObstacle(1,i);
@@ -478,6 +494,16 @@ private void demo2(){
 	bloquantes[8][hauteur-1]=null;
 	cases[8][hauteur-1].setTypeCase(type_case_generique.PORTE_HAUT);
 	
+	setToFullShadow(3,11);
+	setToFullShadow(11,8);
+	setToFullShadow(11,11);
+	setToFullShadow(10,5);
+	setToFullShadow(6,11);
+
+
+	cases[11][5].setTypeCase(type_case_generique.OMBRE_HERBE_BAS);
+	cases[11][1].setTypeCase(type_case_generique.OMBRE_HERBE_BAS);
+
 	refresh();
 }
 
@@ -488,7 +514,7 @@ private void demo3(){
 	createGroundAndBorder();    
 	
 	for (int i = 4; i<6; i++){
-	    for (int j= hauteur-1; j>5; j--)
+	    for (int j= 6; j<hauteur-1; j++)
 	        createObstacle(i,j);
 	}
 	createObstacle(2,5);
@@ -540,6 +566,17 @@ private void demo3(){
 	this.animals.get(1).getPath().add(new Vector2(4f,2f));
 	
 	this.posStart = new Vector2(2f,0f);
+	
+	setToFullShadow(2,4);
+	setToFullShadow(3,11);
+	setToFullShadow(6,5);
+	cases[6][11].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+
+	cases[6][5].setTypeCase(type_case_generique.OMBRE_HERBE_BAS);
+
+	//setToFullShadow(11,2);
+	setToFullShadow(11,3);
+	setToFullShadow(11,11);
 	refresh();
 }
 
@@ -621,6 +658,26 @@ private void demo4(){
 		cases[largeur-1][hauteur-3].setTypeCase(type_case_generique.PORTE_DROITE);
 		ombres[largeur-1][hauteur-3] = cases[largeur-1][hauteur-3].getCadre();
 		bloquantes[largeur-1][hauteur-3] = null;
+		
+		cases[2][10].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+		cases[2][11].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+		cases[6][11].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+		cases[8][10].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+		cases[8][11].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+
+
+		setToFullShadow(6,9);
+		cases[8][9].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+
+		setToFullShadow(11,11);
+		setToFullShadow(6,5);
+
+		setToFullShadow(2,11);
+
+		cases[11][2].setTypeCase(type_case_generique.OMBRE_HERBE_BAS);
+
+		setToFullShadow(11,4);
+		setToFullShadow(9,2);
 		refresh();
 
 }
@@ -682,7 +739,7 @@ public void refresh(){
 	        	light[i][j] = cases[i][j].getCadre();
 	        if(cases[i][j].typeCase== type_case_generique.FALAISE)
 	        	bloquantes[i][j] = cases[i][j].getCadre();
-	        if(cases[i][j].typeCase==type_case_generique.OMBRE_HERBE_BAS || cases[i][j].typeCase==type_case_generique.OMBRE_HERBE_GAUCHE || cases[i][j].typeCase==type_case_generique.OMBRE_HERBE_COIN)
+	        if(cases[i][j].typeCase==type_case_generique.OMBRE || cases[i][j].typeCase==type_case_generique.OMBRE_HERBE_BAS || cases[i][j].typeCase==type_case_generique.OMBRE_HERBE_GAUCHE || cases[i][j].typeCase==type_case_generique.OMBRE_HERBE_COIN)
 	        	ombres[i][j]=cases[i][j].getCadre();
 	        
 	    }

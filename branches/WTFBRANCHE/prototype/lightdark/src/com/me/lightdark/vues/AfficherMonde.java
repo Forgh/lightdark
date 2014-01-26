@@ -321,7 +321,7 @@ public class AfficherMonde {
 		this.imgDarkFormTaming = new TextureRegion(new Texture(Gdx.files.internal("images/taming.png")));
 		this.imgSol = new TextureRegion(new Texture(Gdx.files.internal("images/herbe_seche.png")));
 		this.imgObstacle = new TextureRegion(new Texture(Gdx.files.internal("images/roche.png")));
-		this.imgOmbre= new TextureRegion(new Texture(Gdx.files.internal("images/ombre.png")));
+		this.imgOmbre= new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/ombre_herbe.png")));
 		this.imgProjectile = new TextureRegion(new Texture(Gdx.files.internal("images/projectile.png")));
 		this.imgSword = new TextureRegion(new Texture(Gdx.files.internal("images/sword.png")));
 		this.imgAnimal = new TextureRegion(new Texture(Gdx.files.internal("images/cat_laptop.png")));
@@ -341,6 +341,7 @@ public class AfficherMonde {
 		terrain.put(type_case_generique.OMBRE_HERBE_BAS, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/ombre_herbe_bas.png"))));
 		terrain.put(type_case_generique.OMBRE_HERBE_GAUCHE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/ombre_herbe_gauche.png"))));
 		terrain.put(type_case_generique.OMBRE_HERBE_COIN, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/ombre_herbe_coin.png"))));
+		terrain.put(type_case_generique.OMBRE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/ombre_herbe.png"))));
 
 		terrain.put(type_case_generique.PLANTE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/plante_herbe.png"))));
 		terrain.put(type_case_generique.POT_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/pot_herbe.png"))));
@@ -413,6 +414,9 @@ public class AfficherMonde {
 				 }
 				 else if(c.getTypeCase().equals("OMBRE_HERBE_BAS")){
 					 spriteBatch.draw(terrain.get(type_case_generique.OMBRE_HERBE_BAS), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("OMBRE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.OMBRE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 				 }
 				 else if(c.getTypeCase().equals("TRANSITION_HERBE_BAS")){
 					 spriteBatch.draw(terrain.get(type_case_generique.TRANSITION_HERBE_BAS), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
