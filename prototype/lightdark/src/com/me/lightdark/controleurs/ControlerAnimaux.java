@@ -33,7 +33,7 @@ public class ControlerAnimaux {
 	{
 	    @Override
 	    public void run() {
-	    //	charged = true;	//Si le timer est passé, alors le clic est chargé
+	   
 	    }
 	};
 	final Vector2 vecteurNul = new Vector2(0f,0f);
@@ -177,10 +177,23 @@ public class ControlerAnimaux {
 	}
 	 
 	public void arretSuivreJoueur(Anime a){
-		if (reperer.get(a) != null){
-			a.getPath().removeIndex(reperer.get(a));
-			reperer.put(a,  null);
+		final Anime mob = a;
+		//System.out.println("arret suivi joueur");
+		if (reperer.get(mob) != null){
+			mob.getPath().removeIndex(reperer.get(mob));
+			reperer.put(mob,  null);
+			Timer.Task retour = new Timer.Task()
+			{
+			    @Override
+			    public void run() {
+			    	mob.goHome();
+			    }
+			};
+			
+			Timer.schedule(retour, 3f);//3 secondes avant qu'il ne revienne sur ses pas
 		}
+		
+		
 	}
 	
 	public boolean isShadowDetectable(){
@@ -224,9 +237,7 @@ public class ControlerAnimaux {
                 	
                 	Vector2 v = new Vector2(this.monde.getPerso().getPosition());
                 	if (v.dst(a.getPosition()) < a.DISTANCE_TIR && !monsterReload.isScheduled()){
-						//System.out.println(">>> tir");
-						/*
-						tirer.put(a,transform );*/
+						
 						Vector2 d = new Vector2();
 						float x = a.getPosition().angle() +angleSurRefV1(a.getPosition(), this.monde.getPerso().getPosition());
 						d.x = (float) Math.cos(x);
@@ -237,6 +248,7 @@ public class ControlerAnimaux {
 						Timer.schedule(monsterReload, 0.5f);
                 	}
                 	this.suivreJoueur(a);
+                	
                 }
             }else{
             	this.arretSuivreJoueur(a);
@@ -294,7 +306,8 @@ public class ControlerAnimaux {
 		Vector2 p = a.getPosition();
 		corrigeDirection(a);
 		float approx = 0.1f;
-		if ( Math.abs(p.x - v.x )<approx && Math.abs(p.y - v.y )<approx){
+		if ( Math.abs(p.x - v.x )<approx && Math.abs(p.y - v.y )<approx && a.getPath().size>1){
+			System.out.println(a.getPath().size);
 			this.nextStep(a);
 		}
 		}
@@ -345,8 +358,7 @@ public class ControlerAnimaux {
 	public void update(float delta){
 		
 		for(int i = 0; i<this.animaux.size;i++){
-			//if(!(this.animaux.get(i) instanceof Animal) && !this.animaux.get(i).isTamed())
-				//bruteForce(this.animaux.get(i),delta);
+			
 			this.animaux.get(i).update(delta);
 			if ((this.animaux.get(i) instanceof Monstre) && this.animaux.get(i).getAnimeType() == AnimeType.MONSTRE){ //
 				detecterJoueur2((Monstre) this.animaux.get(i));

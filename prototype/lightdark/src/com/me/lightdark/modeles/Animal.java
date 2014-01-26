@@ -120,7 +120,7 @@ public class Animal extends Anime {
 					if (me != null) me.stopperCompetence(me.comptanima);
 				}
 			};
-			Timer.schedule(fin, 3f); // DUREE de l'effet
+			Timer.schedule(fin, 0.75f); // DUREE de l'effet
 		}
 	}
 	
