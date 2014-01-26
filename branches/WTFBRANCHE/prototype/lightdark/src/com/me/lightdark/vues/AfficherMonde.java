@@ -88,6 +88,15 @@ public class AfficherMonde {
 	private TextureRegion imgAnimal;
 	private TextureRegion imgMonstreCube;
 	private TextureRegion imgTorche;
+	
+	private TextureRegion flambi_left;
+	private TextureRegion flambi_right;
+	private TextureRegion flambi_up;
+	private TextureRegion flambi_down;
+	
+	private TextureRegion cat_left;
+	private TextureRegion cat_right;
+	
 	//Les Atlas pour les textures animées--------------------------------------
 	private Texture atlasPersoLight;//L'atlas brut (.png) de l'ensemble des animations du perso
 	private Texture atlasPersoDark;
@@ -180,6 +189,11 @@ public class AfficherMonde {
 	/*charge les animations depuis les atlas bruts*/
 	private void mapperAnimations(){
 		mapperPerso();
+		mapperAnimes();
+	}
+	
+	private void mapperAnimes(){
+		
 	}
 	
 	
@@ -219,11 +233,7 @@ public class AfficherMonde {
 		 darkSpelling_upTbt = new TextureRegion[4];
 		 darkSpelling_downTbt = new TextureRegion[4];
 		
-		/* lightSpelling_leftTbt = new TextureRegion[7];
-		 lightSpelling_rightTbt = new TextureRegion[7];
-		 lightSpelling_upTbt = new TextureRegion[7];
-		 lightSpelling_downTbt = new TextureRegion[7];
-		 */
+	
 		
 		//Déplacements lightForm
 		for(int i=0; i<4; i++)
@@ -331,6 +341,14 @@ public class AfficherMonde {
 		this.imgFleche = new TextureRegion(new Texture(Gdx.files.internal("images/fleche.png")));
 
 		this.imgTorche  = new TextureRegion(new Texture(Gdx.files.internal("images/torche.png")));
+		
+		cat_left  = new TextureRegion(new Texture(Gdx.files.internal("images/animaux_effet/chat_gauche.png")));
+		cat_right  = new TextureRegion(new Texture(Gdx.files.internal("images/animaux_effet/chat_droite.png")));
+		
+		flambi_left  = new TextureRegion(new Texture(Gdx.files.internal("images/monstres_effet/flambi_gauche.png")));
+		flambi_right  = new TextureRegion(new Texture(Gdx.files.internal("images/monstres_effet/flambi_droit.png")));
+		flambi_up  = new TextureRegion(new Texture(Gdx.files.internal("images/monstres_effet/flambi_haut.png")));
+		flambi_down  = new TextureRegion(new Texture(Gdx.files.internal("images/monstres_effet/flambi_bas.png")));
 		
 		// TODO rajouter pour toutes les cases
 		terrain.put(type_case_generique.ARBUSTE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/arbuste_herbe.png"))));
@@ -564,9 +582,12 @@ public class AfficherMonde {
 	private void drawAnimals(){
 		Array<Anime> project = monde.getAnime();
 		 for(int i=0;i<project.size;i++){
+			 //Anime a = 
 			 if (project.get(i).getAnimeEspece() == AnimeEspece.MONSTRE_CUBE){
+				 //if()
 				 spriteBatch.draw(this.imgMonstreCube, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
-			 }else{
+			 }
+			 if (project.get(i).getAnimeEspece() == AnimeEspece.ANIMAL_CHAT){
 				 spriteBatch.draw(this.imgAnimal, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
 			 }
 			
