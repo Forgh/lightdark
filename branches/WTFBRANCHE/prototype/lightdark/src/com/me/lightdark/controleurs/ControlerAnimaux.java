@@ -3,6 +3,8 @@ package com.me.lightdark.controleurs;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -37,7 +39,8 @@ public class ControlerAnimaux {
 	    }
 	};
 	final Vector2 vecteurNul = new Vector2(0f,0f);
-	
+	private Sound bruitBete = Gdx.audio.newSound(Gdx.files.internal("sound/ouii.wav"));
+
 	public ControlerAnimaux(Monde monde) {
 		// TODO Auto-generated constructor stub
 		this.monde = monde;
@@ -242,9 +245,10 @@ public class ControlerAnimaux {
 						float x = a.getPosition().angle() +angleSurRefV1(a.getPosition(), this.monde.getPerso().getPosition());
 						d.x = (float) Math.cos(x);
 						d.y = (float) Math.sin(x);
-						if(!monde.getPerso().isTamingDetectable())//ne tire pas sur un animal
+						if(!monde.getPerso().isTamingDetectable()){//ne tire pas sur un animal
 							monde.lancerProjectileParMonstre(a.getPosition().cpy(),this.monde.getPerso().getPosition().cpy() );
-						//System.out.println("[DEBUG] Fleche lancee !!");
+							this.bruitBete.play();
+						}//System.out.println("[DEBUG] Fleche lancee !!");
 						Timer.schedule(monsterReload, 0.5f);
                 	}
                 	this.suivreJoueur(a);

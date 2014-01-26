@@ -21,6 +21,7 @@ public class ControlerEpee {
 	private Array<Epee> sword;
 	private Array<Rectangle> collision;
 	private Array<Rectangle> shadowTouched;
+
 	
 	//idem pour les mobs
 	

@@ -1,10 +1,11 @@
 package com.me.lightdark.controleurs;
 
-
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.math.Vector2;
@@ -17,6 +18,7 @@ public class ControlerMenu {
 	private Button orbe;
 	private Button pause;
 	private Monde monde;
+	private Sound sonOrbe = Gdx.audio.newSound(Gdx.files.internal("sound/orageb.wav"));
 	
 	private float transformTime = 10;		//durée de la transformation (en secondes)
 	private float cooldownTime = 30;		//temps de recharge depuis le clic et jusqu'à la prochaine utilisation
@@ -41,6 +43,7 @@ public class ControlerMenu {
 			//System.out.println("posX : "+posX +" PosY : "+posY);
 			//S'il est sur une ombre et que l'orbe est activé
 			if (monde.getNiveau().isShadow(posX, posY) && monde.isOrbEnabled()){
+				sonOrbe.play();
 				perso.switchForm();
 				
 				monde.switchOrb(false); //désactive l'Orbe
