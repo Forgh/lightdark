@@ -33,8 +33,14 @@ public abstract class Anime {
 	
 	private AnimeEspece espece;
 	
+	public enum direction  {
+		HAUT, BAS, GAUCHE, DROITE
+	}
+	
+	private direction direction;
+	
 	public Anime(Vector2 position) {
-		// TODO Auto-generated constructor stub
+		this.direction = direction.BAS;
 		positionInit = position.cpy();
 		this.position = position;
 		this.cadre.setPosition(position);
