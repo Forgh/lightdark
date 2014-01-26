@@ -48,7 +48,7 @@ public class AfficherMonde {
 	//private TextureRegion imgLightForm;
 	//private TextureRegion imgDarkForm;
 	
-	private HashMap<type_case_generique, TextureRegion >  terrain;
+	private HashMap<type_case_generique, TextureRegion >  terrain = new HashMap<type_case_generique, TextureRegion >(0);
 	private TextureRegion currentFrameLight_left;
 	private TextureRegion currentFrameLight_right;
 	private TextureRegion currentFrameLight_up;
@@ -248,18 +248,30 @@ public class AfficherMonde {
 		
 		// TODO rajouter pour toutes les cases
 		terrain.put(type_case_generique.ARBUSTE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/arbuste_herbe.png"))));
-		terrain.put(type_case_generique.HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/herbe.png"))));
-		terrain.put(type_case_generique.TERRE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/herbe.png"))));
+		terrain.put(type_case_generique.CAILLOU_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/caillou_herbe.png"))));
+		terrain.put(type_case_generique.CAILLOUX_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/cailloux_herbe.png"))));
+		terrain.put(type_case_generique.COFFRE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/coffre_herbe.png"))));
 		terrain.put(type_case_generique.FALAISE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/falaise.png"))));
-		terrain.put(type_case_generique.MONTAGNE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/falaise.png"))));
-		terrain.put(type_case_generique.OMBRE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/ombre_herbe.png"))));
-		terrain.put(type_case_generique.OMBRE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/ombre_herbe.png"))));
+		terrain.put(type_case_generique.GRILLE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/grille_herbe.png"))));
+		terrain.put(type_case_generique.HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/herbe.png"))));
 		
-		
-		//transitions
+		terrain.put(type_case_generique.OMBRE_HERBE_BAS, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/ombre_herbe_bas.png"))));
 		terrain.put(type_case_generique.OMBRE_HERBE_GAUCHE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/ombre_herbe_gauche.png"))));
+		terrain.put(type_case_generique.OMBRE_HERBE_COIN, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/ombre_herbe_coin.png"))));
+
+		terrain.put(type_case_generique.PLANTE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/plante_herbe.png"))));
+		terrain.put(type_case_generique.POT_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/pot_herbe.png"))));
 		
+		terrain.put(type_case_generique.PORTE_BAS, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/porte_bas.png"))));
+		terrain.put(type_case_generique.PORTE_DROITE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/porte_droite.png"))));
+		terrain.put(type_case_generique.PORTE_GAUCHE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/porte_gauche.png"))));
+		terrain.put(type_case_generique.PORTE_HAUT, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/porte_haut.png"))));
+		
+		terrain.put(type_case_generique.TRANSITION_HERBE_BAS, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/transition_herbe_bas.png"))));
+		terrain.put(type_case_generique.TRANSITION_HERBE_DROITE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/transition_herbe_seche_droi.png"))));
 		terrain.put(type_case_generique.TRANSITION_HERBE_GAUCHE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/transition_herbe_gauche.png"))));
+		terrain.put(type_case_generique.TRANSITION_HERBE_HAUT, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/transition_herbe_haut.png"))));
+
 	}
 	
 	public void render() {
@@ -286,13 +298,13 @@ public class AfficherMonde {
 		
 		spriteBatch.end();
 		
-	debugRenderer.setProjectionMatrix(cam.combined);
+	/*debugRenderer.setProjectionMatrix(cam.combined);
 	  debugRenderer.begin(ShapeType.Line);
 	  Rectangle rect = monde.getPerso().getCadre();
 	debugRenderer.rect(monde.getPerso().getPosition().x/ppuX + rect.x, monde.getPerso().getPosition().y + rect.y/ppuY, rect.width, rect.height);
 		debugRenderer.setColor(new Color(1, 0, 0, 1));
 		debugRenderer.end();
-	
+	*/
 	}
 	
 	private void drawMap(){
@@ -300,18 +312,72 @@ public class AfficherMonde {
 		Array<Case> cases=  monde.getAffichable(this.width, this.height);
 		for(int i = 0; i<cases.size;i++){
 			 Case c = cases.get(i);
-			 if (c.getTypeCaseE() != null){
-				 /*if(c.getTypeCase().equals("TERRE")){
-					 spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+
+			 if (c.getTypeCase() != null){
+				 
+				 if(c.getTypeCase().equals("FALAISE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.FALAISE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+					 //spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 				 }
-				 else if(c.getTypeCase().equals("MONTAGNE")){
-					 spriteBatch.draw(this.imgObstacle, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 else if(c.getTypeCase().equals("HERBE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 				 }
-				 else if(c.getTypeCase().equals("OMBRE")){
-					 spriteBatch.draw(this.imgOmbre, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-				 }*/
-				 spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 else if(c.getTypeCase().equals("OMBRE_HERBE_GAUCHE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.OMBRE_HERBE_GAUCHE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("OMBRE_HERBE_COIN")){
+					 spriteBatch.draw(terrain.get(type_case_generique.OMBRE_HERBE_COIN), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("OMBRE_HERBE_BAS")){
+					 spriteBatch.draw(terrain.get(type_case_generique.OMBRE_HERBE_BAS), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("TRANSITION_HERBE_BAS")){
+					 spriteBatch.draw(terrain.get(type_case_generique.TRANSITION_HERBE_BAS), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("TRANSITION_HERBE_DROITE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.TRANSITION_HERBE_DROITE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("TRANSITION_HERBE_GAUCHE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.TRANSITION_HERBE_GAUCHE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("TRANSITION_HERBE_HAUT")){
+					 spriteBatch.draw(terrain.get(type_case_generique.TRANSITION_HERBE_HAUT), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("PORTE_BAS")){
+					 spriteBatch.draw(terrain.get(type_case_generique.PORTE_BAS), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("PORTE_DROITE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.PORTE_DROITE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("PORTE_GAUCHE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.PORTE_GAUCHE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("PORTE_HAUT")){
+					 spriteBatch.draw(terrain.get(type_case_generique.PORTE_HAUT), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("GRILLE_HERBE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.GRILLE_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 if(c.getTypeCase().equals("ARBUSTE_HERBE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.ARBUSTE_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else  if(c.getTypeCase().equals("CAILLOU_HERBE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.CAILLOU_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("CAILLOUX_HERBE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.CAILLOUX_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("COFFRE_HERBE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.COFFRE_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("PLANTE_HERBE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.PLANTE_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("POT_HERBE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.POT_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
 			 }
+		
 		}
 		/*for(int i = 0; i<monde.niveau.size;i++){
 			 Case c = monde.getCase().get(i);
