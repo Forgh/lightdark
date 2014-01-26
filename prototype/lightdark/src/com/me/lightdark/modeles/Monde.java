@@ -200,7 +200,7 @@ public class Monde {
 	
 	public void setLvl(String l) {
 		this.niveau= new Niveau(l);
-		System.out.println("l");
+		//System.out.println("l");
 	}
 	
 
