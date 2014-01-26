@@ -186,8 +186,8 @@ public class AfficherMonde {
 		atlasPersoLight = new Texture(Gdx.files.internal("images/atlas/perso_light.png"));//32 colonnes, 34 lignes d'images (parfois vides)
 		atlasPersoDark = new Texture(Gdx.files.internal("images/atlas/perso_dark.png"));//idem
 		
-		TextureRegion[][] tempLight = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/4, atlasPersoLight.getHeight()/8);
-		TextureRegion[][] tempDark = TextureRegion.split(atlasPersoDark, atlasPersoDark.getWidth()/32, atlasPersoDark.getHeight()/64);
+		TextureRegion[][] tempLight = TextureRegion.split(atlasPersoLight, atlasPersoLight.getWidth()/4, atlasPersoLight.getHeight()/16);
+		TextureRegion[][] tempDark = TextureRegion.split(atlasPersoDark, atlasPersoDark.getWidth()/4, atlasPersoDark.getHeight()/16);
 		
 		//Inactif
 		lightIdle_left = tempLight[2][0];
@@ -212,10 +212,10 @@ public class AfficherMonde {
 		darkWalking_downTbt = new TextureRegion[4];
 		
 		//Tirant
-		 darkSpelling_leftTbt = new TextureRegion[7];
-		 darkSpelling_rightTbt = new TextureRegion[7];
-		 darkSpelling_upTbt = new TextureRegion[7];
-		 darkSpelling_downTbt = new TextureRegion[7];
+		 darkSpelling_leftTbt = new TextureRegion[4];
+		 darkSpelling_rightTbt = new TextureRegion[4];
+		 darkSpelling_upTbt = new TextureRegion[4];
+		 darkSpelling_downTbt = new TextureRegion[4];
 		
 		/* lightSpelling_leftTbt = new TextureRegion[7];
 		 lightSpelling_rightTbt = new TextureRegion[7];
@@ -235,23 +235,23 @@ public class AfficherMonde {
 		
 		//Déplacements shadowForm
 		for(int i=0; i<4; i++)
-			darkWalking_leftTbt[i]=tempDark[9][i];
+			darkWalking_leftTbt[i]=tempDark[2][i];
 		for(int i=0; i<4; i++)
-			darkWalking_rightTbt[i]=tempDark[11][i];
+			darkWalking_rightTbt[i]=tempDark[1][i];
 		for(int i=0; i<4; i++)
-			darkWalking_upTbt[i]=tempDark[8][i];
+			darkWalking_upTbt[i]=tempDark[3][i];
 		for(int i=0; i<4; i++)
-			darkWalking_downTbt[i]=tempDark[10][i];
+			darkWalking_downTbt[i]=tempDark[0][i];
 		
 		//Invocation
-		for(int i=0; i<7; i++)
-			 darkSpelling_upTbt[i]=tempDark[1][i];
-		for(int i=0; i<7; i++)
-			 darkSpelling_leftTbt[i]=tempDark[0][i];
-		for(int i=0; i<7; i++)
-			 darkSpelling_downTbt[i]=tempDark[2][i];
-		for(int i=0; i<7; i++)
-			 darkSpelling_rightTbt[i]=tempDark[3][i];
+		for(int i=0; i<4; i++) // 5,6,7,8 n'impactent pas (tout est vers le bas)
+			 darkSpelling_upTbt[i]=tempDark[5][i];
+		for(int i=0; i<4; i++)
+			 darkSpelling_leftTbt[i]=tempDark[6][i];
+		for(int i=0; i<4; i++)
+			 darkSpelling_downTbt[i]=tempDark[7][i];
+		for(int i=0; i<4; i++)
+			 darkSpelling_rightTbt[i]=tempDark[4][i];
 		
 		/*for(int i=0; i<7; i++)
 			 lightSpelling_upTbt[i]=tempLight[1][i];
