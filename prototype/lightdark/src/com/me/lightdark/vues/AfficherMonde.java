@@ -98,6 +98,9 @@ public class AfficherMonde {
 	private TextureRegion cat_left;
 	private TextureRegion cat_right;
 	
+	private TextureRegion salamander_left;
+	private TextureRegion salamander_right;
+	
 	//Les Atlas pour les textures animées--------------------------------------
 	private Texture atlasPersoLight;//L'atlas brut (.png) de l'ensemble des animations du perso
 	private Texture atlasPersoDark;
@@ -351,6 +354,9 @@ public class AfficherMonde {
 		flambi_up  = new TextureRegion(new Texture(Gdx.files.internal("images/monstres_effet/flambi_haut.png")));
 		flambi_down  = new TextureRegion(new Texture(Gdx.files.internal("images/monstres_effet/flambi_bas.png")));
 		
+		salamander_left  = new TextureRegion(new Texture(Gdx.files.internal("images/animaux_effet/dragon_gauche.png")));
+		salamander_right  = new TextureRegion(new Texture(Gdx.files.internal("images/animaux_effet/dragon_droite.png")));
+		
 		// TODO rajouter pour toutes les cases
 		terrain.put(type_case_generique.ARBUSTE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/arbuste_herbe.png"))));
 		terrain.put(type_case_generique.CAILLOU_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/caillou_herbe.png"))));
@@ -595,6 +601,14 @@ public class AfficherMonde {
 					 spriteBatch.draw(flambi_right, a.getPosition().x * ppuX, a.getPosition().y * ppuY, a.TAILLE * ppuX, a.TAILLE * ppuY);
 				 //spriteBatch.draw(this.imgMonstreCube, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
 			 }
+			 
+			 if (project.get(i).getAnimeEspece() == AnimeEspece.SALAMANDRE){
+				 if(a.getDirections()==directions.BAS || a.getDirections()==directions.DROITE)
+					 spriteBatch.draw(salamander_right, a.getPosition().x * ppuX, a.getPosition().y * ppuY, a.TAILLE * ppuX, a.TAILLE * ppuY);
+				 if(a.getDirections()==directions.HAUT || a.getDirections()==directions.GAUCHE)
+					 spriteBatch.draw(salamander_left, a.getPosition().x * ppuX, a.getPosition().y * ppuY, a.TAILLE * ppuX, a.TAILLE * ppuY);
+			 }
+			 
 			 if (project.get(i).getAnimeEspece() == AnimeEspece.ANIMAL_CHAT || a.getAnimeEspece()==AnimeEspece.INCONNU){
 				 if(a.getDirections()==directions.BAS || a.getDirections()==directions.DROITE)
 					 spriteBatch.draw(cat_right, a.getPosition().x * ppuX, a.getPosition().y * ppuY, a.TAILLE * ppuX, a.TAILLE * ppuY);
