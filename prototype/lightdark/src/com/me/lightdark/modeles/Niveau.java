@@ -207,6 +207,31 @@ public class Niveau {
 		
 	}
 	
+	private void createObstacle(int i, int j){
+		//case avec arbuste
+		if(bloquantes[i][j]==null){
+			bloquantes[i][j] = cases[i][j].getCadre();
+			cases[i][j].setTypeCase(type_case_generique.ARBUSTE_HERBE);
+		}
+		
+		if(j-1<=hauteur && j-1>=0 && ombres[i][j-1]==null && bloquantes[i][j-1]==null){
+			ombres[i][j-1]=cases[i][j-1].getCadre();
+			cases[i][j-1].setTypeCase(type_case_generique.OMBRE_HERBE_BAS);
+			
+		}
+		if(i-1<=largeur && i-1>=0 && ombres[i-1][j]==null && bloquantes[i-1][j]==null){
+			ombres[i-1][j]=cases[i-1][j].getCadre();
+			cases[i-1][j].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+		}
+		
+		if(i-1<=largeur && i-1>=0 && j-1<=largeur && j-1>=0 && ombres[i-1][j-1]==null && bloquantes[i-1][j-1]==null){
+			ombres[i-1][j-1]=cases[i-1][j-1].getCadre();
+			cases[i-1][j-1].setTypeCase(type_case_generique.OMBRE_HERBE_COIN);
+		}
+
+		
+	}
+	
 	public void unloadNiveau(){
 		posStart = new Vector2(0f,0f);
 		cases = new Case[largeur][hauteur];
@@ -309,37 +334,37 @@ private void demo1(){
 		createGroundAndBorder();
 		
 		for(int i=7;i<hauteur;i++){
-			createCaseWithShadow(0,i);
+			createObstacle(0,i);
 		}
 		
 		for(int i=0;i<3;i++){
-			createCaseWithShadow(i,2);
+			createObstacle(i,2);
 		}
 
 		for(int i=0;i<3;i++){
-			createCaseWithShadow(4,i);
+			createObstacle(4,i);
 		}
 		
 		for(int i=3;i<8;i++){
-			createCaseWithShadow(i,5);
+			createObstacle(i,5);
 		}
 		
 		for(int i=3;i<6;i++){
-			createCaseWithShadow(10,i);
+			createObstacle(10,i);
 		}
 		
 		for(int i=7;i<10;i++){
-			createCaseWithShadow(i,7);
+			createObstacle(i,7);
 		}
 		
-		createCaseWithShadow(4,8);
+		createObstacle(4,8);
 
 		
 		for(int i=3;i<7;i++){
-			createCaseWithShadow(i,10);
+			createObstacle(i,10);
 		}
 		
-		createCaseWithShadow(9,9);
+		createObstacle(9,9);
 		
 		for(int i=0;i<largeur;i++){
 			for(int j=0;j<hauteur;j++){
@@ -365,16 +390,17 @@ private void demo1(){
 				}
 			}
 		};
-		cases[11][11].setTypeCase(type_case_generique.TERRE);
+		cases[11][11].setTypeCase(type_case_generique.HERBE);
 		
-		cases[11][1] =  new Case(new Vector2(11f,1f)){
+		bloquantes[11][0]=null;
+		cases[11][0] =  new Case(new Vector2(11f,1f)){
 			public void arrive(){
 				unloadNiveau();
 				changeLevel = new String("demo2");
 				//m.getNiveau().loadStartLevel("demo2", m);
 			}
 		};
-		cases[11][1].setTypeCase(type_case_generique.TERRE);
+		cases[11][0].setTypeCase(type_case_generique.PORTE_BAS);
 		
 		this.animals.add(new Monstre(new Vector2(3f,6f), this));
 		this.animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
@@ -382,7 +408,7 @@ private void demo1(){
 		this.animals.get(1).getPath().add(new Vector2(5f,6f));
 		this.animals.get(1).VITESSE = 0.5f;
 		
-		cases[7][2].setTypeCase(type_case_generique.ARBUSTE_HERBE);
+		//cases[7][2].setTypeCase(type_case_generique.ARBUSTE_HERBE);
 		
 		this.posStart = new Vector2(1f,1f);
 		this.formStart = Form.LIGHTFORM;
@@ -398,39 +424,39 @@ private void demo2(){
 createGroundAndBorder(); 
 
 for (int i =3; i<6 ; i++){
-createCaseWithShadow(i,11);
+createObstacle(i,11);
 }
-createCaseWithShadow(3,10);
-createCaseWithShadow(5,10);
+createObstacle(3,10);
+createObstacle(5,10);
 
 for (int i=4; i<7; i++){
-createCaseWithShadow(i,7);
-createCaseWithShadow(i,6);
+createObstacle(i,7);
+createObstacle(i,6);
 
 }
 
 for (int i=6; i>0; i-- ){
-createCaseWithShadow(1,i);
+createObstacle(1,i);
 
 }
 
 for (int i =1; i<5; i++){
-createCaseWithShadow(i,1);
+createObstacle(i,1);
 
 }
 
-createCaseWithShadow(7,1);
+createObstacle(7,1);
 
 for (int i=2; i<5;i++){ 
-createCaseWithShadow(11,i);
+createObstacle(11,i);
 
 }
 
 for (int i= 7; i<1; i++){
-createCaseWithShadow(11, i);
+createObstacle(11, i);
 }
-createCaseWithShadow(10,7);
-createCaseWithShadow(10,9);
+createObstacle(10,7);
+createObstacle(10,9);
 
 for(int i=0;i<largeur;i++){
 for(int j=0;j<hauteur;j++){
@@ -457,8 +483,8 @@ bloquantes[largeur-5][hauteur-1]=null;
 
 cases[4][hauteur-2].setTypeCase(type_case_generique.OMBRE);
 bloquantes[4][hauteur-2]=null;
-createCaseWithShadow(11, hauteur-4);
-createCaseWithShadow(11, hauteur-6);
+createObstacle(11, hauteur-4);
+createObstacle(11, hauteur-6);
 
 
 
@@ -655,12 +681,13 @@ public void refresh(){
 	        	light[i][j] = cases[i][j].getCadre();
 	        if(cases[i][j].typeCase== type_case_generique.FALAISE)
 	        	bloquantes[i][j] = cases[i][j].getCadre();
-	        if(cases[i][j].typeCase==type_case_generique.OMBRE_HERBE_BAS || cases[i][j].typeCase==type_case_generique.OMBRE_HERBE_GAUCHE)
+	        if(cases[i][j].typeCase==type_case_generique.OMBRE_HERBE_BAS || cases[i][j].typeCase==type_case_generique.OMBRE_HERBE_GAUCHE || cases[i][j].typeCase==type_case_generique.OMBRE_HERBE_COIN)
 	        	ombres[i][j]=cases[i][j].getCadre();
 	        
 	    }
 	}
 	
+	//on évite les conflits : si 2 types sont sur la même case, on met l'ombre à null
 	for(int i=0;i<largeur;i++){
 	    for(int j=0;j<hauteur;j++){
 	    	if (ombres[i][j] != null && light[i][j] != null){
