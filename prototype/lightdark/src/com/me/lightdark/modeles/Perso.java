@@ -236,7 +236,7 @@ public class Perso {
 			transition = null;
 		}
 		else{ 
-			Vector2 step = transition.cpy().sub(position).div(10);//le vecteur déplacement, divisé par le nombre d'étapes
+			Vector2 step = transition.cpy().sub(position).div(20);//le vecteur déplacement, divisé par le nombre d'étapes
 			//System.out.println("Pos Joueur : "+position+", Destination de transition :"+ transition+"\nVecteur deplacement : "+step);
 					 
 			position.add(step);
