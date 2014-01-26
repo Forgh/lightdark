@@ -192,13 +192,23 @@ public class ControlerProjectiles {
 					lanceur.transit(new Vector2(destx, desty));
 					//System.out.println("Début de transition");
 					
+					final Timer.Task afterGrabbing = new Timer.Task() {
+
+						@Override
+						public void run() {
+							
+							lanceur.changerEtat(Dark.IDLE);
+							
+						
+						}
+					};
 					
 					Timer.Task toDarkness = new Timer.Task() {
 
 						@Override
 						public void run() {
-							//System.out.println("toDarkness : ON");
-							lanceur.changerEtat(Dark.IDLE);
+							
+							Timer.schedule(afterGrabbing, 0.5f);
 							if(lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
 								lanceur.getAnimal().setTaming(false);
 								lanceur.getAnimal().setTamer(null);
@@ -206,6 +216,8 @@ public class ControlerProjectiles {
 						
 						}
 					};
+					
+					
 					if(!toDarkness.isScheduled())
 						Timer.schedule(toDarkness, 0.5f);
 					

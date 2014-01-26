@@ -307,7 +307,7 @@ public class ControlerAnimaux {
 		corrigeDirection(a);
 		float approx = 0.1f;
 		if ( Math.abs(p.x - v.x )<approx && Math.abs(p.y - v.y )<approx && a.getPath().size>1){
-			System.out.println(a.getPath().size);
+			
 			this.nextStep(a);
 		}
 		}

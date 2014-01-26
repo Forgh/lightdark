@@ -804,7 +804,6 @@ public void demo6(){
 	//ici la salamandre...
 	this.animals.add(new Animal(new Vector2(8f,9f)));
 	
-	this.posStart = new Vector2(0f,2f);
 	
 	refresh();
 }
