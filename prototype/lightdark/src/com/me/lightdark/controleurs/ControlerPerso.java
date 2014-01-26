@@ -245,6 +245,15 @@ public class ControlerPerso {
 		if (ok && (persoRect.y<0 || persoRect.y>this.monde.getNiveau().getHauteur())){
 			perso.getRapidite().y = 0;
 		}
+		i=0;
+		while(i<monde.getAnime().size){
+			if(monde.getAnime().get(i)!=null && perso.getCadre().overlaps(monde.getAnime().get(i).getCadre())){
+				perso.getRapidite().x=0;
+				//perso.getRapidite().y=0;
+				ok=false;
+			}
+			i++;
+		}
 
 		perso.getRapidite().scl(1/delta); // on restaure la vitesse
 		

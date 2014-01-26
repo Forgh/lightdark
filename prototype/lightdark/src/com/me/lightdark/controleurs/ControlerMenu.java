@@ -18,8 +18,8 @@ public class ControlerMenu {
 	private Button pause;
 	private Monde monde;
 	
-	private float transformTime = 30;		//durée de la transformation (en secondes)
-	private float cooldownTime = 40;		//temps de recharge depuis le clic et jusqu'à la prochaine utilisation
+	private float transformTime = 10;		//durée de la transformation (en secondes)
+	private float cooldownTime = 30;		//temps de recharge depuis le clic et jusqu'à la prochaine utilisation
 	
 	public ControlerMenu(Monde monde) {
 		this.perso = monde.getPerso();
@@ -35,53 +35,53 @@ public class ControlerMenu {
 	
 	/*Action éxecutée quand on appuie sur l'orbe*/
 	public void orbPressed(){
+		if(monde.hasUnlockedOrb()){
+			int posX =(int)perso.getPosition().x;//La position de la case sur laquelle est le joueur 
+			int posY = (int)perso.getPosition().y;
+			//System.out.println("posX : "+posX +" PosY : "+posY);
+			//S'il est sur une ombre et que l'orbe est activé
+			if (monde.getNiveau().isShadow(posX, posY) && monde.isOrbEnabled()){
+				perso.switchForm();
+				
+				monde.switchOrb(false); //désactive l'Orbe
+				//-------------------------
+				
+				Timer.Task transform = new Timer.Task()
+				{
+				    @Override
+				    public void run() {
+				    	System.out.println("[DEBUG] Transformation terminée");
+				    	//Vector2 back = new Vector2(savePos);
+				    	perso.setPosition(monde.getNiveau().getCloseShadow(perso.getPosition() ));
+						perso.switchForm();
+						System.out.println("[DEBUG] Orbe réactivé");
+						
+				    }
+				};
+				
+				Timer.Task cooldown = new Timer.Task()
+				{
+				    @Override
+				    public void run() {
+				    	System.out.println("[DEBUG] Orbe rï¿½activï¿½");
+				    	monde.switchOrb(true);  //rï¿½active l'orbe aprï¿½s le cooldown
+				    	
+				    }
+				};
+				
+				//System.out.println("[DEBUG] Orbe utilisé");
+				Timer.schedule(transform, transformTime);
+				Timer.schedule(cooldown, cooldownTime);
+				
+			}
+			/*Si la transformation est impossible, dire pourquoi
+			 * Plus tard, on pourra Implï¿½menter un FeedBack*/
+			else if(!monde.isOrbEnabled())
+				System.out.println("[DEBUG] L'orbe doit se recharger !");
+			else System.out.println("[DEBUG] Tu n'es pas sur une ombre !");
 		
-		int posX =(int)perso.getPosition().x;//La position de la case sur laquelle est le joueur 
-		int posY = (int)perso.getPosition().y;
-		//System.out.println("posX : "+posX +" PosY : "+posY);
-		//S'il est sur une ombre et que l'orbe est activé
-		if (monde.getNiveau().isShadow(posX, posY) && monde.isOrbEnabled()){
-			perso.switchForm();
-			
-			monde.switchOrb(false); //désactive l'Orbe
-			//-------------------------
-			
-			Timer.Task transform = new Timer.Task()
-			{
-			    @Override
-			    public void run() {
-			    	System.out.println("[DEBUG] Transformation terminée");
-			    	//Vector2 back = new Vector2(savePos);
-			    	perso.setPosition(monde.getNiveau().getCloseShadow(perso.getPosition() ));
-					perso.switchForm();
-					System.out.println("[DEBUG] Orbe réactivé");
-					
-			    }
-			};
-			
-			Timer.Task cooldown = new Timer.Task()
-			{
-			    @Override
-			    public void run() {
-			    	System.out.println("[DEBUG] Orbe rï¿½activï¿½");
-			    	monde.switchOrb(true);  //rï¿½active l'orbe aprï¿½s le cooldown
-			    	
-			    }
-			};
-			
-			//System.out.println("[DEBUG] Orbe utilisé");
-			Timer.schedule(transform, transformTime);
-			Timer.schedule(cooldown, cooldownTime);
-			
 		}
-		/*Si la transformation est impossible, dire pourquoi
-		 * Plus tard, on pourra Implï¿½menter un FeedBack*/
-		else if(!monde.isOrbEnabled())
-			System.out.println("[DEBUG] L'orbe doit se recharger !");
-		else System.out.println("[DEBUG] Tu n'es pas sur une ombre !");
-	
-		
-		
+			
 		
 	}
 
