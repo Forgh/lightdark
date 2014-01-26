@@ -138,6 +138,8 @@ public class AfficherMonde {
 		this.cam.position.set(CAM_LARG / 2f, CAM_HAUT / 2f, 0); // ici on place la camera au centre
 		this.deboguage = debug;
 		
+		terrain = new  HashMap<type_case_generique, TextureRegion >();
+		
 		spriteBatch = new SpriteBatch();
 		mapperAnimations();
 		
@@ -245,8 +247,19 @@ public class AfficherMonde {
 		this.imgTorche  = new TextureRegion(new Texture(Gdx.files.internal("images/torche.png")));
 		
 		// TODO rajouter pour toutes les cases
-		terrain.put(type_case_generique.ARBUSTE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain/arbuste_herbe.png"))));
-		 
+		terrain.put(type_case_generique.ARBUSTE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/arbuste_herbe.png"))));
+		terrain.put(type_case_generique.HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/herbe.png"))));
+		terrain.put(type_case_generique.TERRE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/herbe.png"))));
+		terrain.put(type_case_generique.FALAISE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/falaise.png"))));
+		terrain.put(type_case_generique.MONTAGNE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/falaise.png"))));
+		terrain.put(type_case_generique.OMBRE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/ombre_herbe.png"))));
+		terrain.put(type_case_generique.OMBRE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/ombre_herbe.png"))));
+		
+		
+		//transitions
+		terrain.put(type_case_generique.OMBRE_HERBE_GAUCHE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/ombre_herbe_gauche.png"))));
+		
+		terrain.put(type_case_generique.TRANSITION_HERBE_GAUCHE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/transition_herbe_gauche.png"))));
 	}
 	
 	public void render() {
@@ -287,16 +300,17 @@ public class AfficherMonde {
 		Array<Case> cases=  monde.getAffichable(this.width, this.height);
 		for(int i = 0; i<cases.size;i++){
 			 Case c = cases.get(i);
-			 if (c.getTypeCase() != null){
-				 if(c.getTypeCase().equals("TERRE")){
-					 spriteBatch.draw(this.imgSol, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+			 if (c.getTypeCaseE() != null){
+				 /*if(c.getTypeCase().equals("TERRE")){
+					 spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 				 }
 				 else if(c.getTypeCase().equals("MONTAGNE")){
 					 spriteBatch.draw(this.imgObstacle, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 				 }
 				 else if(c.getTypeCase().equals("OMBRE")){
 					 spriteBatch.draw(this.imgOmbre, c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-				 }
+				 }*/
+				 spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 			 }
 		}
 		/*for(int i = 0; i<monde.niveau.size;i++){

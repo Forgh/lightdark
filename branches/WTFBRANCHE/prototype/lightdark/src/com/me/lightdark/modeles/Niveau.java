@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Anime.AnimeEspece;
-import com.me.lightdark.modeles.Case.type_case_generique;
+import com.me.lightdark.modeles.type_case_generique;
 
 public class Niveau {
 
@@ -191,6 +191,7 @@ public class Niveau {
 			ombres[i-1][j-1]=cases[i-1][j-1].getCadre();
 			cases[i-1][j-1].setTypeCase(type_case_generique.OMBRE);
 		}
+		
 	}
 	
 	public void unloadNiveau(){
@@ -221,6 +222,7 @@ public class Niveau {
 			cases[i][0].setTypeCase(type_case_generique.MONTAGNE);
 			bloquantes[i][hauteur-1] = cases[i][hauteur-1].getCadre();
 			cases[i][hauteur-1].setTypeCase(type_case_generique.MONTAGNE);
+			
 		}
 		
 		for(int i=0;i<hauteur;i++){
@@ -340,8 +342,12 @@ private void demo1(){
 		this.animals.get(1).getPath().add(new Vector2(1f,6f));
 		this.animals.get(1).getPath().add(new Vector2(5f,6f));
 		this.animals.get(1).VITESSE = 0.5f;
+		
+		cases[7][2].setTypeCase(type_case_generique.ARBUSTE_HERBE);
+		
 		this.posStart = new Vector2(1f,1f);
 		this.formStart = Form.LIGHTFORM;
+		
 }
 
 private void demo2(){
@@ -412,6 +418,9 @@ cases[4][hauteur-2].setTypeCase(type_case_generique.OMBRE);
 bloquantes[4][hauteur-2]=null;
 createCaseWithShadow(11, hauteur-4);
 createCaseWithShadow(11, hauteur-6);
+
+
+
 
 this.animals.add(new Animal(new Vector2(4f,hauteur-2f)));//mob en haut
 this.animals.add(new Animal(new Vector2(11f,hauteur-5f)));//mob � droite

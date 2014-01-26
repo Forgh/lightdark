@@ -67,6 +67,10 @@ public class Case {
 		return s;
 	}
 	
+	public type_case_generique getTypeCaseE(){
+		return this.typeCase;
+	}
+	
 	public void setOmbre(boolean b){
 		this.ombre = b;
 	}
