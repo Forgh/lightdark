@@ -334,13 +334,15 @@ public class ControlerPerso {
 			
 			if(perso.getForm()==Form.SHADOWFORM && !charged && perso.getEtat()==Dark.TAMING) {//Si en shadowForm en tir non chargé et en taming
 				//NB : ne pas sortir du Taming
-				monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
+				if(monde.getProjectile().size==0)
+					monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
 			}
 			
 			
 			
 			if(perso.getForm()==Form.SHADOWFORM && charged && perso.getEtat()==Dark.TAMING) {//Si en shadowForm en tir chargé
-				System.out.println("[DEBUG] Lancement d'un tir chargé depuis l'animal : Compétence à activer");
+				//System.out.println("[DEBUG] Lancement d'un tir chargé depuis l'animal : Compétence à activer");
+				perso.getAnimal().demarrerCompetence();
 			}
 			
 			
