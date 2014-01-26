@@ -800,7 +800,7 @@ public void demo6(){
 		for(int j=4; j<hauteur-5; j++)
 			createObstacle(i, j);
 	
-	cases[largeur-1][2] =  new Case(new Vector2(largeur-1,2f)){
+	cases[0][2] =  new Case(new Vector2(0f,2f)){
 		public void arrive(){
 			unloadNiveau();
 			changeLevel = new String("END_GAME");
