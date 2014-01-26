@@ -193,6 +193,7 @@ public class Perso {
 			this.health=healthLight;
 		}
 		System.out.println(this.getForm());
+		this.toIdle();
 	}
 	
 	public void toWalking(){
