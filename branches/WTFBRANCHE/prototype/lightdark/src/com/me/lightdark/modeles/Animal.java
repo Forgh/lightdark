@@ -67,20 +67,20 @@ public class Animal extends Anime {
 		super.setTemps(super.temps()+delta);
 		
 		if(!taming){
-			if(super.getCadre().height==0 && super.getCadre().width==0 && !reinitFrame.isScheduled())
+			if(super.getCadre().height==0 && super.getCadre().width==0 && !reinitFrame.isScheduled()){
 				Timer.schedule(reinitFrame, 0.3f);
-			if(!reinitFrame.isScheduled())//ne doit bouger qu'après "s'être remis du taming"
+				this.tamer = null;//il n'y a plus de tamer
+			}
+			if(!reinitFrame.isScheduled() && tamer == null)//ne doit bouger qu'après "s'être remis du taming"
 				super.setPosition(super.getPosition().add(super.getRapidite().cpy().scl(delta)));
 			
 			}
 		else {//if taming
 		
-			if(super.getCadre()!=null){
-				
+			if(super.getCadre()!=null)
 				super.setCadre(null);
-			}
-			
-			super.setPosition(tamer.getPosition().cpy().sub(TAILLE/4, TAILLE/4));
+				
+			super.setPosition(tamer.getPosition().cpy());//.sub(TAILLE/4, TAILLE/4));
 			if(tamer.getEtat()!=Dark.TAMING)
 				taming = false;
 		}
