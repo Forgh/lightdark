@@ -137,7 +137,7 @@ public class ControlerProjectiles {
 
 	                //ici test d'une compétence
 	                monde.getAnime().get(i).demarrerCompetence();
-					System.out.println("[DEBUG] Shadow Taming");
+					//System.out.println("[DEBUG] Shadow Taming");
 					ok=false;
 			}
 			else if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.LIGHTFORM && p.getLanceur()==monde.getPerso()) {
@@ -182,22 +182,22 @@ public class ControlerProjectiles {
 			i=0;
 			while(i< shadowTouched.size && ok){
 				if(persoRect.overlaps(shadowTouched.get(i)) && shadowTouched.get(i).equals(p.getCaseCible().getCadre())) {
-					System.out.println(lanceur.getEtat());
+					//System.out.println(lanceur.getEtat());
 					p.devientObsolete();
-					System.out.println("[DEBUG] Collision ombre détectée");
+					//System.out.println("[DEBUG] Collision ombre détectée");
 					
 					float destx = (shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f));
 					float desty = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
 					
 					lanceur.transit(new Vector2(destx, desty));
-					System.out.println("Début de transition");
+					//System.out.println("Début de transition");
 					
 					
 					Timer.Task toDarkness = new Timer.Task() {
 
 						@Override
 						public void run() {
-							System.out.println("toDarkness : ON");
+							//System.out.println("toDarkness : ON");
 							lanceur.changerEtat(Dark.IDLE);
 							if(lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
 								lanceur.getAnimal().setTaming(false);
