@@ -225,6 +225,9 @@ public class ControlerPerso {
 			i++;
 		}
 
+		if (ok && (persoRect.x<0 || persoRect.x>this.monde.getNiveau().getLargeur())){
+			perso.getRapidite().x = 0;
+		}
 		
 		persoRect.x = perso.getCadre().x;
 		persoRect.y += perso.getRapidite().y;
@@ -237,6 +240,10 @@ public class ControlerPerso {
 				ok2 = false;
 			}
 			i++;
+		}
+		
+		if (ok && (persoRect.y<0 || persoRect.y>this.monde.getNiveau().getHauteur())){
+			perso.getRapidite().y = 0;
 		}
 
 		perso.getRapidite().scl(1/delta); // on restaure la vitesse

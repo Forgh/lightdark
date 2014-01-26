@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 import com.me.lightdark.controleurs.ControlerAnimaux;
@@ -190,6 +191,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 			if (!monde.getNiveau().isLevelChanged().equals("END_GAME")){
 				System.out.println(monde.getNiveau().isLevelChanged());
 				String s = new String(monde.getNiveau().isLevelChanged());
+				this.monde.getPerso().setRapidite(new Vector2(0f,0f));
 				reload(s);
 			}else{
 				affSideMenu.setEndMsgOn(true);
