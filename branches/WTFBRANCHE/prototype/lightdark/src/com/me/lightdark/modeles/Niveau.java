@@ -481,7 +481,7 @@ private void demo2(){
 	
 	
 	//this.animals.add(new Animal(new Vector2(5f,hauteur-2f)));//mob en haut
-	this.animals.add(new Monstre(new Vector2(5f,hauteur-2f), this));
+	this.animals.add(new Monstre(new Vector2(6f,hauteur-2f), this));
 	this.animals.get(0).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
 
 	//this.animals.add(new Animal(new Vector2(11f,hauteur-6f)));//mob � droite
@@ -511,7 +511,7 @@ private void demo2(){
 private void demo3(){
 	this.formStart=Form.SHADOWFORM;
 
-	createGroundAndBorder();
+	createGroundAndBorder();    
 	
 	for (int i = 4; i<6; i++){
 	    for (int j= 6; j<hauteur-1; j++)
@@ -562,8 +562,6 @@ private void demo3(){
 	
 	
 	this.animals.add(new Animal(new Vector2(8f,2f)));
-	Animal coq = (Animal)this.animals.get(1);
-	coq.setCompetence(CompetenceAnimaux.CHANTER);
 	this.animals.get(1).getPath().add(new Vector2(8f,2f));
 	this.animals.get(1).getPath().add(new Vector2(4f,2f));
 	

@@ -45,6 +45,8 @@ public class AfficherMonde {
 	private TextureRegion imgSol;
 	private TextureRegion imgObstacle;
 	private TextureRegion imgOmbre;
+	private TextureRegion imgFleche;
+
 	//private TextureRegion imgLightForm;
 	//private TextureRegion imgDarkForm;
 	
@@ -326,7 +328,8 @@ public class AfficherMonde {
 		this.imgSword = new TextureRegion(new Texture(Gdx.files.internal("images/sword.png")));
 		this.imgAnimal = new TextureRegion(new Texture(Gdx.files.internal("images/cat_laptop.png")));
 		this.imgMonstreCube = new TextureRegion(new Texture(Gdx.files.internal("images/monstre_cube.png")));
-		
+		this.imgFleche = new TextureRegion(new Texture(Gdx.files.internal("images/fleche.png")));
+
 		this.imgTorche  = new TextureRegion(new Texture(Gdx.files.internal("images/torche.png")));
 		
 		// TODO rajouter pour toutes les cases
@@ -581,7 +584,7 @@ public class AfficherMonde {
 	private void drawFleche(){
 		 Array<Projectile> project = monde.getFleche();
 		 for(int i=0;i<project.size;i++){
-			 spriteBatch.draw(this.imgProjectile, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
+			 spriteBatch.draw(this.imgFleche, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
 		 }
 	}
 	
