@@ -18,6 +18,8 @@ public class Niveau {
 	private Rectangle[][] ombres;
 	private Rectangle[][] light;
 	
+	private Monde monde;
+	
 	
 
 	private Vector2 posStart;
@@ -34,8 +36,8 @@ public class Niveau {
 
 	Array<Epee> sword = new Array<Epee>();
 
-	public Niveau(String niv) {
-		// TODO Auto-generated constructor stub
+	public Niveau(String niv, Monde m) {
+		monde = m;
 		this.largeur = 13; this.hauteur = 13;
 		posStart = new Vector2(0f,0f);
 		cases = new Case[largeur][hauteur];
@@ -541,7 +543,7 @@ private void demo3(){
 	//entrï¿½e et sortie
 	
 
-	cases[12][hauteur-2] =  new Case(new Vector2(12f,hauteur-2f)){
+	cases[12][hauteur-2] =  new Case(new Vector2(12f, hauteur-2f)){
 		public void arrive(){
 			unloadNiveau();
 			changeLevel = new String("demo4");
@@ -568,6 +570,9 @@ private void demo3(){
 	this.animals.get(1).getPath().add(new Vector2(4f,2f));
 	
 	this.posStart = new Vector2(2f,0f);
+	
+
+	
 	
 	setToFullShadow(2,4);
 	setToFullShadow(3,11);
@@ -624,8 +629,22 @@ private void demo4(){
 	createObstacle(9,3);
 	createObstacle(10,3);
 	createObstacle(10,1);
-	//Coffre ï¿½pï¿½e
+	//Coffre épée
+	
+	cases[11][1] = new Case(new Vector2(11f, 1f)){
+		public void arrive(){
+			int posX = (int)monde.getPerso().getPosition().x;
+			int posY = (int)monde.getPerso().getPosition().y;
+			if(monde.getPerso().getForm()==Form.LIGHTFORM && posX==11 && posY==1){
+				//System.out.println("Activation épée");
+				monde.unlockSword();
+			}
+		}
+	};
+	
 	cases[11][1].setTypeCase(type_case_generique.COFFRE_HERBE);
+	
+	
 	
 /*	for(int i=0;i<largeur;i++){
 		for(int j=0;j<hauteur;j++){
@@ -708,8 +727,20 @@ private void demo5(){
 	this.animals.get(2).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
 
 	
+	this.cases[6][8] = new Case(new Vector2(6f, 8f)){
+		public void arrive(){
+			int posX = (int)monde.getPerso().getPosition().x;
+			int posY = (int)monde.getPerso().getPosition().y;
+			if(monde.getPerso().getForm()==Form.LIGHTFORM && posX==6 && posY==8)
+				//System.out.println("Activation de l'Orbe");
+				monde.unlockOrb();
+		}
+	};
+	
 	//Insï¿½rer ici le coffre de l'orbe
 	cases[6][8].setTypeCase(type_case_generique.COFFRE_HERBE);
+	
+	
 	
 	//L'entrï¿½e et la sortie :
 	ombres[6][0] = cases[6][0].getCadre();
@@ -762,7 +793,7 @@ public void refresh(){
 public void demo6(){
 	this.formStart=Form.SHADOWFORM;
 	createGroundAndBorder();
-	this.posStart = new Vector2(largeur-1f,2f);
+	
 	
 	
 	for(int i=5; i<largeur-1; i++)
@@ -804,7 +835,7 @@ public void demo6(){
 	//ici la salamandre...
 	this.animals.add(new Animal(new Vector2(8f,9f)));
 	
-	
+	this.posStart = new Vector2(largeur-1f,2f);
 	refresh();
 }
 

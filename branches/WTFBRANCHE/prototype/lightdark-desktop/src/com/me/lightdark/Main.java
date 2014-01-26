@@ -8,7 +8,7 @@ public class Main {
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "lightdark - alpha";
-
+ 
 		cfg.useGL20 = false;
 		cfg.width = 1000;
 		cfg.height = 800;

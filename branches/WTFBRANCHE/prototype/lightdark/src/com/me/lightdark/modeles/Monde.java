@@ -87,7 +87,7 @@ public class Monde {
 	public Monde(String niv) {
 		// TODO Charger une map.
 		
-		this.niveau = new Niveau(niv);
+		this.niveau = new Niveau(niv, this);
 		
 		projectiles = this.niveau.getProjectile();
 		fleches = this.niveau.getFleche();
@@ -217,7 +217,7 @@ public class Monde {
 	}
 	
 	public void setLvl(String l) {
-		this.niveau= new Niveau(l);
+		this.niveau= new Niveau(l, this);
 		//System.out.println("l");
 	}
 	
