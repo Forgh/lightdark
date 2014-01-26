@@ -1,5 +1,7 @@
 package com.me.lightdark.modeles;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -14,7 +16,8 @@ public class Perso {
 	//public static final int max_health = 75;
 	public static final int max_health_light= 3; //vie max light
 	public static final int max_health_shadow= 1; //vie max shadow
-	
+	private Sound hurtSound = Gdx.audio.newSound(Gdx.files.internal("sound/hurt.wav"));
+
 	public final int puissance = 30;
 	public final int puissanceMini = 20;
 	
@@ -169,6 +172,7 @@ public class Perso {
 	
 	public void healthDown(){
 		health--;
+		hurtSound.play(0.2f);
 		System.out.println("HEALTH DOWN");
 	}
 	
