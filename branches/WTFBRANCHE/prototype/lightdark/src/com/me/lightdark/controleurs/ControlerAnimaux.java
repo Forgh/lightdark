@@ -204,7 +204,7 @@ public class ControlerAnimaux {
         
         
         
-        if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING){
+        if(this.monde.getPerso().getForm()==Form.LIGHTFORM || this.monde.getPerso().getEtat()==Dark.GRABBING || this.monde.getPerso().isTamingDetectable()){
             if (this.monde.getPerso().getPosition().dst(a.getPosition()) < a.DISTANCE_VUE){
                
                 float a1 = (float) Math.toDegrees(angleSurRefV1(a.getPosition(), this.monde.getPerso().getPosition()));
@@ -218,21 +218,22 @@ public class ControlerAnimaux {
                 
                 
                 float dec = Math.abs(a1 - a2);
-                System.out.println((dec<60 ? " VU" : "PAS VU" )+ " => "+ a1 + " : " + a2 );
+                //System.out.println((dec<60 ? " VU" : "PAS VU" )+ " => "+ a1 + " : " + a2 );
                 if( dec<60 && (a.champDegage(this.monde.getPerso().getPosition()))){
                 	//System.out.println("Le mob peut nous voir : "+a.champDegage(this.monde.getPerso().getPosition()));
                 	
                 	Vector2 v = new Vector2(this.monde.getPerso().getPosition());
                 	if (v.dst(a.getPosition()) < a.DISTANCE_TIR && !monsterReload.isScheduled()){
-						System.out.println(">>> tir");
+						//System.out.println(">>> tir");
 						/*
 						tirer.put(a,transform );*/
 						Vector2 d = new Vector2();
 						float x = a.getPosition().angle() +angleSurRefV1(a.getPosition(), this.monde.getPerso().getPosition());
 						d.x = (float) Math.cos(x);
-						d.y = (float) Math.sin(x); 
-						monde.lancerProjectileParMonstre(a.getPosition().cpy(),this.monde.getPerso().getPosition().cpy() );
-						System.out.println("[DEBUG] Fleche lancee !!");
+						d.y = (float) Math.sin(x);
+						if(!monde.getPerso().isTamingDetectable())//ne tire pas sur un animal
+							monde.lancerProjectileParMonstre(a.getPosition().cpy(),this.monde.getPerso().getPosition().cpy() );
+						//System.out.println("[DEBUG] Fleche lancee !!");
 						Timer.schedule(monsterReload, 0.5f);
                 	}
                 	this.suivreJoueur(a);

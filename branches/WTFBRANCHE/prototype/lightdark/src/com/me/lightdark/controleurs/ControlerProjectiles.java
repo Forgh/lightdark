@@ -136,7 +136,7 @@ public class ControlerProjectiles {
 					
 
 	                //ici test d'une compétence
-	                monde.getAnime().get(i).demarrerCompetence();
+	               // monde.getAnime().get(i).demarrerCompetence();
 					//System.out.println("[DEBUG] Shadow Taming");
 					ok=false;
 			}
