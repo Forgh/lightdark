@@ -13,7 +13,7 @@ public abstract class Anime {
 	}
 	
 	public enum AnimeEspece { // affichage
-		INCONNU, MONSTRE_CUBE, ANIMAL_CHAT
+		INCONNU, MONSTRE_CUBE, ANIMAL_CHAT, SALAMANDRE
 	}
 	
 	private Vector2 position = new Vector2();
