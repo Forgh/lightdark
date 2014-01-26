@@ -277,16 +277,6 @@ public class ControlerPerso {
 	
 	private void gererEntrees() {
 		// ici on modifie l'état du perso
-		if (touches.get(Touches.GAUCHE) && toucheActuHoz == Touches.GAUCHE) {
-				perso.setDirection(direction.GAUCHE);
-				perso.getRapidite().x = -Perso.VITESSE;
-			
-		}
-		if (touches.get(Touches.DROITE) && toucheActuHoz == Touches.DROITE) {
-				perso.setDirection(direction.DROITE);
-				perso.getRapidite().x = Perso.VITESSE;
-			
-		}
 		if (touches.get(Touches.HAUT)  && toucheActuVer == Touches.HAUT) {
 				perso.setDirection(direction.HAUT);
 				perso.getRapidite().y = Perso.VITESSE;
@@ -297,6 +287,18 @@ public class ControlerPerso {
 				perso.getRapidite().y = -Perso.VITESSE;
 			
 		}
+		
+		if (touches.get(Touches.GAUCHE) && toucheActuHoz == Touches.GAUCHE) {
+				perso.setDirection(direction.GAUCHE);
+				perso.getRapidite().x = -Perso.VITESSE;
+			
+		}
+		if (touches.get(Touches.DROITE) && toucheActuHoz == Touches.DROITE) {
+				perso.setDirection(direction.DROITE);
+				perso.getRapidite().x = Perso.VITESSE;
+			
+		}
+		
 		
 		if (!touches.get(Touches.GAUCHE) && !touches.get(Touches.DROITE)){
 			perso.getRapidite().x = 0;

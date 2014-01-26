@@ -27,6 +27,7 @@ public class Perso {
 	
 	private Vector2 position = new Vector2();
 	private Vector2 rapidite = new Vector2();
+	private Vector2 transition = null;//La destination de transition  du joueur (si null -> pas de transition en cours)
 	
 	private Form form;
 	
@@ -178,7 +179,10 @@ public class Perso {
 
 	public void update(float delta) {
 		tempsAnime += delta;
-		position.add(rapidite.cpy().scl(delta)); //?
+		if (transition==null)
+			position.add(rapidite.cpy().scl(delta)); //?
+		else//Si transistion en cours
+			transit();
 		cadre.setPosition(position.x + correctX, position.y + correctY);
 	}
 
@@ -213,16 +217,30 @@ public class Perso {
 	}
 	
 	/*@param la destination du joueur
-	 * déplace le joueur de façon fluide jusqu'à sa destination*/
+	 * établit les coordonnées de destination de la transition du joueur
+	 * l'attribut transition devient un vecteur déplacement*/
 	public void transit(Vector2 destination){
+		transition = destination;
 		
-		float precision = 50f;//précision avec laquelle on vérifie le vecteur mob-player
-		Vector2 trace = new Vector2((destination.cpy().sub(this.getPosition())).div(precision));//Le vecteur joueur-->destination divisé par la précision
-		//Vector2 verif = this.getPosition().cpy();
-		
-		
-		for(int i=0; i<(int)precision; i++)//tous les xièmes
-			this.getPosition().add(trace);//on progresse de 1/x vers la destination
+	}
+	
+	/*Se charge de déplacer le perso d'un cran vers sa destination de transition
+	 * S'il est arrivé, passe transition à null*/
+	public void transit(){
+		//System.out.println("transition "+position+" --> "+transition);
+		Vector2 diff = position.cpy().sub(transition);
+		//System.out.println("diff : " +diff);
+		if(Math.abs(diff.x)<0.01f && Math.abs(diff.y)<0.01f){//Si arrivé, arrêter la transition
+			System.out.println("Fin de transition");
+			
+			transition = null;
+		}
+		else{ 
+			Vector2 step = transition.cpy().sub(position).div(10);//le vecteur déplacement, divisé par le nombre d'étapes
+			//System.out.println("Pos Joueur : "+position+", Destination de transition :"+ transition+"\nVecteur deplacement : "+step);
+					 
+			position.add(step);
+		}
 	}
 
 }

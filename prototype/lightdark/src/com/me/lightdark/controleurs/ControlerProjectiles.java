@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.Timer;
 import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Anime;
 import com.me.lightdark.modeles.Anime.AnimeType;
@@ -108,18 +109,32 @@ public class ControlerProjectiles {
 			if(monde.getAnime().get(i) instanceof Animal && persoRect.overlaps(monde.getAnime().get(i).getCadre()) && monde.getPerso().getForm()==Form.SHADOWFORM) {
 				//Si le projectile du perso en ShadowForm rencontre un Animal
 				
-					monde.getAnime().get(i).setTamer(lanceur);
-					monde.getAnime().get(i).setTaming(true);//L'animal devient contrôlé
-					lanceur.setAnimal(monde.getAnime().get(i));
-					p.devientObsolete();
-
+					
 					//lanceur.getPosition().x = monde.getAnime().get(i).getCadre().x;//TODO : placer cash sur le CENTRE de l'animal (+=Animal.TAILLE/4)
 	                //lanceur.getPosition().y = monde.getAnime().get(i).getCadre().y;
-	                Vector2 destination = new Vector2(monde.getAnime().get(i).getCadre().x, monde.getAnime().get(i).getCadre().y);
 	                
-	                lanceur.changerEtat(Dark.TAMING);
-	                lanceur.transit(destination);
+				p.devientObsolete();
+	            lanceur.transit(new Vector2(monde.getAnime().get(i).getCadre().x, monde.getAnime().get(i).getCadre().y));
+	            
+	            final Anime target = monde.getAnime().get(i);
+	            target.setTamer(lanceur);
+	            lanceur.setAnimal(target);
+	            Timer.Task transiter = new Timer.Task() {
+
+					@Override
+					public void run() {
+						lanceur.changerEtat(Dark.TAMING);
 	                
+					target.setTaming(true);//L'animal devient contrôlé
+					
+					}
+				};
+				if(!transiter.isScheduled())
+					Timer.schedule(transiter, 0.5f);
+	                
+	                
+					
+
 	                //ici test d'une compétence
 	                monde.getAnime().get(i).demarrerCompetence();
 					System.out.println("[DEBUG] Shadow Taming");
@@ -169,21 +184,34 @@ public class ControlerProjectiles {
 				if(persoRect.overlaps(shadowTouched.get(i)) && shadowTouched.get(i).equals(p.getCaseCible().getCadre())) {
 					System.out.println(lanceur.getEtat());
 					p.devientObsolete();
-					System.out.println("[DEBUG2] Shadow Taming ...");
-					lanceur.getPosition().x = (shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f));
-					lanceur.getPosition().y = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
-					//lanceur.setPosition();
-					lanceur.changerEtat(Dark.IDLE);
-					if(lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
+					System.out.println("[DEBUG] Collision ombre détectée");
+					
+					float destx = (shadowTouched.get(i).x + (shadowTouched.get(i).width /2f) - (lanceur.TAILLE / 2f));
+					float desty = (shadowTouched.get(i).y + (shadowTouched.get(i).height /2f) -  (lanceur.TAILLE / 2f));
+					
+					lanceur.transit(new Vector2(destx, desty));
+					System.out.println("Début de transition");
+					
+					
+					Timer.Task toDarkness = new Timer.Task() {
+
+						@Override
+						public void run() {
+							System.out.println("toDarkness : ON");
+							lanceur.changerEtat(Dark.IDLE);
+							if(lanceur.getAnimal()!=null){//Désactiver le shadow taming si de retour sur une ombre
+								lanceur.getAnimal().setTaming(false);
+								lanceur.getAnimal().setTamer(null);
+							}
+						
+						}
+					};
+					if(!toDarkness.isScheduled())
+						Timer.schedule(toDarkness, 0.5f);
+					
+					
 						//ici test d'une compétence
 						//lanceur.getAnimal().stopperCompetence(CompetenceAnimaux.COURRIR);
-						lanceur.getAnimal().setTaming(false);
-						
-						//lanceur.setPosition(monde.getNiveau().getCloseShadow(lanceur.getPosition()));
-						//System.out.println("[DEBUG] Position joueur : "+lanceur.getPosition().toString()+"\n        Position ombre : "+monde.getNiveau().getCloseShadow(lanceur.getPosition()));
-					}
-				
-					//on remet en shadowwalking si jamais on touche la case désirée 
 
 					ok=false;
 				}
