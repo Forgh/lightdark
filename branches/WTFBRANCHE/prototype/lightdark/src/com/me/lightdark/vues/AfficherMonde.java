@@ -195,10 +195,10 @@ public class AfficherMonde {
 		lightIdle_up = tempLight[3][0];
 		lightIdle_down = tempLight[0][0];
 		
-		darkIdle_left = tempDark[1][0];
-		darkIdle_right = tempDark[3][0];
-		darkIdle_up = tempDark[0][0];
-		darkIdle_down = tempDark[2][0];
+		darkIdle_left = tempDark[2][0];
+		darkIdle_right = tempDark[1][0];
+		darkIdle_up = tempDark[3][0];
+		darkIdle_down = tempDark[0][0];
 		
 		//Marchant
 		lightWalking_leftTbt = new TextureRegion[4];//9 images pour le déplacement
