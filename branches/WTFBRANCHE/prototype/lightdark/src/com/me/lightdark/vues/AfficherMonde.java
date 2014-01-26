@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Anime;
 import com.me.lightdark.modeles.Anime.AnimeEspece;
+import com.me.lightdark.modeles.Anime.directions;
 import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Epee;
@@ -582,13 +583,24 @@ public class AfficherMonde {
 	private void drawAnimals(){
 		Array<Anime> project = monde.getAnime();
 		 for(int i=0;i<project.size;i++){
-			 //Anime a = 
+			 Anime a = project.get(i); 
 			 if (project.get(i).getAnimeEspece() == AnimeEspece.MONSTRE_CUBE){
-				 //if()
-				 spriteBatch.draw(this.imgMonstreCube, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
+				 if(a.getDirections()==directions.BAS)
+					 spriteBatch.draw(flambi_down, a.getPosition().x * ppuX, a.getPosition().y * ppuY, a.TAILLE * ppuX, a.TAILLE * ppuY);
+				 if(a.getDirections()==directions.HAUT)
+					 spriteBatch.draw(flambi_up, a.getPosition().x * ppuX, a.getPosition().y * ppuY, a.TAILLE * ppuX, a.TAILLE * ppuY);
+				 if(a.getDirections()==directions.GAUCHE)
+					 spriteBatch.draw(flambi_left, a.getPosition().x * ppuX, a.getPosition().y * ppuY, a.TAILLE * ppuX, a.TAILLE * ppuY);
+				 if(a.getDirections()==directions.DROITE)
+					 spriteBatch.draw(flambi_right, a.getPosition().x * ppuX, a.getPosition().y * ppuY, a.TAILLE * ppuX, a.TAILLE * ppuY);
+				 //spriteBatch.draw(this.imgMonstreCube, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
 			 }
-			 if (project.get(i).getAnimeEspece() == AnimeEspece.ANIMAL_CHAT){
-				 spriteBatch.draw(this.imgAnimal, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
+			 if (project.get(i).getAnimeEspece() == AnimeEspece.ANIMAL_CHAT || a.getAnimeEspece()==AnimeEspece.INCONNU){
+				 if(a.getDirections()==directions.BAS || a.getDirections()==directions.DROITE)
+					 spriteBatch.draw(cat_right, a.getPosition().x * ppuX, a.getPosition().y * ppuY, a.TAILLE * ppuX, a.TAILLE * ppuY);
+				 if(a.getDirections()==directions.HAUT || a.getDirections()==directions.GAUCHE)
+					 spriteBatch.draw(cat_left, a.getPosition().x * ppuX, a.getPosition().y * ppuY, a.TAILLE * ppuX, a.TAILLE * ppuY);
+				 //spriteBatch.draw(this.imgAnimal, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
 			 }
 			
 		 }
