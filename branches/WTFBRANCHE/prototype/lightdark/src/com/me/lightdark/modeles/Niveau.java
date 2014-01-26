@@ -562,6 +562,8 @@ private void demo3(){
 	
 	
 	this.animals.add(new Animal(new Vector2(8f,2f)));
+	Animal coq = (Animal)this.animals.get(1);
+	coq.setCompetence(CompetenceAnimaux.CHANTER);
 	this.animals.get(1).getPath().add(new Vector2(8f,2f));
 	this.animals.get(1).getPath().add(new Vector2(4f,2f));
 	

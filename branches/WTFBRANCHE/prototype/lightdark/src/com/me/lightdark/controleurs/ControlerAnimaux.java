@@ -248,7 +248,7 @@ public class ControlerAnimaux {
 						Timer.schedule(monsterReload, 0.5f);
                 	}
                 	this.suivreJoueur(a);
-                	
+                	//System.out.println("Repéré");
                 }
             }else{
             	this.arretSuivreJoueur(a);

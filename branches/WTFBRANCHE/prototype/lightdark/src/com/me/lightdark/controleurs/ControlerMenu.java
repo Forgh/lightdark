@@ -38,7 +38,7 @@ public class ControlerMenu {
 		
 		int posX =(int)perso.getPosition().x;//La position de la case sur laquelle est le joueur 
 		int posY = (int)perso.getPosition().y;
-		System.out.println("posX : "+posX +" PosY : "+posY);
+		//System.out.println("posX : "+posX +" PosY : "+posY);
 		//S'il est sur une ombre et que l'orbe est activé
 		if (monde.getNiveau().isShadow(posX, posY) && monde.isOrbEnabled()){
 			perso.switchForm();

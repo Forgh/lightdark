@@ -231,7 +231,7 @@ public class Perso {
 		Vector2 diff = position.cpy().sub(transition);
 		//System.out.println("diff : " +diff);
 		if(Math.abs(diff.x)<0.01f && Math.abs(diff.y)<0.01f){//Si arrivé, arrêter la transition
-			System.out.println("Fin de transition");
+			//System.out.println("Fin de transition");
 			
 			transition = null;
 		}

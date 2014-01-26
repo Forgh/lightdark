@@ -100,6 +100,7 @@ public class Animal extends Anime {
 			
 			
 		}else if (comptanima == CompetenceAnimaux.CHANTER){
+			System.out.println("C0c0r1c0 !");
 			tamer.setTamingDetectable(true);
 			actionTimed = true;
 			

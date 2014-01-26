@@ -343,6 +343,7 @@ public class ControlerPerso {
 			if(perso.getForm()==Form.SHADOWFORM && charged && perso.getEtat()==Dark.TAMING) {//Si en shadowForm en tir chargé
 				//System.out.println("[DEBUG] Lancement d'un tir chargé depuis l'animal : Compétence à activer");
 				perso.getAnimal().demarrerCompetence();
+				System.out.println("Compétence démarrée");
 			}
 			
 			
