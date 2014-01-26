@@ -36,11 +36,11 @@ public class ControlerMenu {
 	/*Action éxecutée quand on appuie sur l'orbe*/
 	public void orbPressed(){
 		
-		int posX =(int)perso.getPosition().x;//La position de la case sur laquelle est le joueur
+		int posX =(int)perso.getPosition().x;//La position de la case sur laquelle est le joueur 
 		int posY = (int)perso.getPosition().y;
-		
+		System.out.println("posX : "+posX +" PosY : "+posY);
 		//S'il est sur une ombre et que l'orbe est activé
-		if (monde.getNiveau().get(posX, posY).getTypeCase()=="OMBRE" && monde.isOrbEnabled()){
+		if (monde.getNiveau().isShadow(posX, posY) && monde.isOrbEnabled()){
 			perso.switchForm();
 			
 			monde.switchOrb(false); //désactive l'Orbe
