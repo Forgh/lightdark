@@ -366,7 +366,12 @@ public class AfficherMonde {
 		majPerso();
 		
 		spriteBatch.begin();
-
+		
+		if (this.monde.getPerso().getForm() == Form.LIGHTFORM){
+			this.applyShader(spriteBatch);
+		}else{
+			this.removeShader(spriteBatch);
+		}
 		// dessiner strate 1
 		drawMap();
 		// dessiner strate 2
@@ -480,6 +485,7 @@ public class AfficherMonde {
 		
 		if(p.getForm()==Form.LIGHTFORM){
 			
+			this.removeShader(spriteBatch);
 			if(p.getEtat()!=null && p.getEtat()==Light.MARCHANT){//si marche
 		
 				
@@ -506,6 +512,8 @@ public class AfficherMonde {
 				if(d==direction.DROITE)
 					spriteBatch.draw(lightIdle_right, p.getPosition().x * ppuX, p.getPosition().y * ppuY, p.TAILLE * ppuX, p.TAILLE * ppuY);
 			}
+			
+			this.applyShader(spriteBatch);
 		}
 		
 		
@@ -590,6 +598,18 @@ public class AfficherMonde {
 			 spriteBatch.draw(this.imgSword, sword.get(i).getPosition().x * ppuX, sword.get(i).getPosition().y * ppuY, sword.get(i).TAILLE * ppuX, sword.get(i).TAILLE * ppuY);
 		 }
 	}
+	
+	
+	private void applyShader(SpriteBatch sb){
+		Color c = sb.getColor();
+		sb.setColor(c.r, c.g, c.b, 0.1f);
+	}
+	
+	private void removeShader(SpriteBatch sb){
+		Color c = sb.getColor();
+		sb.setColor(c.r, c.g, c.b, 1f);
+	}
+	
 	
 	
 
