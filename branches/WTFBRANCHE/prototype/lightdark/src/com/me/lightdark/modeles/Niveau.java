@@ -231,15 +231,25 @@ public class Niveau {
 		
 		for(int i=0;i<largeur;i++){
 			setFalaise(i,0);
+			if(bloquantes[i][1]==null){
+				cases[i][1].setTypeCase(type_case_generique.TRANSITION_HERBE_BAS);
+			}
 			setFalaise(i,hauteur-1);
-
+			if(bloquantes[i][hauteur-2]==null){
+				cases[i][hauteur-2].setTypeCase(type_case_generique.TRANSITION_HERBE_HAUT);
+			}
 			
 		}
 		
 		for(int i=0;i<hauteur;i++){
 			setFalaise(0,i);
+			if(bloquantes[1][i]==null){
+				cases[1][i].setTypeCase(type_case_generique.TRANSITION_HERBE_GAUCHE);
+			}
 			setFalaise(largeur-1,i);
-
+			if(bloquantes[largeur-2][i]==null){
+				cases[largeur-2][i].setTypeCase(type_case_generique.TRANSITION_HERBE_DROITE);
+			}
 		}
 	}
 	
@@ -251,13 +261,7 @@ public class Niveau {
 		cases[i][j].setTypeCase(type_case_generique.FALAISE);
 	}
 	
-	private void setOmbreGauche(int i, int j){
-		cases[i][j].setTypeCase(type_case_generique.TRANSITION_HERBE_GAUCHE);
-	}
 	
-	private void setOmbreBas(int i, int j){
-		cases[i][j].setTypeCase(type_case_generique.TRANSITION_HERBE_BAS);
-	}
 	/*private void createOmbreCoin(int i, int j){
 		cases[i][j] = new Case(new Vector2(i,j));
 		cases[i][j].setTypeCase(type_case_generique.TRANSITION_HERBE_COIN);

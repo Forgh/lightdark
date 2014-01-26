@@ -268,7 +268,7 @@ public class AfficherMonde {
 		terrain.put(type_case_generique.PORTE_HAUT, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/porte_haut.png"))));
 		
 		terrain.put(type_case_generique.TRANSITION_HERBE_BAS, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/transition_herbe_bas.png"))));
-		terrain.put(type_case_generique.TRANSITION_HERBE_DROITE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/transition_herbe_seche_droi.png"))));
+		terrain.put(type_case_generique.TRANSITION_HERBE_DROITE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/transition_herbe_droite.png"))));
 		terrain.put(type_case_generique.TRANSITION_HERBE_GAUCHE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/transition_herbe_gauche.png"))));
 		terrain.put(type_case_generique.TRANSITION_HERBE_HAUT, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/transition_herbe_haut.png"))));
 
