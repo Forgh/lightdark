@@ -18,6 +18,7 @@ public class AfficherSideMenu {
 	private Monde monde;
 	private TextureRegion imgOrbe;
 	private TextureRegion imgOrbeOff;
+	private TextureRegion imgNoOrb;
 	private TextureRegion imgPause;
 	private TextureRegion imgHealth;
 	
@@ -51,6 +52,8 @@ public class AfficherSideMenu {
 	private void chargerTextures() {
 		this.imgOrbe = new TextureRegion(new Texture("images/orb1_a.png"));
 		this.imgOrbeOff = new TextureRegion(new Texture("images/orb1_d.png"));
+		this.imgNoOrb = new TextureRegion(new Texture("images/noOrb.png"));
+
 		this.imgPause = new TextureRegion(new Texture("images/start.png"));
 		this.imgHealth = new TextureRegion(new Texture("images/hp.png"));
 		this.frameUp  = new TextureRegion(new Texture("images/frameUp.png"));
@@ -119,11 +122,15 @@ public class AfficherSideMenu {
 	}
 	private void drawOrbe(){
 		Button o = monde.getOrbe();
-		if(monde.isOrbEnabled()){
-			spriteBatch.draw(this.imgOrbe, o.getX(), o.getY(), 128, 128);
-		}
-		else{
-			spriteBatch.draw(this.imgOrbeOff, o.getX(), o.getY(), 128, 128);
+		if(monde.hasUnlockedOrb()){
+			if(monde.isOrbEnabled()){
+				spriteBatch.draw(this.imgOrbe, o.getX(), o.getY(), 128, 128);
+			}
+			else{
+				spriteBatch.draw(this.imgOrbeOff, o.getX(), o.getY(), 128, 128);
+			}
+		} else {
+			spriteBatch.draw(this.imgNoOrb, o.getX(), o.getY(), 128, 128);
 		}
 	}
 	
