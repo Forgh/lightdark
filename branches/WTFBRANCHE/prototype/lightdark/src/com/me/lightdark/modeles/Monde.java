@@ -20,6 +20,8 @@ public class Monde {
 
 	Array<Epee> sword;
 
+	boolean debloquerEpee = false;
+	boolean debloquerOrbe = false;
 
 	private Button pause;
 	private Button orbe;
@@ -40,6 +42,22 @@ public class Monde {
 	
 	public Array<Anime> getAnime() {
 		return this.niveau.getAnime();
+	}
+	
+	public boolean hasUnlockedSword(){
+		return this.debloquerEpee;
+	}
+	
+	public boolean hasUnlockedOrb(){
+		return this.debloquerOrbe;
+	}
+	
+	public void unlockSword(){
+		this.debloquerEpee=true;
+	}
+	
+	public void unlockOrb(){
+		this.debloquerOrbe=true;
 	}
 	
 	public Array<Epee> getEpee() {
@@ -124,7 +142,7 @@ public class Monde {
 	}
 	public void frapperEpee(Vector2 vect, Vector2 cible){
 
-		if(perso.getForm() != Form.SHADOWFORM){
+		if(perso.getForm() != Form.SHADOWFORM && hasUnlockedSword()){
 			Epee s = new Epee(perso,new Vector2(perso.getPosition()),vect);
 			sword.add(s);
 		}
