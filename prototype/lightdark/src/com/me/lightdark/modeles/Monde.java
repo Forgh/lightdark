@@ -20,8 +20,8 @@ public class Monde {
 
 	Array<Epee> sword;
 
-	boolean debloquerEpee = false;
-	boolean debloquerOrbe = false;
+	static boolean debloquerEpee = false;
+	static boolean debloquerOrbe = false;
 
 	private Button pause;
 	private Button orbe;
