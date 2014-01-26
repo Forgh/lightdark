@@ -602,7 +602,7 @@ public class AfficherMonde {
 	
 	private void applyShader(SpriteBatch sb){
 		Color c = sb.getColor();
-		sb.setColor(c.r, c.g, c.b, 0.4f);
+		sb.setColor(c.r, c.g, c.b, 0.3f);
 	}
 	
 	private void removeShader(SpriteBatch sb){
