@@ -817,16 +817,16 @@ public void demo6(){
 	
 	cases[1][2] =  new Case(new Vector2(1f,2f)){//milieu braseros
 		public void arrive(){
-			System.out.println("entrée "+ monde.getPerso().getAnimal().isCapaciting());
+			//System.out.println("entrée "+ monde.getPerso().getAnimal().isCapaciting());
 			int posX=(int)monde.getPerso().getPosition().x;
 			int posY=(int)monde.getPerso().getPosition().y;
 			if(/*posX==1 && posY==2 && */monde.getPerso().getAnimal()!=null  && monde.getPerso().getAnimal().getAnimeEspece()==AnimeEspece.SALAMANDRE && monde.getPerso().getAnimal().isCapaciting()){
-				
+				cases[1][3]=new Case(new Vector2(1f, 3f));
+				cases[1][1]=new Case(new Vector2(1f, 1f));
+				cases[1][3].setTypeCase(type_case_generique.FEU);
+				cases[1][1].setTypeCase(type_case_generique.FEU);
 	
-			}cases[1][3]=new Case(new Vector2(1f, 3f));
-			cases[1][1]=new Case(new Vector2(1f, 1f));
-			cases[1][3].setTypeCase(type_case_generique.FEU);
-			cases[1][1].setTypeCase(type_case_generique.FEU);
+			}
 		}
 	};
 	cases[1][2].setTypeCase(type_case_generique.HERBE);
