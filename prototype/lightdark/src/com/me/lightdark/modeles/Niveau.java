@@ -868,7 +868,6 @@ public void demo6(){
 		bloquantes[5][j] = cases[5][j].getCadre();
 		cases[5][j].setTypeCase(type_case_generique.GRILLE_HERBE);
 	}
-	cases[5][11].setTypeCase(type_case_generique.GRILLE_HERBE_OMBRE);
 	
 	
 	for(int i=1; i<largeur-1; i++)
@@ -903,7 +902,19 @@ public void demo6(){
 	animals.get(2).setAnimeEspece(AnimeEspece.SALAMANDRE);
 	Animal salamandre = (Animal)animals.get(2);
 	salamandre.setCompetence(CompetenceAnimaux.BRULER);
-	
+    for(int i=1;i<11;i++)
+        cases[i][11].setTypeCase(type_case_generique.OMBRE_HERBE_BAS);
+    
+    cases[2][9].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+    cases[12][2].setTypeCase(type_case_generique.PORTE_DROITE);
+    cases[0][2].setTypeCase(type_case_generique.PORTE_GAUCHE);
+    setToFullShadow(11,3);
+    setToFullShadow(11,11);
+    setToFullShadow(11,3);
+    setToFullShadow(2,11);
+    
+	cases[5][11].setTypeCase(type_case_generique.GRILLE_HERBE_OMBRE);
+
 	this.posStart = new Vector2(largeur-1f,2f);
 	refresh();
 }
