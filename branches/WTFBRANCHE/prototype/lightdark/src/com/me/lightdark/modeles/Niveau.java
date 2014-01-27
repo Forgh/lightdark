@@ -818,8 +818,8 @@ public void demo6(){
 		bloquantes[5][j] = cases[5][j].getCadre();
 		cases[5][j].setTypeCase(type_case_generique.GRILLE_HERBE);
 	}
-	cases[5][10].setTypeCase(type_case_generique.GRILLE_HERBE_OMBRE);
-	
+	cases[5][11].setTypeCase(type_case_generique.GRILLE_HERBE_OMBRE);
+	ombres[5][11]=null;
 	
 	for(int i=1; i<largeur-1; i++)
 		cases[i][hauteur-2].setTypeCase(type_case_generique.OMBRE);
@@ -829,14 +829,14 @@ public void demo6(){
 	
 	
 	//ici les mobs...
-	this.animals.add(new Animal(new Vector2(10f,10f)));
+	this.animals.add(new Monstre(new Vector2(10f,10f), this));
 	this.animals.get(0).getPath().add(new Vector2(10f,10f));
 	this.animals.get(0).getPath().add(new Vector2(10f,8f));
 	this.animals.get(0).getPath().add(new Vector2(6f,8f));
 	this.animals.get(0).getPath().add(new Vector2(6f,10f));
 	
 	
-	this.animals.add(new Animal(new Vector2(6f,8f)));
+	this.animals.add(new Monstre(new Vector2(6f,8f), this));
 	this.animals.get(1).getPath().add(new Vector2(6f,8f));
 	this.animals.get(1).getPath().add(new Vector2(6f,10f));
 	this.animals.get(1).getPath().add(new Vector2(10f,10f));
