@@ -440,8 +440,8 @@ public class AfficherMonde {
 			 Case c = cases.get(i);
 
 			 if (c.getTypeCaseE() != null){
-				 spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-				 /*if(c.getTypeCase().equals("FALAISE")){
+				//spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 if(c.getTypeCase().equals("FALAISE")){
 					 spriteBatch.draw(terrain.get(type_case_generique.FALAISE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 					 //spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 				 }
@@ -518,7 +518,7 @@ public class AfficherMonde {
 				 }
 				 else if(c.getTypeCase().equals("POT_HERBE")){
 					 spriteBatch.draw(terrain.get(type_case_generique.POT_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-				 }*/
+				 }
 			 }
 		
 		}

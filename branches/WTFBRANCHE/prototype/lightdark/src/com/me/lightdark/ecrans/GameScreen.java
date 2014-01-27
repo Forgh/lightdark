@@ -231,7 +231,8 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	@Override
 	public void show() {
 		reload("demo6");
-		//monde.unlockOrb();
+		monde.unlockOrb();
+		monde.unlockSword();
 		darkness.loop(0.1f);
 
 		Gdx.input.setInputProcessor(this);
