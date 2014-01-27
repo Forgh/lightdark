@@ -364,6 +364,7 @@ public class AfficherMonde {
 		terrain.put(type_case_generique.COFFRE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/coffre_herbe.png"))));
 		terrain.put(type_case_generique.FALAISE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/falaise.png"))));
 		terrain.put(type_case_generique.GRILLE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/grille_herbe.png"))));
+		terrain.put(type_case_generique.GRILLE_HERBE_OMBRE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/grille_herbe_ombre.png"))));
 		terrain.put(type_case_generique.HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/herbe.png"))));
 		
 		terrain.put(type_case_generique.OMBRE_HERBE_BAS, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/directionnels/ombre_herbe_bas.png"))));
@@ -478,6 +479,9 @@ public class AfficherMonde {
 				 else if(c.getTypeCase().equals("GRILLE_HERBE")){
 					 spriteBatch.draw(terrain.get(type_case_generique.GRILLE_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 				 }
+				 else if(c.getTypeCase().equals("GRILLE_HERBE_OMBRE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.GRILLE_HERBE_OMBRE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
 				 if(c.getTypeCase().equals("ARBUSTE_HERBE")){
 					 spriteBatch.draw(terrain.get(type_case_generique.ARBUSTE_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 				 }
@@ -489,6 +493,9 @@ public class AfficherMonde {
 				 }
 				 else if(c.getTypeCase().equals("COFFRE_HERBE")){
 					 spriteBatch.draw(terrain.get(type_case_generique.COFFRE_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 else if(c.getTypeCase().equals("GRILLE_HERBE")){
+					 spriteBatch.draw(terrain.get(type_case_generique.GRILLE_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 				 }
 				 else if(c.getTypeCase().equals("PLANTE_HERBE")){
 					 spriteBatch.draw(terrain.get(type_case_generique.PLANTE_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);

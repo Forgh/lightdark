@@ -795,6 +795,8 @@ public void demo6(){
 	createGroundAndBorder();
 	
 	
+		
+	
 	
 	for(int i=5; i<largeur-1; i++)
 		for(int j=4; j<hauteur-5; j++)
@@ -810,6 +812,13 @@ public void demo6(){
 	cases[0][2].setTypeCase(type_case_generique.OMBRE);
 	bloquantes[largeur-1][2]=null;
 	bloquantes[0][2]=null;
+	
+	for(int j=8; j<11; j++){
+		cases[5][j]=new Case(new Vector2(5f, j));
+		bloquantes[5][j] = cases[5][j].getCadre();
+		cases[5][j].setTypeCase(type_case_generique.GRILLE_HERBE);
+	}
+	cases[5][10].setTypeCase(type_case_generique.GRILLE_HERBE_OMBRE);
 	
 	
 	for(int i=1; i<largeur-1; i++)
@@ -832,8 +841,14 @@ public void demo6(){
 	this.animals.get(1).getPath().add(new Vector2(6f,10f));
 	this.animals.get(1).getPath().add(new Vector2(10f,10f));
 	this.animals.get(1).getPath().add(new Vector2(10f,8f));
+	
+	animals.get(0).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
+	animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
 	//ici la salamandre...
 	this.animals.add(new Animal(new Vector2(8f,9f)));
+	animals.get(2).setAnimeEspece(AnimeEspece.SALAMANDRE);
+	Animal salamandre = (Animal)animals.get(2);
+	salamandre.setCompetence(CompetenceAnimaux.BRULER);
 	
 	this.posStart = new Vector2(largeur-1f,2f);
 	refresh();
