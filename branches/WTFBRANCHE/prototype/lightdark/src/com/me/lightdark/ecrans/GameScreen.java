@@ -187,6 +187,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 		affSideMenu.render();
 		
 		if(monde.getPerso().getHealth()==0){
+			monde.getPerso().setDying();
 			darkness.pause(5);
 			gameOver.play(0.3f);
 			monde.getPerso().refill();

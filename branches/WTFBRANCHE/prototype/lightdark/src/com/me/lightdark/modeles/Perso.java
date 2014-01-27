@@ -170,6 +170,13 @@ public class Perso {
 		this.healthShadow=max_health_shadow;
 	}
 	
+	public void setDying(){
+		if(this.getForm()==Form.LIGHTFORM)
+			this.etat=Light.MOURRANT;
+		else 
+			this.etat=Dark.DYING;
+	}
+	
 	public void healthDown(){
 		health--;
 		hurtSound.play(0.2f);
