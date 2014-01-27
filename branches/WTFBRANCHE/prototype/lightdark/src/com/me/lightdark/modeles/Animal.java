@@ -130,6 +130,7 @@ public class Animal extends Anime {
 	}
 	
 	public void demarrerCompetence() {
+		setCapaciting(true);
 		
 		this.demarrerCompetence(this.comptanima);
 		
@@ -138,6 +139,7 @@ public class Animal extends Anime {
 	public void stopperCompetence(CompetenceAnimaux ca) {
 		// TODO Auto-generated method stub
 		super.stopperCompetence(ca);
+		setCapaciting(false);
 		
 		try{
 			if (ca == CompetenceAnimaux.COURRIR){

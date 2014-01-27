@@ -26,6 +26,8 @@ public abstract class Anime {
 	
 	private Rectangle cadre = new Rectangle();
 	
+	private boolean capaciting=false;//en train d'utiliser sa capacité ?
+	
 	private Array<Vector2> path = new Array<Vector2>();
 	private int pathStep = 0;
 	
@@ -209,4 +211,12 @@ public abstract class Anime {
 		}
 
 		public abstract void setTamer(Perso p);
+
+		public boolean isCapaciting() {
+			return capaciting;
+		}
+
+		public void setCapaciting(boolean capaciting) {
+			this.capaciting = capaciting;
+		}
 }
