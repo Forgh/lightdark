@@ -344,7 +344,7 @@ public class AfficherMonde {
 		this.imgMonstreCube = new TextureRegion(new Texture(Gdx.files.internal("images/monstre_cube.png")));
 		this.imgFleche = new TextureRegion(new Texture(Gdx.files.internal("images/fleche.png")));
 
-		this.imgTorche  = new TextureRegion(new Texture(Gdx.files.internal("images/torche.png")));
+		this.imgTorche  = new TextureRegion(new Texture(Gdx.files.internal("images/objet_effet/feu.png")));
 		
 		cat_left  = new TextureRegion(new Texture(Gdx.files.internal("images/animaux_effet/chat_gauche.png")));
 		cat_right  = new TextureRegion(new Texture(Gdx.files.internal("images/animaux_effet/chat_droite.png")));
@@ -409,10 +409,13 @@ public class AfficherMonde {
 		drawFleche();
 		// dessiner strate 3
 		drawAnimals();
+		
+		drawObjet();
+		
 		drawPerso();
 		
 		
-		drawObjet();
+		
 		
 		spriteBatch.end();
 		
@@ -431,9 +434,9 @@ public class AfficherMonde {
 		for(int i = 0; i<cases.size;i++){
 			 Case c = cases.get(i);
 
-			 if (c.getTypeCase() != null){
-				 
-				 if(c.getTypeCase().equals("FALAISE")){
+			 if (c.getTypeCaseE() != null){
+				 spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 /*if(c.getTypeCase().equals("FALAISE")){
 					 spriteBatch.draw(terrain.get(type_case_generique.FALAISE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 					 //spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 				 }
@@ -502,7 +505,7 @@ public class AfficherMonde {
 				 }
 				 else if(c.getTypeCase().equals("POT_HERBE")){
 					 spriteBatch.draw(terrain.get(type_case_generique.POT_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-				 }
+				 }*/
 			 }
 		
 		}
@@ -645,8 +648,10 @@ public class AfficherMonde {
 	private void drawObjet(){
 		 Array<Objet> project = monde.getObjet();
 		 for(int i=0;i<project.size;i++){
+			 if (project.get(i).getTypeCase() != null){
 			 spriteBatch.draw(this.imgTorche, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
-		 }
+			 }
+		}
 	}
 	
 	private void drawSword(){

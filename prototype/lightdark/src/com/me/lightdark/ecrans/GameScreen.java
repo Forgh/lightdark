@@ -32,7 +32,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	private boolean charged = false; //tir chargé
 	private ControlerEpee epee;
 	private Sound gameOver = Gdx.audio.newSound(Gdx.files.internal("sound/gameover.wav"));
-	private Sound darkness = Gdx.audio.newSound(Gdx.files.internal("sound/darkness.mp3"));
+	private Sound darkness = Gdx.audio.newSound(Gdx.files.internal("sound/Point of no return.mp3"));
 	private Sound chargedSound = Gdx.audio.newSound(Gdx.files.internal("sound/charged.wav"));
 
 
@@ -230,7 +230,8 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	}
 	@Override
 	public void show() {
-		reload("demo1");
+		reload("demo6");
+		monde.unlockOrb();
 		darkness.loop(0.1f);
 
 		Gdx.input.setInputProcessor(this);

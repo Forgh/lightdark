@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Anime.AnimeEspece;
+import com.me.lightdark.modeles.Objet.type_objet;
 import com.me.lightdark.modeles.type_case_generique;
 
 
@@ -802,7 +803,7 @@ public void demo6(){
 		for(int j=4; j<hauteur-5; j++)
 			createObstacle(i, j);
 	
-	cases[0][2] =  new Case(new Vector2(0f,2f)){
+	cases[largeur-1][2] =  new Case(new Vector2(largeur-1f,2f)){
 		public void arrive(){
 			unloadNiveau();
 			changeLevel = new String("END_GAME");
@@ -827,6 +828,19 @@ public void demo6(){
 	createObstacle(3,hauteur-3);
 	createObstacle(3,hauteur-4);
 	
+	cases[largeur-3][1] = new Case(new Vector2(largeur-3f, 1f)){
+		public void  action(CompetenceAnimaux ca, Monde m){
+			if (ca == CompetenceAnimaux.BRULER){
+				Objet o =new Objet(new Vector2(largeur-3f, 1f), 1f);
+				o.setTypeCase(type_objet.OBJET_FEU);
+				m.addObjet(o);
+				
+			}
+		}
+	};
+	cases[largeur-3][1].setTypeCase(type_case_generique.POT_HERBE);
+	
+	
 	
 	//ici les mobs...
 	this.animals.add(new Monstre(new Vector2(10f,10f), this));
@@ -845,12 +859,18 @@ public void demo6(){
 	animals.get(0).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
 	animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
 	//ici la salamandre...
-	this.animals.add(new Animal(new Vector2(8f,9f)));
+	Animal a = new Animal(new Vector2(8f,9f));
+	this.animals.add(a);
+	a.setCompetence(CompetenceAnimaux.BRULER);
 	animals.get(2).setAnimeEspece(AnimeEspece.SALAMANDRE);
 	Animal salamandre = (Animal)animals.get(2);
 	salamandre.setCompetence(CompetenceAnimaux.BRULER);
 	
-	this.posStart = new Vector2(largeur-1f,2f);
+	salamandre.getPath().add(new Vector2(9f,9f));
+	salamandre.getPath().add(new Vector2(7f,9f));
+	
+	
+	this.posStart = new Vector2(0f,2f);
 	refresh();
 }
 

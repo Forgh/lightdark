@@ -16,6 +16,11 @@ public class Objet {
 	private int pathStep = 0;
 	private float tempsAnime;
 	
+	public enum type_objet {
+		OBJET_FEU
+	}
+	private type_objet t;
+	
 
 	public Objet(Vector2 position, float t) {
 		// TODO Auto-generated constructor stub
@@ -53,6 +58,14 @@ public class Objet {
 		
 		public Rectangle getCadre() {
 			return cadre;
+		}
+		
+		public void setTypeCase(type_objet t){
+			this.t = t;
+		}
+		
+		public type_objet getTypeCase(){
+			return this.t;
 		}
 		
 		public void update(float delta) {
