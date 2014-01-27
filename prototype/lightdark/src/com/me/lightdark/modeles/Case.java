@@ -9,7 +9,8 @@ public class Case {
 	Vector2 position = new Vector2();
 	Rectangle cadre = new Rectangle();
 	
-	public interface type_case{} 
+	public interface type_case{}
+	private Monde monde = null;
 	
 	
 	
@@ -27,6 +28,11 @@ public class Case {
 		this.bloquante = false;
 		this.ombre = false;
 		this.hashCode=this.hashCode();
+	}
+	
+	public Case(Vector2 position, Monde m){
+		this(position);
+		monde = m;
 	}
 	
 	

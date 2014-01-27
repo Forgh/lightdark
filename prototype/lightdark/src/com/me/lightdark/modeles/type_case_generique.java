@@ -46,6 +46,7 @@ public enum type_case_generique implements type_case {
 	OMBRE_HERBE_SECHE_DROITE,
 	OMBRE_HERBE_SECHE_GAUCHE,
 	OMBRE_HERBE_SECHE_HAUT,
-	PLAQUE_PRESSION
+	PLAQUE_PRESSION,
+	FEU
 	
 }
