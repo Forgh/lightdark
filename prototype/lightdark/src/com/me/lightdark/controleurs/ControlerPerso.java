@@ -60,7 +60,7 @@ public class ControlerPerso {
 		this.collision = new Array<Rectangle>();
 		this.arrives = new Array<Case>();
 		this.directionTir = new Vector2();
-	
+		this.perso.toIdle();
 		//ici on charge la map des collisions 
 	}
 	
