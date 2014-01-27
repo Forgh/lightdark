@@ -362,7 +362,7 @@ public class ControlerPerso {
 			
 			
 			if(perso.getForm()==Form.LIGHTFORM && !charged){//Si en LightForm en tir non chargé
-				
+				perso.changerEtat(Light.FRAPPANT);
 				monde.frapperEpee(new Vector2(directionTir), new Vector2(cibleTir));
 				this.bruitEpee.play();
 			}
