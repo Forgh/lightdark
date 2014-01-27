@@ -344,7 +344,7 @@ public class AfficherMonde {
 		this.imgMonstreCube = new TextureRegion(new Texture(Gdx.files.internal("images/monstre_cube.png")));
 		this.imgFleche = new TextureRegion(new Texture(Gdx.files.internal("images/fleche.png")));
 
-		this.imgTorche  = new TextureRegion(new Texture(Gdx.files.internal("images/objet_effet/feu.png")));
+		this.imgTorche  = new TextureRegion(new Texture(Gdx.files.internal("images/torche.png")));
 		
 		cat_left  = new TextureRegion(new Texture(Gdx.files.internal("images/animaux_effet/chat_gauche.png")));
 		cat_right  = new TextureRegion(new Texture(Gdx.files.internal("images/animaux_effet/chat_droite.png")));
@@ -358,7 +358,9 @@ public class AfficherMonde {
 		salamander_right  = new TextureRegion(new Texture(Gdx.files.internal("images/animaux_effet/dragon_droite.png")));
 		
 		// TODO rajouter pour toutes les cases
+		terrain.put(type_case_generique.FEU, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/feu.png"))));
 		terrain.put(type_case_generique.ARBUSTE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/arbuste_herbe.png"))));
+		terrain.put(type_case_generique.PLAQUE_PRESSION, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/plaque_pression.png"))));
 		terrain.put(type_case_generique.CAILLOU_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/caillou_herbe.png"))));
 		terrain.put(type_case_generique.CAILLOUX_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/cailloux_herbe.png"))));
 		terrain.put(type_case_generique.COFFRE_HERBE, new TextureRegion(new Texture(Gdx.files.internal("images/terrain_effet/coffre_herbe.png"))));
@@ -409,13 +411,10 @@ public class AfficherMonde {
 		drawFleche();
 		// dessiner strate 3
 		drawAnimals();
-		
-		drawObjet();
-		
 		drawPerso();
 		
 		
-		
+		drawObjet();
 		
 		spriteBatch.end();
 		
@@ -434,10 +433,18 @@ public class AfficherMonde {
 		for(int i = 0; i<cases.size;i++){
 			 Case c = cases.get(i);
 
-			 if (c.getTypeCaseE() != null){
-				 spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-				 /*if(c.getTypeCase().equals("FALAISE")){
+			 if (c.getTypeCase() != null){
+				 
+				 if(c.getTypeCase().equals("FALAISE")){
 					 spriteBatch.draw(terrain.get(type_case_generique.FALAISE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+					 //spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 if(c.getTypeCase().equals("FEU")){
+					 spriteBatch.draw(terrain.get(type_case_generique.FEU), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+					 //spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
+				 }
+				 if(c.getTypeCase().equals("PLAQUE_PRESSION")){
+					 spriteBatch.draw(terrain.get(type_case_generique.PLAQUE_PRESSION), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 					 //spriteBatch.draw(this.terrain.get(c.getTypeCaseE()), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
 				 }
 				 else if(c.getTypeCase().equals("HERBE")){
@@ -505,7 +512,7 @@ public class AfficherMonde {
 				 }
 				 else if(c.getTypeCase().equals("POT_HERBE")){
 					 spriteBatch.draw(terrain.get(type_case_generique.POT_HERBE), c.getPosition().x * ppuX, c.getPosition().y * ppuY, c.TAILLE * ppuX, c.TAILLE * ppuY);
-				 }*/
+				 }
 			 }
 		
 		}
@@ -648,10 +655,8 @@ public class AfficherMonde {
 	private void drawObjet(){
 		 Array<Objet> project = monde.getObjet();
 		 for(int i=0;i<project.size;i++){
-			 if (project.get(i).getTypeCase() != null){
 			 spriteBatch.draw(this.imgTorche, project.get(i).getPosition().x * ppuX, project.get(i).getPosition().y * ppuY, project.get(i).TAILLE * ppuX, project.get(i).TAILLE * ppuY);
-			 }
-		}
+		 }
 	}
 	
 	private void drawSword(){

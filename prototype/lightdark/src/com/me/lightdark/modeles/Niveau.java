@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.me.lightdark.modeles.Anime.AnimeEspece;
-import com.me.lightdark.modeles.Objet.type_objet;
 import com.me.lightdark.modeles.type_case_generique;
 
 
@@ -796,19 +795,56 @@ public void demo6(){
 	createGroundAndBorder();
 	
 	
-		
-	
-	
 	for(int i=5; i<largeur-1; i++)
 		for(int j=4; j<hauteur-5; j++)
 			createObstacle(i, j);
 	
-	cases[largeur-1][2] =  new Case(new Vector2(largeur-1f,2f)){
+	
+	
+	cases[0][2] =  new Case(new Vector2(0f,2f)){
 		public void arrive(){
 			unloadNiveau();
 			changeLevel = new String("END_GAME");
 		}
 	};
+	
+	cases[0][2] =  new Case(new Vector2(1f,2f)){//milieu braseros
+		public void arrive(){
+			int posX=(int)monde.getPerso().getPosition().x;
+			int posY=(int)monde.getPerso().getPosition().y;
+			if(posX==1 && posY==2 && monde.getPerso().getAnimal().getAnimeEspece()==AnimeEspece.SALAMANDRE && monde.getPerso().getAnimal().isCapaciting()){
+				cases[1][3].setTypeCase(type_case_generique.FEU);
+				cases[1][1].setTypeCase(type_case_generique.FEU);
+	
+			}
+		}
+	};
+	
+	
+	
+	
+	
+	
+	
+	cases[11][8]=new Case(new Vector2(11f, 8f), monde){
+		public void arrive(){
+			int posX=(int)monde.getPerso().getPosition().x;
+			int posY=(int)monde.getPerso().getPosition().y;
+			if(posX==11 && posY==8){
+				for(int i=8; i<11; i++){
+					bloquantes[5][i]=null;
+					cases[5][i].setTypeCase(type_case_generique.HERBE);
+				}
+				cases[5][hauteur-2].setTypeCase(type_case_generique.OMBRE_HERBE);
+					
+			}
+				
+		}
+		
+	};
+	
+	cases[11][8].setTypeCase(type_case_generique.PLAQUE_PRESSION);
+	
 	cases[largeur-1][2].setTypeCase(type_case_generique.OMBRE);
 	cases[0][2].setTypeCase(type_case_generique.OMBRE);
 	bloquantes[largeur-1][2]=null;
@@ -820,26 +856,17 @@ public void demo6(){
 		cases[5][j].setTypeCase(type_case_generique.GRILLE_HERBE);
 	}
 	cases[5][11].setTypeCase(type_case_generique.GRILLE_HERBE_OMBRE);
-	ombres[5][11]=null;
+	
 	
 	for(int i=1; i<largeur-1; i++)
 		cases[i][hauteur-2].setTypeCase(type_case_generique.OMBRE);
 	
+	cases[5][hauteur-2].setTypeCase(type_case_generique.GRILLE_HERBE_OMBRE);
+	
 	createObstacle(3,hauteur-3);
 	createObstacle(3,hauteur-4);
 	
-	cases[largeur-3][1] = new Case(new Vector2(largeur-3f, 1f)){
-		public void  action(CompetenceAnimaux ca, Monde m){
-			if (ca == CompetenceAnimaux.BRULER){
-				Objet o =new Objet(new Vector2(largeur-3f, 1f), 1f);
-				o.setTypeCase(type_objet.OBJET_FEU);
-				m.addObjet(o);
-				
-			}
-		}
-	};
-	cases[largeur-3][1].setTypeCase(type_case_generique.POT_HERBE);
-	
+	cases[0][2].setTypeCase(type_case_generique.PORTE_GAUCHE);
 	
 	
 	//ici les mobs...
@@ -859,18 +886,12 @@ public void demo6(){
 	animals.get(0).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
 	animals.get(1).setAnimeEspece(AnimeEspece.MONSTRE_CUBE);
 	//ici la salamandre...
-	Animal a = new Animal(new Vector2(8f,9f));
-	this.animals.add(a);
-	a.setCompetence(CompetenceAnimaux.BRULER);
+	this.animals.add(new Animal(new Vector2(8f,9f)));
 	animals.get(2).setAnimeEspece(AnimeEspece.SALAMANDRE);
 	Animal salamandre = (Animal)animals.get(2);
 	salamandre.setCompetence(CompetenceAnimaux.BRULER);
 	
-	salamandre.getPath().add(new Vector2(9f,9f));
-	salamandre.getPath().add(new Vector2(7f,9f));
-	
-	
-	this.posStart = new Vector2(0f,2f);
+	this.posStart = new Vector2(largeur-1f,2f);
 	refresh();
 }
 
