@@ -230,7 +230,7 @@ public class GameScreen extends Stage implements Screen, InputProcessor{
 	}
 	@Override
 	public void show() {
-		reload("demo1");
+		reload("demo6");
 		//monde.unlockOrb();
 		darkness.loop(0.1f);
 

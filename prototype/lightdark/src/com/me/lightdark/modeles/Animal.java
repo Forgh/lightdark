@@ -103,7 +103,7 @@ public class Animal extends Anime {
 			
 			
 		}else if (comptanima == CompetenceAnimaux.CHANTER){
-			System.out.println("C0c0r1c0 !");
+			//System.out.println("C0c0r1c0 !");
 			chat.play(0.1f);
 			tamer.setTamingDetectable(true);
 			actionTimed = true;
