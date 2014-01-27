@@ -846,8 +846,8 @@ public void demo6(){
 					bloquantes[5][i]=null;
 					cases[5][i].setTypeCase(type_case_generique.HERBE);
 				}
-				cases[5][hauteur-2]=new Case(new Vector2(5f, hauteur-2f));
-				cases[5][hauteur-2].setTypeCase(type_case_generique.OMBRE_HERBE);
+				cases[5][hauteur-2]= new Case(new Vector2(5f, hauteur-2f));
+				cases[5][hauteur-2].setTypeCase(type_case_generique.OMBRE);
 					
 			}
 			
