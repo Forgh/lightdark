@@ -5,10 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import com.me.lightdark.modeles.Animal;
-import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Epee;
-import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Monstre;
 import com.me.lightdark.modeles.Perso;
@@ -48,11 +45,6 @@ public class ControlerEpee {
 	}
 	public void update(float delta) {
 		this.sword = monde.getEpee();
-		
-		
-		
-		
-		
 		for (int i =0 ; i< this.sword.size;i++){
 			gererCollision(this.sword.get(i), delta);
 			gererDistance(this.sword.get(i));
@@ -63,7 +55,7 @@ public class ControlerEpee {
 	}
 	
 	public void gererCollision(Epee p, float delta){
-		p.getRapidite().scl(delta); // on travail au ralenti
+		p.getRapidite().scl(delta); // on travail au ralenti TODO Why ?
 		
 		p.getCadre().x += p.getRapidite().x;
 		p.getCadre().y += p.getRapidite().y;
@@ -96,9 +88,8 @@ public class ControlerEpee {
 		while(i< monde.getAnime().size && ok){
 			if(monde.getAnime().get(i) instanceof Monstre && persoRect.overlaps(monde.getAnime().get(i).getCadre())) {
 				((Monstre) monde.getAnime().get(i)).recevoirCoup(lanceur.puissanceMini());
-				//System.out.println(">>>>>>>>>>>> ok");
 				p.devientObsolete();
-				//on remet en shadowwalking si jamais on touche la case dÃ©sirÃ©e 
+				//on remet en shadowalking si jamais on touche la case voulue 
 				ok=false; 
 			}
 			i++;
@@ -129,17 +120,16 @@ public class ControlerEpee {
 		vtemp.x = (Math.abs(position.x) - Math.abs(posInitial.x));
 		vtemp.y = (Math.abs(position.y) - Math.abs(posInitial.y));
 
-		// calcul du rayon par le thï¿½orï¿½me de pythagore
+		// calcul du rayon par le théorème de pythagore
 		float rayon = (float) Math.sqrt(Math.pow((double)vtemp.x, 2.0) + Math.pow((double)vtemp.y, 2.0));
 		
-		if (rayon > p.getDistanceMax()){
+		if (rayon > p.getDistanceMax()){//gerer distance max
 			p.devientObsolete(); //ben, au moins il ne doit plus aller vers l'infini...
 			
 		}
 	}
 	
 	public ControlerEpee(Monde monde, Perso epeiste) {
-		// TODO Auto-generated constructor stub
 		this.monde = monde;
 		this.sword = new Array<Epee>();
 		this.collision = new Array<Rectangle>();

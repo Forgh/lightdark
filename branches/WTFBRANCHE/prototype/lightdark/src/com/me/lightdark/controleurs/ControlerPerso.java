@@ -10,14 +10,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.me.lightdark.modeles.Case;
-//import com.me.lightdark.modeles.Case;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
 import com.me.lightdark.modeles.Light;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Perso;
-import com.me.lightdark.modeles.Perso.Etat;
 import com.me.lightdark.modeles.Perso.direction;
+
 
 public class ControlerPerso {
 
@@ -25,7 +24,7 @@ public class ControlerPerso {
 	private Perso perso;
 	private Array<Rectangle> collision;
 	private Array<Case> arrives;
-	
+	// chargement des sons
 	private Sound bruitEpee = Gdx.audio.newSound(Gdx.files.internal("sound/epees.wav"));
 	private Sound bruitOmbre = Gdx.audio.newSound(Gdx.files.internal("sound/ombre.wav"));
 	private Sound bruitProj = Gdx.audio.newSound(Gdx.files.internal("sound/projectile.wav"));
@@ -38,7 +37,7 @@ public class ControlerPerso {
 	
 	
 	enum Touches {
-		GAUCHE, DROITE, HAUT, BAS, FEU//, EPEE
+		GAUCHE, DROITE, HAUT, BAS, EPEE
 	}
 	
 	static Map<Touches, Boolean> touches = new HashMap<Touches, Boolean>();
@@ -47,10 +46,10 @@ public class ControlerPerso {
 		touches.put(Touches.HAUT, false);
 		touches.put(Touches.DROITE, false);
 		touches.put(Touches.BAS, false);
-		touches.put(Touches.FEU, false);
+		touches.put(Touches.EPEE, false);
 	};
 	
-	static Touches toucheActuHoz; // ! rustine !
+	static Touches toucheActuHoz; // ! rustine !  ?? TODO preciser
 	static Touches toucheActuVer; // ! rustine !
 	
 	public ControlerPerso(Monde monde) {
@@ -95,12 +94,12 @@ public class ControlerPerso {
 		
 	}
 	
-	/*Définis par défaut les cases qui permettent au personnage d'arriver sur un micro-monde et d'en sortir*/
+	/*Defini par défaut les cases qui permettent au personnage d'arriver sur un micro-monde et d'en sortir*/
 	private void chargerArrives(){
 		arrives.clear();
 		for(int x = 0;x<=monde.getNiveau().getLargeur();x++){
 			for(int y= 0;y<=monde.getNiveau().getHauteur();y++){
-				if (monde.getNiveau().get(x, y) != null){ // (x>=dX) && (x<= fX) && (y>=dY) && (y<= fY)){
+				if (monde.getNiveau().get(x, y) != null){
 					arrives.add(monde.getNiveau().get(x, y));
 				}
 			}
@@ -131,14 +130,18 @@ public class ControlerPerso {
 	
 	
 	public void feuPresse(int x, int y, int w, int h) {
-		touches.get(touches.put(Touches.FEU, true));
+		/*
+		 * Si on appuie sur la touche epee, alors on recupere les positions du click et du perso
+		 */
+	
+		touches.get(touches.put(Touches.EPEE, true));
 		
 		float posX = ((  (this.monde.getNiveau().getLargeur() / (float) w) * (float) x));
 		float posY = (this.monde.getNiveau().getHauteur() - ((this.monde.getNiveau().getHauteur() / (float) h) * (float) y));
-				
+				//position click
 		Vector2 v = new Vector2(posX, posY);
 
-		v.sub(this.perso.getPosition());
+		v.sub(this.perso.getPosition());//position perso
 
 		
 		float angle = (float) Math.atan2(v.y, v.x);
@@ -147,9 +150,10 @@ public class ControlerPerso {
 		v.y =(float)Math.sin(angle);
 		
 		
-		 //ï¿½ verif que la precision numerique des float ne tombe pas sur 0.0 
+		 //Ici verif que la precision numerique des float ne tombe pas sur 0.0 
+		
 		 
-		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zï¿½ro (bloquant)
+		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zero (bloquant)
 		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
 
 
@@ -194,21 +198,21 @@ public class ControlerPerso {
 		v.y =(float)Math.sin(angle);
 		
 		/*
-		 * ï¿½ verif que la precision numerique des float ne tombe pas sur 0.0 
+		 * ici verif que la precision numerique des float ne tombe pas sur 0.0 
 		 */
-		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zï¿½ro (bloquant)
+		directionTir.x = (float) (v.x != 0.0 ? v.x : 0.001); // on evite de passer par zero (bloquant)
 		directionTir.y =  (float) (v.y != 0.0 ? v.y : 0.001);
 
 
 		cibleTir = new Vector2(posX, posY);
 		
-		touches.get(touches.put(Touches.FEU, false));
+		touches.get(touches.put(Touches.EPEE, false));
 		
 	}
 	
 	
 	
-	public void update(float delta) {
+	public void update(float delta) {//mise a jour, en continu !
 		this.perso = monde.getPerso();
 		gererEntrees();
 		gererArrives(delta);
@@ -217,7 +221,7 @@ public class ControlerPerso {
 	}
 	
 	public void gererCollision(float delta){
-		perso.getRapidite().scl(delta); // on travaille au ralenti
+		perso.getRapidite().scl(delta); // on travaille au ralenti TODO cad ??
 		
 		float approx = 0f;
 		Rectangle persoRect = rectPool.obtain();
@@ -330,13 +334,13 @@ public class ControlerPerso {
 				perso.changerEtat(Light.INACTIF);
 		}
 		
-		if (touches.get(Touches.FEU) && directionTir.x !=0 && directionTir.y !=0 && perso.getEtat()!=Dark.GRABBING){
-			//si on appuie sur la touche de feu, que la direction du tir est correcte et que le Shadow-player ne tire pas déjà
+		if (touches.get(Touches.EPEE) && directionTir.x !=0 && directionTir.y !=0 && perso.getEtat()!=Dark.GRABBING){
+			//si on appuie sur la touche de EPEE, que la direction du tir est correcte et que le Shadow-player ne tire pas déjà
 			attacking = true;
 		}
 		
-		if(!touches.get(Touches.FEU) && attacking){
-			//Si la touche de feu est relâchée après un appui dans le but d'effectuer une attaque
+		if(!touches.get(Touches.EPEE) && attacking){
+			//Si la touche de EPEE est relâchée après un appui dans le but d'effectuer une attaque
 			attacking = false;//reset pour le prochain appui
 			
 			
@@ -361,12 +365,12 @@ public class ControlerPerso {
 			}
 			
 			
-			if(perso.getForm()==Form.LIGHTFORM && !charged){//Si en LightForm en tir non chargé
+			if(perso.getForm()==Form.LIGHTFORM && !charged){//Si en LightForm en tir non chargé ==> coup d epee
 				perso.changerEtat(Light.FRAPPANT);
 				monde.frapperEpee(new Vector2(directionTir), new Vector2(cibleTir));
 				this.bruitEpee.play();
 			}
-			if(perso.getForm()==Form.LIGHTFORM && charged){//Si tir en LightForm et tir chargé
+			if(perso.getForm()==Form.LIGHTFORM && charged){//Si tir en LightForm et tir chargé ==> projectile
 				monde.lancerProjectile(new Vector2(directionTir), new Vector2(cibleTir));
 				this.bruitProj.play();
 			}
