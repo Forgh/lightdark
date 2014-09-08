@@ -42,7 +42,7 @@ public class ControlerProjectiles {
 		collision.clear();
 		shadowTouched.clear();
 		for(int x = 0;x<=monde.getNiveau().getLargeur();x++){
-			for(int y= 0;y<=monde.getNiveau().getHauteur();y++){
+			for(int y= 0;y<=monde.getNiveau().getHauteur();y++){// Tant qu'on reste dans la taille du monde ...
 				if (monde.getNiveau().getCollision(x, y) != null){ // (x>=dX) && (x<= fX) && (y>=dY) && (y<= fY)){
 					collision.add(monde.getNiveau().getCollision(x, y));
 				}
@@ -69,7 +69,7 @@ public class ControlerProjectiles {
 		gererObsoletes();
 	}
 	
-	private boolean gererCollisionAnimaux(Rectangle p){
+	private boolean gererCollisionAnimaux(Rectangle p){// si touche un annimal, return false
 		boolean pasTouche = true;
 		int i = 0;
 		while (i<this.monde.getAnime().size && pasTouche){
@@ -89,7 +89,7 @@ public class ControlerProjectiles {
 			return false;
 	}
 	
-	public void gererCollision(Projectile p, float delta){
+	public void gererCollision(Projectile p, float delta){// HERE ? TODO ameliorer la gestion du grappin
 		p.getRapidite().scl(delta); // on travail au ralenti
 		
 		p.getCadre().x += p.getRapidite().x;

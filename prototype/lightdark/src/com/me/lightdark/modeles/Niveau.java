@@ -685,8 +685,10 @@ private void demo4(){
 		cases[6][11].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
 		cases[8][10].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
 		cases[8][11].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
-
-
+		cases[8][12].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+		cases[8][13].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+		cases[8][14].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
+		
 		setToFullShadow(6,9);
 		cases[8][9].setTypeCase(type_case_generique.OMBRE_HERBE_GAUCHE);
 
