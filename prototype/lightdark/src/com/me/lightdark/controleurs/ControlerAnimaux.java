@@ -10,13 +10,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Timer;
-import com.me.lightdark.controleurs.ControlerPerso.Touches;
-import com.me.lightdark.modeles.Animal;
 import com.me.lightdark.modeles.Anime;
 import com.me.lightdark.modeles.Anime.AnimeType;
 import com.me.lightdark.modeles.Dark;
 import com.me.lightdark.modeles.Form;
-import com.me.lightdark.modeles.Light;
 import com.me.lightdark.modeles.Monde;
 import com.me.lightdark.modeles.Monstre;
 
@@ -42,7 +39,7 @@ public class ControlerAnimaux {
 	private Sound bruitBete = Gdx.audio.newSound(Gdx.files.internal("sound/ouii.wav"));
 
 	public ControlerAnimaux(Monde monde) {
-		// TODO Auto-generated constructor stub
+		// Auto-generated constructor stub
 		this.monde = monde;
 		this.animaux = this.monde.getAnime();
 		this.collision = new Array<Rectangle>();
@@ -50,6 +47,7 @@ public class ControlerAnimaux {
 		//demarrerParcoursAnimaux();
 	}
 	
+	@SuppressWarnings("unused") // TODO evaluer l'utilitee de cette methode 
 	private void demarrerParcoursAnimaux(){
 		for (int i=0;i<this.animaux.size;i++){
 			this.nextStep(this.animaux.get(i));
