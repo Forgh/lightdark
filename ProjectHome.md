@@ -1,0 +1,1 @@
+Projet de jeu étudiant à double coeur de gameplay, réalisé en Java, 2D, à l'aide de la librairie libGDX
